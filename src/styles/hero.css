@@ -66,7 +66,15 @@
   z-index: 1;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  /* stretch (não center) — com align-items:center os filhos encolhem pro
+     tamanho do próprio conteúdo em vez de respeitar o max-width deles, o
+     que fazia a palavra rotativa mais longa não caber e quebrar linha
+     dentro do container de altura fixa. Os filhos ficam full-width (até o
+     próprio max-width); o text-align:center abaixo cuida de centralizar o
+     texto dentro dessa caixa — sem usar margin-inline:auto nos filhos, que
+     cancelaria o stretch (margem auto "absorve" o espaço extra e volta a
+     encolher o elemento pro tamanho do conteúdo). */
+  align-items: stretch;
   gap: var(--space-6);
   max-width: var(--content-max-width);
   margin: 0 auto;
@@ -79,43 +87,79 @@
   max-width: 24ch;
 }
 
+/* Abaixo de ~420px o piso de 2rem do clamp não deixa espaço suficiente pra
+   a palavra rotativa mais longa ("Criador de conteúdo") caber numa linha
+   só dentro do container de altura fixa — reduz só nesses casos. */
+@media (max-width: 420px) {
+  .hero__headline {
+    font-size: 1.75rem;
+  }
+}
+
+@media (max-width: 340px) {
+  .hero__headline {
+    font-size: 1.375rem;
+  }
+}
+
 /* A palavra fixa usa o peso padrão de headline (bold, herdado do h1). A
    palavra rotativa usa itálico + verde pra se destacar como o elemento que
    muda — itálico real do Fontsource (400-italic), não sintético.
    display:block é o fix estrutural: garante que a palavra rotativa sempre
    ocupe sua própria linha, não importa se o texto dela é curto ("Lucas",
-   "Kinho") ou mais longo ("Estrategista") — não depende do conteúdo. */
+   "Kinho") ou mais longo ("Estrategista") — não depende do conteúdo.
+
+   Efeito de rolagem: as duas camadas (.hero__rotator-word) ficam empilhadas
+   via position:absolute dentro desse container de altura fixa (1.2em, igual
+   ao line-height do h1) e animam ao mesmo tempo em direções opostas —
+   ver hero-rotator.js. */
 .hero__rotator {
+  position: relative;
   display: block;
   overflow: hidden;
+  height: 1.2em;
 }
 
 .hero__rotator-word {
-  display: inline-block;
+  position: absolute;
+  inset-inline: 0;
+  text-align: center;
   font-style: italic;
   color: var(--accent);
-  transition: opacity 380ms ease, transform 380ms ease;
+  transition: opacity 480ms ease-in-out, transform 480ms ease-in-out;
+}
+
+.hero__rotator-word.pos-current {
   opacity: 1;
   transform: translateY(0);
 }
 
-.hero__rotator-word.is-leaving {
+.hero__rotator-word.pos-next {
   opacity: 0;
-  transform: translateY(-14px);
+  transform: translateY(100%);
 }
 
-.hero__rotator-word.is-below {
-  transition: none;
+.hero__rotator-word.pos-prev {
   opacity: 0;
-  transform: translateY(14px);
+  transform: translateY(-100%);
+}
+
+.hero__rotator-word.no-transition {
+  transition: none;
 }
 
 .hero__subtitle {
   font-family: var(--font-sans);
   font-weight: var(--fw-regular);
-  font-size: 1.125rem;
+  font-size: 1rem;
+  line-height: 1.6;
   color: var(--text-secondary);
-  max-width: 52ch;
+  max-width: 58ch;
+}
+
+.hero__subtitle-highlight {
+  color: var(--accent);
+  font-weight: var(--fw-semibold);
 }
 
 .hero__ctas {
