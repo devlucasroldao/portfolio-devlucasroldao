@@ -1,0 +1,4 @@
+@import './tokens.css';
+@import './base.css';
+
+/* Estilos de componentes são importados aqui conforme cada etapa é construída. */

@@ -1,0 +1,119 @@
+.navbar {
+  position: fixed;
+  top: var(--space-4);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+  width: calc(100% - var(--space-8));
+  max-width: 640px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding: var(--space-2) var(--space-2) var(--space-2) var(--space-6);
+  border-radius: var(--radius-full);
+  background: transparent;
+  border: 1px solid transparent;
+  transition: background-color var(--transition-base), border-color var(--transition-base),
+    backdrop-filter var(--transition-base);
+}
+
+/* Única exceção de blur/glassmorphism do site inteiro — briefing seção 2 */
+.navbar.is-scrolled {
+  background: rgba(13, 27, 42, 0.7);
+  border-color: var(--border);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.navbar__brand {
+  font-family: var(--font-mono);
+  font-weight: var(--fw-medium);
+  font-size: 0.9rem;
+  color: var(--text-primary);
+  white-space: nowrap;
+}
+
+.navbar__links {
+  display: flex;
+  align-items: center;
+  gap: var(--space-6);
+}
+
+.navbar__links a {
+  font-family: var(--font-sans);
+  font-weight: var(--fw-medium);
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  transition: color var(--transition-fast);
+}
+
+.navbar__links a:hover {
+  color: var(--accent);
+}
+
+.navbar__toggle {
+  display: none;
+  width: 36px;
+  height: 36px;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-full);
+  color: var(--text-primary);
+}
+
+.navbar__toggle svg {
+  width: 16px;
+  height: 16px;
+}
+
+.navbar__panel {
+  display: none;
+}
+
+@media (max-width: 640px) {
+  .navbar {
+    padding: var(--space-2) var(--space-2) var(--space-2) var(--space-4);
+  }
+
+  .navbar__links {
+    display: none;
+  }
+
+  .navbar__toggle {
+    display: flex;
+  }
+
+  .navbar__panel {
+    position: fixed;
+    top: calc(var(--navbar-height) + var(--space-4));
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 99;
+    width: calc(100% - var(--space-8));
+    max-width: 320px;
+    background: var(--bg-elevated);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: var(--space-4);
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .navbar__panel.is-open {
+    display: flex;
+  }
+
+  .navbar__panel a {
+    font-family: var(--font-sans);
+    font-weight: var(--fw-medium);
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+  }
+
+  .navbar__panel a:hover {
+    color: var(--accent);
+  }
+}

@@ -1,0 +1,64 @@
+.code-editor {
+  margin-top: var(--space-8);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--bg-elevated);
+  overflow: hidden;
+}
+
+.code-editor__tabs {
+  display: flex;
+  border-bottom: 1px solid var(--border);
+}
+
+.code-editor__tab {
+  padding: var(--space-2) var(--space-4);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  background: transparent;
+  border: none;
+  border-right: 1px solid var(--border);
+}
+
+.code-editor__tab.is-active {
+  color: var(--text-primary);
+  background: var(--bg-darker);
+}
+
+.code-editor__body {
+  overflow-x: auto;
+}
+
+.code-editor__panel {
+  display: none;
+  margin: 0;
+  padding: var(--space-4) var(--space-6);
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  line-height: 1.7;
+  color: var(--text-primary);
+  white-space: pre;
+}
+
+.code-editor__panel.is-active {
+  display: block;
+}
+
+.code-editor__panel .comment {
+  color: var(--text-secondary);
+  font-style: italic;
+}
+
+.code-editor__panel .highlight {
+  color: var(--accent);
+  font-style: italic;
+}
+
+.code-editor__note {
+  padding: var(--space-2) var(--space-6);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--text-secondary);
+  border-top: 1px dashed var(--border);
+}
