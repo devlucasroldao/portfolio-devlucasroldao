@@ -52,7 +52,7 @@ const sobreTemplate = `
   </section>
 `;
 
-const whatsappMessage = 'Olá Lucas, vi seu portfólio e quero conversar sobre [algo]';
+const whatsappMessage = 'Olá Lucas, vi seu portfólio e gostaria de conversar com você.';
 const whatsappHref = `https://wa.me/5551999611692?text=${encodeURIComponent(whatsappMessage)}`;
 
 const ctaFinalTemplate = `
