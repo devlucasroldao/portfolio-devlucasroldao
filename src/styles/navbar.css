@@ -5,25 +5,27 @@
   transform: translateX(-50%);
   z-index: 100;
   width: calc(100% - var(--space-8));
-  max-width: 640px;
+  max-width: var(--content-max-width);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: var(--space-4);
+  gap: var(--space-6);
   padding: var(--space-2) var(--space-2) var(--space-2) var(--space-6);
   border-radius: var(--radius-full);
   background: transparent;
   border: 1px solid transparent;
   transition: background-color var(--transition-base), border-color var(--transition-base),
-    backdrop-filter var(--transition-base);
+    backdrop-filter var(--transition-base), box-shadow var(--transition-base);
 }
 
 /* Única exceção de blur/glassmorphism do site inteiro — briefing seção 2 */
 .navbar.is-scrolled {
-  background: rgba(13, 27, 42, 0.7);
+  background: rgba(13, 27, 42, 0.78);
   border-color: var(--border);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  border-top-color: rgba(224, 225, 221, 0.22);
+  backdrop-filter: blur(20px) saturate(150%);
+  -webkit-backdrop-filter: blur(20px) saturate(150%);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
 }
 
 .navbar__brand {
@@ -45,6 +47,7 @@
   font-weight: var(--fw-medium);
   font-size: 0.9rem;
   color: var(--text-secondary);
+  white-space: nowrap;
   transition: color var(--transition-fast);
 }
 
@@ -52,8 +55,56 @@
   color: var(--accent);
 }
 
+.navbar__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  flex-shrink: 0;
+}
+
+/* CTA de destaque — preenchido mas moderado, gradiente sutil só com o verde
+   já existente (nenhuma cor nova). O preenchimento sólido no hover entra via
+   um ::before com opacity animada, pra crossfade suave em vez de troca seca
+   de cor. Pill total por pedido explícito — exceção ao raio pequeno padrão
+   de botão, só pra esse chip da navbar. */
+.navbar__cta {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  font-family: var(--font-sans);
+  font-weight: var(--fw-medium);
+  font-size: 0.85rem;
+  white-space: nowrap;
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-full);
+  background: linear-gradient(135deg, rgba(82, 183, 136, 0.24), rgba(82, 183, 136, 0.09));
+  border: 1px solid rgba(82, 183, 136, 0.35);
+  color: var(--accent);
+  transition: color 320ms ease, border-color 320ms ease;
+}
+
+.navbar__cta::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--accent);
+  opacity: 0;
+  transition: opacity 320ms ease;
+}
+
+.navbar__cta:hover {
+  border-color: var(--accent);
+  color: var(--bg-base);
+}
+
+.navbar__cta:hover::before {
+  opacity: 1;
+}
+
 .navbar__toggle {
   display: none;
+  flex-shrink: 0;
   width: 36px;
   height: 36px;
   align-items: center;
@@ -62,6 +113,12 @@
   border: 1px solid var(--border);
   border-radius: var(--radius-full);
   color: var(--text-primary);
+  transition: border-color var(--transition-fast), color var(--transition-fast);
+}
+
+.navbar__toggle:hover {
+  border-color: var(--accent);
+  color: var(--accent);
 }
 
 .navbar__toggle svg {
@@ -69,11 +126,73 @@
   height: 16px;
 }
 
+/* Toggle de tema — formato switch (trilho + bolinha deslizante), só estado
+   visual por enquanto. Ícone sol/lua troca dentro da bolinha, sem mudar
+   nenhuma cor da página. */
+.navbar__theme-toggle {
+  display: flex;
+  flex-shrink: 0;
+  background: transparent;
+  border: none;
+  padding: 0;
+}
+
+.navbar__theme-track {
+  position: relative;
+  width: 44px;
+  height: 24px;
+  border-radius: var(--radius-full);
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  transition: border-color var(--transition-fast);
+}
+
+.navbar__theme-toggle:hover .navbar__theme-track {
+  border-color: var(--accent);
+}
+
+.navbar__theme-thumb {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-full);
+  background: var(--text-primary);
+  color: var(--bg-base);
+  transition: transform var(--transition-base), background-color var(--transition-fast);
+}
+
+.navbar__theme-thumb svg {
+  width: 11px;
+  height: 11px;
+}
+
+.navbar__theme-thumb .icon-sun {
+  display: none;
+}
+
+.navbar__theme-toggle.is-light .navbar__theme-thumb {
+  transform: translateX(20px);
+  background: var(--accent);
+}
+
+.navbar__theme-toggle.is-light .navbar__theme-thumb .icon-moon {
+  display: none;
+}
+
+.navbar__theme-toggle.is-light .navbar__theme-thumb .icon-sun {
+  display: flex;
+}
+
 .navbar__panel {
   display: none;
 }
 
-@media (max-width: 640px) {
+@media (max-width: 900px) {
   .navbar {
     padding: var(--space-2) var(--space-2) var(--space-2) var(--space-4);
   }
@@ -115,5 +234,12 @@
 
   .navbar__panel a:hover {
     color: var(--accent);
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar__cta {
+    padding: var(--space-2) var(--space-3);
+    font-size: 0.78rem;
   }
 }

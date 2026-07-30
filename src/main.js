@@ -11,30 +11,37 @@ import { renderNavbar, initNavbar } from './scripts/navbar.js';
 import { casesTeaserTemplate } from './scripts/cases.js';
 import { marqueeTemplate, initMarquee } from './scripts/marquee.js';
 import { renderFooter, initFooterEmail } from './scripts/footer.js';
+import { whatsappHref } from './scripts/contact.js';
+import { initHeroRotator } from './scripts/hero-rotator.js';
 
 const heroTemplate = `
-  <section class="hero">
-    <h1 class="hero__headline">Dev que pensa como estrategista e constrói em público.</h1>
-
-    <p class="hero__subtitle">
-      Decisão real, prazo real, resultado honesto — nada de portfólio de mentirinha.
-    </p>
-
-    <div class="hero__terminal">
-      <span class="hero__terminal-prompt">&gt; status --lucas</span>
-      <span class="hero__terminal-output">2 cases reais · 1 falha crítica corrigida antes de virar incidente</span>
+  <section class="hero" id="inicio">
+    <div class="hero__media">
+      <div class="hero__media-overlay"></div>
+      <div class="hero__media-placeholder">
+        [ vídeo real aqui — self-hosted, mp4, você em ação — substituir ]
+      </div>
     </div>
 
-    <div class="hero__ctas">
-      <a href="#contato" class="btn">Falar comigo</a>
-      <a href="#cases" class="btn btn--secondary">Ver os cases</a>
+    <div class="hero__content">
+      <h1 class="hero__headline">Bah, eu sou o <span class="hero__rotator"><span class="hero__rotator-word">Lucas</span></span></h1>
+
+      <p class="hero__subtitle">
+        Dev, designer, marketeiro e comunicador — tudo ao mesmo tempo... e sim, dá pra fazer tudo isso bem, com a
+        ferramenta certa e um pouco de teimosia.
+      </p>
+
+      <div class="hero__ctas">
+        <a href="#cases" class="btn">Ver cases</a>
+        <a href="https://linkedin.com/in/devlucasroldao" target="_blank" rel="noopener noreferrer" class="btn btn--secondary">Meu LinkedIn</a>
+      </div>
     </div>
   </section>
 `;
 
 const sobreTemplate = `
   <section class="sobre" id="sobre">
-    <h2 class="sobre__heading">Sobre</h2>
+    <h2 class="sobre__heading">Sobre mim</h2>
     <div class="sobre__inner">
       <div class="sobre__avatar">[ foto real aqui ]</div>
       <div class="sobre__text">
@@ -51,9 +58,6 @@ const sobreTemplate = `
     </div>
   </section>
 `;
-
-const whatsappMessage = 'Olá Lucas, vi seu portfólio e gostaria de conversar com você.';
-const whatsappHref = `https://wa.me/5551999611692?text=${encodeURIComponent(whatsappMessage)}`;
 
 const ctaFinalTemplate = `
   <section class="cta-final" id="contato">
@@ -74,3 +78,4 @@ document.querySelector('#app').innerHTML =
 initNavbar();
 initMarquee();
 initFooterEmail();
+initHeroRotator();
