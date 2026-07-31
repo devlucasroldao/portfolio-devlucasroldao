@@ -4,12 +4,12 @@ import './styles/buttons.css';
 import './styles/hero.css';
 import './styles/cases.css';
 import './styles/sobre.css';
-import './styles/marquee.css';
+import './styles/carousel.css';
 import './styles/cta-final.css';
 import './styles/footer.css';
 import { renderNavbar, initNavbar } from './scripts/navbar.js';
 import { casesTeaserTemplate } from './scripts/cases.js';
-import { marqueeTemplate, initMarquee } from './scripts/marquee.js';
+import { depoimentosTemplate, initCarousels } from './scripts/carousel.js';
 import { renderFooter, initFooterEmail } from './scripts/footer.js';
 import { whatsappHref } from './scripts/contact.js';
 import { initHeroRotator } from './scripts/hero-rotator.js';
@@ -129,9 +129,9 @@ const ctaFinalTemplate = `
 `;
 
 document.querySelector('#app').innerHTML =
-  renderNavbar() + heroTemplate + casesTeaserTemplate() + sobreTemplate + marqueeTemplate() + ctaFinalTemplate + renderFooter();
+  renderNavbar() + heroTemplate + casesTeaserTemplate() + sobreTemplate + depoimentosTemplate() + ctaFinalTemplate + renderFooter();
 
 initNavbar();
-initMarquee();
+initCarousels();
 initFooterEmail();
 initHeroRotator();
