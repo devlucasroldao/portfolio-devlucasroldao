@@ -1,5 +1,6 @@
 import { getIconSvg, iconTitles } from './icons.js';
 import { initCodeTabs } from './code-tabs.js';
+import { BADGE_ICONS } from './badge-icons.js';
 
 function renderStack(groups) {
   return `
@@ -67,14 +68,13 @@ export const casesData = [
     href: 'case-conecte.html',
     reverse: false,
     eyebrow: 'Case 01 — Segurança & Performance',
+    badgeIcon: 'shield',
     title: 'Conecte Telecom',
     imageAlt: 'Screenshot real do site da Conecte Telecom — substituir',
+    teaserHeadline: 'De site solto a plataforma real',
     teaserProblem:
-      'Auditoria de rotina virou vulnerabilidade crítica: dados de clientes acessíveis sem autenticação.',
-    teaserStat: {
-      label: 'Resultado',
-      value: '150–1000ms → 2–20ms no carregamento afetado',
-    },
+      'De landing page genérica a plataforma completa: admin sem depender de código, mobile redondo, analytics de verdade — e uma vulnerabilidade crítica corrigida no meio do caminho.',
+    teaserTags: ['Identidade visual', '+5 anos de mercado', 'Segurança auditada'],
     blocks: [
       [
         'Problema',
@@ -111,14 +111,13 @@ export const casesData = [
     href: 'case-lu-perfumes.html',
     reverse: true,
     eyebrow: 'Case 02 — Produto pré-lançamento',
+    badgeIcon: 'tag',
     title: 'Lu Perfumes & Presentes',
     imageAlt: 'Screenshot real do catálogo da Lu Perfumes & Presentes — substituir',
+    teaserHeadline: 'Catálogo & atendimento sem perder o humano',
     teaserProblem:
-      'Atendimento de perfumes e cosméticos 100% manual por WhatsApp, sem catálogo nem histórico de pedidos.',
-    teaserStat: {
-      label: 'Estado atual',
-      value: 'De atendimento 100% manual pra vitrine própria',
-    },
+      '"O que você tem de perfume feminino aí?" — a Lu respondia isso, um por um, pra centenas de clientes, sem catálogo, sem histórico, sem parar.',
+    teaserTags: ['Catálogo online', 'Kits personalizados', 'Painel admin autônomo'],
     blocks: [
       [
         'Problema',
@@ -147,10 +146,29 @@ export const casesData = [
   },
 ];
 
-function renderImagePlaceholder(imageAlt) {
+function renderImagePlaceholder(imageAlt, extraClass = '') {
   return `
-    <div class="case__image-placeholder">
+    <div class="case__image-placeholder${extraClass ? ` ${extraClass}` : ''}">
       [ imagem real aqui — ${imageAlt} ]
+    </div>
+  `;
+}
+
+// Selo circular reforçando a categoria do case — círculo é a exceção de
+// forma prevista no briefing pra ícone isolado. Só aparece no teaser da
+// home, não na página de case dedicada.
+function renderCaseBadge(data) {
+  return `
+    <span class="case__badge" title="${data.eyebrow}" aria-hidden="true">
+      ${BADGE_ICONS[data.badgeIcon] ?? ''}
+    </span>
+  `;
+}
+
+function renderTeaserTags(tags) {
+  return `
+    <div class="case-teaser__tags">
+      ${tags.map((tag) => `<span class="case-teaser__tag">${tag}</span>`).join('')}
     </div>
   `;
 }
@@ -158,15 +176,17 @@ function renderImagePlaceholder(imageAlt) {
 function renderCaseTeaser(data) {
   return `
     <article class="case${data.reverse ? ' case--reverse' : ''}">
-      <div class="case__media">${renderImagePlaceholder(data.imageAlt)}</div>
+      <div class="case__media case-teaser__media">
+        <a href="${data.href}" class="case-teaser__image-link" aria-label="Ver case completo: ${data.title}">
+          ${renderImagePlaceholder(data.imageAlt, 'case-teaser__image')}
+        </a>
+        ${renderCaseBadge(data)}
+      </div>
       <div class="case__content case-teaser__content">
-        <span class="case__eyebrow">${data.eyebrow}</span>
-        <h3 class="case__title">${data.title}</h3>
+        <span class="case__eyebrow">${data.title}</span>
+        <h3 class="case__title">${data.teaserHeadline}</h3>
         <p class="case-teaser__problem">${data.teaserProblem}</p>
-        <div class="case-teaser__stat">
-          <span class="case__block-label">${data.teaserStat.label}</span>
-          <span class="case-teaser__stat-value">${data.teaserStat.value}</span>
-        </div>
+        ${renderTeaserTags(data.teaserTags)}
         <a href="${data.href}" class="case-teaser__link">Ver case completo →</a>
       </div>
     </article>

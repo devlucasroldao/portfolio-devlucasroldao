@@ -55,6 +55,64 @@
   line-height: 1.6;
 }
 
+/* Só no teaser da home — corte geométrico de canto (puramente estrutural,
+   a borda tracejada já existente acompanha o recorte automaticamente) +
+   hover de destaque. Espelhado conforme o card é intercalado: o corte fica
+   sempre no canto voltado pro texto ao lado. */
+.case-teaser__image {
+  clip-path: polygon(0 0, calc(100% - 28px) 0, 100% 28px, 100% 100%, 0 100%);
+  transition: transform var(--transition-fast), border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.case--reverse .case-teaser__image {
+  clip-path: polygon(28px 0, 100% 0, 100% 100%, 0 100%, 0 28px);
+}
+
+/* A imagem inteira é clicável (mesmo destino do botão "Ver case completo"),
+   por isso é um <a> — display:block evita comportamento de inline padrão
+   de âncora, cursor pointer já vem de graça do elemento. */
+.case-teaser__image-link {
+  display: block;
+}
+
+.case-teaser__image:hover {
+  transform: scale(1.04);
+  border-color: var(--accent);
+  box-shadow: 0 0 0 1px var(--accent);
+}
+
+/* Hover sincronizado: passar o mouse na imagem (ou em qualquer parte de
+   .case-teaser__media, que ela preenche quase por completo) destaca o
+   título grande do card ao mesmo tempo — um único :hover disparando os
+   dois efeitos, via combinador de irmão adjacente (media e content são
+   irmãos diretos no DOM). */
+.case-teaser__media:hover + .case-teaser__content .case__title {
+  color: var(--accent);
+}
+
+/* Selo circular reforçando a categoria — círculo é a exceção de forma do
+   briefing pra ícone isolado. Fica sempre no canto oposto ao corte, então
+   nunca sobrepõe o recorte independente do lado do card. */
+.case__badge {
+  position: absolute;
+  bottom: calc(-1 * var(--space-4));
+  right: calc(-1 * var(--space-4));
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-full);
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  color: var(--accent);
+}
+
+.case__badge svg {
+  width: 20px;
+  height: 20px;
+}
+
 .case__eyebrow {
   display: block;
   font-family: var(--font-mono);
@@ -67,6 +125,7 @@
 .case__title {
   font-size: 1.75rem;
   margin: var(--space-2) 0 var(--space-6);
+  transition: color var(--transition-fast);
 }
 
 .case__block {
@@ -178,33 +237,72 @@
   margin-bottom: var(--space-4);
 }
 
-.case-teaser__stat {
-  display: inline-flex;
-  flex-direction: column;
-  gap: var(--space-1);
-  padding: var(--space-3) var(--space-4);
+.case-teaser__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-bottom: var(--space-4);
+}
+
+/* Mesmo padrão visual das caixinhas de ícone de tech stack (.stack-icon) —
+   borda fina, fundo elevado — só que com texto em vez de ícone, e pill
+   (radius total) como exceção pontual só pra esse componente, o resto do
+   site mantém radius pequeno padrão. Destaque de borda no hover é só um
+   toque interativo. */
+.case-teaser__tag {
+  padding: var(--space-1) var(--space-3);
   border: 1px solid var(--border);
   background: var(--bg-elevated);
-  border-radius: var(--radius-sm);
-  margin-bottom: var(--space-6);
-}
-
-.case-teaser__stat-value {
+  border-radius: var(--radius-full);
   font-family: var(--font-mono);
-  font-weight: var(--fw-bold);
-  font-size: 1.05rem;
-  color: var(--text-primary);
+  font-size: 0.75rem;
+  white-space: nowrap;
+  color: var(--text-secondary);
+  transition: border-color var(--transition-fast), padding var(--transition-fast), font-size var(--transition-fast);
 }
 
+.case-teaser__tag:hover {
+  border-color: var(--accent);
+}
+
+/* Outline com mais peso visual (borda mais espessa + leve fundo em opacidade
+   baixa, mesma técnica do CTA "Falar comigo" da navbar, mas com radius-sm
+   em vez de pill — aqui é card, não chip de navbar). Preenche sólido só no
+   hover via ::before com opacity animada, mesmo crossfade suave já usado
+   em outros CTAs do site. */
 .case-teaser__link {
-  display: inline-block;
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-4);
+  border: 2px solid var(--accent);
+  border-radius: var(--radius-sm);
+  background: rgba(82, 183, 136, 0.1);
   font-family: var(--font-sans);
-  font-weight: var(--fw-medium);
+  font-weight: var(--fw-semibold);
   color: var(--accent);
+  transition: color 280ms ease;
+}
+
+.case-teaser__link::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--accent);
+  opacity: 0;
+  transition: opacity 280ms ease;
 }
 
 .case-teaser__link:hover {
-  text-decoration: underline;
+  color: var(--bg-base);
+}
+
+.case-teaser__link:hover::before {
+  opacity: 1;
 }
 
 @media (max-width: 900px) {
@@ -218,7 +316,50 @@
   }
 
   .case__media {
-    position: static;
+    position: relative;
+    /* zera o top herdado da versão sticky do desktop — como position:relative
+       também usa top como deslocamento visual (ao contrário de static), o
+       valor antigo empurrava a mídia pra baixo sem mover o conteúdo junto,
+       causando sobreposição do selo com o título abaixo. */
+    top: auto;
     width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  /* corte de canto fica proporcionalmente grande demais em telas muito
+     estreitas — reduz o tamanho do recorte em vez de remover, mantém o
+     elemento geométrico mas mais discreto */
+  .case-teaser__image,
+  .case--reverse .case-teaser__image {
+    clip-path: polygon(0 0, calc(100% - 18px) 0, 100% 18px, 100% 100%, 0 100%);
+  }
+
+  .case--reverse .case-teaser__image {
+    clip-path: polygon(18px 0, 100% 0, 100% 100%, 0 100%, 0 18px);
+  }
+
+  .case__badge {
+    width: 36px;
+    height: 36px;
+    bottom: calc(-1 * var(--space-3));
+    right: calc(-1 * var(--space-3));
+  }
+
+  .case__badge svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  /* Tentativa de caber numa linha só media que precisaria encolher a fonte
+     pra ~3.6px (Conecte, 5 chips) — abaixo de qualquer piso legível. Mantido
+     o wrap (quebra limpa, já testado sem overflow) em vez de forçar. */
+  .case-teaser__tags {
+    gap: var(--space-1);
+  }
+
+  .case-teaser__tag {
+    padding: var(--space-1) var(--space-2);
+    font-size: 0.68rem;
   }
 }
