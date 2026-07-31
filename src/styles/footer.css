@@ -16,24 +16,48 @@
 .footer__identity {
   display: flex;
   flex-direction: column;
-  gap: var(--space-1);
+  gap: var(--space-2);
   font-family: var(--font-mono);
 }
 
 .footer__name {
   color: var(--text-primary);
-  font-weight: var(--fw-medium);
+  font-size: 1.4rem;
+  font-weight: var(--fw-bold);
 }
 
-.footer__role,
-.footer__location {
+.footer__meta {
   color: var(--text-secondary);
   font-size: 0.85rem;
 }
 
+/* Dois grupos empilhados: navegação do site em cima, links sociais
+   embaixo — mesma origem (align-items:flex-start no .footer__inner) que
+   a coluna do nome, então os dois começam na mesma altura. */
+.footer__link-groups {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: var(--space-3);
+}
+
+.footer__nav,
 .footer__links {
   display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
   gap: var(--space-6);
+}
+
+.footer__nav a {
+  font-family: var(--font-sans);
+  font-weight: var(--fw-medium);
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+}
+
+.footer__nav a:hover {
+  color: var(--accent);
 }
 
 .footer__links a {
@@ -48,12 +72,34 @@
 }
 
 .footer__signature {
-  max-width: var(--content-max-width);
   margin: var(--space-8) auto 0;
   padding-top: var(--space-6);
   border-top: 1px solid var(--border);
+  text-align: center;
   font-family: var(--font-sans);
   color: var(--text-secondary);
-  font-size: 0.85rem;
+  font-size: 0.75rem;
   line-height: 1.6;
+}
+
+/* Medido de verdade: a frase (0.75rem) só cabe numa linha só a partir de
+   ~1240px reais (não 1200px — testado ponto a ponto, abaixo disso corta
+   por poucos pixels mesmo "parecendo" caber). 1280px dá uma margem de
+   segurança confortável acima desse mínimo medido. Abaixo disso, mantém
+   quebra natural (nowrap forçaria fonte ilegível ou scroll horizontal). */
+@media (min-width: 1280px) {
+  .footer__signature {
+    white-space: nowrap;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer__link-groups {
+    align-items: flex-start;
+  }
+
+  .footer__nav,
+  .footer__links {
+    justify-content: flex-start;
+  }
 }

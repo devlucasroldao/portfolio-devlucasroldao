@@ -1,6 +1,6 @@
 import { whatsappHref } from './contact.js';
 
-const NAV_ITEMS = [
+export const NAV_ITEMS = [
   ['#inicio', 'Início'],
   ['#cases', 'Cases'],
   ['#sobre', 'Sobre mim'],

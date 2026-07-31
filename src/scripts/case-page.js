@@ -16,7 +16,7 @@ export function mountCasePage(caseId) {
       <a href="index.html#cases" class="case-page__back">&larr; voltar pros cases</a>
       ${renderCaseFull(caseId)}
     </div>
-    ${renderFooter()}
+    ${renderFooter({ base: 'index.html' })}
   `;
 
   initNavbar();

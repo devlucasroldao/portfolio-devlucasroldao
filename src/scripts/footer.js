@@ -1,17 +1,27 @@
-export function renderFooter() {
+import { NAV_ITEMS } from './navbar.js';
+
+// base = '' quando renderizado na própria home (âncora rola na página atual)
+// base = 'index.html' quando renderizado numa página de case (navega de volta pra home e âncora)
+export function renderFooter({ base = '' } = {}) {
+  const navLinks = NAV_ITEMS.map(([hash, label]) => `<a href="${base}${hash}">${label}</a>`).join('\n');
+
   return `
     <footer class="footer">
       <div class="footer__inner">
         <div class="footer__identity">
           <span class="footer__name">Lucas Roldão</span>
-          <span class="footer__role">Dev &amp; Estrategista Digital</span>
-          <span class="footer__location">Arroio do Sal, RS</span>
+          <span class="footer__meta">Dev &amp; Estrategista Digital · Arroio do Sal, RS</span>
         </div>
-        <nav class="footer__links">
-          <a href="https://linkedin.com/in/devlucasroldao" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-          <a href="https://github.com/devlucasroldao" target="_blank" rel="noopener noreferrer">GitHub</a>
-          <a href="#" data-email-link>Email</a>
-        </nav>
+        <div class="footer__link-groups">
+          <nav class="footer__links">
+            <a href="https://linkedin.com/in/devlucasroldao" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+            <a href="https://github.com/devlucasroldao" target="_blank" rel="noopener noreferrer">GitHub</a>
+            <a href="#" data-email-link>Email</a>
+          </nav>
+          <nav class="footer__nav">
+            ${navLinks}
+          </nav>
+        </div>
       </div>
       <p class="footer__signature">
         "Esse site quase virou mais um clichê de dev com cara de IA. Não virou porque cada decisão aqui foi
