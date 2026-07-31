@@ -1,7 +1,22 @@
+/* Bloco de fechamento da página: CTA + footer são dois sub-blocos
+   visualmente distintos dentro da mesma seção unificada .closing — CTA
+   em off-white (--text-primary), footer no --bg-darker padrão. Sem
+   fundo compartilhado entre eles; a transição é direta (o contraste
+   entre os dois já marca a mudança, sem precisar de borda extra).
+   .cta-final segue o mesmo padrão de .footer/.footer__inner: o bloco
+   externo é full-width (fundo), o __inner centraliza o conteúdo. */
+.closing {
+  background: var(--bg-darker);
+}
+
 .cta-final {
+  background: var(--text-primary);
+}
+
+.cta-final__inner {
   max-width: var(--content-max-width);
   margin: 0 auto;
-  padding: var(--space-24) var(--space-6);
+  padding: var(--space-24) var(--space-6) var(--space-16);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -9,21 +24,137 @@
   text-align: center;
 }
 
+/* Sem isso, o <h2> (filho de um flex column com align-items:center) encolhe
+   pro fit-content baseado só na linha 1 (a única com largura intrínseca
+   real) — e a linha 2 (rotator, width:100%) resolve "100%" contra essa
+   largura errada e menor, cortando frases mais longas. width:100% aqui
+   propaga a largura cheia do container pra baixo, resolvendo os dois
+   níveis de uma vez. */
 .cta-final__heading {
-  font-size: clamp(1.75rem, 4vw, 2.5rem);
-  max-width: 18ch;
+  width: 100%;
 }
 
+.cta-final__heading-line {
+  display: block;
+}
+
+/* Linha 1: fixa, tamanho menor, nowrap garante que nunca quebra de
+   verdade (max-width em ch no elemento pai calcularia contra o
+   font-size do PAI, não da linha — armadilha testada e evitada aqui).
+   Cor --bg-base: ~13:1 de contraste sobre o novo fundo claro, testado. */
+.cta-final__heading-line--intro {
+  white-space: nowrap;
+  font-size: clamp(1.1rem, 4.2vw, 2rem);
+  color: var(--bg-base);
+}
+
+/* Linha 2: a frase rotativa, maior que a linha 1 (mais destaque) — mesma
+   técnica de rolagem do Hero (ver rotator.js), inclusive o mesmo
+   princípio de destaque só por cor (--accent no texto, sem fundo/badge).
+   width:100% é essencial aqui (o Hero não precisa disso porque o rotator
+   dele vive em fluxo normal de bloco dentro do h1; este vive dentro de um
+   flex column com align-items:center — sem largura explícita, o
+   container encolhe pro fit-content, e como as palavras são
+   position:absolute (não contam pro tamanho intrínseco do pai), ele
+   colapsava perto de 0 e cortava o texto no overflow:hidden). */
+.cta-final__rotator {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  height: 1.4em;
+  font-size: clamp(1.6rem, 5.6vw, 2.5rem);
+}
+
+.cta-final__rotator-word {
+  position: absolute;
+  inset-inline: 0;
+  text-align: center;
+  white-space: nowrap;
+  color: var(--accent);
+  transition: opacity 480ms ease-in-out, transform 480ms ease-in-out;
+}
+
+.cta-final__rotator-word.pos-current {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.cta-final__rotator-word.pos-next {
+  opacity: 0;
+  transform: translateY(100%);
+}
+
+.cta-final__rotator-word.pos-prev {
+  opacity: 0;
+  transform: translateY(-100%);
+}
+
+.cta-final__rotator-word.no-transition {
+  transition: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cta-final__rotator-word {
+    transition: none;
+  }
+}
+
+/* --border mede 5.4:1 de contraste sobre o fundo claro, passa WCAG AA
+   (>=4.5:1) — testado antes de escolher (mesmo valor já validado numa
+   rodada anterior sobre esse mesmo fundo). */
 .cta-final__subtitle {
   font-family: var(--font-sans);
-  color: var(--text-secondary);
-  font-size: 1.05rem;
+  color: var(--border);
+  font-size: 0.8rem;
   max-width: 48ch;
 }
 
+/* Empilhados em qualquer largura (não só mobile), WhatsApp em cima —
+   ordem já garantida pela ordem no HTML, aqui só a direção da coluna. */
 .cta-final__ctas {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
   gap: var(--space-4);
+  margin-top: var(--space-2);
+}
+
+/* Mesma largura pros dois — medida a partir do texto mais longo
+   ("Chamar no WhatsApp": 157px de texto + padding/borda padrão do .btn =
+   207px real, medido via browser) com uma margem de folga. Padding e
+   tamanho de fonte continuam os padrão do .btn/.btn--secondary — só a
+   largura é igualada. */
+.cta-final__ctas .btn {
+  min-width: 212px;
+  justify-content: center;
+}
+
+/* Tamanho padrão do site (mesmo .btn usado em todo lugar) — só o
+   preenchimento sólido em --accent é exceção pontual aqui (mesmo
+   princípio do chip da navbar). Contraste --bg-base sobre --accent:
+   ~7:1, testado. */
+.cta-final__button--primary {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--bg-base);
+}
+
+.cta-final__button--primary:hover {
+  opacity: 0.88;
+}
+
+/* .btn--secondary por padrão usa --text-primary como cor de texto — faz
+   sentido sobre o fundo escuro do resto do site, mas aqui o fundo do CTA
+   é --text-primary (claro), então o texto ficaria quase invisível sem
+   essa sobrescrita. --bg-base testado em ~13:1 de contraste sobre esse
+   fundo claro (mesma medição já validada numa rodada anterior). */
+.cta-final__inner .btn--secondary {
+  border-color: var(--bg-base);
+  color: var(--bg-base);
+}
+
+.cta-final__inner .btn--secondary:hover {
+  background: var(--bg-base);
+  border-color: var(--bg-base);
+  color: var(--text-primary);
 }

@@ -13,6 +13,9 @@ import { depoimentosTemplate, initCarousels } from './scripts/carousel.js';
 import { renderFooter, initFooterEmail } from './scripts/footer.js';
 import { whatsappHref } from './scripts/contact.js';
 import { initHeroRotator } from './scripts/hero-rotator.js';
+import { initRotator } from './scripts/rotator.js';
+
+const CTA_HEADING_PHRASES = ['Fala comigo!', 'Me chama!', 'Vem de zapzap', 'Bora trocar uma ideia'];
 
 const heroTemplate = `
   <section class="hero" id="inicio">
@@ -115,23 +118,30 @@ const sobreTemplate = `
   </section>
 `;
 
-const ctaFinalTemplate = `
-  <section class="cta-final" id="contato">
-    <h2 class="cta-final__heading">Tem um problema real? Fala comigo.</h2>
-    <p class="cta-final__subtitle">
-      Sem formulário de 10 campos, sem "em breve retornaremos". Me manda uma mensagem e eu respondo — sério.
-    </p>
-    <div class="cta-final__ctas">
-      <a href="${whatsappHref}" target="_blank" rel="noopener noreferrer" class="btn">Falar comigo</a>
-      <a href="https://linkedin.com/in/devlucasroldao" target="_blank" rel="noopener noreferrer" class="btn btn--secondary">LinkedIn</a>
+const closingTemplate = `
+  <section class="closing" id="contato">
+    <div class="cta-final">
+      <div class="cta-final__inner">
+        <h2 class="cta-final__heading">
+          <span class="cta-final__heading-line cta-final__heading-line--intro">Tem um problema real?</span>
+          <span class="cta-final__heading-line cta-final__rotator"><span class="cta-final__rotator-word pos-current">${CTA_HEADING_PHRASES[0]}</span><span class="cta-final__rotator-word"></span></span>
+        </h2>
+        <p class="cta-final__subtitle">Manda uma mensagem que eu respondo de verdade (sem meme).</p>
+        <div class="cta-final__ctas">
+          <a href="${whatsappHref}" target="_blank" rel="noopener noreferrer" class="btn cta-final__button--primary">Chamar no WhatsApp</a>
+          <a href="https://linkedin.com/in/devlucasroldao" target="_blank" rel="noopener noreferrer" class="btn btn--secondary">Meu LinkedIn</a>
+        </div>
+      </div>
     </div>
+    ${renderFooter()}
   </section>
 `;
 
 document.querySelector('#app').innerHTML =
-  renderNavbar() + heroTemplate + casesTeaserTemplate() + sobreTemplate + depoimentosTemplate() + ctaFinalTemplate + renderFooter();
+  renderNavbar() + heroTemplate + casesTeaserTemplate() + sobreTemplate + depoimentosTemplate() + closingTemplate;
 
 initNavbar();
 initCarousels();
 initFooterEmail();
 initHeroRotator();
+initRotator(document.querySelector('.cta-final__rotator'), CTA_HEADING_PHRASES, { wordSelector: '.cta-final__rotator-word' });
