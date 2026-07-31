@@ -4,55 +4,246 @@
   padding: var(--space-24) var(--space-6);
 }
 
-.sobre__heading {
-  font-size: 1.5rem;
-  margin-bottom: var(--space-6);
+.sobre__caption {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--space-3);
 }
 
+/* Tamanho único nas 3 linhas (só a cor de "Um caos" diferencia agora).
+   Testado ponto a ponto: com a coluna de texto em 1.2fr (ver .sobre__inner
+   abaixo, alargada de 1.05fr pra abrir espaço pro título maior), o teto
+   real é 2.25rem — a partir de 1.55fr o grid ao lado ficaria pequeno
+   demais só pra alcançar 2.5rem, então fechei em 2.25rem (base da faixa
+   2.25-2.5rem pedida) em vez de espremer o grid.
+
+   Breakpoints (a coluna de texto, não a viewport, define o espaço real
+   disponível assim que o layout vira 2 colunas em 900px):
+   - <=340px: 1.1rem
+   - 341-480px: 1.25rem
+   - 481-1049px: 1.75rem (cobre tanto a coluna única quanto o início das
+     2 colunas — 901px, o ponto mais apertado dessa faixa, testado)
+   - 1050-1199px: 2.125rem (34px, testado em 1050/1061)
+   - 1200px+: 2.25rem (36px, teto real testado — 38px já quebra) */
+.sobre__heading {
+  font-size: 1.75rem;
+  line-height: 1.25;
+  text-align: left;
+}
+
+@media (max-width: 480px) {
+  .sobre__heading {
+    font-size: 1.25rem;
+  }
+}
+
+@media (max-width: 340px) {
+  .sobre__heading {
+    font-size: 1.1rem;
+  }
+}
+
+@media (min-width: 1050px) and (max-width: 1199px) {
+  .sobre__heading {
+    font-size: 2.125rem;
+  }
+}
+
+@media (min-width: 1200px) {
+  .sobre__heading {
+    font-size: 2.25rem;
+  }
+}
+
+.sobre__heading-line {
+  display: block;
+}
+
+.sobre__heading-accent {
+  color: var(--accent);
+}
+
+/* .sobre__main e .sobre__side são os dois filhos diretos do grid de duas
+   colunas — isso é o que garante que o topo da legenda "Sobre mim" e o
+   topo do grid de fotos comecem exatamente na mesma linha (align-items:
+   start abaixo). Antes o cabeçalho ficava FORA desse grid, acima das duas
+   colunas, criando o degrau entre os lados. */
 .sobre__inner {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: var(--space-12);
+  /* stretch (não start) — as duas colunas passam a ter a mesma altura (a da
+     mais alta), o que permite empurrar os botões pro final de .sobre__main
+     com margin-top:auto, alinhando com o final da tabela ao lado. */
+  align-items: stretch;
+}
+
+.sobre__main {
+  min-width: 0;
   display: flex;
-  align-items: flex-start;
+  flex-direction: column;
   gap: var(--space-8);
 }
 
-.sobre__avatar {
-  flex-shrink: 0;
-  width: 112px;
-  height: 112px;
-  border-radius: var(--radius-full);
-  border: 2px dashed var(--accent);
-  background: var(--bg-elevated);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: var(--space-2);
-  font-family: var(--font-mono);
-  font-size: 0.62rem;
-  line-height: 1.4;
-  color: var(--text-secondary);
-}
-
 .sobre__text {
+  min-width: 0;
   display: flex;
   flex-direction: column;
   gap: var(--space-4);
-  max-width: 62ch;
-}
-
-@media (max-width: 640px) {
-  .sobre__inner {
-    flex-direction: column;
-  }
 }
 
 .sobre__text p {
   font-family: var(--font-sans);
-  font-size: 1.125rem;
-  line-height: 1.65;
+  font-size: 1.05rem;
+  line-height: 1.7;
   color: var(--text-primary);
 }
 
-.sobre__text p + p {
+.sobre__highlight {
+  font-weight: var(--fw-semibold);
+}
+
+.sobre__highlight--accent {
+  color: var(--accent);
+}
+
+.sobre__ctas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+  /* empurra os botões pro final de .sobre__main — só tem efeito quando
+     sobra espaço (desktop, coluna esticada pelo align-items:stretch); no
+     mobile/tablet empilhado não sobra espaço e os botões ficam no fluxo
+     normal, logo após o texto. */
+  margin-top: auto;
+}
+
+.sobre__side {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+/* Quebra-cabeça: contorno externo é um quadrado perfeito (aspect-ratio 1/1).
+   Grid 3x3 com 5 áreas nomeadas dimensionadas de propósito pra preencher
+   o quadrado por completo, sem sobra — peça grande (2x2), peça larga
+   (1x2) e três peças pequenas (1x1). Fundo --bg-elevated por trás do
+   conjunto (visível nos gaps entre peças) pra parecer um bloco sólido
+   preenchido, não um vazio, enquanto os placeholders não têm foto real. */
+.sobre__grid {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  background: var(--bg-elevated);
+  border-radius: var(--radius-md);
+  padding: var(--space-3);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  grid-template-areas:
+    'a a b'
+    'a a c'
+    'd e e';
+  gap: var(--space-3);
+}
+
+.sobre__grid-item {
+  min-height: 0;
+  min-width: 0;
+  padding: var(--space-2);
+  font-size: 0.62rem;
+  line-height: 1.4;
+}
+
+.sobre__grid-item--1 {
+  grid-area: a;
+}
+
+.sobre__grid-item--2 {
+  grid-area: b;
+}
+
+.sobre__grid-item--3 {
+  grid-area: c;
+}
+
+.sobre__grid-item--4 {
+  grid-area: d;
+}
+
+.sobre__grid-item--5 {
+  grid-area: e;
+}
+
+.sobre__info {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--bg-elevated);
+  overflow: hidden;
+}
+
+.sobre__info-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding: var(--space-3) var(--space-6);
+  border-bottom: 1px solid var(--border);
+}
+
+.sobre__info-row:last-child {
+  border-bottom: none;
+}
+
+.sobre__info-label {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
   color: var(--text-secondary);
+}
+
+.sobre__info-value {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--text-primary);
+  text-align: right;
+}
+
+.sobre__info-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: var(--radius-full);
+  background: var(--accent);
+  flex-shrink: 0;
+}
+
+@media (max-width: 900px) {
+  .sobre__inner {
+    grid-template-columns: 1fr;
+  }
+
+  .sobre__grid {
+    max-width: 480px;
+  }
+}
+
+@media (max-width: 480px) {
+  .sobre__info-row {
+    padding: var(--space-3) var(--space-4);
+  }
+
+  .sobre__info-label,
+  .sobre__info-value {
+    font-size: 0.75rem;
+  }
+
+  .sobre__grid-item {
+    font-size: 0.55rem;
+  }
 }
