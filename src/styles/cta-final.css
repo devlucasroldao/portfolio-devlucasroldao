@@ -16,7 +16,7 @@
 .cta-final__inner {
   max-width: var(--content-max-width);
   margin: 0 auto;
-  padding: var(--space-24) var(--space-6) var(--space-16);
+  padding: var(--space-32) var(--space-6) var(--space-16);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -137,6 +137,7 @@
   background: var(--accent);
   border-color: var(--accent);
   color: var(--bg-base);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
 }
 
 .cta-final__button--primary:hover {

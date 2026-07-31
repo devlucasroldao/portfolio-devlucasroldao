@@ -14,6 +14,7 @@ import { renderFooter, initFooterEmail } from './scripts/footer.js';
 import { whatsappHref } from './scripts/contact.js';
 import { initHeroRotator } from './scripts/hero-rotator.js';
 import { initRotator } from './scripts/rotator.js';
+import { EXTERNAL_LINK_ICON } from './scripts/ui-icons.js';
 
 const CTA_HEADING_PHRASES = ['Fala comigo!', 'Me chama!', 'Vem de zapzap', 'Bora trocar uma ideia'];
 
@@ -38,7 +39,7 @@ const heroTemplate = `
 
       <div class="hero__ctas">
         <a href="#cases" class="btn">Ver cases</a>
-        <a href="https://linkedin.com/in/devlucasroldao" target="_blank" rel="noopener noreferrer" class="btn btn--secondary">Meu LinkedIn</a>
+        <a href="https://linkedin.com/in/devlucasroldao" target="_blank" rel="noopener noreferrer" class="btn btn--secondary">Meu LinkedIn${EXTERNAL_LINK_ICON}</a>
       </div>
     </div>
   </section>
@@ -81,8 +82,8 @@ const sobreTemplate = `
         </div>
 
         <div class="sobre__ctas">
-          <a href="https://linkedin.com/in/devlucasroldao" target="_blank" rel="noopener noreferrer" class="btn btn--secondary">Meu LinkedIn</a>
-          <a href="${whatsappHref}" target="_blank" rel="noopener noreferrer" class="btn">Fale comigo</a>
+          <a href="https://linkedin.com/in/devlucasroldao" target="_blank" rel="noopener noreferrer" class="btn btn--secondary">Meu LinkedIn${EXTERNAL_LINK_ICON}</a>
+          <a href="${whatsappHref}" target="_blank" rel="noopener noreferrer" class="btn">Fale comigo${EXTERNAL_LINK_ICON}</a>
         </div>
       </div>
 
@@ -128,8 +129,8 @@ const closingTemplate = `
         </h2>
         <p class="cta-final__subtitle">Manda uma mensagem que eu respondo de verdade (sem meme).</p>
         <div class="cta-final__ctas">
-          <a href="${whatsappHref}" target="_blank" rel="noopener noreferrer" class="btn cta-final__button--primary">Chamar no WhatsApp</a>
-          <a href="https://linkedin.com/in/devlucasroldao" target="_blank" rel="noopener noreferrer" class="btn btn--secondary">Meu LinkedIn</a>
+          <a href="${whatsappHref}" target="_blank" rel="noopener noreferrer" class="btn cta-final__button--primary">Chamar no WhatsApp${EXTERNAL_LINK_ICON}</a>
+          <a href="https://linkedin.com/in/devlucasroldao" target="_blank" rel="noopener noreferrer" class="btn btn--secondary">Meu LinkedIn${EXTERNAL_LINK_ICON}</a>
         </div>
       </div>
     </div>

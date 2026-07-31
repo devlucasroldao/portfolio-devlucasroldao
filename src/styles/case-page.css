@@ -12,6 +12,7 @@
   font-size: 0.9rem;
   color: var(--text-secondary);
   margin-bottom: var(--space-12);
+  transition: color var(--transition-ui);
 }
 
 .case-page__back:hover {

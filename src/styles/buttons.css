@@ -11,12 +11,18 @@
   border: 1px solid var(--accent);
   background: transparent;
   color: var(--accent);
-  transition: background-color var(--transition-fast), color var(--transition-fast);
+  transition: background-color var(--transition-ui), color var(--transition-ui), transform var(--transition-ui),
+    opacity var(--transition-ui);
 }
 
 .btn:hover {
   background: var(--accent);
   color: var(--bg-base);
+}
+
+/* Leve encolhimento ao clicar — feedback tátil consistente em todo botão do site */
+.btn:active {
+  transform: scale(0.97);
 }
 
 .btn--secondary {

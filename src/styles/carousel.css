@@ -1,12 +1,34 @@
 .depoimentos {
-  padding: var(--space-24) 0;
+  padding: var(--space-32) 0;
 }
 
-.depoimentos__heading {
+.depoimentos__header {
   max-width: var(--content-max-width);
   margin: 0 auto var(--space-8);
   padding: 0 var(--space-6);
+}
+
+.depoimentos__eyebrow {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--space-3);
+}
+
+.depoimentos__heading {
   font-size: 1.5rem;
+}
+
+.depoimentos__subtitle {
+  margin-top: var(--space-3);
+  max-width: 60ch;
+  font-family: var(--font-sans);
+  color: var(--text-secondary);
+  font-size: 1.05rem;
+  line-height: 1.6;
 }
 
 .depoimentos__grid {
@@ -96,7 +118,7 @@
   cursor: pointer;
   pointer-events: auto;
   z-index: 4;
-  transition: border-color var(--transition-fast), color var(--transition-fast);
+  transition: border-color var(--transition-ui), color var(--transition-ui), transform var(--transition-ui);
 }
 
 .carousel__arrow--prev {
@@ -117,6 +139,13 @@
   color: var(--accent);
 }
 
+/* Combina com o translateY(-50%) de centralização — precisa ir junto na
+   mesma declaração de transform, senão o :active sobrescreveria a
+   centralização vertical em vez de só encolher. */
+.carousel__arrow:active {
+  transform: translateY(-50%) scale(0.97);
+}
+
 .testimonial-card {
   box-sizing: border-box;
   height: 100%;
@@ -127,7 +156,8 @@
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
   background: var(--bg-elevated);
-  transition: border-color var(--transition-fast);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+  transition: border-color var(--transition-ui);
 }
 
 .carousel__card-wrap.is-active .testimonial-card:hover {

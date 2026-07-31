@@ -49,7 +49,11 @@ function carousel(startIndex, { secondary = false } = {}) {
 export function depoimentosTemplate() {
   return `
     <section class="depoimentos" id="depoimentos">
-      <h2 class="depoimentos__heading">O que dizem sobre mim</h2>
+      <div class="depoimentos__header">
+        <span class="depoimentos__eyebrow">Depoimentos</span>
+        <h2 class="depoimentos__heading">O que dizem sobre mim</h2>
+        <p class="depoimentos__subtitle">Depoimento de quem trabalhou comigo e números reais dos cases — sem nota 5 forçada.</p>
+      </div>
       <div class="depoimentos__grid">
         ${carousel(0)}
         ${carousel(3, { secondary: true })}

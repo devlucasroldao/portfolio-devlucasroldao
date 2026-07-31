@@ -70,6 +70,7 @@ export const casesData = [
     eyebrow: 'Case 01 — Segurança & Performance',
     badgeIcon: 'shield',
     title: 'Conecte Telecom',
+    subtitle: 'De checagem de rotina a correção de uma falha crítica, com plataforma completa entregue no caminho.',
     imageAlt: 'Screenshot real do site da Conecte Telecom — substituir',
     teaserHeadline: 'De site solto a plataforma real',
     teaserProblem:
@@ -113,6 +114,7 @@ export const casesData = [
     eyebrow: 'Case 02 — Produto pré-lançamento',
     badgeIcon: 'tag',
     title: 'Lu Perfumes & Presentes',
+    subtitle: 'Catálogo, kits e atendimento organizado — sem perder o toque humano do WhatsApp.',
     imageAlt: 'Screenshot real do catálogo da Lu Perfumes & Presentes — substituir',
     teaserHeadline: 'Catálogo & atendimento sem perder o humano',
     teaserProblem:
@@ -196,7 +198,11 @@ function renderCaseTeaser(data) {
 export function casesTeaserTemplate() {
   return `
     <section class="cases" id="cases">
-      <h2 class="cases__heading">Cases</h2>
+      <div class="cases__header">
+        <span class="cases__eyebrow">Cases selecionados</span>
+        <h2 class="cases__heading">Onde estratégia encontra <span class="cases__heading-accent">forma</span>.</h2>
+        <p class="cases__subtitle">Dois projetos reais — do problema bruto ao resultado medido, sem enfeite.</p>
+      </div>
       <div class="case-list">
         ${casesData.map(renderCaseTeaser).join('')}
       </div>
@@ -214,6 +220,7 @@ export function renderCaseFull(caseId) {
       <div class="case__content">
         <span class="case__eyebrow">${data.eyebrow}</span>
         <h1 class="case__title">${data.title}</h1>
+        <p class="case__subtitle">${data.subtitle}</p>
 
         ${data.blocks.map(([label, html]) => renderBlock(label, html)).join('')}
 

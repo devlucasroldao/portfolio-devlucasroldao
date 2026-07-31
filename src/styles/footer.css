@@ -49,26 +49,34 @@
   gap: var(--space-6);
 }
 
-.footer__nav a {
+.footer__nav a,
+.footer__links a {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
   font-family: var(--font-sans);
   font-weight: var(--fw-medium);
-  color: var(--text-secondary);
   font-size: 0.95rem;
+}
+
+/* Navegação interna (âncoras da própria página) — texto secundário,
+   destaca em --accent só no hover, igual o resto dos links do site. */
+.footer__nav a {
+  color: var(--text-secondary);
 }
 
 .footer__nav a:hover {
   color: var(--accent);
 }
 
+/* Links sociais (LinkedIn/GitHub/Email) — já em --accent por padrão,
+   diferenciando visualmente esse grupo do de navegação. */
 .footer__links a {
-  font-family: var(--font-sans);
-  font-weight: var(--fw-medium);
-  color: var(--text-secondary);
-  font-size: 0.95rem;
+  color: var(--accent);
 }
 
 .footer__links a:hover {
-  color: var(--accent);
+  color: var(--text-primary);
 }
 
 .footer__signature {
@@ -91,6 +99,14 @@
   .footer__signature {
     white-space: nowrap;
   }
+}
+
+.footer__rights {
+  margin: var(--space-3) auto 0;
+  text-align: center;
+  font-family: var(--font-sans);
+  color: var(--text-secondary);
+  font-size: 0.7rem;
 }
 
 @media (max-width: 480px) {

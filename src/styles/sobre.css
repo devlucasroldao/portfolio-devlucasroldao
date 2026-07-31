@@ -1,7 +1,7 @@
 .sobre {
   max-width: var(--content-max-width);
   margin: 0 auto;
-  padding: var(--space-24) var(--space-6);
+  padding: var(--space-32) var(--space-6);
 }
 
 .sobre__caption {
@@ -140,6 +140,7 @@
   aspect-ratio: 1 / 1;
   background: var(--bg-elevated);
   border-radius: var(--radius-md);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
   padding: var(--space-3);
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -151,12 +152,20 @@
   gap: var(--space-3);
 }
 
+/* Hover sutil — sem scale aqui (o grid é quebra-cabeça, peças já ficam
+   coladas nas outras, aumentar tamanho causaria sobreposição visual) —
+   só o destaque de borda, mesmo timing usado nas outras imagens do site. */
 .sobre__grid-item {
   min-height: 0;
   min-width: 0;
   padding: var(--space-2);
   font-size: 0.62rem;
   line-height: 1.4;
+  transition: border-color var(--transition-ui);
+}
+
+.sobre__grid-item:hover {
+  border-color: var(--accent);
 }
 
 .sobre__grid-item--1 {

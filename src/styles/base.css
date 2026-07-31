@@ -32,6 +32,27 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+/* Fade-in sutil no carregamento — #app é o ponto de montagem em toda
+   página (home e cases), então isso cobre o site inteiro de uma vez. */
+#app {
+  animation: page-fade-in 420ms ease-out;
+}
+
+@keyframes page-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #app {
+    animation: none;
+  }
+}
+
 h1,
 h2,
 h3,
@@ -74,6 +95,17 @@ img {
 /* Regra do briefing: verde só pontual (hover de link, prompt de terminal, itálico de destaque) */
 a:hover {
   color: var(--accent);
+}
+
+/* Ícones de interface inline (seta externa, envelope, marca no footer) —
+   16px fixo, nunca maior que o texto ao lado (a maioria dos textos que os
+   acompanham está entre 0.85-1.1rem, ou seja, 13.6-17.6px). */
+.icon-external,
+.icon-envelope,
+.icon-brand {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
 }
 
 em {

@@ -32,10 +32,18 @@
   --space-12: 3rem;
   --space-16: 4rem;
   --space-24: 6rem;
+  /* Próximo degrau da escala (24 vinha de 16×1.5; o padrão de progressão
+     alterna ×1.5/×1.33, então o próximo é 24×1.33≈32) — usado no espaço
+     entre as seções principais da home, que estava apertado. */
+  --space-32: 8rem;
 
-  /* Transições — só timing/motion, não introduz cor/efeito novo */
+  /* Transições — só timing/motion, não introduz cor/efeito novo.
+     --transition-ui é o padrão único pra feedback interativo (hover/active
+     de botões, links, imagens com hover) — antes cada componente tinha seu
+     próprio valor solto (150/250/280/320ms), agora consolidado num só. */
   --transition-fast: 150ms ease;
   --transition-base: 250ms ease;
+  --transition-ui: 220ms ease-out;
 
   /* Layout */
   --content-max-width: 1120px;

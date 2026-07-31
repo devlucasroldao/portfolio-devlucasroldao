@@ -48,7 +48,7 @@
   font-size: 0.9rem;
   color: var(--text-secondary);
   white-space: nowrap;
-  transition: color var(--transition-fast);
+  transition: color var(--transition-ui);
 }
 
 .navbar__links a:hover {
@@ -71,6 +71,9 @@
   position: relative;
   isolation: isolate;
   overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
   font-family: var(--font-sans);
   font-weight: var(--fw-medium);
   font-size: 0.85rem;
@@ -80,7 +83,7 @@
   background: linear-gradient(135deg, rgba(82, 183, 136, 0.24), rgba(82, 183, 136, 0.09));
   border: 1px solid rgba(82, 183, 136, 0.35);
   color: var(--accent);
-  transition: color 320ms ease, border-color 320ms ease;
+  transition: color var(--transition-ui), border-color var(--transition-ui), transform var(--transition-ui);
 }
 
 .navbar__cta::before {
@@ -90,7 +93,7 @@
   z-index: -1;
   background: var(--accent);
   opacity: 0;
-  transition: opacity 320ms ease;
+  transition: opacity var(--transition-ui);
 }
 
 .navbar__cta:hover {
@@ -100,6 +103,10 @@
 
 .navbar__cta:hover::before {
   opacity: 1;
+}
+
+.navbar__cta:active {
+  transform: scale(0.97);
 }
 
 .navbar__toggle {
@@ -113,12 +120,16 @@
   border: 1px solid var(--border);
   border-radius: var(--radius-full);
   color: var(--text-primary);
-  transition: border-color var(--transition-fast), color var(--transition-fast);
+  transition: border-color var(--transition-ui), color var(--transition-ui), transform var(--transition-ui);
 }
 
 .navbar__toggle:hover {
   border-color: var(--accent);
   color: var(--accent);
+}
+
+.navbar__toggle:active {
+  transform: scale(0.97);
 }
 
 .navbar__toggle svg {
@@ -135,6 +146,11 @@
   background: transparent;
   border: none;
   padding: 0;
+  transition: transform var(--transition-ui);
+}
+
+.navbar__theme-toggle:active {
+  transform: scale(0.97);
 }
 
 .navbar__theme-track {
@@ -144,7 +160,7 @@
   border-radius: var(--radius-full);
   background: var(--bg-elevated);
   border: 1px solid var(--border);
-  transition: border-color var(--transition-fast);
+  transition: border-color var(--transition-ui);
 }
 
 .navbar__theme-toggle:hover .navbar__theme-track {
@@ -163,7 +179,7 @@
   border-radius: var(--radius-full);
   background: var(--text-primary);
   color: var(--bg-base);
-  transition: transform var(--transition-base), background-color var(--transition-fast);
+  transition: transform var(--transition-ui), background-color var(--transition-ui);
 }
 
 .navbar__theme-thumb svg {
