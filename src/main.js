@@ -21,10 +21,10 @@ const CTA_HEADING_PHRASES = ['Fala comigo!', 'Me chama!', 'Vem de zapzap', 'Bora
 const heroTemplate = `
   <section class="hero" id="inicio">
     <div class="hero__media">
+      <video class="hero__video" autoplay loop muted playsinline>
+        <source src="/hero-video.mp4" type="video/mp4" />
+      </video>
       <div class="hero__media-overlay"></div>
-      <div class="hero__media-placeholder">
-        [ vídeo real aqui — self-hosted, mp4, você em ação — substituir ]
-      </div>
     </div>
 
     <div class="hero__content">
