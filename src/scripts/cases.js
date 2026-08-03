@@ -1,6 +1,6 @@
 import { getIconSvg, iconTitles } from './icons.js';
-import { initCodeTabs } from './code-tabs.js';
 import { BADGE_ICONS } from './badge-icons.js';
+import { EXTERNAL_LINK_ICON } from './ui-icons.js';
 
 function renderStack(groups) {
   return `
@@ -36,31 +36,17 @@ function renderBlock(label, html) {
   `;
 }
 
-const conecteCode = `
-  <div class="code-editor">
-    <div class="code-editor__tabs">
-      <button class="code-editor__tab is-active" data-tab="before">before.ts</button>
-      <button class="code-editor__tab" data-tab="after">after.ts</button>
+// Sub-divisões dentro de um bloco (só a Solução do Conecte usa, por ter
+// muita coisa pra cobrir) — mesmo padrão tipográfico do label de bloco,
+// só um nível menor.
+function renderSubBlock(label, html) {
+  return `
+    <div class="case__sub-block">
+      <span class="case__sub-label">${label}</span>
+      ${html}
     </div>
-    <div class="code-editor__body">
-      <pre class="code-editor__panel is-active" data-panel="before"><span class="comment">// busca direta, sem checar quem está pedindo o dado</span>
-export async function getClienteData(id: string) {
-  return db.clientes.findUnique({ where: { id } });
-}</pre>
-      <pre class="code-editor__panel" data-panel="after">export async function getClienteData(id: string, session: Session) {
-  if (!session?.userId) {
-    throw new UnauthorizedError();
-  }
-
-  <span class="highlight">// depois: valida a sessão no servidor antes de liberar qualquer dado</span>
-  return db.clientes.findUnique({ where: { id } });
-}</pre>
-    </div>
-    <div class="code-editor__note">
-      &gt; trecho ilustrativo e generalizado, sem expor o mecanismo real da falha — o snippet definitivo (revisado) entra aqui antes do lançamento.
-    </div>
-  </div>
-`;
+  `;
+}
 
 export const casesData = [
   {
@@ -79,33 +65,57 @@ export const casesData = [
     teaserHeadline: 'De site solto a plataforma real',
     teaserProblem:
       'De landing page genérica a plataforma completa: admin sem depender de código, mobile redondo, analytics de verdade — e uma vulnerabilidade crítica corrigida no meio do caminho.',
-    teaserTags: ['Identidade visual', '+5 anos de mercado', 'Segurança auditada'],
+    teaserTags: ['Plataforma completa', 'Contratação digital', 'Segurança auditada'],
     blocks: [
       [
         'Problema',
-        '<p>O pedido inicial era uma checagem de segurança de rotina antes de migrar o site para domínio próprio. A auditoria revelou uma falha crítica: dados pessoais de clientes ficavam acessíveis sem autenticação. Havia também canais de contato quebrados silenciosamente e um problema de performance específico e mensurável.</p>',
+        `<p>Durante meses, eu sequer sabia que a Conecte tinha um site oficial — e eu trabalhava lá. Isso já dizia tudo: o site existia, mas era tão desatualizado e distante da identidade da empresa que passava despercebido até por quem trabalhava dentro dela. Os próprios gestores sabiam que aquilo não representava a marca. Recebi liberdade total pra reconstruir a presença digital do zero.</p>
+        <a href="https://www.linkedin.com/posts/devlucasroldao_reestrutura%C3%A7%C3%A3o-site-conecte-telecom-activity-7468042231271026688-U9Ty" target="_blank" rel="noopener noreferrer" class="case__inline-link">Contei mais sobre essa descoberta neste post${EXTERNAL_LINK_ICON}</a>`,
       ],
       [
         'Decisão',
-        '<p>Não aceitar "parece corrigido" como critério de conclusão. Isso significou reproduzir os bugs em ambiente controlado em vez de aceitar a primeira explicação plausível, e fazer uma varredura manual completa — clique real em cada um dos ~35 pontos de contato do site — antes de declarar o lançamento pronto, mesmo sob pressão de prazo.</p>',
+        '<p>A decisão que definiu o projeto não foi técnica, foi estratégica: pensei no cenário em que, no futuro, eu não estivesse mais na empresa. O sistema não podia depender de alguém mexendo em código toda vez que fosse preciso trocar uma imagem ou atualizar um plano — por isso o projeto virou uma plataforma com painel administrativo completo, não só um site bonito. Essa mesma lógica se repetiu quando percebi que clientes queriam contratar mas não conseguiam assinar por estarem fora da cidade — decisão de construir contratação 100% digital, o que por sua vez exigiu revisar toda a arquitetura de segurança da aplicação a fundo.</p>',
       ],
       [
         'Solução',
-        '<p>Correção da falha de acesso a dados, endpoint de servidor dedicado, autenticação em duas etapas no painel admin, fluxo de assinatura eletrônica com versionamento de contrato, e analytics de conversão construído do zero (~35 pontos instrumentados).</p>',
+        `<div class="case__sub-blocks">
+          ${renderSubBlock(
+            'Plataforma & Admin',
+            '<p>Painel administrativo completo — planos (com ou sem preço visível), textos, imagens, conteúdo do site, tudo gerenciável sem depender de código.</p>'
+          )}
+          ${renderImagePlaceholder('screenshot do painel administrativo', 'case__inline-image')}
+          ${renderSubBlock(
+            'Contratação digital',
+            '<p>Assinatura eletrônica com PDF real, versionamento de templates legais (cada contrato trava a versão exata do texto vigente no momento da assinatura), acesso protegido a documentos sensíveis.</p>'
+          )}
+          ${renderSubBlock(
+            'Segurança',
+            '<p>Durante o aprofundamento da arquitetura, uma auditoria revelou uma falha crítica — dados pessoais de clientes ficavam acessíveis sem autenticação. Corrigida com endpoint dedicado, validado antes e depois em produção. Foram tratados 39 achados no total (do crítico ao baixo), incluindo autenticação em duas etapas no admin e correção sistemática de um padrão de falha silenciosa em ~10 pontos do sistema.</p>'
+          )}
+          ${renderSubBlock(
+            'Central de Ajuda',
+            '<p>Base de conhecimento com mais de 40 artigos reais cobrindo dúvidas de internet, equipamentos, instalação e contrato — com expansão futura planejada em vídeo.</p>'
+          )}
+          ${renderImagePlaceholder('screenshot da Central de Ajuda', 'case__inline-image')}
+          ${renderSubBlock(
+            'Analytics',
+            '<p>Painel próprio de conversão (~35 pontos instrumentados) + página de links (bio do Instagram) integrada ao Google Analytics.</p>'
+          )}
+          ${renderImagePlaceholder('screenshot do painel de Analytics ou página de links', 'case__inline-image')}
+          ${renderSubBlock(
+            'Correção de canais',
+            '<p>7 números de WhatsApp incorretos identificados e corrigidos, com validação no admin pra impedir recorrência.</p>'
+          )}
+          ${renderSubBlock('Stack', '<p>Next.js 14, TypeScript, Supabase, Tailwind, Vercel.</p>')}
+        </div>`,
       ],
       [
         'Resultado',
-        `<ul class="case__result-list">
-          <li>Performance: 150–1000ms → 2–20ms no carregamento afetado (medido, antes/depois)</li>
-          <li>Cobertura de tracking: de ~3 de 19 pontos rastreados corretamente para 35 de 35 confirmados</li>
-          <li>Vulnerabilidade crítica identificada e corrigida antes de qualquer incidente registrado</li>
-          <li>Impacto em geração de leads ainda não medido em número fechado (domínio recém no ar) — assumido honestamente como qualitativo por enquanto</li>
-        </ul>`,
+        '<p>Performance: 150–1000ms → 2–20ms (medido). Tracking: de ~3 de 19 pontos corretos para 35 de 35 confirmados. Central de Ajuda: de 3 categorias vazias pra mais de 40 artigos publicados. Vulnerabilidade crítica corrigida antes de qualquer incidente. O site deixou de ser uma landing page esquecida e virou uma plataforma que integra marketing, gestão de conteúdo, contratos e suporte — pensada pra continuar funcionando mesmo sem depender de quem a construiu.</p>',
       ],
     ],
     learning:
-      '"Parece corrigido" e "está corrigido" são coisas diferentes — a diferença só aparece quando alguém força a reprodução real em vez de aceitar a primeira explicação plausível.',
-    code: conecteCode,
+      '"A decisão mais importante desse projeto não foi corrigir a falha de segurança — foi pensar em continuidade desde o início. Um sistema que só funciona enquanto uma pessoa específica está por perto não é uma solução, é uma dependência disfarçada. E quando a superfície do projeto cresce (de site pra plataforma), o rigor técnico precisa crescer junto: \'parece corrigido\' e \'está corrigido\' são coisas diferentes, e isso vale tanto pra uma falha crítica de segurança quanto pra um número de WhatsApp com um dígito errado."',
     stack: [
       { label: 'Frontend', icons: ['nextdotjs', 'typescript', 'tailwindcss'] },
       { label: 'Banco/Infra', icons: ['supabase', 'vercel'] },
@@ -127,28 +137,31 @@ export const casesData = [
     teaserHeadline: 'Catálogo & atendimento sem perder o humano',
     teaserProblem:
       '"O que você tem de perfume feminino aí?" — a Lu respondia isso, um por um, pra centenas de clientes, sem catálogo, sem histórico, sem parar.',
-    teaserTags: ['Catálogo online', 'Kits personalizados', 'Painel admin autônomo'],
+    teaserTags: ['Catálogo online', '500+ produtos', 'Painel admin autônomo'],
     blocks: [
       [
         'Problema',
-        '<p>A Lu (mãe do Lucas) revende perfumes e cosméticos há mais de 5 anos, tudo gerenciado manualmente por WhatsApp — sem catálogo, sem organização, sem histórico de pedidos. Ela mal parava de trabalhar respondendo "o que você tem?" e "qual o preço?" repetidamente. Kits personalizados existiam só como ideia, sem execução estruturada.</p>',
+        '<p>"Quais perfumes masculinos você tem?" "Quanto custa esse?" — minha mãe respondia isso, uma pessoa de cada vez, fotografando produto por produto pelo WhatsApp, todos os dias. Ela divide a rotina entre atendimento, compra, organização da loja e montagem de kits — e o tempo pra responder cliente por cliente ia ficando cada vez mais curto.</p>',
       ],
       [
         'Decisão',
-        '<p>A mais importante: sem sistema de pagamento, deliberadamente, contrariando o caminho óbvio de e-commerce completo — pagamento online exige responsabilidade legal/fiscal que a Lu não tem estrutura para absorver agora. Toda venda fecha no WhatsApp, mantendo o atendimento humanizado que é o diferencial real dela. Também: JavaScript puro em vez de TypeScript (sem overhead desnecessário pro escopo) e Pages Router em vez de App Router (estabilidade em vez de modernidade, por ser projeto de produção real).</p>',
+        '<p>A decisão mais importante foi não tentar substituir o atendimento humano — o catálogo existe pra tornar esse atendimento mais eficiente, não pra eliminá-lo. Dentro disso, teve uma decisão que eu errei e corrigi no meio do caminho: comecei sem mostrar preço nenhum, achando que simplificaria a manutenção com centenas de produtos. Conversando com outras pessoas, percebi que preço é uma das primeiras coisas que o cliente procura — sem ele, muita gente perde interesse antes mesmo de chamar no WhatsApp. Reestruturei a plataforma inteira pra ter gerenciamento de preço via painel, o que aumentou bastante a complexidade (hoje são 500+ produtos cadastrados), mas resolveu o problema de verdade.</p>',
       ],
       [
         'Solução',
-        '<p>Catálogo completo com filtros, busca e categorias; sistema de kits prontos + "monte o seu"; sacola com envio formatado automaticamente pro WhatsApp; painel admin com autonomia total pra Lu gerenciar produtos, preços e campanhas sem depender do filho; segurança implementada (senha fora do bundle público, rate limiting, sanitização de input).</p>',
+        `<p>Catálogo completo navegável por categoria/marca, com kits personalizados prontos ou montados pelo cliente, e envio direto pro WhatsApp já com a seleção pronta.</p>
+        ${renderImagePlaceholder('screenshot do catálogo de produtos', 'case__inline-image')}
+        <p>Painel administrativo: cadastro de produto, edição de preço individual ou em massa, promoções, dashboard, e até anotações internas pra facilitar a operação da loja.</p>
+        ${renderImagePlaceholder('screenshot do cadastro de produto no admin', 'case__inline-image')}
+        <p>Fotos reais dos produtos, não banco de imagem nem geração por IA — decisão consciente pra manter o catálogo confiável e fiel ao que a cliente realmente vai receber. Estratégia de marketing começou antes do site: incentivo real a avaliações no Google, construindo uma base de mais de 100 avaliações com média 5 estrelas antes mesmo do lançamento — pra quando o site entrar no ar, já ter reputação local forte pra SEO. Página de links dedicada pra bio do Instagram. Sem checkout, decisão deliberada — venda fecha no WhatsApp, mantendo o atendimento humano no centro.</p>`,
       ],
       [
-        'Estado atual',
-        '<p>Site funcional em produção, catálogo em fase de povoamento com produtos e fotos reais. Sem número de tráfego/conversão ainda — lançamento oficial aguarda catálogo completo. O que já mudou, comparado a antes: atendimento que era 100% manual agora tem vitrine própria; pedidos que não tinham histórico agora ficam salvos automaticamente.</p>',
+        'Resultado',
+        '<p>Site funcional, em fase final de cadastro de produto antes do lançamento oficial. Sem número de tráfego ainda (justo, é pré-lançamento) — mas a base de reputação (100+ avaliações 5 estrelas) e a estrutura de 500+ produtos já estão prontas pro dia em que o domínio for ao ar.</p>',
       ],
     ],
     learning:
-      'O erro mais caro foi pensar demais em vez de meter a mão na massa — um componente específico passou por mais de 9 iterações por tentar prever o resultado sem implementar e ver. Projeto real ensina o que projeto fictício não ensina: lidar com mudança de ideia do cliente e limitações operacionais reais é a diferença entre desenvolvedor e profissional.',
-    code: null,
+      '"A decisão errada mais valiosa desse projeto foi esconder o preço no início — corrigir isso me ensinou que simplificar o trabalho do desenvolvedor e simplificar a vida do cliente nem sempre são a mesma coisa, e às vezes é preciso escolher a segunda opção mesmo custando mais trabalho técnico."',
     stack: [
       { label: 'Frontend', icons: ['nextdotjs', 'javascript'] },
       { label: 'Banco/Infra', icons: ['supabase', 'vercel'] },
@@ -262,6 +275,10 @@ export function renderCaseFull(caseId) {
           <h1 class="case__title">${data.title}</h1>
           <p class="case__subtitle">${data.teaserProblem}</p>
           ${renderCaseMeta(data.meta)}
+          <div class="case-full__stack">
+            <span class="case-full__meta-label">Stack</span>
+            ${renderStack(data.stack)}
+          </div>
         </div>
       </div>
 
@@ -270,18 +287,10 @@ export function renderCaseFull(caseId) {
           ${data.blocks.map(([label, html]) => renderBlock(label, html)).join('')}
 
           <blockquote class="case__learning">${data.learning}</blockquote>
-
-          ${data.code ?? ''}
-
-          ${renderStack(data.stack)}
         </div>
 
         ${renderNextCaseNav(data.id)}
       </div>
     </article>
   `;
-}
-
-export function initCodeEditors() {
-  document.querySelectorAll('.code-editor').forEach((editor) => initCodeTabs(editor));
 }

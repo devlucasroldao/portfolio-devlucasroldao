@@ -200,6 +200,61 @@
   line-height: 1.65;
 }
 
+/* Link discreto embutido no meio de um bloco de texto (ex: post externo
+   citado no Problema) — sublinhado sutil + seta externa, nada chamativo. */
+.case__inline-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  margin-top: var(--space-3);
+  color: var(--accent);
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color var(--transition-ui);
+}
+
+.case__inline-link:hover {
+  color: var(--text-primary);
+}
+
+/* Sub-divisões dentro de um bloco (só a Solução do Conecte usa, por ter
+   muita coisa pra cobrir) — mesmo padrão tipográfico do label de bloco
+   grande logo acima, só um nível menor, pra ficar claro que é filho
+   dele e não um novo bloco no mesmo nível. */
+.case__sub-blocks {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.case__sub-label {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 1.15rem;
+  font-weight: var(--fw-bold);
+  color: var(--text-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  margin-bottom: var(--space-2);
+}
+
+/* Espaço de imagem intercalado no meio do texto (não é full-bleed como o
+   banner do topo — ocupa a largura do container de texto). */
+.case__inline-image {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  min-height: 220px;
+}
+
+/* Só quando a imagem é filha direta do bloco (Lu Perfumes, meio de um
+   texto corrido) — dentro de .case__sub-blocks (Conecte) o próprio gap
+   do flex já cuida do espaçamento, então não duplica aqui. */
+.case__block > .case__inline-image {
+  margin: var(--space-6) 0;
+}
+
 .case__result-list {
   display: flex;
   flex-direction: column;

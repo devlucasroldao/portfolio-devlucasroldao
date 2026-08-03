@@ -116,6 +116,24 @@
   color: var(--text-primary);
 }
 
+/* Stack de tecnologia — movida pra perto da meta-informação (era só no
+   fim da página). Mesmo label da meta ("Stack" no lugar de "Empresa"/
+   "Período"/"Papel"), ícones já existentes (.case__stack), sem repetir
+   a margem grande que ele tinha quando vinha depois do bloco de
+   aprendizado — o espaçamento aqui é o gap deste wrapper. */
+.case-full__stack {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-3) var(--space-6);
+  margin-top: var(--space-4);
+}
+
+.case-full__stack .case__stack {
+  margin-top: 0;
+  gap: var(--space-6);
+}
+
 .case-full__body {
   max-width: var(--content-max-width);
   margin: 0 auto;

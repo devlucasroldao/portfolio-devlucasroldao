@@ -2,11 +2,10 @@ import '../styles/main.css';
 import '../styles/navbar.css';
 import '../styles/buttons.css';
 import '../styles/cases.css';
-import '../styles/code-editor.css';
 import '../styles/case-page.css';
 import '../styles/footer.css';
 import { renderNavbar, initNavbar } from './navbar.js';
-import { renderCaseFull, initCodeEditors } from './cases.js';
+import { renderCaseFull } from './cases.js';
 import { renderFooter, initFooterEmail } from './footer.js';
 
 export function mountCasePage(caseId) {
@@ -20,6 +19,5 @@ export function mountCasePage(caseId) {
   `;
 
   initNavbar();
-  initCodeEditors();
   initFooterEmail();
 }
