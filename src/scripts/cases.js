@@ -70,7 +70,11 @@ export const casesData = [
     eyebrow: 'Case 01 — Segurança & Performance',
     badgeIcon: 'shield',
     title: 'Conecte Telecom',
-    subtitle: 'De checagem de rotina a correção de uma falha crítica, com plataforma completa entregue no caminho.',
+    meta: [
+      ['Empresa', 'Conecte Telecom'],
+      ['Período', 'Jun–Jul 2026 (2 meses)'],
+      ['Papel', 'Desenvolvimento full-stack + Auditoria de segurança'],
+    ],
     imageAlt: 'Screenshot real do site da Conecte Telecom — substituir',
     teaserHeadline: 'De site solto a plataforma real',
     teaserProblem:
@@ -114,7 +118,11 @@ export const casesData = [
     eyebrow: 'Case 02 — Produto pré-lançamento',
     badgeIcon: 'tag',
     title: 'Lu Perfumes & Presentes',
-    subtitle: 'Catálogo, kits e atendimento organizado — sem perder o toque humano do WhatsApp.',
+    meta: [
+      ['Empresa', 'Lu Perfumes & Presentes'],
+      ['Período', '2025–2026 (em andamento)'],
+      ['Papel', 'Desenvolvimento full-stack + Estratégia digital'],
+    ],
     imageAlt: 'Screenshot real do catálogo da Lu Perfumes & Presentes — substituir',
     teaserHeadline: 'Catálogo & atendimento sem perder o humano',
     teaserProblem:
@@ -175,6 +183,35 @@ function renderTeaserTags(tags) {
   `;
 }
 
+function renderCaseMeta(meta) {
+  return `
+    <div class="case-full__meta">
+      ${meta
+        .map(
+          ([label, value]) => `
+        <div class="case-full__meta-item">
+          <span class="case-full__meta-label">${label}</span>
+          <span class="case-full__meta-value">${value}</span>
+        </div>
+      `
+        )
+        .join('')}
+    </div>
+  `;
+}
+
+// Só existem 2 cases — o "próximo" é sempre o outro, ciclicamente
+// (Conecte -> Lu Perfumes -> Conecte).
+function renderNextCaseNav(currentId) {
+  const next = casesData.find((c) => c.id !== currentId) ?? casesData[0];
+  return `
+    <a href="${next.href}" class="case-next">
+      <span class="case-next__eyebrow">Próximo case</span>
+      <span class="case-next__title">${next.title} →</span>
+    </a>
+  `;
+}
+
 function renderCaseTeaser(data) {
   return `
     <article class="case${data.reverse ? ' case--reverse' : ''}">
@@ -215,20 +252,31 @@ export function renderCaseFull(caseId) {
   if (!data) return '';
 
   return `
-    <article class="case${data.reverse ? ' case--reverse' : ''}" id="${data.id}">
-      <div class="case__media">${renderImagePlaceholder(data.imageAlt)}</div>
-      <div class="case__content">
-        <span class="case__eyebrow">${data.eyebrow}</span>
-        <h1 class="case__title">${data.title}</h1>
-        <p class="case__subtitle">${data.subtitle}</p>
+    <article class="case-full" id="${data.id}">
+      <div class="case-full__banner">
+        ${renderImagePlaceholder(data.imageAlt, 'case-full__banner-image')}
+        <div class="case-full__banner-overlay"></div>
+        <div class="case-full__banner-content">
+          ${renderTeaserTags(data.teaserTags)}
+          <span class="case__eyebrow">${data.eyebrow}</span>
+          <h1 class="case__title">${data.title}</h1>
+          <p class="case__subtitle">${data.teaserProblem}</p>
+          ${renderCaseMeta(data.meta)}
+        </div>
+      </div>
 
-        ${data.blocks.map(([label, html]) => renderBlock(label, html)).join('')}
+      <div class="case-full__body">
+        <div class="case-full__content">
+          ${data.blocks.map(([label, html]) => renderBlock(label, html)).join('')}
 
-        <blockquote class="case__learning">${data.learning}</blockquote>
+          <blockquote class="case__learning">${data.learning}</blockquote>
 
-        ${data.code ?? ''}
+          ${data.code ?? ''}
 
-        ${renderStack(data.stack)}
+          ${renderStack(data.stack)}
+        </div>
+
+        ${renderNextCaseNav(data.id)}
       </div>
     </article>
   `;

@@ -147,7 +147,21 @@
       "Bash(node shot-polish.mjs)",
       "Bash(sed -i 's/await new Promise\\(\\(r\\) => setTimeout\\(r, 80\\)\\);/await new Promise\\(\\(r\\) => setTimeout\\(r, 300\\)\\);/' test-active-state.mjs)",
       "Bash(node test-active-state.mjs)",
-      "Bash(taskkill //PID 21652 //F)"
+      "Bash(taskkill //PID 21652 //F)",
+      "Bash(cd \"c:\\\\Users\\\\lucas\\\\Documents\\\\MeusProjetos\\\\portfolio-devlucasroldao\" && mv hero-video.mp4 public/hero-video.mp4 && ls -la public/)",
+      "Bash(node test-hero-video.mjs)",
+      "Bash(node test-hero-loop.mjs)",
+      "Bash(node shot-loop-frames.mjs)",
+      "Bash(taskkill //PID 19952 //F)",
+      "Bash(node test-case-restructure.mjs)",
+      "Bash(node shot-case-restructure.mjs)",
+      "Bash(taskkill //PID 25852 //F)",
+      "Bash(node test-fullbleed.mjs)",
+      "Bash(node shot-fullbleed.mjs)",
+      "Bash(taskkill //PID 23932 //F)"
+    ],
+    "additionalDirectories": [
+      "c:\\Users\\lucas\\Documents\\MeusProjetos\\portfolio-devlucasroldao"
     ]
   }
 }

@@ -156,11 +156,10 @@
   transition: color var(--transition-ui);
 }
 
-/* Só a página de case completo (:not exclui o teaser, que reusa a mesma
-   classe .case__content combinada com .case-teaser__content) — reduz a
-   margem do título já que o subtítulo agora ocupa esse espaço antes dos
-   blocks. */
-.case__content:not(.case-teaser__content) > .case__title {
+/* Só a página de case completo (o teaser não usa .case-full__banner-content) —
+   reduz a margem do título já que o subtítulo ocupa esse espaço logo
+   abaixo dele. */
+.case-full__banner-content > .case__title {
   margin-bottom: var(--space-2);
 }
 
@@ -172,19 +171,26 @@
   margin: 0 0 var(--space-6);
 }
 
+/* Respiro generoso entre os blocos de conteúdo (Problema/Decisão/Solução/
+   Resultado/Aprendizado) — mesma lógica de aumento de espaçamento já
+   aplicada no resto do site (próximo degrau da escala). */
 .case__block {
-  margin-bottom: var(--space-6);
+  margin-bottom: var(--space-12);
 }
 
+/* Antes lia como legenda pequena (eyebrow) — agora precisa ler como
+   divisor de seção forte, no mesmo patamar dos títulos de seção da home
+   (Cases/Sobre mim/Depoimentos ficam entre 1.5-2.25rem). Mesma fonte
+   mono já usada, só maior e com mais peso/contraste. */
 .case__block-label {
   display: block;
   font-family: var(--font-mono);
-  font-size: 0.8rem;
-  font-weight: var(--fw-medium);
-  color: var(--text-secondary);
+  font-size: clamp(1.5rem, 3vw, 1.875rem);
+  font-weight: var(--fw-bold);
+  color: var(--text-primary);
   text-transform: uppercase;
-  letter-spacing: 0.05em;
-  margin-bottom: var(--space-2);
+  letter-spacing: 0.03em;
+  margin-bottom: var(--space-4);
 }
 
 .case__block p {
