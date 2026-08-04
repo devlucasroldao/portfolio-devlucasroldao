@@ -186,7 +186,10 @@
       "Bash(node check-links.mjs)",
       "Bash(node check-links2.mjs)",
       "Bash(node check-chip-and-subtitle.mjs)",
-      "Bash(node check-subblocks-wrapper.mjs)"
+      "Bash(node check-subblocks-wrapper.mjs)",
+      "Bash(sed -i 's/console.log\\(JSON.stringify\\(JSON.parse\\(imgInfo\\), null, 2\\)\\);/console.log\\(imgInfo\\);/' check-images-load.mjs)",
+      "Bash(node check-images-load.mjs)",
+      "Bash(node check-lazy-loads-on-scroll.mjs)"
     ],
     "additionalDirectories": [
       "c:\\Users\\lucas\\Documents\\MeusProjetos\\portfolio-devlucasroldao"
