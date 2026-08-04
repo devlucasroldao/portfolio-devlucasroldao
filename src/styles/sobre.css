@@ -241,6 +241,30 @@ img.sobre__grid-item {
   text-align: right;
 }
 
+/* Só o valor de "Disponibilidade" — "Ferramentas" continua podendo
+   quebrar linha normalmente, como já é o padrão aceito nessa tabela.
+   Medido ponto a ponto (mesma técnica do .sobre__heading acima): com o
+   texto "Aberto a oportunidades", o tamanho padrão (0.85rem desktop /
+   0.75rem em @media 480px, ambos já definidos em .sobre__info-value)
+   já cabe numa linha só em toda a faixa de 375px até 1440px+ — inclusive
+   no ponto mais apertado da faixa 2-colunas (901px, onde a coluna lateral
+   é mais estreita que em 1440px). Só teto abaixo. */
+.sobre__info-value--nowrap {
+  white-space: nowrap;
+}
+
+/* 901-1049px: ainda cabe no tamanho padrão (13.6px), mas com margem
+   apertada (~3.5px, testado em 901px) — reduz um pouco só nessa faixa
+   pra sobrar folga de verdade (~11px) contra variação de renderização
+   de fonte entre navegadores/SO. Mesmos limites de breakpoint já usados
+   em .sobre__heading (901-1049 é o trecho mais estreito da coluna antes
+   do próximo ajuste em 1050px). */
+@media (min-width: 901px) and (max-width: 1049px) {
+  .sobre__info-value--nowrap {
+    font-size: 0.8125rem;
+  }
+}
+
 .sobre__info-dot {
   width: 8px;
   height: 8px;
@@ -271,5 +295,20 @@ img.sobre__grid-item {
 
   .sobre__grid-item {
     font-size: 0.55rem;
+  }
+}
+
+/* Precisa vir DEPOIS do bloco @media 480px acima: mesma especificidade
+   de seletor (uma classe só), então em CSS quem vem por último na fonte
+   vence — sem essa ordem, a regra de 480px sobrescreveria esta abaixo
+   de 340px mesmo essa faixa também batendo em max-width:480px. Abaixo
+   de 340px (mesmo piso extra usado em .sobre__heading) o texto ainda
+   cabe reduzindo um pouco mais — testado até 340px real. Abaixo disso
+   (~320px, dispositivo raro/legado) o valor pode cortar a última letra
+   graças ao overflow:hidden do .sobre__info — aceito como último
+   recurso, não vale sacrificar legibilidade só por esse caso extremo. */
+@media (max-width: 340px) {
+  .sobre__info-value--nowrap {
+    font-size: 0.625rem;
   }
 }

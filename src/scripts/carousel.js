@@ -9,23 +9,13 @@ const NEXT_ICON =
   '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>';
 
 function renderCard(item) {
-  // Depoimento real (com foto) x card de estatística de case (sem foto,
-  // layout simples de sempre) — só os 4 depoimentos ganham o layout com foto.
-  if (item.placeholder) {
-    return `
-      <blockquote class="testimonial-card testimonial-card--placeholder testimonial-card--profile">
-        <div class="testimonial-card__photo" aria-hidden="true">[ foto real aqui — substituir ]</div>
-        <div class="testimonial-card__body">
-          <p class="testimonial-card__quote">${item.quote}</p>
-          <cite class="testimonial-card__author">${item.author}</cite>
-        </div>
-      </blockquote>
-    `;
-  }
   return `
-    <blockquote class="testimonial-card testimonial-card--stat">
-      <p class="testimonial-card__quote">${item.quote}</p>
-      <cite class="testimonial-card__author">${item.author}</cite>
+    <blockquote class="testimonial-card testimonial-card--profile">
+      <img class="testimonial-card__photo" src="${item.photo}" alt="Foto de ${item.name}" loading="lazy" />
+      <div class="testimonial-card__body">
+        <p class="testimonial-card__quote">${item.quote}</p>
+        <cite class="testimonial-card__author">${item.name} — ${item.role}</cite>
+      </div>
     </blockquote>
   `;
 }

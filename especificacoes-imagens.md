@@ -106,10 +106,11 @@ Ordem de aparição na tela, de cima pra baixo.
 - **Conteúdo**: foto casual do Lucas, fora do contexto de trabalho — mais
   pessoal/descontraída, contrasta com as peças "de trabalho" do grid
 
-### 8–11. Depoimentos — 4 fotos de perfil (cards do carrossel)
+### 8–13. Depoimentos — 6 fotos de perfil (cards do carrossel)
 
-- **Onde fica**: seção Depoimentos, `.testimonial-card__photo` — os 4 cards
-  de depoimento real (os 2 cards de estatística dos cases não têm foto)
+- **Onde fica**: seção Depoimentos, `.testimonial-card__photo` — os 6 cards
+  do carrossel (os cards de estatística dos cases foram removidos; agora
+  são 6 depoimentos reais, todos com foto)
 - **Dimensão recomendada**: 900 × 1200 px
 - **Proporção**: 3:4 (vertical/retrato) — é o corte usado no desktop/tablet;
   no mobile o mesmo arquivo é cortado em 16:9 (mais largo) via CSS, então
@@ -117,13 +118,15 @@ Ordem de aparição na tela, de cima pra baixo.
   pra o corte mobile não cortar a cabeça/ombros
 - **Peso máximo**: 150 KB cada
 - **Formato**: JPG
-- **Conteúdo** (uma foto por pessoa):
-  1. Foto de perfil de quem vai dar o depoimento pela **Lu Perfumes &
-     Presentes** (provavelmente a Lu, mãe do Lucas)
-  2. Foto de perfil de quem vai dar o depoimento pela **Conecte Telecom**
-     (colega ou gestor de lá)
-  3. Foto de perfil de um **colega de trabalho ou estudo** do Lucas
-  4. Foto de perfil do **cliente da Rabisco** que vai dar o depoimento
+- **Conteúdo** (uma foto por pessoa, arquivo já referenciado em
+  `src/scripts/testimonials.js`):
+  1. `depoimento1.jpg` — Giulia Teixeira, sócia na Rabisco
+  2. `depoimento2.jpg` — João "Goiaba", amigo
+  3. `depoimento3.jpg` — Manu Dias, amiga/fisioterapeuta
+  4. `depoimento4.jpg` — Ricardo Germann, ex-colega/gerente na Agrocenter
+  5. `depoimento5.jpg` — Anderson, dev do sistema da Conecte Telecom
+  6. `depoimento6.jpg` — Lu Roldão, mãe do Lucas, dona da Lu Perfumes &
+     Presentes
 
 ---
 

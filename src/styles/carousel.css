@@ -182,25 +182,13 @@
   color: var(--text-secondary);
 }
 
-/* Placeholder — mesmo padrão visual dos blocos de imagem/avatar ainda sem conteúdo real */
-.testimonial-card--placeholder {
-  border-style: dashed;
-}
-
-.testimonial-card--placeholder .testimonial-card__quote {
-  font-family: var(--font-mono);
-  font-size: 0.85rem;
-  font-style: italic;
-  color: var(--text-secondary);
-}
-
 /* Depoimento real: foto grande à esquerda, texto empilhado à direita —
    mesmo tratamento visual das imagens de case e do grid do Sobre mim
-   (borda --border, fundo --bg-elevated, tracejado, radius pequeno, sem
-   círculo). aspect-ratio garante que a foto tenha uma altura própria
-   mesmo na medição estática (ver measureHeight em carousel.js) — na
-   posição final ela é sobrescrita por height:100%, acompanhando a altura
-   inteira do card. */
+   (borda --border, radius pequeno, sem círculo, object-fit:cover). Fotos
+   vieram em 3:4 (retrato) — aspect-ratio garante que a foto tenha uma
+   altura própria mesmo na medição estática (ver measureHeight em
+   carousel.js) — na posição final ela é sobrescrita por height:100%,
+   acompanhando a altura inteira do card. */
 .testimonial-card--profile {
   flex-direction: row;
   gap: var(--space-4);
@@ -211,18 +199,10 @@
   flex: 0 0 38%;
   aspect-ratio: 3 / 4;
   height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: var(--space-3);
-  border: 1px dashed var(--border);
+  display: block;
+  object-fit: cover;
+  border: 1px solid var(--border);
   border-radius: var(--radius-md);
-  background: var(--bg-elevated);
-  font-family: var(--font-mono);
-  font-size: 0.7rem;
-  line-height: 1.4;
-  color: var(--text-secondary);
 }
 
 .testimonial-card__body {
@@ -244,12 +224,6 @@
     height: auto;
     aspect-ratio: 16 / 9;
   }
-}
-
-/* Stat — número real extraído de um case, não depoimento de terceiro */
-.testimonial-card--stat .testimonial-card__author {
-  font-style: italic;
-  color: var(--accent);
 }
 
 @media (max-width: 900px) {

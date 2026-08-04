@@ -1,37 +1,48 @@
-// Depoimentos reais de terceiros ainda não coletados (pendência da seção 8
-// do briefing). Placeholders claramente marcados — substituir antes do
-// lançamento. Os dois últimos itens não são depoimentos: são números reais
-// dos próprios cases, no mesmo formato visual (regra da seção 4 do briefing).
+// Depoimentos reais de terceiros (seção 8 do briefing). Array sem número
+// fixo de propósito — mais depoimentos podem chegar depois, basta empurrar
+// pro fim da lista, nada no carousel.js trava em "6" itens.
+//
+// `photo`: caminho da foto real em public/images/depoimentos/depoimentoN.jpg.
 export const testimonials = [
   {
-    quote: '[SUBSTITUIR — depoimento real, tom da própria pessoa]',
-    author: '[Nome] — Lu Perfumes & Presentes',
-    placeholder: true,
-  },
-  {
-    quote: '[SUBSTITUIR — depoimento real, tom da própria pessoa]',
-    author: '[Nome] — Conecte Telecom',
-    placeholder: true,
-  },
-  {
-    quote: '[SUBSTITUIR — depoimento real, tom da própria pessoa]',
-    author: '[Nome] — colega de trabalho/estudo',
-    placeholder: true,
-  },
-  {
-    quote: '[SUBSTITUIR — depoimento real, tom da própria pessoa]',
-    author: '[Nome] — cliente Rabisco',
-    placeholder: true,
-  },
-  {
+    photo: '/images/depoimentos/depoimento1.jpg',
     quote:
-      '35/35 pontos de contato validados manualmente antes do lançamento — nenhum assumido como "deve estar funcionando".',
-    author: 'Case Conecte Telecom',
-    placeholder: false,
+      'No trabalho, ele nunca faz as coisas pela metade — sempre entrega mais do que o esperado, como nos contratos ou na organização do Notion. É curioso: estuda coisas fora da própria área só pra entender melhor o todo. E sabe ouvir e se importar de verdade com as pessoas.',
+    name: 'Giulia Teixeira',
+    role: 'Sócia na Rabisco',
   },
   {
-    quote: 'De atendimento 100% manual por WhatsApp pra catálogo com vitrine própria e histórico de pedidos.',
-    author: 'Case Lu Perfumes & Presentes',
-    placeholder: false,
+    photo: '/images/depoimentos/depoimento2.jpg',
+    quote:
+      'Falar do Kinho é fácil demais. Uma pessoa que todo mundo gosta de ter por perto — esforçado, e virando um baita profissional.',
+    name: 'João "Goiaba"',
+    role: 'Amigo',
+  },
+  {
+    photo: '/images/depoimentos/depoimento3.jpg',
+    quote:
+      'É criativo e crítico com a própria criatividade. Sempre que precisei de ajuda, ele parou pra ouvir, entender e achar uma solução — como amigo, parceiro de criação ou profissional.',
+    name: 'Manu Dias',
+    role: 'Amiga, fisioterapeuta',
+  },
+  {
+    photo: '/images/depoimentos/depoimento4.jpg',
+    quote:
+      'Trabalhei com ele por 2 anos — sempre com um sorriso no rosto e pensando pra frente, mesmo nos dias difíceis. Foi um baita colega de trabalho, e virou um baita amigo.',
+    name: 'Ricardo Germann',
+    role: 'Ex-colega, gerente na Agrocenter',
+  },
+  {
+    photo: '/images/depoimentos/depoimento5.jpg',
+    quote: 'Lucas dedicado no trabalho. Esse garoto é fera... ficou excelente, ficou top mesmo. Continue assim.',
+    name: 'Anderson',
+    role: 'Dev do sistema, Conecte Telecom',
+  },
+  {
+    photo: '/images/depoimentos/depoimento6.jpg',
+    quote:
+      'Fico muito feliz vendo o empenho desse guri — nos estudos, no trabalho, na vida. As coisas que ele fez por mim ajudaram muito, e continuam ajudando, porque ele não para nunca. Te amo, filho!',
+    name: 'Lu Roldão',
+    role: 'Mãe, dona da Lu Perfumes & Presentes',
   },
 ];
