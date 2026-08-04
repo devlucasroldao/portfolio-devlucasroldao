@@ -179,7 +179,10 @@
       "Bash(node audit-touch-targets.mjs)",
       "Bash(node check-navbar-state.mjs)",
       "Bash(node check-typography.mjs)",
-      "Bash(node check-typography2.mjs)"
+      "Bash(node check-typography2.mjs)",
+      "Bash(node verify-item4-visual.mjs)",
+      "Bash(node verify-item4b.mjs)",
+      "Bash(node final-retest-prod.mjs)"
     ],
     "additionalDirectories": [
       "c:\\Users\\lucas\\Documents\\MeusProjetos\\portfolio-devlucasroldao"
