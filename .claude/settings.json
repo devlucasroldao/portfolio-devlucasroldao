@@ -210,7 +210,17 @@
       "Bash(node compute-alpha.mjs)",
       "Bash(node test-home-navbar-unaffected.mjs)",
       "Bash(node check-cta-inverted.mjs)",
-      "Bash(node check-remaining-accent-text.mjs)"
+      "Bash(node check-remaining-accent-text.mjs)",
+      "Bash(curl -s -o /dev/null -w \"dev server: %{http_code}\\\\n\" http://localhost:5173/)",
+      "Bash(node test-toggle-persist.mjs)",
+      "Bash(node test-hero-navbar-locked.mjs)",
+      "Bash(node check-768-and-overflow-all.mjs)",
+      "Bash(git fetch *)",
+      "Bash(node verify-final-shade.mjs)",
+      "Bash(node measure-accent-contrast.mjs)",
+      "Bash(node check-dark-unaffected.mjs)",
+      "Bash(node check-dark-unaffected2.mjs)",
+      "Bash(node measure-icon-contrast.mjs)"
     ],
     "additionalDirectories": [
       "c:\\Users\\lucas\\Documents\\MeusProjetos\\portfolio-devlucasroldao"
