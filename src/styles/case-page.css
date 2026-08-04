@@ -126,12 +126,12 @@
   align-items: center;
   flex-wrap: wrap;
   gap: var(--space-3) var(--space-6);
-  margin-top: var(--space-4);
+  margin-top: var(--space-8);
 }
 
 .case-full__stack .case__stack {
   margin-top: 0;
-  gap: var(--space-6);
+  gap: var(--space-3);
 }
 
 .case-full__body {
@@ -151,7 +151,12 @@
   padding: var(--space-6);
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
-  transition: border-color var(--transition-ui), background-color var(--transition-ui);
+  /* opacity/transform aqui em vez de deixar só em .reveal (base.css) —
+     como .transition é propriedade shorthand, esta regra mais específica
+     sobrescreveria por completo a de .reveal e cancelaria a animação de
+     entrada do scroll-reveal nesse card específico. */
+  transition: border-color var(--transition-ui), background-color var(--transition-ui), opacity 700ms ease,
+    transform 700ms ease;
 }
 
 .case-next:hover {
@@ -181,9 +186,28 @@
 
 @media (max-width: 480px) {
   /* Banner mais baixo no mobile — 75vh ocuparia a tela quase inteira sem
-     mostrar nada do conteúdo abaixo, testado e reduzido. */
+     mostrar nada do conteúdo abaixo, testado e reduzido. min-height medido
+     de verdade (conteúdo sobreposto chega a ~542px de altura com tags +
+     eyebrow + título + subtítulo + meta + stack em viewport real de
+     375x812) + margem de segurança — abaixo disso o conteúdo vaza pro
+     topo do banner e colide com o placeholder da imagem. */
   .case-full__banner {
-    height: 55vh;
-    min-height: 380px;
+    height: 65vh;
+    min-height: 600px;
+  }
+
+  /* No mobile o conteúdo sobreposto ocupa ~90% da altura do banner (bem
+     mais que no desktop) — o gradiente padrão só fica opaco a partir de
+     60% da altura, deixando a faixa de topo do conteúdo (tags/eyebrow)
+     sobre a imagem quase sem escurecer, colidindo visualmente com o texto
+     do placeholder. Versão mobile fica opaca bem mais cedo (~40%), sobra
+     só uma tira fina de imagem visível no topo do banner. */
+  .case-full__banner-overlay {
+    background: linear-gradient(
+      to bottom,
+      rgba(13, 27, 42, 0) 0%,
+      rgba(13, 27, 42, 0.95) 5%,
+      var(--bg-base) 14%
+    );
   }
 }

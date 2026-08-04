@@ -53,6 +53,53 @@ body {
   }
 }
 
+/* Scroll-reveal genérico (scroll-animations.js adiciona .reveal via JS e
+   .is-visible quando o IntersectionObserver dispara) — fade + leve subida,
+   reutilizado em seções inteiras e em cards com stagger via
+   transition-delay inline. */
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 700ms ease, transform 700ms ease;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Cursor piscando só durante a digitação (scroll-animations.js remove a
+   classe assim que o último caractere entra) — largura fixa, acompanha a
+   cor do texto (todos os eyebrows já são --text-secondary ou --accent). */
+.typing-cursor::after {
+  content: '';
+  display: inline-block;
+  width: 2px;
+  height: 0.9em;
+  margin-left: 2px;
+  background: currentColor;
+  vertical-align: -0.15em;
+  animation: typing-cursor-blink 800ms steps(1, start) infinite;
+}
+
+@keyframes typing-cursor-blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .typing-cursor::after {
+    animation: none;
+  }
+}
+
 h1,
 h2,
 h3,

@@ -3,23 +3,13 @@ import { BADGE_ICONS } from './badge-icons.js';
 import { EXTERNAL_LINK_ICON } from './ui-icons.js';
 
 function renderStack(groups) {
+  const icons = groups.flatMap((group) => group.icons);
   return `
     <div class="case__stack">
-      ${groups
+      ${icons
         .map(
-          (group) => `
-        <div class="stack-group">
-          <span class="stack-group__label">${group.label}</span>
-          <div class="stack-group__icons">
-            ${group.icons
-              .map(
-                (key) => `
-              <span class="stack-icon" title="${iconTitles[key]}">${getIconSvg(key)}</span>
-            `
-              )
-              .join('')}
-          </div>
-        </div>
+          (key) => `
+        <span class="stack-icon" data-tooltip="${iconTitles[key]}">${getIconSvg(key)}</span>
       `
         )
         .join('')}

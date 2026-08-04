@@ -290,30 +290,14 @@
 .case__stack {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--space-8);
+  gap: var(--space-3);
   margin-top: var(--space-8);
 }
 
-.stack-group {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-2);
-}
-
-.stack-group__label {
-  font-family: var(--font-sans);
-  font-style: italic;
-  font-weight: var(--fw-medium);
-  color: var(--accent);
-  font-size: 0.85rem;
-}
-
-.stack-group__icons {
-  display: flex;
-  gap: var(--space-2);
-}
-
+/* Ícone isolado, sem label de categoria ao lado — o nome da tecnologia
+   mora no tooltip (::after), não ocupa espaço fixo na tela. */
 .stack-icon {
+  position: relative;
   width: 40px;
   height: 40px;
   display: flex;
@@ -323,11 +307,47 @@
   background: var(--bg-elevated);
   border-radius: var(--radius-sm);
   color: var(--text-secondary);
+  transition: transform var(--transition-ui), border-color var(--transition-ui), color var(--transition-ui);
+}
+
+.stack-icon:hover {
+  transform: scale(1.05);
+  border-color: var(--accent);
+  color: var(--accent);
 }
 
 .stack-icon svg {
   width: 20px;
   height: 20px;
+}
+
+/* Tooltip só-CSS via atributo data-tooltip — some por padrão, sobe e
+   aparece no hover/focus. z-index garante que fica acima do gradiente
+   do banner quando usado ali dentro. */
+.stack-icon::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: calc(100% + var(--space-2));
+  left: 50%;
+  transform: translateX(-50%) translateY(4px);
+  padding: var(--space-1) var(--space-2);
+  background: var(--bg-darker);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--transition-ui), transform var(--transition-ui);
+  z-index: 2;
+}
+
+.stack-icon:hover::after,
+.stack-icon:focus-visible::after {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
 }
 
 .case-teaser__content .case__title {

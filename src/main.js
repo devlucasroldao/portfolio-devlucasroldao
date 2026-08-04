@@ -14,6 +14,7 @@ import { renderFooter, initFooterEmail } from './scripts/footer.js';
 import { whatsappHref } from './scripts/contact.js';
 import { initHeroRotator } from './scripts/hero-rotator.js';
 import { initRotator } from './scripts/rotator.js';
+import { initScrollReveal, initTypewriter } from './scripts/scroll-animations.js';
 import { EXTERNAL_LINK_ICON } from './scripts/ui-icons.js';
 
 const CTA_HEADING_PHRASES = ['Fala comigo!', 'Me chama!', 'Vem de zapzap', 'Bora trocar uma ideia'];
@@ -146,3 +147,12 @@ initCarousels();
 initFooterEmail();
 initHeroRotator();
 initRotator(document.querySelector('.cta-final__rotator'), CTA_HEADING_PHRASES, { wordSelector: '.cta-final__rotator-word' });
+
+initScrollReveal({
+  sections: ['.cases', '.sobre', '.depoimentos', '.closing'],
+  staggerGroups: [
+    ['.case-list', ':scope > .case'],
+    ['.depoimentos__grid', ':scope > .carousel'],
+  ],
+});
+initTypewriter('.cases__eyebrow, .sobre__caption, .depoimentos__eyebrow, .case__eyebrow');
