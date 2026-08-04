@@ -139,7 +139,7 @@
 
 .carousel__arrow:hover {
   border-color: var(--accent);
-  color: var(--accent);
+  color: var(--accent-text);
 }
 
 /* Combina com o translateY(-50%) de centralização — precisa ir junto na

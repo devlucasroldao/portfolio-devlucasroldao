@@ -79,13 +79,13 @@
 }
 
 .footer__nav a:hover {
-  color: var(--accent);
+  color: var(--accent-text);
 }
 
-/* Links sociais (LinkedIn/GitHub/Email) — já em --accent por padrão,
+/* Links sociais (LinkedIn/GitHub/Email) — já em --accent-text por padrão,
    diferenciando visualmente esse grupo do de navegação. */
 .footer__links a {
-  color: var(--accent);
+  color: var(--accent-text);
 }
 
 .footer__links a:hover {

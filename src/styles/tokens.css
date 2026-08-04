@@ -7,6 +7,14 @@
   --text-secondary: #778da9;
   --text-primary: #e0e1dd;
   --accent: #52b788;
+  /* Cor de TEXTO com --accent — separada do --accent puro (que continua
+     servindo fundo/borda de botão sem alteração) porque o verde original
+     não tem contraste suficiente como texto sobre fundo claro (medido:
+     ~1.9-2.5:1 contra os 3 fundos do modo claro, bem abaixo do mínimo
+     WCAG AA de 4.5:1). No escuro é igual ao --accent normal — só o modo
+     claro sobrescreve pra um tom mais escuro/saturado (ver
+     [data-theme="light"] abaixo). */
+  --accent-text: var(--accent);
 
   /* Tipografia — briefing seção 2 */
   --font-mono: 'JetBrains Mono', monospace;
@@ -63,4 +71,8 @@
   --border: #b4b7ae;
   --text-secondary: #415a77;
   --text-primary: #0d1b2a;
+  /* Verde mais escuro/saturado só pra uso como texto — medido contra os
+     3 fundos do modo claro: 6.11:1 (bg-base), 8.03:1 (bg-elevated),
+     5.10:1 (bg-darker), todos acima do mínimo AA de 4.5:1 com folga. */
+  --accent-text: #245a42;
 }

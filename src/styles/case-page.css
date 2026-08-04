@@ -20,7 +20,7 @@
 }
 
 .case-page__back:hover {
-  color: var(--accent);
+  color: var(--accent-text);
 }
 
 /* Banner contido — voltou a respeitar o max-width do resto do site (nada
@@ -169,6 +169,6 @@ img.case-full__banner-image {
 }
 
 .case-next:hover .case-next__title {
-  color: var(--accent);
+  color: var(--accent-text);
 }
 

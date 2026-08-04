@@ -10,7 +10,7 @@
   font-size: 0.95rem;
   border: 1px solid var(--accent);
   background: transparent;
-  color: var(--accent);
+  color: var(--accent-text);
   transition: background-color var(--transition-ui), color var(--transition-ui), transform var(--transition-ui),
     opacity var(--transition-ui);
 }

@@ -64,7 +64,7 @@
 }
 
 .sobre__heading-accent {
-  color: var(--accent);
+  color: var(--accent-text);
 }
 
 /* .sobre__main e .sobre__side são os dois filhos diretos do grid de duas
@@ -108,7 +108,7 @@
 }
 
 .sobre__highlight--accent {
-  color: var(--accent);
+  color: var(--accent-text);
 }
 
 .sobre__ctas {

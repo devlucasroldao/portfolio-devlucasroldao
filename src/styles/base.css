@@ -148,9 +148,10 @@ img {
   display: block;
 }
 
-/* Regra do briefing: verde só pontual (hover de link, prompt de terminal, itálico de destaque) */
+/* Regra do briefing: verde só pontual (hover de link, prompt de terminal, itálico de destaque).
+   --accent-text (não --accent puro): é cor de texto, precisa do tom ajustado pro modo claro. */
 a:hover {
-  color: var(--accent);
+  color: var(--accent-text);
 }
 
 /* Ícones de interface inline (seta externa, envelope, marca no footer) —
@@ -166,5 +167,5 @@ a:hover {
 
 em {
   font-style: italic;
-  color: var(--accent);
+  color: var(--accent-text);
 }

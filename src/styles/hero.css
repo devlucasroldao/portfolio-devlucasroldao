@@ -11,6 +11,7 @@
   --border: #415a77;
   --text-secondary: #778da9;
   --text-primary: #e0e1dd;
+  --accent-text: var(--accent);
 
   position: relative;
   overflow: hidden;

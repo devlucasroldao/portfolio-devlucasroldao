@@ -27,7 +27,7 @@
 }
 
 .cases__heading-accent {
-  color: var(--accent);
+  color: var(--accent-text);
 }
 
 .cases__subtitle {
@@ -130,7 +130,7 @@ img.case-teaser__image {
    dois efeitos, via combinador de irmão adjacente (media e content são
    irmãos diretos no DOM). */
 .case-teaser__media:hover + .case-teaser__content .case__title {
-  color: var(--accent);
+  color: var(--accent-text);
 }
 
 /* Selo circular reforçando a categoria — círculo é a exceção de forma do
@@ -148,7 +148,7 @@ img.case-teaser__image {
   border-radius: var(--radius-full);
   background: var(--bg-elevated);
   border: 1px solid var(--border);
-  color: var(--accent);
+  color: var(--accent-text);
 }
 
 .case__badge svg {
@@ -226,7 +226,7 @@ img.case-teaser__image {
   align-items: center;
   gap: var(--space-1);
   margin-top: var(--space-3);
-  color: var(--accent);
+  color: var(--accent-text);
   font-family: var(--font-sans);
   font-size: 0.95rem;
   text-decoration: underline;
@@ -320,7 +320,7 @@ img.case__inline-image {
   margin: 0;
   font-family: var(--font-sans);
   font-style: italic;
-  color: var(--accent);
+  color: var(--accent-text);
   font-size: 1.05rem;
   line-height: 1.6;
   border-left: 1px solid var(--accent);
@@ -354,7 +354,7 @@ img.case__inline-image {
 .stack-icon.is-active {
   transform: scale(1.05);
   border-color: var(--accent);
-  color: var(--accent);
+  color: var(--accent-text);
 }
 
 .stack-icon svg {
@@ -450,7 +450,7 @@ img.case__inline-image {
   background: rgba(82, 183, 136, 0.1);
   font-family: var(--font-sans);
   font-weight: var(--fw-semibold);
-  color: var(--accent);
+  color: var(--accent-text);
   transition: color var(--transition-ui), transform var(--transition-ui);
 }
 
