@@ -51,6 +51,20 @@
   padding-top: var(--space-16);
 }
 
+/* Foto real do banner — herda position:absolute;inset:0 da regra acima
+   (preenche o banner inteiro), só zera o padding-top (era só pra afastar
+   o texto do placeholder do topo, não faz sentido pra imagem de verdade,
+   deixaria uma faixa vazia) e cobre a área via object-fit. As fotos já
+   vieram bem perto de 21:9, então o corte real é mínimo. */
+img.case-full__banner-image {
+  padding-top: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  object-position: center;
+}
+
 /* Gradiente só na base — invisível no topo (imagem visível), opaco
    embaixo (onde o texto precisa de contraste garantido). Não é um véu
    uniforme por cima de tudo. Usa rgba(13,27,42,0) explícito em vez da

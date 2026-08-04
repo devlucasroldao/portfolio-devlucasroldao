@@ -267,6 +267,16 @@ img.case-teaser__image {
   min-height: 220px;
 }
 
+/* Foto real (screenshot) — todas já vieram cortadas em 16:9, então o
+   object-fit aqui é só uma garantia, não faz corte perceptível. */
+img.case__inline-image {
+  display: block;
+  object-fit: cover;
+  object-position: center;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+}
+
 /* Só quando a imagem é filha direta do bloco (Lu Perfumes, meio de um
    texto corrido) — dentro de .case__sub-blocks (Conecte) o próprio gap
    do flex já cuida do espaçamento, então não duplica aqui. */
