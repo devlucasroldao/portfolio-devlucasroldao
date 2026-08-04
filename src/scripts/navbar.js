@@ -1,5 +1,5 @@
 import { whatsappHref } from './contact.js';
-import { EXTERNAL_LINK_ICON } from './ui-icons.js';
+import { CHAT_ICON, EXTERNAL_LINK_ICON } from './ui-icons.js';
 
 export const NAV_ITEMS = [
   ['#inicio', 'Início'],
@@ -37,7 +37,10 @@ export function renderNavbar({ base = '' } = {}) {
           </span>
         </button>
 
-        <a href="${whatsappHref}" target="_blank" rel="noopener noreferrer" class="navbar__cta">Falar comigo${EXTERNAL_LINK_ICON}</a>
+        <a href="${whatsappHref}" target="_blank" rel="noopener noreferrer" class="navbar__cta" aria-label="Falar comigo no WhatsApp">
+          <span class="navbar__cta-text">Falar comigo${EXTERNAL_LINK_ICON}</span>
+          <span class="navbar__cta-icon">${CHAT_ICON}</span>
+        </a>
 
         <button class="navbar__toggle" type="button" aria-label="Abrir menu">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">

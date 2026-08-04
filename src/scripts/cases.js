@@ -9,7 +9,7 @@ function renderStack(groups) {
       ${icons
         .map(
           (key) => `
-        <span class="stack-icon" data-tooltip="${iconTitles[key]}">${getIconSvg(key)}</span>
+        <span class="stack-icon" tabindex="0" title="${iconTitles[key]}" data-tooltip="${iconTitles[key]}">${getIconSvg(key)}</span>
       `
         )
         .join('')}
@@ -283,4 +283,28 @@ export function renderCaseFull(caseId) {
       </div>
     </article>
   `;
+}
+
+// Fallback de toque pro tooltip do Stack (:hover não existe em touch) —
+// tocar no ícone alterna o tooltip (fecha os outros abertos); tocar fora
+// de qualquer ícone fecha tudo. Usa o evento "click" (não touchstart) de
+// propósito: no mobile o navegador só dispara click num toque de verdade,
+// não num arrasto de rolagem — evita abrir o tooltip sem querer ao rolar
+// a página por cima do ícone.
+export function initStackTooltips() {
+  const icons = document.querySelectorAll('.stack-icon');
+  if (!icons.length) return;
+
+  icons.forEach((icon) => {
+    icon.addEventListener('click', (e) => {
+      const wasActive = icon.classList.contains('is-active');
+      icons.forEach((i) => i.classList.remove('is-active'));
+      if (!wasActive) icon.classList.add('is-active');
+      e.stopPropagation();
+    });
+  });
+
+  document.addEventListener('click', () => {
+    icons.forEach((i) => i.classList.remove('is-active'));
+  });
 }

@@ -49,11 +49,24 @@
   gap: var(--space-6);
 }
 
+/* Padding + margin negativa igual e oposta: cresce a área clicável (pra
+   pelo menos 44px de altura) sem empurrar os vizinhos nem mudar o
+   espaçamento visual entre linhas — a "sobra" fica só dentro da própria
+   caixa do link, invisível mas tocável. */
 .footer__nav a,
 .footer__links a {
   display: inline-flex;
   align-items: center;
   gap: var(--space-1);
+  padding: var(--space-3) var(--space-2);
+  /* Só compensa a margem no eixo horizontal (o gap entre itens da mesma
+     linha é generoso, --space-6, sobra folga). No eixo vertical NÃO
+     compensa: o `gap` do flex-wrap já garante a distância fixa entre
+     linhas independente da altura de cada item, então o padding vertical
+     só cresce a própria caixa do link sem invadir a linha vizinha (testado:
+     compensar os dois eixos causava sobreposição entre os dois grupos
+     empilhados de navegação do rodapé). */
+  margin: 0 calc(-1 * var(--space-2));
   font-family: var(--font-sans);
   font-weight: var(--fw-medium);
   font-size: 0.95rem;

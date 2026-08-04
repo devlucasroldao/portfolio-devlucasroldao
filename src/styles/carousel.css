@@ -101,7 +101,10 @@
 
 /* Círculo permitido aqui — ícone isolado, uma das exceções do briefing ao
    raio pequeno padrão. Metade do círculo fica sobre o card, metade pra
-   fora dele (padrão comum de seta de carrossel). */
+   fora dele (padrão comum de seta de carrossel). 44x44 = mínimo de área
+   de toque recomendado; offset reduzido de -20px pra -10px pra sobrar
+   mais margem da borda física da tela no mobile (era ~4px, agora ~14px
+   — medido em 375px), reduzindo risco de conflito com gesto de sistema. */
 .carousel__arrow {
   position: absolute;
   top: 50%;
@@ -109,8 +112,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 40px;
-  height: 40px;
+  width: 44px;
+  height: 44px;
   border: 1px solid var(--border);
   border-radius: var(--radius-full);
   background: var(--bg-elevated);
@@ -122,11 +125,11 @@
 }
 
 .carousel__arrow--prev {
-  left: -20px;
+  left: -10px;
 }
 
 .carousel__arrow--next {
-  right: -20px;
+  right: -10px;
 }
 
 .carousel__arrow svg {

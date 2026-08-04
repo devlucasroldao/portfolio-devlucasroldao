@@ -4,10 +4,15 @@
   padding: calc(var(--navbar-height) + var(--space-12)) var(--space-6) 0;
 }
 
+/* Padding vertical cresce a área de toque pra 44px+ de altura — sem
+   compensar com margem negativa (ao contrário do footer, aqui não tem
+   vizinho colado embaixo/em cima disputando o mesmo espaço apertado,
+   então deixar a caixa crescer de verdade no fluxo normal é seguro). */
 .case-page__back {
   display: inline-flex;
   align-items: center;
   gap: var(--space-2);
+  padding: var(--space-3) 0;
   font-family: var(--font-mono);
   font-size: 0.9rem;
   color: var(--text-secondary);

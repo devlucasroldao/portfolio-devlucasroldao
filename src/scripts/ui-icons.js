@@ -6,6 +6,12 @@ export const EXTERNAL_LINK_ICON =
 export const ENVELOPE_ICON =
   '<svg class="icon-envelope" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>';
 
+// Balão de conversa — usado só como versão ícone-só do CTA "Falar comigo"
+// da navbar abaixo de ~420px, quando o texto não cabe mais ao lado do
+// hambúrguer (ver .navbar__cta-icon em navbar.css).
+export const CHAT_ICON =
+  '<svg class="icon-chat" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>';
+
 // simple-icons não tem mais o logo do LinkedIn (removido do pacote por
 // pedido legal da própria LinkedIn/Microsoft) — desenhado à mão aqui,
 // seguindo o mesmo tratamento flat/monocromático do resto dos ícones de

@@ -131,6 +131,58 @@ function initCarouselInstance(root, reducedMotion) {
 
   window.addEventListener('resize', measureHeight);
 
+  // Swipe de toque — mesmo efeito das setas, só que arrastando o dedo.
+  // Só decide se é gesto horizontal (troca de card) ou vertical (rolagem
+  // normal da página) depois de ver pra que lado o dedo andou mais —
+  // rolar a página verticalmente sobre o card continua funcionando.
+  const SWIPE_THRESHOLD_PX = 40;
+  let touchStartX = 0;
+  let touchStartY = 0;
+  let touchDeltaX = 0;
+  let isHorizontalSwipe = null;
+
+  stage.addEventListener(
+    'touchstart',
+    (e) => {
+      const touch = e.touches[0];
+      touchStartX = touch.clientX;
+      touchStartY = touch.clientY;
+      touchDeltaX = 0;
+      isHorizontalSwipe = null;
+      if (timer) clearInterval(timer);
+      timer = null;
+    },
+    { passive: true }
+  );
+
+  stage.addEventListener(
+    'touchmove',
+    (e) => {
+      const touch = e.touches[0];
+      touchDeltaX = touch.clientX - touchStartX;
+      const deltaY = touch.clientY - touchStartY;
+
+      if (isHorizontalSwipe === null && (Math.abs(touchDeltaX) > 8 || Math.abs(deltaY) > 8)) {
+        isHorizontalSwipe = Math.abs(touchDeltaX) > Math.abs(deltaY);
+      }
+
+      // Só bloqueia o scroll vertical da página quando já ficou claro que
+      // o gesto é horizontal — senão o usuário fica preso sem conseguir
+      // rolar a página ao tocar em cima do card.
+      if (isHorizontalSwipe) e.preventDefault();
+    },
+    { passive: false }
+  );
+
+  stage.addEventListener('touchend', () => {
+    if (isHorizontalSwipe && Math.abs(touchDeltaX) >= SWIPE_THRESHOLD_PX) {
+      if (touchDeltaX < 0) next();
+      else prev();
+    }
+    isHorizontalSwipe = null;
+    restartTimer();
+  });
+
   applyClasses();
   measureHeight();
   restartTimer();

@@ -109,6 +109,24 @@
   transform: scale(0.97);
 }
 
+.navbar__cta-text {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+/* Ícone-só (balão de conversa) fica escondido por padrão — só assume o
+   lugar do texto abaixo de 420px, quando toggle de tema + CTA + hambúrguer
+   juntos não cabem mais na largura da viewport (ver breakpoint abaixo). */
+.navbar__cta-icon {
+  display: none;
+}
+
+.navbar__cta-icon svg {
+  width: 18px;
+  height: 18px;
+}
+
 .navbar__toggle {
   display: none;
   flex-shrink: 0;
@@ -140,12 +158,16 @@
 /* Toggle de tema — formato switch (trilho + bolinha deslizante), só estado
    visual por enquanto. Ícone sol/lua troca dentro da bolinha, sem mudar
    nenhuma cor da página. */
+/* Padding vertical em vez de 0: cresce a área de toque do botão pra pelo
+   menos 44px de altura (a trilha visível continua com os mesmos 24px,
+   só recentralizada dentro da caixa maior — nenhuma mudança visual). */
 .navbar__theme-toggle {
   display: flex;
+  align-items: center;
   flex-shrink: 0;
   background: transparent;
   border: none;
-  padding: 0;
+  padding: var(--space-3) 0;
   transition: transform var(--transition-ui);
 }
 
@@ -257,5 +279,27 @@
   .navbar__cta {
     padding: var(--space-2) var(--space-3);
     font-size: 0.78rem;
+  }
+}
+
+/* Abaixo de ~420px, toggle de tema + CTA + hambúrguer juntos não cabem
+   mais na largura da viewport (medido: o grupo inteiro precisa de ~228px,
+   sobrando menos que isso em telas de 375-414px) — o CTA vira ícone-só
+   (balão de conversa, ainda leva pro WhatsApp) pra liberar espaço
+   suficiente pro hambúrguer ficar 100% dentro da tela. */
+@media (max-width: 420px) {
+  .navbar__cta-text {
+    display: none;
+  }
+
+  .navbar__cta-icon {
+    display: flex;
+  }
+
+  .navbar__cta {
+    padding: var(--space-2);
+    min-width: 44px;
+    min-height: 44px;
+    justify-content: center;
   }
 }

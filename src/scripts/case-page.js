@@ -5,7 +5,7 @@ import '../styles/cases.css';
 import '../styles/case-page.css';
 import '../styles/footer.css';
 import { renderNavbar, initNavbar } from './navbar.js';
-import { renderCaseFull } from './cases.js';
+import { renderCaseFull, initStackTooltips } from './cases.js';
 import { renderFooter, initFooterEmail } from './footer.js';
 import { initScrollReveal, initTypewriter } from './scroll-animations.js';
 
@@ -21,6 +21,7 @@ export function mountCasePage(caseId) {
 
   initNavbar();
   initFooterEmail();
+  initStackTooltips();
 
   initScrollReveal({ sections: ['.case__block', '.case__learning', '.case-next'] });
   initTypewriter('.case__eyebrow, .case-next__eyebrow');
