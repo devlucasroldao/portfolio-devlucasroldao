@@ -197,6 +197,15 @@
 .testimonial-card__photo {
   box-sizing: border-box;
   flex: 0 0 38%;
+  /* min-width:0 sobrescreve o "automatic minimum size" que o flexbox dá de
+     graça a item com aspect-ratio + height definidos: sem isso, em cards
+     estreitos o navegador calcula um mínimo de largura a partir da altura
+     (height:100% x aspect-ratio 3:4) e ignora o flex-basis de 38%, fazendo
+     a foto crescer bem além do previsto e espremer o texto — reproduzido e
+     confirmado especificamente nos 901-1049px (onde o grid de depoimentos
+     vira 2 colunas e o card fica mais estreito). Mesmo fix que
+     .testimonial-card__body já tinha, só faltava aqui na foto. */
+  min-width: 0;
   aspect-ratio: 3 / 4;
   height: 100%;
   display: block;

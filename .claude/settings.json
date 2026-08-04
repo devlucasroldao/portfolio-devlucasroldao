@@ -189,7 +189,23 @@
       "Bash(node check-subblocks-wrapper.mjs)",
       "Bash(sed -i 's/console.log\\(JSON.stringify\\(JSON.parse\\(imgInfo\\), null, 2\\)\\);/console.log\\(imgInfo\\);/' check-images-load.mjs)",
       "Bash(node check-images-load.mjs)",
-      "Bash(node check-lazy-loads-on-scroll.mjs)"
+      "Bash(node check-lazy-loads-on-scroll.mjs)",
+      "Bash(npm ls *)",
+      "Read(//c//**)",
+      "Bash(find /c/Users/lucas/AppData/Local/npm-cache/_npx -maxdepth 3 -iname \"*playwright*\" 2>/dev/null | head; find / -maxdepth 4 -iname \"playwright\" -type d 2>/dev/null | head -20)",
+      "Bash(node debug-overflow.mjs)",
+      "Bash(npx playwright *)",
+      "Bash(mkdir -p screenshots)",
+      "Bash(node test-carousel.js)",
+      "Bash(node debug-timing.js)",
+      "Bash(node debug-hover.js)",
+      "Bash(node debug-hover2.js)",
+      "Bash(lsof -ti:4173 -sTCP:LISTEN)",
+      "Bash(xargs -r kill)",
+      "Bash(node shot-final.js)",
+      "Bash(node final-verify-sweep.mjs)",
+      "Bash(node debug-testi-photo.mjs)",
+      "Bash(node debug-testi-widths.mjs)"
     ],
     "additionalDirectories": [
       "c:\\Users\\lucas\\Documents\\MeusProjetos\\portfolio-devlucasroldao"
