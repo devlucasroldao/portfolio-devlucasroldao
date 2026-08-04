@@ -171,10 +171,10 @@ img.case-teaser__image {
   transition: color var(--transition-ui);
 }
 
-/* Só a página de case completo (o teaser não usa .case-full__banner-content) —
+/* Só a página de case completo (o teaser não usa .case-full__header) —
    reduz a margem do título já que o subtítulo ocupa esse espaço logo
    abaixo dele. */
-.case-full__banner-content > .case__title {
+.case-full__header > .case__title {
   margin-bottom: var(--space-2);
 }
 
@@ -267,14 +267,25 @@ img.case-teaser__image {
   min-height: 220px;
 }
 
-/* Foto real (screenshot) — todas já vieram cortadas em 16:9, então o
-   object-fit aqui é só uma garantia, não faz corte perceptível. */
+/* Foto real (screenshot) — max-height evita que uma imagem de proporção
+   diferente do 16:9 padrão (ou uma tela muito larga) domine o scroll
+   inteiro da página. object-position:top porque screenshot de site
+   normalmente tem o conteúdo mais importante no topo da tela (menu,
+   hero) — cortar por baixo perde menos informação do que cortar por
+   cima ou centralizar. */
 img.case__inline-image {
   display: block;
+  max-height: 480px;
   object-fit: cover;
-  object-position: center;
+  object-position: top;
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
+}
+
+@media (max-width: 480px) {
+  img.case__inline-image {
+    max-height: 320px;
+  }
 }
 
 /* Só quando a imagem é filha direta do bloco (Lu Perfumes, meio de um

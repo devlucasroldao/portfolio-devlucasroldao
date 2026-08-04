@@ -314,17 +314,17 @@ export function renderCaseFull(caseId) {
     <article class="case-full" id="${data.id}">
       <div class="case-full__banner">
         ${renderImage(data.bannerImage, data.bannerImageAlt, 'case-full__banner-image', { eager: true })}
-        <div class="case-full__banner-overlay"></div>
-        <div class="case-full__banner-content">
-          ${renderTeaserTags(data.teaserTags)}
-          <span class="case__eyebrow">${data.eyebrow}</span>
-          <h1 class="case__title">${data.title}</h1>
-          <p class="case__subtitle">${data.teaserProblem}</p>
-          ${renderCaseMeta(data.meta)}
-          <div class="case-full__stack">
-            <span class="case-full__meta-label">Stack</span>
-            ${renderStack(data.stack)}
-          </div>
+      </div>
+
+      <div class="case-full__header">
+        ${renderTeaserTags(data.teaserTags)}
+        <span class="case__eyebrow">${data.eyebrow}</span>
+        <h1 class="case__title">${data.title}</h1>
+        <p class="case__subtitle">${data.teaserProblem}</p>
+        ${renderCaseMeta(data.meta)}
+        <div class="case-full__stack">
+          <span class="case-full__meta-label">Stack</span>
+          ${renderStack(data.stack)}
         </div>
       </div>
 

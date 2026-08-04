@@ -23,84 +23,53 @@
   color: var(--accent);
 }
 
-/* Full-bleed de verdade: .case-full__banner é filho direto do <article>,
-   que por sua vez é filho direto de #app — nenhum ancestral com
-   max-width entre ele e o body, então width:100% já basta. Evita de
-   propósito o hack de width:100vw + margin negativo (estoura a barra de
-   rolagem vertical em alguns navegadores, testado e descartado). */
+/* Banner contido — voltou a respeitar o max-width do resto do site (nada
+   de full-bleed). Sobreposição de texto em cima de screenshot real de
+   site não funciona bem (o próprio site já tem texto/UI, colide com o
+   conteúdo sobreposto) — por isso o banner agora é só a imagem, com o
+   conteúdo (tags/eyebrow/título/meta) no fluxo normal da página, abaixo
+   dele (.case-full__header). */
 .case-full__banner {
-  position: relative;
-  width: 100%;
-  height: 75vh;
-  min-height: 480px;
-  max-height: 820px;
-  margin-top: var(--space-12);
-  overflow: hidden;
+  max-width: var(--content-max-width);
+  margin: var(--space-8) auto 0;
+  padding: 0 var(--space-6);
 }
 
-/* Mesmo placeholder tracejado de sempre (.case__image-placeholder cuida
-   de borda/fundo/fonte) — aqui só reposiciona o texto do placeholder
-   pro topo, longe da faixa inferior onde o conteúdo real (tags/título/
-   meta) fica sobreposto por cima do gradiente. */
-.case-full__banner-image {
-  position: absolute;
-  inset: 0;
-  min-height: 0;
-  border-radius: 0;
-  align-items: flex-start;
-  padding-top: var(--space-16);
-}
-
-/* Foto real do banner — herda position:absolute;inset:0 da regra acima
-   (preenche o banner inteiro), só zera o padding-top (era só pra afastar
-   o texto do placeholder do topo, não faz sentido pra imagem de verdade,
-   deixaria uma faixa vazia) e cobre a área via object-fit. As fotos já
-   vieram bem perto de 21:9, então o corte real é mínimo. */
+/* max-height modera o tamanho (uma screenshot de site é geralmente bem
+   mais larga que alta, então isso raramente entra em ação no desktop —
+   é sobretudo uma garantia). object-position:top porque o conteúdo mais
+   importante de um screenshot de site fica no topo da tela (menu, hero),
+   então cortar por baixo preserva mais informação. */
 img.case-full__banner-image {
-  padding-top: 0;
-  width: 100%;
-  height: 100%;
   display: block;
+  width: 100%;
+  max-height: 420px;
   object-fit: cover;
-  object-position: center;
+  object-position: top;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
 }
 
-/* Gradiente só na base — invisível no topo (imagem visível), opaco
-   embaixo (onde o texto precisa de contraste garantido). Não é um véu
-   uniforme por cima de tudo. Usa rgba(13,27,42,0) explícito em vez da
-   palavra-chave "transparent": ela equivale a rgba(0,0,0,0), então o
-   navegador interpolaria também o canal de cor (de preto pro azul-
-   marinho) e não só a opacidade — com o rgba explícito, o canal de cor
-   já nasce igual ao da cor final, e só a opacidade muda, transição
-   previsível e sem desvio de tom no meio do caminho. */
-.case-full__banner-overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    to bottom,
-    rgba(13, 27, 42, 0) 0%,
-    rgba(13, 27, 42, 0) 30%,
-    rgba(13, 27, 42, 0.7) 60%,
-    var(--bg-base) 100%
-  );
-  pointer-events: none;
+@media (max-width: 480px) {
+  img.case-full__banner-image {
+    max-height: 260px;
+  }
 }
 
-.case-full__banner-content {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
+/* Conteúdo do topo do case (tags/eyebrow/título/subtítulo/meta/stack) —
+   fluxo normal da página, sobre o fundo escuro padrão do site (sem
+   gradiente, sem overlay, sem sobreposição). */
+.case-full__header {
   max-width: var(--content-max-width);
   margin: 0 auto;
-  padding: 0 var(--space-6) var(--space-8);
+  padding: var(--space-8) var(--space-6) 0;
 }
 
-.case-full__banner-content .case-teaser__tags {
+.case-full__header .case-teaser__tags {
   margin-bottom: var(--space-3);
 }
 
-.case-full__banner-content .case__subtitle {
+.case-full__header .case__subtitle {
   max-width: 70ch;
 }
 
@@ -203,30 +172,3 @@ img.case-full__banner-image {
   color: var(--accent);
 }
 
-@media (max-width: 480px) {
-  /* Banner mais baixo no mobile — 75vh ocuparia a tela quase inteira sem
-     mostrar nada do conteúdo abaixo, testado e reduzido. min-height medido
-     de verdade (conteúdo sobreposto chega a ~542px de altura com tags +
-     eyebrow + título + subtítulo + meta + stack em viewport real de
-     375x812) + margem de segurança — abaixo disso o conteúdo vaza pro
-     topo do banner e colide com o placeholder da imagem. */
-  .case-full__banner {
-    height: 65vh;
-    min-height: 600px;
-  }
-
-  /* No mobile o conteúdo sobreposto ocupa ~90% da altura do banner (bem
-     mais que no desktop) — o gradiente padrão só fica opaco a partir de
-     60% da altura, deixando a faixa de topo do conteúdo (tags/eyebrow)
-     sobre a imagem quase sem escurecer, colidindo visualmente com o texto
-     do placeholder. Versão mobile fica opaca bem mais cedo (~40%), sobra
-     só uma tira fina de imagem visível no topo do banner. */
-  .case-full__banner-overlay {
-    background: linear-gradient(
-      to bottom,
-      rgba(13, 27, 42, 0) 0%,
-      rgba(13, 27, 42, 0.95) 5%,
-      var(--bg-base) 14%
-    );
-  }
-}
