@@ -100,7 +100,7 @@ const sobreTemplate = `
         <div class="sobre__info">
           <div class="sobre__info-row">
             <span class="sobre__info-label">Disponibilidade</span>
-            <span class="sobre__info-value"><span class="sobre__info-dot"></span>CLT + projetos paralelos</span>
+            <span class="sobre__info-value"><span class="sobre__info-dot"></span>Aberto a oportunidades e parcerias</span>
           </div>
           <div class="sobre__info-row">
             <span class="sobre__info-label">Atuação</span>
