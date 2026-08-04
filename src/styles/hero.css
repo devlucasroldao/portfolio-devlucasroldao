@@ -1,4 +1,17 @@
+/* Hero sempre escuro — identidade principal do site, não responde ao
+   toggle de tema claro/escuro. Re-declara os tokens de cor pro valor
+   dark fixo: como propriedade custom num elemento que bate direto
+   sempre vence sobre o valor herdado de um ancestral, isso "trava" tudo
+   dentro do Hero (incluindo os .btn dos CTAs) mesmo com
+   [data-theme="light"] ativo em <html>. */
 .hero {
+  --bg-base: #0d1b2a;
+  --bg-elevated: #141d2e;
+  --bg-darker: #0f1622;
+  --border: #415a77;
+  --text-secondary: #778da9;
+  --text-primary: #e0e1dd;
+
   position: relative;
   overflow: hidden;
   min-height: 100vh;

@@ -6,10 +6,19 @@
 @import '@fontsource/geist-sans/500.css';
 @import '@fontsource/geist-sans/600.css';
 
+/* Transição suave de cor pro toggle de tema claro/escuro — rede de
+   segurança em qualquer elemento que não tenha sua própria declaração de
+   transition (a maioria dos componentes interativos já anima
+   background-color/color/border-color no próprio hover; onde já existe
+   uma declaração de transition mais específica — ex: .navbar, .btn — o
+   componente simplesmente reaproveita a transição que já tinha, que já
+   costuma incluir essas mesmas propriedades). Mesmo timing/easing já
+   usado em todo feedback interativo do site (--transition-ui). */
 *,
 *::before,
 *::after {
   box-sizing: border-box;
+  transition: background-color var(--transition-ui), color var(--transition-ui), border-color var(--transition-ui);
 }
 
 html {

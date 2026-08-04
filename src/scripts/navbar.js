@@ -28,7 +28,7 @@ export function renderNavbar({ base = '' } = {}) {
       </div>
 
       <div class="navbar__actions">
-        <button class="navbar__theme-toggle" type="button" aria-label="Alternar tema (em breve)">
+        <button class="navbar__theme-toggle" type="button" aria-label="Ativar modo claro" aria-pressed="false">
           <span class="navbar__theme-track">
             <span class="navbar__theme-thumb">
               ${MOON_ICON}
@@ -58,6 +58,23 @@ export function renderNavbar({ base = '' } = {}) {
   `;
 }
 
+const THEME_STORAGE_KEY = 'theme';
+
+function setStoredTheme(value) {
+  try {
+    localStorage.setItem(THEME_STORAGE_KEY, value);
+  } catch (e) {
+    // localStorage indisponível (modo privado, cookies bloqueados etc.) —
+    // o toggle ainda funciona pra sessão atual, só não persiste.
+  }
+}
+
+function syncThemeToggleVisual(themeToggle, isLight) {
+  themeToggle.classList.toggle('is-light', isLight);
+  themeToggle.setAttribute('aria-pressed', String(isLight));
+  themeToggle.setAttribute('aria-label', isLight ? 'Ativar modo escuro' : 'Ativar modo claro');
+}
+
 export function initNavbar() {
   const navbar = document.querySelector('.navbar');
   const toggle = document.querySelector('.navbar__toggle');
@@ -78,8 +95,19 @@ export function initNavbar() {
     link.addEventListener('click', () => panel.classList.remove('is-open'));
   });
 
-  // Só alterna o próprio ícone (sol/lua) — sem trocar tema de verdade ainda.
+  // O <html data-theme="light"> já foi aplicado (ou não) pelo script
+  // síncrono no <head>, antes de qualquer render — aqui só sincroniza o
+  // visual do switch com esse estado já decidido.
+  syncThemeToggleVisual(themeToggle, document.documentElement.getAttribute('data-theme') === 'light');
+
   themeToggle.addEventListener('click', () => {
-    themeToggle.classList.toggle('is-light');
+    const nextIsLight = document.documentElement.getAttribute('data-theme') !== 'light';
+    if (nextIsLight) {
+      document.documentElement.setAttribute('data-theme', 'light');
+    } else {
+      document.documentElement.removeAttribute('data-theme');
+    }
+    setStoredTheme(nextIsLight ? 'light' : 'dark');
+    syncThemeToggleVisual(themeToggle, nextIsLight);
   });
 }

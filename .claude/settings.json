@@ -205,7 +205,12 @@
       "Bash(node shot-final.js)",
       "Bash(node final-verify-sweep.mjs)",
       "Bash(node debug-testi-photo.mjs)",
-      "Bash(node debug-testi-widths.mjs)"
+      "Bash(node debug-testi-widths.mjs)",
+      "Bash(node test-case-navbar-contrast.mjs)",
+      "Bash(node compute-alpha.mjs)",
+      "Bash(node test-home-navbar-unaffected.mjs)",
+      "Bash(node check-cta-inverted.mjs)",
+      "Bash(node check-remaining-accent-text.mjs)"
     ],
     "additionalDirectories": [
       "c:\\Users\\lucas\\Documents\\MeusProjetos\\portfolio-devlucasroldao"

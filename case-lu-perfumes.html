@@ -2,6 +2,19 @@
 <html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
+    <!-- Aplica o tema salvo (se houver) antes da primeira renderização —
+         script síncrono de propósito (não type="module", que é adiado),
+         evita o "flash" do tema errado no carregamento. Padrão é escuro:
+         só mexe no atributo se existir uma preferência clara salva. -->
+    <script>
+      (function () {
+        try {
+          if (localStorage.getItem('theme') === 'light') {
+            document.documentElement.setAttribute('data-theme', 'light');
+          }
+        } catch (e) {}
+      })();
+    </script>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="Case Lu Perfumes & Presentes: como decisões técnicas — sem sistema de pagamento, JavaScript puro, Pages Router — resolveram um atendimento 100% manual por WhatsApp." />

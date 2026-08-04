@@ -49,3 +49,18 @@
   --content-max-width: 1120px;
   --navbar-height: 64px;
 }
+
+/* Modo claro — sobrescreve só os tokens de cor de superfície/texto
+   (--accent fica igual nos dois temas). Hero e navbar têm seus próprios
+   tokens travados de volta pro valor escuro (ver hero.css/navbar.css) —
+   não respondem a essa troca, sempre escuros por design. Padrão é
+   escuro: essa classe só existe quando o usuário ativa o claro
+   explicitamente (toggle da navbar, ver theme.js). */
+:root[data-theme='light'] {
+  --bg-base: #e0e1dd;
+  --bg-elevated: #ffffff;
+  --bg-darker: #cdcfc8;
+  --border: #b4b7ae;
+  --text-secondary: #415a77;
+  --text-primary: #0d1b2a;
+}

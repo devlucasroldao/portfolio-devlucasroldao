@@ -1,3 +1,17 @@
+/* Navbar sempre escura — mesma trava de tokens do Hero (ver hero.css),
+   não responde ao toggle de tema claro/escuro. .navbar__panel (menu
+   mobile) recebe a mesma trava logo abaixo — é irmã de .navbar no DOM,
+   não filha, então precisa da própria declaração. */
+.navbar,
+.navbar__panel {
+  --bg-base: #0d1b2a;
+  --bg-elevated: #141d2e;
+  --bg-darker: #0f1622;
+  --border: #415a77;
+  --text-secondary: #778da9;
+  --text-primary: #e0e1dd;
+}
+
 .navbar {
   position: fixed;
   top: var(--space-4);
@@ -16,6 +30,24 @@
   border: 1px solid transparent;
   transition: background-color var(--transition-base), border-color var(--transition-base),
     backdrop-filter var(--transition-base), box-shadow var(--transition-base);
+}
+
+/* Nas páginas de case não existe Hero escuro por trás pra garantir
+   contraste do texto (travado em claro/--text-primary escuro) enquanto
+   a navbar ainda está transparente (só ganha fundo em .is-scrolled,
+   scrollY > 24) — sem Hero, o fundo da página normal do tema claro fica
+   quase idêntico à cor do texto travado (mesmo tom, e0e1dd). Dá um
+   fundo escuro sutil já de saída só nesse cenário específico, sem mexer
+   no visual da home (que sempre tem o Hero escuro atrás no topo). */
+body:not(:has(.hero)) .navbar:not(.is-scrolled) {
+  /* 0.75 medido de verdade (contraste do texto travado contra o fundo
+     claro por trás, com blend real da rgba) — em 0.55 dava só 3.61:1
+     (abaixo do mínimo AA de 4.5:1 pra texto normal); em 0.75 sobe pra
+     6.62:1, com folga. Mesma opacidade aproximada do estado
+     .is-scrolled (0.78) — visual consistente entre os dois. */
+  background: rgba(13, 27, 42, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 }
 
 /* Única exceção de blur/glassmorphism do site inteiro — briefing seção 2 */
