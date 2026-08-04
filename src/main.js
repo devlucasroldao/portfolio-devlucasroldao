@@ -90,11 +90,11 @@ const sobreTemplate = `
 
       <div class="sobre__side">
         <div class="sobre__grid">
-          <div class="case__image-placeholder sobre__grid-item sobre__grid-item--1">[ foto real aqui — foto trabalhando — substituir ]</div>
-          <div class="case__image-placeholder sobre__grid-item sobre__grid-item--2">[ foto real aqui — setup/mesa — substituir ]</div>
-          <div class="case__image-placeholder sobre__grid-item sobre__grid-item--3">[ foto real aqui — Rabisco — substituir ]</div>
-          <div class="case__image-placeholder sobre__grid-item sobre__grid-item--4">[ foto real aqui — tela de código — substituir ]</div>
-          <div class="case__image-placeholder sobre__grid-item sobre__grid-item--5">[ foto real aqui — foto casual — substituir ]</div>
+          <img src="/images/sobre/trabalhando.jpg" alt="Lucas fazendo sinal de positivo em frente ao notebook, editando artes no Canva pra Conecte Telecom" class="sobre__grid-item sobre__grid-item--1" loading="lazy" />
+          <img src="/images/sobre/setup-mesa.jpg" alt="Notebook com editor de código e vídeo-aula de JavaScript ao lado de um livro de lógica de programação" class="sobre__grid-item sobre__grid-item--2" loading="lazy" />
+          <img src="/images/sobre/rabisco.jpg" alt="Tela do site da Rabisco Agência de Marketing aberta no notebook, ao lado do editor de código" class="sobre__grid-item sobre__grid-item--3" loading="lazy" />
+          <img src="/images/sobre/tela-codigo.jpg" alt="Editor de código VS Code mostrando o desenvolvimento do site da Lu Perfumes & Presentes" class="sobre__grid-item sobre__grid-item--4" loading="lazy" />
+          <img src="/images/sobre/casual.jpg" alt="Foto casual de Lucas em ambiente descontraído, fazendo sinal de positivo pra câmera" class="sobre__grid-item sobre__grid-item--5" loading="lazy" />
         </div>
 
         <div class="sobre__info">

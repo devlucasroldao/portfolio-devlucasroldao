@@ -52,7 +52,7 @@ export function depoimentosTemplate() {
       <div class="depoimentos__header">
         <span class="depoimentos__eyebrow">Depoimentos</span>
         <h2 class="depoimentos__heading">O que dizem sobre mim</h2>
-        <p class="depoimentos__subtitle">Depoimento de quem trabalhou comigo e números reais dos cases — sem nota 5 forçada.</p>
+        <p class="depoimentos__subtitle">Recados de gente que cruzou meu caminho — faculdade, trabalho, parceria, amizade. Não é sobre validar projeto, é sobre quem eu sou pros dois lados.</p>
       </div>
       <div class="depoimentos__grid">
         ${carousel(0)}

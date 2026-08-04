@@ -109,6 +109,21 @@
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35), 0 0 0 1px var(--accent);
 }
 
+/* Foto real do teaser — mesma vaga que o placeholder ocupava (min-height
+   320px), trocada por aspect-ratio (mais correto pra imagem de verdade:
+   acompanha a largura do card em vez de fixar um valor de altura solto).
+   As fotos já vieram cortadas em 8:5, então o object-fit aqui praticamente
+   não corta nada. */
+img.case-teaser__image {
+  display: block;
+  width: 100%;
+  aspect-ratio: 8 / 5;
+  object-fit: cover;
+  object-position: center;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+}
+
 /* Hover sincronizado: passar o mouse na imagem (ou em qualquer parte de
    .case-teaser__media, que ela preenche quase por completo) destaca o
    título grande do card ao mesmo tempo — um único :hover disparando os
@@ -201,9 +216,13 @@
 }
 
 /* Link discreto embutido no meio de um bloco de texto (ex: post externo
-   citado no Problema) — sublinhado sutil + seta externa, nada chamativo. */
+   citado no Problema) — sublinhado sutil + seta externa, nada chamativo.
+   display:flex (bloco) em vez de inline-flex: quando há mais de um link
+   seguido (ex: Conecte tem 2 no Problema), cada um cai na própria linha
+   em vez de ficar lado a lado disputando espaço — pra um só, o resultado
+   visual é idêntico ao de antes. */
 .case__inline-link {
-  display: inline-flex;
+  display: flex;
   align-items: center;
   gap: var(--space-1);
   margin-top: var(--space-3);

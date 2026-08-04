@@ -182,7 +182,11 @@
       "Bash(node check-typography2.mjs)",
       "Bash(node verify-item4-visual.mjs)",
       "Bash(node verify-item4b.mjs)",
-      "Bash(node final-retest-prod.mjs)"
+      "Bash(node final-retest-prod.mjs)",
+      "Bash(node check-links.mjs)",
+      "Bash(node check-links2.mjs)",
+      "Bash(node check-chip-and-subtitle.mjs)",
+      "Bash(node check-subblocks-wrapper.mjs)"
     ],
     "additionalDirectories": [
       "c:\\Users\\lucas\\Documents\\MeusProjetos\\portfolio-devlucasroldao"

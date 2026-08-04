@@ -168,6 +168,23 @@
   border-color: var(--accent);
 }
 
+/* Foto real preenchendo a peça do quebra-cabeça — cobre a área inteira
+   da grid-area sem distorcer (as 5 fotos já vieram pré-cortadas na
+   proporção certa de cada peça, então o corte do object-fit é mínimo).
+   Sobrescreve o padding/fonte do placeholder (eram só pro texto
+   centralizado) e adiciona borda sólida própria, já que a foto não tem
+   mais o tracejado herdado do placeholder. */
+img.sobre__grid-item {
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  object-fit: cover;
+  object-position: center;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+}
+
 .sobre__grid-item--1 {
   grid-area: a;
 }
