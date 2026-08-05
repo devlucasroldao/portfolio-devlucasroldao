@@ -34,8 +34,22 @@
   border-radius: var(--radius-full);
   background: transparent;
   border: 1px solid transparent;
+  opacity: 1;
+  pointer-events: auto;
   transition: background-color var(--transition-base), border-color var(--transition-base),
-    backdrop-filter var(--transition-base), box-shadow var(--transition-base);
+    backdrop-filter var(--transition-base), box-shadow var(--transition-base), opacity var(--transition-base);
+}
+
+/* Perto do fim da página (últimos ~140px de scroll) a navbar desaparece
+   — ver o comentário grande em navbar.js (onScroll) pra o "porquê": sem
+   isso, o CTA final (WhatsApp) fica escondido atrás dela no scroll
+   máximo. O footer já duplica os mesmos links de navegação, então sumir
+   aqui não tira acesso a nada. Some suave (opacity), não instantâneo —
+   translateY sutil pra reforçar a saída "pra cima" em vez de um corte seco. */
+.navbar.is-near-bottom {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(-50%) translateY(-8px);
 }
 
 /* Nas páginas de case não existe Hero escuro por trás pra garantir

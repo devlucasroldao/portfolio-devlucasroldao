@@ -126,6 +126,27 @@ export function initNavbar() {
 
   const onScroll = () => {
     navbar.classList.toggle('is-scrolled', window.scrollY > 24);
+
+    // Bug real, achado testando de verdade (não só lendo CSS): a navbar é
+    // position:fixed, sempre por cima (z-index:100) dos primeiros ~70px
+    // da tela, em QUALQUER posição de scroll — inclusive o fim da página.
+    // O CTA final (WhatsApp + LinkedIn) fica logo acima do footer, então
+    // no scroll máximo ele acaba empurrado pra dentro dessa faixa e fica
+    // parcial ou totalmente escondido atrás da navbar (medido: o botão
+    // principal ficava 100% fora da viewport). Em vez de inflar o fim da
+    // página com espaço vazio artificial só pra empurrar o CTA pra longe
+    // da navbar (tentativa anterior, descartada — só piorava a conta),
+    // a navbar em si some perto do fim: o footer já tem os mesmos links
+    // de navegação duplicados, então não faz falta ela continuar visível
+    // ali, e o CTA final fica livre pra aparecer por completo.
+    const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+    const distanceFromBottom = maxScroll - window.scrollY;
+    // Não esconde se o drawer estiver aberto — senão o botão de fechar (X)
+    // continua funcionando (junto com Esc/clique no scrim), mas some o
+    // jeito "natural" de fechar (o próprio hambúrguer) enquanto o usuário
+    // ainda pode estar interagindo com o menu.
+    const shouldHide = distanceFromBottom < 140 && !panel.classList.contains('is-open');
+    navbar.classList.toggle('is-near-bottom', shouldHide);
   };
   onScroll();
   window.addEventListener('scroll', onScroll, { passive: true });
@@ -147,6 +168,7 @@ export function initNavbar() {
     panel.setAttribute('aria-hidden', 'true');
     toggle.setAttribute('aria-expanded', 'false');
     document.body.style.overflow = '';
+    onScroll();
   }
 
   toggle.addEventListener('click', () => {
