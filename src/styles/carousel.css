@@ -222,23 +222,40 @@
   gap: var(--space-4);
 }
 
+/* Antes empilhava (foto em cima, 16:9, full-width) abaixo de 480px — na
+   prática a foto ficava enorme e cortada de um jeito ruim (retrato
+   forçado em moldura larga). Mantido o MESMO layout do desktop (foto à
+   esquerda, texto à direita, proporção 3:4) em qualquer largura — só
+   encolhe a fatia da foto e aperta o padding/fonte pra sobrar espaço de
+   verdade pro texto num card de ~300px de largura útil. */
 @media (max-width: 480px) {
-  /* Mesmo ajuste de espaçamento entre seções do resto do site (ver
-     cases.css) — --space-32 vira --space-16 só no mobile. */
-  .depoimentos {
-    padding-top: var(--space-16);
-    padding-bottom: var(--space-16);
-  }
-
-  .testimonial-card--profile {
-    flex-direction: column;
+  .testimonial-card {
+    /* Padding direito maior de propósito — a setinha do carrossel fica
+       "pendurada" na borda do card (metade dentro, metade fora, ver
+       .carousel__arrow--next: right:-10px numa largura de 44px = uns
+       34px dela invadindo o card). Card estreito + texto correndo até a
+       borda = texto ficando escondido atrás do círculo da seta (visto
+       renderizando de verdade em 375px, não só lendo o CSS). Um respiro
+       a mais só do lado direito resolve sem precisar mexer na seta. */
+    padding: var(--space-4) var(--space-8) var(--space-4) var(--space-4);
+    gap: var(--space-3);
   }
 
   .testimonial-card__photo {
-    flex: 0 0 auto;
-    width: 100%;
-    height: auto;
-    aspect-ratio: 16 / 9;
+    flex: 0 0 34%;
+  }
+
+  .testimonial-card__body {
+    gap: var(--space-3);
+  }
+
+  .testimonial-card__quote {
+    font-size: 0.85rem;
+    line-height: 1.55;
+  }
+
+  .testimonial-card__author {
+    font-size: 0.75rem;
   }
 }
 
@@ -249,5 +266,14 @@
 
   .carousel--secondary {
     display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Mesmo ajuste de espaçamento entre seções do resto do site (ver
+     cases.css) — --space-32 vira --space-16 só no mobile. */
+  .depoimentos {
+    padding-top: var(--space-16);
+    padding-bottom: var(--space-16);
   }
 }
