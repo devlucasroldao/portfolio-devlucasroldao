@@ -23,9 +23,28 @@ export function renderNavbar({ base = '' } = {}) {
   // aqui embaixo (pill do desktop) e outro dentro do .navbar__panel (drawer
   // do mobile) — não dá pra "mover" o mesmo elemento entre dois containers
   // irmãos só com CSS quando os dois têm que poder estar em telas
-  // diferentes. Os dois usam exatamente as mesmas classes (mesmo visual),
-  // e o JS trata os dois com querySelectorAll, sincronizando o estado.
-  const themeToggle = `
+  // diferentes. O JS trata as duas instâncias com querySelectorAll,
+  // sincronizando o estado entre elas.
+  //
+  // O toggle de tema tem dois VISUAIS diferentes por contexto: switch
+  // pequeno na pill (cabe pouco espaço ali), botão grande com ícone+texto
+  // no rodapé do drawer (mesmo tamanho do CTA, pedido explícito — antes
+  // era um switch pequeno perdido ao lado de um botão grande, sem
+  // hierarquia visual nenhuma entre os dois).
+  const themeToggle = (variant = 'pill') => {
+    if (variant === 'big') {
+      return `
+    <button class="navbar__theme-toggle navbar__theme-toggle--big" type="button" aria-label="Ativar modo claro" aria-pressed="false">
+      <span class="navbar__theme-toggle-icon">
+        ${MOON_ICON}
+        ${SUN_ICON}
+      </span>
+      <span class="navbar__theme-toggle-label-to-light">Modo claro</span>
+      <span class="navbar__theme-toggle-label-to-dark">Modo escuro</span>
+    </button>
+  `;
+    }
+    return `
     <button class="navbar__theme-toggle" type="button" aria-label="Ativar modo claro" aria-pressed="false">
       <span class="navbar__theme-track">
         <span class="navbar__theme-thumb">
@@ -35,6 +54,7 @@ export function renderNavbar({ base = '' } = {}) {
       </span>
     </button>
   `;
+  };
 
   const cta = `
     <a href="${whatsappHref}" target="_blank" rel="noopener noreferrer" class="navbar__cta" aria-label="Falar comigo no WhatsApp">
@@ -62,7 +82,7 @@ export function renderNavbar({ base = '' } = {}) {
       </div>
 
       <div class="navbar__actions">
-        ${themeToggle}
+        ${themeToggle('pill')}
         ${cta}
 
         <button class="navbar__toggle" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="navbar-panel">
@@ -89,18 +109,25 @@ export function renderNavbar({ base = '' } = {}) {
       </div>
 
       <nav class="navbar__panel-links">
-        <a class="navbar__panel-link" href="${base}#inicio">Início</a>
-        <a class="navbar__panel-link" href="${base}#cases">Cases</a>
-        <div class="navbar__panel-sublinks">
-          <a href="case-conecte.html">Conecte Telecom</a>
-          <a href="case-lu-perfumes.html">Lu Perfumes &amp; Presentes</a>
+        <div class="navbar__panel-group">
+          <span class="navbar__panel-group-label">Seções</span>
+          <a class="navbar__panel-link" href="${base}#inicio">Início</a>
+          <a class="navbar__panel-link" href="${base}#sobre">Sobre mim</a>
+          <a class="navbar__panel-link" href="${base}#depoimentos">Depoimentos</a>
         </div>
-        <a class="navbar__panel-link" href="${base}#sobre">Sobre mim</a>
-        <a class="navbar__panel-link" href="${base}#depoimentos">Depoimentos</a>
+
+        <div class="navbar__panel-group">
+          <span class="navbar__panel-group-label">Cases</span>
+          <a class="navbar__panel-link" href="${base}#cases">Ver todos</a>
+          <div class="navbar__panel-sublinks">
+            <a href="case-conecte.html">Conecte Telecom</a>
+            <a href="case-lu-perfumes.html">Lu Perfumes &amp; Presentes</a>
+          </div>
+        </div>
       </nav>
 
       <div class="navbar__panel-footer">
-        ${themeToggle}
+        ${themeToggle('big')}
         ${cta}
       </div>
     </aside>

@@ -2,8 +2,12 @@
    não responde ao toggle de tema claro/escuro. .navbar__panel (menu
    mobile) recebe a mesma trava logo abaixo — é irmã de .navbar no DOM,
    não filha, então precisa da própria declaração. */
-.navbar,
-.navbar__panel {
+/* Só a pill trava no escuro — o drawer (.navbar__panel) responde ao
+   toggle normalmente (ver mais abaixo, seção do painel): ele cobre a
+   tela inteira quando aberto, então se ele não mudasse de cor junto,
+   apertar o toggle pareceria não ter feito nada (o resto da página
+   muda de tema, mas fica escondido atrás do drawer). */
+.navbar {
   --bg-base: #0d1b2a;
   --bg-elevated: #141d2e;
   --bg-darker: #0f1622;
@@ -328,6 +332,13 @@ body:not(:has(.hero)) .navbar:not(.is-scrolled) {
 
 .navbar__panel {
   display: none;
+  /* Mesma declaração defensiva de cor que a pill tem — sem ela, texto
+     novo sem "color" própria herdaria de .navbar__panel-header/whatever
+     ancestral, ao invés do token de tema certo. Aqui NÃO trava o valor
+     (fica só "var(--text-primary)", que responde ao [data-theme=light]
+     normalmente) — ver comentário grande lá em cima na regra .navbar
+     sobre o porquê do painel não travar. */
+  color: var(--text-primary);
 }
 
 .navbar__scrim {
@@ -455,7 +466,25 @@ body:not(:has(.hero)) .navbar:not(.is-scrolled) {
   .navbar__panel-links {
     display: flex;
     flex-direction: column;
+    gap: var(--space-8);
+  }
+
+  /* Cada seção do menu (Seções da página / Cases) com um rótulo próprio
+     — antes era uma lista só, achatada, sem indicar que "Cases" era uma
+     categoria diferente dos links de âncora. */
+  .navbar__panel-group {
+    display: flex;
+    flex-direction: column;
     gap: var(--space-5);
+  }
+
+  .navbar__panel-group-label {
+    font-family: var(--font-mono);
+    font-weight: var(--fw-medium);
+    font-size: 0.7rem;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
   }
 
   .navbar__panel-link {
@@ -495,20 +524,86 @@ body:not(:has(.hero)) .navbar:not(.is-scrolled) {
   }
 
   /* Empurra tema + CTA pro rodapé do drawer, colados embaixo mesmo com
-     poucos links de sobra em cima. */
+     poucos links de sobra em cima. Empilhados (não lado a lado) e do
+     mesmo tamanho — toggle de tema em cima, CTA embaixo, pedido
+     explícito pra dar peso visual igual aos dois (antes o toggle era um
+     switch pequeno perdido do lado de um botão grande). */
   .navbar__panel-footer {
     margin-top: auto;
     padding-top: var(--space-6);
     border-top: 1px solid var(--border);
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: var(--space-4);
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--space-3);
   }
 
   .navbar__panel-footer .navbar__cta {
-    flex: 1;
     justify-content: center;
+    padding: var(--space-3) var(--space-4);
+    font-size: 0.95rem;
+  }
+
+  /* Mesmo tamanho/forma do CTA logo abaixo — texto+ícone centralizados,
+     borda em vez do preenchimento verde (esse continua sendo o destaque
+     visual mais forte, o CTA de conversão). */
+  .navbar__theme-toggle--big {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2);
+    padding: var(--space-3) var(--space-4);
+    border-radius: var(--radius-full);
+    border: 1px solid var(--border);
+    background: transparent;
+    font-family: var(--font-sans);
+    font-weight: var(--fw-medium);
+    font-size: 0.95rem;
+    color: var(--text-primary);
+    transition: border-color var(--transition-ui), color var(--transition-ui);
+  }
+
+  .navbar__theme-toggle--big:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  .navbar__theme-toggle-icon {
+    display: flex;
+    align-items: center;
+  }
+
+  .navbar__theme-toggle-icon svg {
+    width: 17px;
+    height: 17px;
+  }
+
+  .navbar__theme-toggle-icon .icon-sun {
+    display: none;
+  }
+
+  .navbar__theme-toggle--big.is-light .navbar__theme-toggle-icon .icon-moon {
+    display: none;
+  }
+
+  .navbar__theme-toggle--big.is-light .navbar__theme-toggle-icon .icon-sun {
+    display: flex;
+  }
+
+  /* Texto muda pra descrever a AÇÃO (pra onde vai), não o estado atual —
+     "Modo claro" convida a ativar o claro; depois de ativado, convida a
+     voltar ("Modo escuro"). Mesmo padrão do aria-label já usado no
+     toggle pequeno. */
+  .navbar__theme-toggle-label-to-dark {
+    display: none;
+  }
+
+  .navbar__theme-toggle--big.is-light .navbar__theme-toggle-label-to-light {
+    display: none;
+  }
+
+  .navbar__theme-toggle--big.is-light .navbar__theme-toggle-label-to-dark {
+    display: inline;
   }
 }
 
