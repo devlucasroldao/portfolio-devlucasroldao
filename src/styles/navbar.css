@@ -11,6 +11,11 @@
   --text-secondary: #778da9;
   --text-primary: #e0e1dd;
   --accent-text: var(--accent);
+  /* Defensivo (ver hero.css pro bug real que isso evita): hoje todo
+     texto da navbar já declara a própria "color" explicitamente, mas
+     sem isso aqui um texto novo sem color própria herdaria do body
+     (não travado) em vez do valor travado acima. */
+  color: var(--text-primary);
 }
 
 .navbar {

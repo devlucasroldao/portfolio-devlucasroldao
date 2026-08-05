@@ -21,6 +21,16 @@
   justify-content: center;
   background: var(--bg-darker);
   border-bottom: 1px solid var(--border);
+  /* Travar a custom property --text-primary acima não basta sozinho: o
+     h1 (headline) não declara "color" em lugar nenhum, só herda do
+     body — e a herança da propriedade "color" já vem resolvida (valor
+     final, não a variável viva) do body, que NÃO está travado e troca
+     com o tema. Resultado no modo claro: o headline herdava o
+     --text-primary escuro do body (cor quase invisível sobre o vídeo
+     escuro do Hero). Declarar "color" aqui, no próprio .hero, resolve
+     --text-primary usando o valor já travado acima, e é esse valor
+     certo que passa a ser herdado pelo h1. */
+  color: var(--text-primary);
 }
 
 /* Camada de mídia de fundo — vídeo self-hosted (public/hero-video.mp4). */
