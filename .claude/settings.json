@@ -256,7 +256,8 @@
       "Bash(node compute-brightness-sweep.mjs)",
       "Bash(node compute-brightness-sweep2.mjs)",
       "Bash(grep -iE \"^\\(sharp|jimp|pngjs|canvas|get-pixels\\)$\")",
-      "Bash(node test-real-pixel-contrast.mjs)"
+      "Bash(node test-real-pixel-contrast.mjs)",
+      "Bash(cd \"c:\\\\Users\\\\lucas\\\\Documents\\\\MeusProjetos\\\\portfolio-devlucasroldao\" && rm portfolio-mobile-e-icone.patch && echo \"removido\")"
     ],
     "additionalDirectories": [
       "c:\\Users\\lucas\\Documents\\MeusProjetos\\portfolio-devlucasroldao"
