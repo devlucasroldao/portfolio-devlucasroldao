@@ -93,6 +93,15 @@
   transition: none;
 }
 
+/* Mesmo ajuste de espaçamento entre seções do resto do site (ver
+   cases.css) — só o topo (o bottom já era --space-16 de propósito, o
+   footer vem logo em seguida sem precisar do mesmo respiro). */
+@media (max-width: 480px) {
+  .cta-final__inner {
+    padding-top: var(--space-16);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .cta-final__rotator-word {
     transition: none;

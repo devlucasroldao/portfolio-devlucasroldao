@@ -56,13 +56,16 @@ body:not(:has(.hero)) .navbar:not(.is-scrolled) {
   -webkit-backdrop-filter: blur(12px);
 }
 
-/* Única exceção de blur/glassmorphism do site inteiro — briefing seção 2 */
+/* Única exceção de blur/glassmorphism do site inteiro — briefing seção 2.
+   Blur/saturação intensificados (20px/150% → 32px/200%) pra um resultado
+   mais "líquido" — a opacidade do fundo (0.78) segura a legibilidade do
+   texto por cima mesmo com o blur mais forte. */
 .navbar.is-scrolled {
   background: rgba(13, 27, 42, 0.78);
   border-color: var(--border);
   border-top-color: rgba(224, 225, 221, 0.22);
-  backdrop-filter: blur(20px) saturate(150%);
-  -webkit-backdrop-filter: blur(20px) saturate(150%);
+  backdrop-filter: blur(32px) saturate(200%);
+  -webkit-backdrop-filter: blur(32px) saturate(200%);
   box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
 }
 

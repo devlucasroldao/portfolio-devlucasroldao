@@ -1,6 +1,6 @@
 import { getIconSvg, iconTitles } from './icons.js';
 import { BADGE_ICONS } from './badge-icons.js';
-import { EXTERNAL_LINK_ICON } from './ui-icons.js';
+import { EXTERNAL_LINK_ICON, INSTAGRAM_ICON } from './ui-icons.js';
 
 function renderStack(groups) {
   const icons = groups.flatMap((group) => group.icons);
@@ -55,6 +55,8 @@ export const casesData = [
     teaserImageAlt: 'Página inicial do site da Conecte Telecom, com mascote e chamada para planos de internet',
     bannerImage: '/images/cases/conecte-banner.jpg',
     bannerImageAlt: 'Home do site da Conecte Telecom com menu, hero de conexão de internet e mascote Gasturinha',
+    liveUrl: 'https://seconecte.net/',
+    instagramUrl: 'https://www.instagram.com/seconecte2021/',
     teaserHeadline: 'De site solto a plataforma real',
     teaserProblem:
       'De landing page genérica a plataforma completa: admin sem depender de código, mobile redondo, analytics de verdade — e uma vulnerabilidade crítica corrigida no meio do caminho.',
@@ -62,13 +64,13 @@ export const casesData = [
     blocks: [
       [
         'Problema',
-        `<p>Durante meses, eu sequer sabia que a Conecte tinha um site oficial — e eu trabalhava lá. Isso já dizia tudo: o site existia, mas era tão desatualizado e distante da identidade da empresa que passava despercebido até por quem trabalhava dentro dela. Os próprios gestores sabiam que aquilo não representava a marca. Recebi liberdade total pra reconstruir a presença digital do zero.</p>
+        `<p>Durante meses, eu sequer sabia que a Conecte tinha um site oficial — e eu trabalhava lá. Isso já dizia tudo: o site existia, mas era tão desatualizado e distante da identidade da empresa que passava despercebido até por quem trabalhava dentro dela. Os próprios gestores sabiam que aquilo não representava a marca. Recebi <span class="case__highlight">liberdade total</span> pra reconstruir a presença digital do zero.</p>
         <a href="https://www.linkedin.com/posts/devlucasroldao_reestrutura%C3%A7%C3%A3o-site-conecte-telecom-activity-7468042231271026688-U9Ty" target="_blank" rel="noopener noreferrer" class="case__inline-link">Fiz uma análise completa do site antigo e seus problemas neste post${EXTERNAL_LINK_ICON}</a>
         <a href="https://www.linkedin.com/posts/devlucasroldao_site-conecte-telecom-activity-7469007601846968320-Ooo-" target="_blank" rel="noopener noreferrer" class="case__inline-link">Contei sobre essa primeira versão aqui${EXTERNAL_LINK_ICON}</a>`,
       ],
       [
         'Decisão',
-        '<p>A decisão que definiu o projeto não foi técnica, foi estratégica: pensei no cenário em que, no futuro, eu não estivesse mais na empresa. O sistema não podia depender de alguém mexendo em código toda vez que fosse preciso trocar uma imagem ou atualizar um plano — por isso o projeto virou uma plataforma com painel administrativo completo, não só um site bonito. Essa mesma lógica se repetiu quando percebi que clientes queriam contratar mas não conseguiam assinar por estarem fora da cidade — decisão de construir contratação 100% digital, o que por sua vez exigiu revisar toda a arquitetura de segurança da aplicação a fundo.</p>',
+        '<p>A decisão que definiu o projeto não foi técnica, foi estratégica: pensei no cenário em que, no futuro, eu não estivesse mais na empresa. O sistema não podia depender de alguém mexendo em código toda vez que fosse preciso trocar uma imagem ou atualizar um plano — por isso o projeto virou uma plataforma com <span class="case__highlight">painel administrativo completo</span>, não só um site bonito. Essa mesma lógica se repetiu quando percebi que clientes queriam contratar mas não conseguiam assinar por estarem fora da cidade — decisão de construir <span class="case__highlight">contratação 100% digital</span>, o que por sua vez exigiu revisar toda a arquitetura de segurança da aplicação a fundo.</p>',
       ],
       [
         'Solução',
@@ -89,12 +91,12 @@ export const casesData = [
           )}
           ${renderSubBlock(
             'Segurança',
-            `<p>Durante o aprofundamento da arquitetura, uma auditoria revelou uma falha crítica — dados pessoais de clientes ficavam acessíveis sem autenticação. Corrigida com endpoint dedicado, validado antes e depois em produção. Foram tratados 39 achados no total (do crítico ao baixo), incluindo autenticação em duas etapas no admin e correção sistemática de um padrão de falha silenciosa em ~10 pontos do sistema.</p>
+            `<p>Durante o aprofundamento da arquitetura, uma auditoria revelou uma <span class="case__highlight">falha crítica</span> — dados pessoais de clientes ficavam acessíveis sem autenticação. Corrigida com endpoint dedicado, validado antes e depois em produção. Foram tratados <span class="case__highlight">39 achados</span> no total (do crítico ao baixo), incluindo autenticação em duas etapas no admin e correção sistemática de um padrão de falha silenciosa em ~10 pontos do sistema.</p>
             <a href="https://www.linkedin.com/posts/devlucasroldao_cybersecurity-appsec-supabase-activity-7488657402028961793-i6oX" target="_blank" rel="noopener noreferrer" class="case__inline-link">Detalhei essa auditoria neste post${EXTERNAL_LINK_ICON}</a>`
           )}
           ${renderSubBlock(
             'Central de Ajuda',
-            '<p>Base de conhecimento com mais de 40 artigos reais cobrindo dúvidas de internet, equipamentos, instalação e contrato — com expansão futura planejada em vídeo.</p>'
+            '<p>Base de conhecimento com <span class="case__highlight">mais de 40 artigos reais</span> cobrindo dúvidas de internet, equipamentos, instalação e contrato — com expansão futura planejada em vídeo.</p>'
           )}
           ${renderImage(
             '/images/cases/conecte-central-ajuda.jpg',
@@ -103,7 +105,7 @@ export const casesData = [
           )}
           ${renderSubBlock(
             'Analytics',
-            '<p>Painel próprio de conversão (~35 pontos instrumentados) + página de links (bio do Instagram) integrada ao Google Analytics.</p>'
+            '<p>Painel próprio de conversão (<span class="case__highlight">~35 pontos instrumentados</span>) + página de links (bio do Instagram) integrada ao Google Analytics.</p>'
           )}
           ${renderImage(
             '/images/cases/conecte-analytics.jpg',
@@ -112,14 +114,18 @@ export const casesData = [
           )}
           ${renderSubBlock(
             'Correção de canais',
-            '<p>7 números de WhatsApp incorretos identificados e corrigidos, com validação no admin pra impedir recorrência.</p>'
+            '<p><span class="case__highlight">7 números de WhatsApp</span> incorretos identificados e corrigidos, com validação no admin pra impedir recorrência.</p>'
           )}
           ${renderSubBlock('Stack', '<p>Next.js 14, TypeScript, Supabase, Tailwind, Vercel.</p>')}
+          ${renderSubBlock(
+            'Próximo passo',
+            '<p>Com o admin pronto, o próximo módulo grande é um <span class="case__highlight">portal de autoatendimento</span> de verdade — não só emissão de boleto. Login seguro, dados do plano, segunda via, histórico de pagamento e protocolos, tudo puxado em tempo real do sistema que a empresa já usa (Aganet), sem duplicar dado nenhum. Desenvolvimento em parceria com o Anderson, responsável pelo sistema interno da Conecte, via integração de API. Mesma identidade visual do resto da plataforma, mobile incluído. Ideia central: o cliente resolver o que precisar sem depender de telefone ou WhatsApp.</p>'
+          )}
         </div>`,
       ],
       [
         'Resultado',
-        '<p>Performance: 150–1000ms → 2–20ms (medido). Tracking: de ~3 de 19 pontos corretos para 35 de 35 confirmados. Central de Ajuda: de 3 categorias vazias pra mais de 40 artigos publicados. Vulnerabilidade crítica corrigida antes de qualquer incidente. O site deixou de ser uma landing page esquecida e virou uma plataforma que integra marketing, gestão de conteúdo, contratos e suporte — pensada pra continuar funcionando mesmo sem depender de quem a construiu.</p>',
+        '<p>Performance: 150–1000ms → <span class="case__highlight">2–20ms</span> (medido). Tracking: de ~3 de 19 pontos corretos para <span class="case__highlight">35 de 35 confirmados</span>. Central de Ajuda: de 3 categorias vazias pra mais de 40 artigos publicados. <span class="case__highlight">Vulnerabilidade crítica corrigida antes de qualquer incidente</span>. O site deixou de ser uma landing page esquecida e virou uma plataforma que integra marketing, gestão de conteúdo, contratos e suporte — pensada pra continuar funcionando mesmo sem depender de quem a construiu.</p>',
       ],
     ],
     learning:
@@ -145,6 +151,8 @@ export const casesData = [
     teaserImageAlt: 'Página de catálogo da Lu Perfumes & Presentes, com produtos em destaque',
     bannerImage: '/images/cases/lu-banner.jpg',
     bannerImageAlt: 'Home do site da Lu Perfumes & Presentes, com foto da Lu e chamada para o catálogo',
+    liveUrl: 'https://lu-perfumes-v2.vercel.app/',
+    instagramUrl: 'https://www.instagram.com/lu_roldaoperfumes/',
     teaserHeadline: 'Catálogo & atendimento sem perder o humano',
     teaserProblem:
       '"O que você tem de perfume feminino aí?" — a Lu respondia isso, um por um, pra centenas de clientes, sem catálogo, sem histórico, sem parar.',
@@ -157,7 +165,7 @@ export const casesData = [
       ],
       [
         'Decisão',
-        '<p>A decisão mais importante foi não tentar substituir o atendimento humano — o catálogo existe pra tornar esse atendimento mais eficiente, não pra eliminá-lo. Dentro disso, teve uma decisão que eu errei e corrigi no meio do caminho: comecei sem mostrar preço nenhum, achando que simplificaria a manutenção com centenas de produtos. Conversando com outras pessoas, percebi que preço é uma das primeiras coisas que o cliente procura — sem ele, muita gente perde interesse antes mesmo de chamar no WhatsApp. Reestruturei a plataforma inteira pra ter gerenciamento de preço via painel, o que aumentou bastante a complexidade — o catálogo final vai passar de 500 produtos; hoje já são cerca de 350 fotografados, com o cadastro (foto editada, marca, descrição, fragrância, categoria, preço) sendo feito manualmente, produto por produto — mas resolveu o problema de verdade.</p>',
+        '<p>A decisão mais importante foi <span class="case__highlight">não tentar substituir o atendimento humano</span> — o catálogo existe pra tornar esse atendimento mais eficiente, não pra eliminá-lo. Dentro disso, teve uma decisão que eu errei e corrigi no meio do caminho: comecei sem mostrar preço nenhum, achando que simplificaria a manutenção com centenas de produtos. Conversando com outras pessoas, percebi que preço é uma das primeiras coisas que o cliente procura — sem ele, muita gente perde interesse antes mesmo de chamar no WhatsApp. Reestruturei a plataforma inteira pra ter gerenciamento de preço via painel, o que aumentou bastante a complexidade — o catálogo final vai passar de <span class="case__highlight">500 produtos</span>; hoje já são cerca de <span class="case__highlight">350 fotografados</span>, com o cadastro (foto editada, marca, descrição, fragrância, categoria, preço) sendo feito manualmente, produto por produto — mas resolveu o problema de verdade.</p>',
       ],
       [
         'Solução',
@@ -173,7 +181,7 @@ export const casesData = [
           )}
           ${renderSubBlock(
             'Painel — Dashboard & Produtos',
-            `<p>Dashboard reúne os indicadores da operação numa tela só: total de produtos, destaques, campanhas ativas, últimos cadastrados, mais favoritados. Gestão de produtos com CRUD completo, edição de preço individual ou em massa, categorias, destaques e imagens — tudo sem abrir uma linha de código. Uma importação de catálogo em lote (via planilha) está em fase de teste, pensada pra acelerar o cadastro das 500+ peças planejadas.</p>
+            `<p>Dashboard reúne os indicadores da operação numa tela só: total de produtos, destaques, campanhas ativas, últimos cadastrados, mais favoritados. Gestão de produtos com CRUD completo, edição de preço individual ou em massa, categorias, destaques e imagens — tudo sem abrir uma linha de código. Uma importação de catálogo em lote (via planilha) está em fase de teste, pensada pra acelerar o cadastro das <span class="case__highlight">500+ peças planejadas</span>.</p>
             <a href="https://www.linkedin.com/posts/devlucasroldao_linkedinbrasil-desenvolvimentoweb-programaaexaeto-activity-7454594868678463489-AMJM" target="_blank" rel="noopener noreferrer" class="case__inline-link">Mostrei esse processo de cadastro aqui${EXTERNAL_LINK_ICON}</a>`
           )}
           ${renderImage(
@@ -196,13 +204,13 @@ export const casesData = [
           )}
           ${renderSubBlock(
             'Fotos reais',
-            '<p>Fotos reais dos produtos, não banco de imagem nem geração por IA — decisão consciente pra manter o catálogo confiável e fiel ao que a cliente realmente vai receber. Estratégia de marketing começou antes do site: incentivo real a avaliações no Google, construindo uma base de mais de 100 avaliações com média 5 estrelas antes mesmo do lançamento — pra quando o site entrar no ar, já ter reputação local forte pra SEO. Página de links dedicada pra bio do Instagram. Sem checkout, decisão deliberada — venda fecha no WhatsApp, mantendo o atendimento humano no centro.</p>'
+            '<p>Fotos reais dos produtos, não banco de imagem nem geração por IA — decisão consciente pra manter o catálogo confiável e fiel ao que a cliente realmente vai receber. Estratégia de marketing começou antes do site: incentivo real a avaliações no Google, construindo uma base de <span class="case__highlight">mais de 100 avaliações com média 5 estrelas</span> antes mesmo do lançamento — pra quando o site entrar no ar, já ter reputação local forte pra SEO. Página de links dedicada pra bio do Instagram. <span class="case__highlight">Sem checkout, decisão deliberada</span> — venda fecha no WhatsApp, mantendo o atendimento humano no centro.</p>'
           )}
         </div>`,
       ],
       [
         'Resultado',
-        '<p>Site funcional, catálogo ainda em construção: das mais de 500 peças planejadas, ~350 já foram fotografadas e menos de 100 estão cadastradas até agora — processo manual e ainda em andamento. A base de reputação (100+ avaliações 5 estrelas) já está pronta pro dia em que o domínio for ao ar.</p>',
+        '<p>Site funcional, catálogo ainda em construção: das <span class="case__highlight">mais de 500 peças planejadas</span>, <span class="case__highlight">~350 já foram fotografadas</span> e menos de 100 estão cadastradas até agora — processo manual e ainda em andamento. A base de reputação (<span class="case__highlight">100+ avaliações 5 estrelas</span>) já está pronta pro dia em que o domínio for ao ar.</p>',
       ],
     ],
     learning:
@@ -255,6 +263,17 @@ function renderCaseMeta(meta) {
       `
         )
         .join('')}
+    </div>
+  `;
+}
+
+// Link pro site real + Instagram da empresa — perto da meta-informação,
+// tratamento discreto e igual nos dois cases (ver .case-full__links).
+function renderCaseLinks(data) {
+  return `
+    <div class="case-full__links">
+      <a href="${data.liveUrl}" target="_blank" rel="noopener noreferrer" class="case-full__live-link">Ver site ao vivo${EXTERNAL_LINK_ICON}</a>
+      <a href="${data.instagramUrl}" target="_blank" rel="noopener noreferrer" class="case-full__instagram-link">${INSTAGRAM_ICON}Instagram</a>
     </div>
   `;
 }
@@ -322,6 +341,7 @@ export function renderCaseFull(caseId) {
         <h1 class="case__title">${data.title}</h1>
         <p class="case__subtitle">${data.teaserProblem}</p>
         ${renderCaseMeta(data.meta)}
+        ${renderCaseLinks(data)}
         <div class="case-full__stack">
           <span class="case-full__meta-label">Stack</span>
           ${renderStack(data.stack)}

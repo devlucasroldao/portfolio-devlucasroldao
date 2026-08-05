@@ -284,6 +284,13 @@ img.sobre__grid-item {
 }
 
 @media (max-width: 480px) {
+  /* Mesmo ajuste de espaçamento entre seções do resto do site (ver
+     cases.css) — --space-32 vira --space-16 só no mobile. */
+  .sobre {
+    padding-top: var(--space-16);
+    padding-bottom: var(--space-16);
+  }
+
   .sobre__info-row {
     padding: var(--space-3) var(--space-4);
   }

@@ -9,7 +9,14 @@ function createRevealObserver() {
         observer.unobserve(entry.target);
       });
     },
-    { threshold: 0.15, rootMargin: '0px 0px -60px 0px' }
+    // threshold baixo (dispara já no 1º pixel visível) + rootMargin
+    // POSITIVO na base (não negativo — negativo encolhe a área de detecção
+    // e faz disparar mais tarde, o oposto do que a gente quer aqui):
+    // estende a zona de detecção 15% da altura da viewport pra baixo da
+    // área realmente visível, então o fade-in já começa um pouco antes do
+    // elemento cruzar a borda de baixo da tela — pelo scroll acaba de
+    // "brotar do nada", ele já está no meio da transição.
+    { threshold: 0.01, rootMargin: '0px 0px 15% 0px' }
   );
 }
 

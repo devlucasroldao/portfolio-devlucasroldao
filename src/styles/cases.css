@@ -215,6 +215,17 @@ img.case-teaser__image {
   line-height: 1.65;
 }
 
+/* Destaque pontual em números/fatos específicos e decisões centrais dos
+   textos de Problema/Decisão/Solução/Resultado — mesmo tratamento do
+   .sobre__highlight--accent (peso + cor num só passo, sem duas
+   variantes como no Sobre mim, aqui todo destaque já é "forte"). Usado
+   com moderação: só nos trechos que carregam o fato/decisão, não a
+   frase inteira. */
+.case__highlight {
+  font-weight: var(--fw-semibold);
+  color: var(--accent-text);
+}
+
 /* Link discreto embutido no meio de um bloco de texto (ex: post externo
    citado no Problema) — sublinhado sutil + seta externa, nada chamativo.
    display:flex (bloco) em vez de inline-flex: quando há mais de um link
@@ -498,6 +509,17 @@ img.case__inline-image {
 }
 
 @media (max-width: 480px) {
+  /* Espaçamento entre seções — --space-32 (128px topo+base) rendia um vão
+     de 256px entre duas seções, quase 1/3 da altura de uma tela de
+     375-414px. Desce 2 degraus na escala (--space-16, 64px) só no
+     mobile — o vão vira 128px, ainda com respiro real mas sem parecer
+     vazio. Desktop mantém --space-32 (testado, não parece exagerado lá
+     — telas maiores têm proporcionalmente mais espaço de sobra). */
+  .cases {
+    padding-top: var(--space-16);
+    padding-bottom: var(--space-16);
+  }
+
   /* corte de canto fica proporcionalmente grande demais em telas muito
      estreitas — reduz o tamanho do recorte em vez de remover, mantém o
      elemento geométrico mas mais discreto */

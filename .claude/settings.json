@@ -220,7 +220,16 @@
       "Bash(node measure-accent-contrast.mjs)",
       "Bash(node check-dark-unaffected.mjs)",
       "Bash(node check-dark-unaffected2.mjs)",
-      "Bash(node measure-icon-contrast.mjs)"
+      "Bash(node measure-icon-contrast.mjs)",
+      "Bash(node measure-spacing.mjs)",
+      "Bash(node measure-padding.mjs)",
+      "Bash(node check-insta-svg.mjs)",
+      "Bash(node test-block5-reveal-timing.mjs)",
+      "Bash(node test-block5-clean.mjs)",
+      "Bash(node test-block5-clean2.mjs)",
+      "Bash(node test-block6-highlights.mjs)",
+      "Bash(node test-light-highlight.mjs)",
+      "Bash(node basic-sanity.mjs)"
     ],
     "additionalDirectories": [
       "c:\\Users\\lucas\\Documents\\MeusProjetos\\portfolio-devlucasroldao"

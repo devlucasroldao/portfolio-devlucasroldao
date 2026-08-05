@@ -1,3 +1,5 @@
+import instagramRaw from 'simple-icons/icons/instagram.svg?raw';
+
 // Ícones de interface hand-drawn (não são logo de marca) — mesmo tratamento
 // flat/stroke-only do hambúrguer e sol/lua da navbar e dos badges de case.
 export const EXTERNAL_LINK_ICON =
@@ -24,3 +26,9 @@ export const LINKEDIN_ICON =
 export function asFooterBrandIcon(svg) {
   return svg.replace('<svg ', '<svg class="icon-brand" aria-hidden="true" ');
 }
+
+// Logo real do Instagram (simple-icons — diferente do LinkedIn, esse
+// continua disponível no pacote). fill:currentColor força a paleta fechada
+// do site (nada de cor de marca solta) — usado no link discreto de
+// Instagram de cada case.
+export const INSTAGRAM_ICON = asFooterBrandIcon(instagramRaw.replace('<svg ', '<svg fill="currentColor" '));

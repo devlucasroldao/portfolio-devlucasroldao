@@ -37,6 +37,14 @@ export function renderFooter({ base = '' } = {}) {
 
 // Monta o endereço em runtime em vez de deixar o texto cru no HTML — dificulta
 // scraping simples de bot que varre a página estática atrás de "mailto:".
+//
+// mailto: sozinho é pouco confiável na prática: em qualquer máquina sem
+// cliente de email padrão configurado (comum pra quem usa só webmail), o
+// clique não abre nada visível — parece "quebrado" mesmo com o href certo.
+// Mantém o mailto: (funciona de verdade pra quem tem cliente configurado) e
+// soma um fallback de copiar o endereço pra área de transferência, com
+// feedback visual no próprio texto do link — clique sempre produz um
+// resultado útil, independente de o navegador abrir um cliente ou não.
 export function initFooterEmail() {
   const link = document.querySelector('[data-email-link]');
   if (!link) return;
@@ -47,4 +55,24 @@ export function initFooterEmail() {
 
   link.href = `mailto:${email}`;
   link.setAttribute('aria-label', `Email: ${email}`);
+
+  const label = link.querySelector('span');
+  const originalText = label ? label.textContent : null;
+
+  link.addEventListener('click', () => {
+    if (!label || !navigator.clipboard?.writeText) return;
+
+    navigator.clipboard
+      .writeText(email)
+      .then(() => {
+        label.textContent = 'Copiado!';
+        setTimeout(() => {
+          label.textContent = originalText;
+        }, 2000);
+      })
+      .catch(() => {
+        // Clipboard indisponível (permissão negada, contexto não seguro) —
+        // o mailto: já disparou normalmente por conta própria, sem isso.
+      });
+  });
 }

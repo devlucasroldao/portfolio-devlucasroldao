@@ -104,6 +104,49 @@ img.case-full__banner-image {
   color: var(--text-primary);
 }
 
+/* Site ao vivo + Instagram — perto da meta-informação, tratamento
+   discreto (sem virar botão grande) e consistente entre os dois cases.
+   "Ver site ao vivo" com um pouco mais de peso (é o link principal),
+   Instagram menor/secundário — mesma família visual, hierarquia clara. */
+.case-full__links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3) var(--space-6);
+  margin-top: var(--space-4);
+}
+
+.case-full__live-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  color: var(--accent-text);
+  font-family: var(--font-sans);
+  font-weight: var(--fw-semibold);
+  font-size: 0.95rem;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color var(--transition-ui);
+}
+
+.case-full__live-link:hover {
+  color: var(--text-primary);
+}
+
+.case-full__instagram-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--text-secondary);
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  transition: color var(--transition-ui);
+}
+
+.case-full__instagram-link:hover {
+  color: var(--accent-text);
+}
+
 /* Stack de tecnologia — movida pra perto da meta-informação (era só no
    fim da página). Mesmo label da meta ("Stack" no lugar de "Empresa"/
    "Período"/"Papel"), ícones já existentes (.case__stack), sem repetir
