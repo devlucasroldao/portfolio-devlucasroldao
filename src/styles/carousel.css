@@ -242,7 +242,20 @@
   }
 
   .testimonial-card__photo {
-    flex: 0 0 34%;
+    /* height:100% (regra base, linha ~211) estica a foto pra bater com a
+       altura da linha inteira do card — que varia conforme o tamanho da
+       citação de cada depoimento. Resultado: junto com aspect-ratio:3/4
+       fixo, os dois "dimensionamentos" brigam (largura vem do
+       flex-basis, altura vem do texto) e a proporção real acaba sendo
+       nem uma coisa nem outra — mais espremida em depoimentos com texto
+       longo, e olhando de perto fica claramente diferente do desktop.
+       No mobile a foto passa a ter a proporção 3:4 de verdade (largura
+       manda, altura seguindo o aspect-ratio, sem esticar pra bater com
+       o texto) — sobra um respiro abaixo da foto se o texto for mais
+       comprido, o que é bem melhor que distorcer a foto. */
+    flex: 0 0 40%;
+    height: auto;
+    align-self: flex-start;
   }
 
   .testimonial-card__body {
@@ -256,6 +269,15 @@
 
   .testimonial-card__author {
     font-size: 0.75rem;
+    /* margin-top:auto (regra base) empurra o nome pro rodapé do card,
+       o que fazia sentido enquanto a foto (height:100%) esticava pra
+       bater com a altura do texto. Agora que a foto tem altura própria
+       (ver .testimonial-card__photo acima), um depoimento curto deixava
+       um vão vazio enorme entre a citação e o nome — o auto tentava
+       empurrar o nome até a altura da FOTO, não do texto. Gap fixo
+       (mesmo --space-3 do resto do body) mantém o nome colado à
+       citação, do tamanho que ela for. */
+    margin-top: 0;
   }
 }
 
