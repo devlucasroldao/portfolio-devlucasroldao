@@ -97,11 +97,25 @@ body:not(:has(.hero)) .navbar:not(.is-scrolled) {
 }
 
 .navbar__brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
   font-family: var(--font-mono);
   font-weight: var(--fw-medium);
   font-size: 0.9rem;
   color: var(--text-primary);
   white-space: nowrap;
+}
+
+/* Marca isolada (sem o quadrado de fundo do favicon/app icon) — a
+   navbar já é o fundo escuro fixo do site (ver briefing seção 3: "Hero,
+   navbar e footer ficam SEMPRE no visual escuro"), então o badge com
+   fundo próprio ficaria redundante, tipo um adesivo colado em cima de
+   outro. */
+.navbar__brand-icon {
+  flex-shrink: 0;
+  width: 22px;
+  height: 22px;
 }
 
 .navbar__links {

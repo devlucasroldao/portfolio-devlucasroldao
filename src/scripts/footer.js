@@ -11,8 +11,18 @@ export function renderFooter({ base = '' } = {}) {
     <footer class="footer">
       <div class="footer__inner">
         <div class="footer__identity">
-          <span class="footer__name">Lucas Roldão</span>
-          <span class="footer__meta">Dev &amp; Estrategista Digital · Arroio do Sal, RS</span>
+          <img
+            src="/images/brand/mark-dark@2x.png"
+            srcset="/images/brand/mark-dark@2x.png 2x, /images/brand/mark-dark@3x.png 3x"
+            alt=""
+            class="footer__brand-icon"
+            width="32"
+            height="32"
+          />
+          <div class="footer__identity-text">
+            <span class="footer__name">Lucas Roldão</span>
+            <span class="footer__meta">Dev &amp; Estrategista Digital · Arroio do Sal, RS</span>
+          </div>
         </div>
         <div class="footer__link-groups">
           <nav class="footer__links">

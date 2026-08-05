@@ -21,7 +21,17 @@ export function renderNavbar({ base = '' } = {}) {
 
   return `
     <nav class="navbar">
-      <a href="${base}#inicio" class="navbar__brand">@devlucasroldao</a>
+      <a href="${base}#inicio" class="navbar__brand">
+        <img
+          src="/images/brand/mark-dark@2x.png"
+          srcset="/images/brand/mark-dark@2x.png 2x, /images/brand/mark-dark@3x.png 3x"
+          alt=""
+          class="navbar__brand-icon"
+          width="24"
+          height="24"
+        />
+        <span>@devlucasroldao</span>
+      </a>
 
       <div class="navbar__links">
         ${links('')}
