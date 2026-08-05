@@ -45,4 +45,11 @@ export const testimonials = [
     name: 'Lu Roldão',
     role: 'Mãe, dona da Lu Perfumes & Presentes',
   },
+  {
+    photo: '/images/depoimentos/depoimento7.jpg',
+    quote:
+      'Lucas é um excelente profissional: inteligente, prestativo, proativo, de aprendizado muito rápido — tem facilidade pra se moldar a qualquer situação. Além de profissional, é uma pessoa de coração imenso e essência pura. Um menino de ouro!',
+    name: 'Bernard Becker',
+    role: 'Dono da Conecte Telecom',
+  },
 ];
