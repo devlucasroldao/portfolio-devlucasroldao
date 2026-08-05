@@ -64,7 +64,7 @@ const sobreTemplate = `
             Olá! Nessa altura do campeonato, já sabe que meu nome é Antônio Fagundes... brincadeira. Sou o
             <span class="sobre__highlight sobre__highlight--accent">Lucas Roldão Cardoso</span>, de
             <span class="sobre__highlight">Arroio do Sal, RS</span> — terra dos maiores gauderios de todos os
-            tempos. Daleee, Coloradooo!
+            tempos.
           </p>
           <p>
             Estudante de <span class="sobre__highlight">ADS na ULBRA (Campus Torres)</span> — só ir à aula não

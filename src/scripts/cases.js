@@ -316,7 +316,7 @@ export function casesTeaserTemplate() {
       <div class="cases__header">
         <span class="cases__eyebrow">Cases selecionados</span>
         <h2 class="cases__heading">Onde estratégia encontra <span class="cases__heading-accent">forma</span>.</h2>
-        <p class="cases__subtitle">Dois projetos reais — do problema bruto ao resultado medido, sem enfeite.</p>
+        <p class="cases__subtitle">Dois projetos reais — com as partes feias incluídas, não só o resultado bonito.</p>
       </div>
       <div class="case-list">
         ${casesData.map(renderCaseTeaser).join('')}
