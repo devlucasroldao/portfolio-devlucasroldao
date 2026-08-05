@@ -1,4 +1,22 @@
+/* Footer sempre escuro — mesma trava de tokens do Hero/navbar (ver
+   hero.css/navbar.css), não responde ao toggle de tema claro/escuro.
+   Precisa do "background" explícito aqui (não basta travar as custom
+   properties): o footer não pintava o próprio fundo, deixava o
+   --bg-darker do .closing (pai) aparecer por trás — sem essa linha, a
+   trava não mudaria nada visível na prática (mesmo problema do
+   .hero__headline antes de declarar "color" ali: herança de
+   propriedade já resolvida no ancestral não volta a ler a variável
+   travada mais embaixo). */
 .footer {
+  --bg-base: #0d1b2a;
+  --bg-elevated: #141d2e;
+  --bg-darker: #0f1622;
+  --border: #415a77;
+  --text-secondary: #778da9;
+  --text-primary: #e0e1dd;
+  --accent-text: var(--accent);
+
+  background: var(--bg-darker);
   border-top: 1px solid var(--border);
   padding: var(--space-12) var(--space-6);
 }

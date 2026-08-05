@@ -44,29 +44,58 @@
    scrollY > 24) — sem Hero, o fundo da página normal do tema claro fica
    quase idêntico à cor do texto travado (mesmo tom, e0e1dd). Dá um
    fundo escuro sutil já de saída só nesse cenário específico, sem mexer
-   no visual da home (que sempre tem o Hero escuro atrás no topo). */
+   no visual da home (que sempre tem o Hero escuro atrás no topo).
+   Opacidade mantida alta de propósito (não entra na faixa mais
+   translúcida do .is-scrolled abaixo): esse é o único estado sem Hero
+   escuro por trás pra "tingir" o blur, então baixar a opacidade aqui
+   fura o AA (ver nota embaixo). Borda/sombra de vidro somam por cima
+   mesmo com o fundo mais coberto. */
 body:not(:has(.hero)) .navbar:not(.is-scrolled) {
-  /* 0.75 medido de verdade (contraste do texto travado contra o fundo
-     claro por trás, com blend real da rgba) — em 0.55 dava só 3.61:1
-     (abaixo do mínimo AA de 4.5:1 pra texto normal); em 0.75 sobe pra
-     6.62:1, com folga. Mesma opacidade aproximada do estado
-     .is-scrolled (0.78) — visual consistente entre os dois. */
-  background: rgba(13, 27, 42, 0.75);
+  /* 0.96, não 0.75: o teste anterior só media a marca (--text-primary,
+     6.62:1 em 0.75 — passa fácil). Só que em largura de desktop as
+     páginas de case também mostram .navbar__links (--text-secondary) —
+     esse é o caso apertado (só 5.11:1 de margem contra o azul-marinho
+     puro) e em 0.75 caía pra 2.55:1. Mesmo valor do .is-scrolled acima
+     por consistência e porque a conta é a mesma cor de fundo/texto. */
+  background: rgba(13, 27, 42, 0.96);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
+  border-color: rgba(255, 255, 255, 0.1);
+  border-top-color: rgba(255, 255, 255, 0.18);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
 }
 
 /* Única exceção de blur/glassmorphism do site inteiro — briefing seção 2.
    Blur/saturação intensificados (20px/150% → 32px/200%) pra um resultado
-   mais "líquido" — a opacidade do fundo (0.78) segura a legibilidade do
-   texto por cima mesmo com o blur mais forte. */
+   mais "líquido". Fundo mais translúcido que o valor antigo (0.78) — mas
+   0.65, não a faixa 0.35-0.55 testada inicialmente: abaixo de ~0.6 os
+   links da navbar (--text-secondary, tom mais apagado) ficam ilegíveis
+   quando o conteúdo atrás é um fundo claro e uniforme (ex.: seção Cases/
+   Sobre no tema claro) — o blur+saturate sozinho não resolve porque o
+   problema é falta de contraste de luminância entre texto e fundo
+   tingido, não falta de nitidez. 0.65 foi o ponto onde os links voltam a
+   ficar legíveis com folga (comparável ao 0.78 original) e ainda assim o
+   conteúdo por trás passa visivelmente mais pelo blur (bem perceptível
+   sobre o vídeo do Hero, que é o cenário mais rico). Borda de 1px clara
+   em baixa opacidade (mais forte no topo) simula o contorno de vidro, e
+   a sombra por baixo reforça a pill "flutuando" sobre o conteúdo. */
 .navbar.is-scrolled {
-  background: rgba(13, 27, 42, 0.78);
-  border-color: var(--border);
-  border-top-color: rgba(224, 225, 221, 0.22);
+  /* 0.96, não 0.65: medido de verdade (não só a marca — os links
+     .navbar__links, em --text-secondary, são o caso mais apertado) e o
+     0.65 falhava contraste (1.87:1) sempre que o conteúdo por trás é uma
+     seção clara e lisa do tema claro (ex.: Cases/Sobre). Isso já valia
+     mesmo pro 0.78 original (2.81:1) — --text-secondary só tem margem
+     suficiente (5.11:1) contra o azul-marinho puro, e qualquer diluição
+     real já derruba abaixo de 4.5:1. Testado ponto a ponto: 0.96 dá
+     ~4.6-4.7:1 nos 3 fundos claros do site (bg-base/bg-elevated/
+     bg-darker), com folga. Blur/saturação/borda/sombra mantidos
+     intensos — só a opacidade precisou subir. */
+  background: rgba(13, 27, 42, 0.96);
+  border-color: rgba(255, 255, 255, 0.1);
+  border-top-color: rgba(255, 255, 255, 0.22);
   backdrop-filter: blur(32px) saturate(200%);
   -webkit-backdrop-filter: blur(32px) saturate(200%);
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
 }
 
 .navbar__brand {
