@@ -161,6 +161,14 @@
   background: var(--bg-elevated);
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
   transition: border-color var(--transition-ui);
+  /* Necessário agora que o stage muda de altura por card (ver
+     carousel.js measureHeight): os cards empilhados atrás (is-back-1/2)
+     têm a MESMA altura do card ativo da vez (todos são inset:0 do
+     stage), então se o depoimento de trás for mais longo que o ativo,
+     o texto dele vazava pra fora, visível abaixo do card da frente. Sem
+     isso tinha sempre altura de sobra (travava no maior de todos), o
+     vazamento nunca acontecia — agora precisa cortar de propósito. */
+  overflow: hidden;
 }
 
 .carousel__card-wrap.is-active .testimonial-card:hover {

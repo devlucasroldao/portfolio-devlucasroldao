@@ -70,20 +70,39 @@ function initCarouselInstance(root, reducedMotion) {
       else if (delta === 2) wrap.classList.add('is-back-2');
       else wrap.classList.add('is-hidden');
     });
+    measureHeight();
   }
 
-  // Cada card tem texto de tamanho diferente — mede a altura natural de
-  // todos e fixa a maior no stage, pra trocar de card sem "pular" o layout.
+  // Cada card tem texto de tamanho diferente. Antes isso media a altura
+  // natural de TODOS os cards e travava o stage na maior — pensado pra
+  // não "pular" o layout ao trocar de card, mas o efeito colateral era
+  // pior: com 7 depoimentos de tamanhos bem diferentes, a caixa toda
+  // ficava travada no tamanho do MAIOR (Giulia, o mais longo) o tempo
+  // todo — inclusive quando o depoimento ativo era um curto (tipo o da
+  // Lu Roldão), sobrando uma área vazia enorme abaixo do texto/foto.
+  // Agora mede só o card ATIVO a cada troca — o stage já tinha
+  // `transition: height` pronto no CSS (carousel.css) esperando por
+  // isso, só a lógica antiga nunca aproveitava, sempre setava um valor
+  // fixo só uma vez. Troca de card agora anima a altura suavemente pro
+  // tamanho real daquele depoimento específico, em vez de reservar
+  // sempre o pior caso.
   function measureHeight() {
-    let max = 0;
-    wraps.forEach((wrap) => {
-      wrap.style.position = 'static';
-      wrap.style.visibility = 'hidden';
-      max = Math.max(max, wrap.getBoundingClientRect().height);
-      wrap.style.position = '';
-      wrap.style.visibility = '';
-    });
-    stage.style.height = `${Math.ceil(max)}px`;
+    const activeWrap = wraps[current];
+    if (!activeWrap) return;
+    const prevPosition = activeWrap.style.position;
+    const prevVisibility = activeWrap.style.visibility;
+    // Truque necessário mesmo pro card ativo: .carousel__card-wrap é
+    // position:absolute + inset:0, então sua altura renderizada já
+    // segue a altura do PAI (stage) — para medir a altura natural de
+    // verdade (baseada no conteúdo), precisa tirar do absolute
+    // temporariamente. visibility:hidden (não display:none) evita
+    // qualquer flash visual durante a medição.
+    activeWrap.style.position = 'static';
+    activeWrap.style.visibility = 'hidden';
+    const height = activeWrap.getBoundingClientRect().height;
+    activeWrap.style.position = prevPosition;
+    activeWrap.style.visibility = prevVisibility;
+    stage.style.height = `${Math.ceil(height)}px`;
   }
 
   function next() {
@@ -174,7 +193,6 @@ function initCarouselInstance(root, reducedMotion) {
   });
 
   applyClasses();
-  measureHeight();
   restartTimer();
 }
 
