@@ -118,6 +118,10 @@ body:not(:has(.hero)) .navbar:not(.is-scrolled) {
   height: 22px;
 }
 
+.navbar__brand-text {
+  display: block;
+}
+
 .navbar__links {
   display: flex;
   align-items: center;
@@ -312,12 +316,45 @@ body:not(:has(.hero)) .navbar:not(.is-scrolled) {
   display: none;
 }
 
+.navbar__scrim {
+  position: fixed;
+  inset: 0;
+  z-index: 150;
+  background: rgba(0, 0, 0, 0.55);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--transition-base);
+}
+
+.navbar__scrim.is-open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
 @media (max-width: 900px) {
   .navbar {
     padding: var(--space-2) var(--space-2) var(--space-2) var(--space-4);
   }
 
+  /* Só o ícone na pill do mobile — o handle completo por extenso não cabe
+     sobrando espaço decente pro hambúrguer, e o ícone sozinho já é
+     identidade suficiente numa barra que é basicamente "navegação",
+     não cartão de visita. */
+  .navbar__brand-text {
+    display: none;
+  }
+
   .navbar__links {
+    display: none;
+  }
+
+  /* Toggle de tema e CTA de WhatsApp saem da pill (só sobra o hambúrguer)
+     e reaparecem dentro do drawer — ver .navbar__panel-footer abaixo.
+     Mesmos elementos duplicados, escondidos aqui só por causa do
+     ancestral .navbar__actions (a instância de dentro do painel não tem
+     esse ancestral, então não é afetada por essa regra). */
+  .navbar__actions .navbar__theme-toggle,
+  .navbar__actions .navbar__cta {
     display: none;
   }
 
@@ -325,63 +362,112 @@ body:not(:has(.hero)) .navbar:not(.is-scrolled) {
     display: flex;
   }
 
+  /* Drawer lateral (desliza da direita), não mais o dropdown pequeno
+     centralizado de antes — cobre a altura inteira da viewport,
+     acompanhado do scrim escurecendo o resto da página atrás. */
   .navbar__panel {
     position: fixed;
-    top: calc(var(--navbar-height) + var(--space-4));
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 99;
-    width: calc(100% - var(--space-8));
-    max-width: 320px;
+    top: 0;
+    right: 0;
+    z-index: 200;
+    width: min(84vw, 320px);
+    height: 100dvh;
     background: var(--bg-elevated);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-md);
-    padding: var(--space-4);
+    border-left: 1px solid var(--border);
+    display: flex;
     flex-direction: column;
-    gap: var(--space-3);
+    padding: var(--space-6);
+    transform: translateX(100%);
+    transition: transform var(--transition-base);
+    overflow-y: auto;
   }
 
   .navbar__panel.is-open {
     display: flex;
+    transform: translateX(0);
   }
 
-  .navbar__panel a {
+  .navbar__panel-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--space-8);
+  }
+
+  .navbar__panel-title {
+    font-family: var(--font-mono);
+    font-weight: var(--fw-medium);
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  .navbar__panel-close {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    flex-shrink: 0;
+    background: transparent;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-full);
+    color: var(--text-primary);
+    transition: border-color var(--transition-ui), color var(--transition-ui);
+  }
+
+  .navbar__panel-close:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  .navbar__panel-close svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .navbar__panel-links {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+  }
+
+  .navbar__panel-link {
     font-family: var(--font-sans);
     font-weight: var(--fw-medium);
     color: var(--text-secondary);
-    font-size: 0.95rem;
+    font-size: 1.05rem;
+    transition: color var(--transition-ui);
   }
 
-  .navbar__panel a:hover {
+  .navbar__panel-link:hover {
     color: var(--accent);
   }
-}
 
-@media (max-width: 480px) {
-  .navbar__cta {
-    padding: var(--space-2) var(--space-3);
-    font-size: 0.78rem;
-  }
-}
-
-/* Abaixo de ~420px, toggle de tema + CTA + hambúrguer juntos não cabem
-   mais na largura da viewport (medido: o grupo inteiro precisa de ~228px,
-   sobrando menos que isso em telas de 375-414px) — o CTA vira ícone-só
-   (balão de conversa, ainda leva pro WhatsApp) pra liberar espaço
-   suficiente pro hambúrguer ficar 100% dentro da tela. */
-@media (max-width: 420px) {
-  .navbar__cta-text {
-    display: none;
-  }
-
-  .navbar__cta-icon {
+  /* Empurra tema + CTA pro rodapé do drawer, colados embaixo mesmo com
+     poucos links de sobra em cima. */
+  .navbar__panel-footer {
+    margin-top: auto;
+    padding-top: var(--space-6);
+    border-top: 1px solid var(--border);
     display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-4);
   }
 
-  .navbar__cta {
-    padding: var(--space-2);
-    min-width: 44px;
-    min-height: 44px;
+  .navbar__panel-footer .navbar__cta {
+    flex: 1;
     justify-content: center;
   }
 }
+
+/* Os dois breakpoints abaixo (480/420) existiam pra encolher o CTA
+   "Falar comigo" até virar ícone-só, porque antes ele dividia a pill com
+   o hambúrguer em telas estreitas. Agora o CTA já não aparece mais na
+   pill abaixo de 900px (foi pro rodapé do drawer, com espaço de sobra) —
+   então esse encolhimento não tem mais função e virou código morto.
+   Removido de propósito, não esquecido: sem isso, essas regras (sem
+   escopo de ancestral) acabariam encolhendo também o CTA de dentro do
+   drawer, que tem largura suficiente pra manter o texto completo. */

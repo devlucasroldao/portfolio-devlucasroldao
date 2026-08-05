@@ -19,6 +19,30 @@ export function renderNavbar({ base = '' } = {}) {
   const links = (className) =>
     NAV_ITEMS.map(([hash, label]) => `<a class="${className}" href="${base}${hash}">${label}</a>`).join('\n');
 
+  // Toggle de tema e CTA de WhatsApp existem em DOIS lugares no DOM: um
+  // aqui embaixo (pill do desktop) e outro dentro do .navbar__panel (drawer
+  // do mobile) — não dá pra "mover" o mesmo elemento entre dois containers
+  // irmãos só com CSS quando os dois têm que poder estar em telas
+  // diferentes. Os dois usam exatamente as mesmas classes (mesmo visual),
+  // e o JS trata os dois com querySelectorAll, sincronizando o estado.
+  const themeToggle = `
+    <button class="navbar__theme-toggle" type="button" aria-label="Ativar modo claro" aria-pressed="false">
+      <span class="navbar__theme-track">
+        <span class="navbar__theme-thumb">
+          ${MOON_ICON}
+          ${SUN_ICON}
+        </span>
+      </span>
+    </button>
+  `;
+
+  const cta = `
+    <a href="${whatsappHref}" target="_blank" rel="noopener noreferrer" class="navbar__cta" aria-label="Falar comigo no WhatsApp">
+      <span class="navbar__cta-text">Falar comigo${EXTERNAL_LINK_ICON}</span>
+      <span class="navbar__cta-icon">${CHAT_ICON}</span>
+    </a>
+  `;
+
   return `
     <nav class="navbar">
       <a href="${base}#inicio" class="navbar__brand">
@@ -30,7 +54,7 @@ export function renderNavbar({ base = '' } = {}) {
           width="24"
           height="24"
         />
-        <span>@devlucasroldao</span>
+        <span class="navbar__brand-text">@devlucasroldao</span>
       </a>
 
       <div class="navbar__links">
@@ -38,21 +62,10 @@ export function renderNavbar({ base = '' } = {}) {
       </div>
 
       <div class="navbar__actions">
-        <button class="navbar__theme-toggle" type="button" aria-label="Ativar modo claro" aria-pressed="false">
-          <span class="navbar__theme-track">
-            <span class="navbar__theme-thumb">
-              ${MOON_ICON}
-              ${SUN_ICON}
-            </span>
-          </span>
-        </button>
+        ${themeToggle}
+        ${cta}
 
-        <a href="${whatsappHref}" target="_blank" rel="noopener noreferrer" class="navbar__cta" aria-label="Falar comigo no WhatsApp">
-          <span class="navbar__cta-text">Falar comigo${EXTERNAL_LINK_ICON}</span>
-          <span class="navbar__cta-icon">${CHAT_ICON}</span>
-        </a>
-
-        <button class="navbar__toggle" type="button" aria-label="Abrir menu">
+        <button class="navbar__toggle" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="navbar-panel">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
             <line x1="3" y1="6" x2="21" y2="6" />
             <line x1="3" y1="12" x2="21" y2="12" />
@@ -62,9 +75,25 @@ export function renderNavbar({ base = '' } = {}) {
       </div>
     </nav>
 
-    <div class="navbar__panel">
-      ${links('')}
-    </div>
+    <div class="navbar__scrim"></div>
+
+    <aside class="navbar__panel" id="navbar-panel" aria-hidden="true">
+      <div class="navbar__panel-header">
+        <span class="navbar__panel-title">Menu</span>
+        <button class="navbar__panel-close" type="button" aria-label="Fechar menu">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+        </button>
+      </div>
+
+      <nav class="navbar__panel-links">
+        ${links('navbar__panel-link')}
+      </nav>
+
+      <div class="navbar__panel-footer">
+        ${themeToggle}
+        ${cta}
+      </div>
+    </aside>
   `;
 }
 
@@ -89,7 +118,11 @@ export function initNavbar() {
   const navbar = document.querySelector('.navbar');
   const toggle = document.querySelector('.navbar__toggle');
   const panel = document.querySelector('.navbar__panel');
-  const themeToggle = document.querySelector('.navbar__theme-toggle');
+  const panelClose = document.querySelector('.navbar__panel-close');
+  const scrim = document.querySelector('.navbar__scrim');
+  // Dois toggles no DOM (pill do desktop + drawer do mobile) — mesma
+  // classe nos dois, tratados juntos aqui.
+  const themeToggles = [...document.querySelectorAll('.navbar__theme-toggle')];
 
   const onScroll = () => {
     navbar.classList.toggle('is-scrolled', window.scrollY > 24);
@@ -97,27 +130,57 @@ export function initNavbar() {
   onScroll();
   window.addEventListener('scroll', onScroll, { passive: true });
 
+  function openPanel() {
+    panel.classList.add('is-open');
+    scrim.classList.add('is-open');
+    panel.setAttribute('aria-hidden', 'false');
+    toggle.setAttribute('aria-expanded', 'true');
+    // Trava o scroll da página por trás enquanto o drawer tá aberto —
+    // senão dá pra rolar o conteúdo por baixo do overlay, o que quebra a
+    // sensação de "camada modal" que o drawer devia ter.
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closePanel() {
+    panel.classList.remove('is-open');
+    scrim.classList.remove('is-open');
+    panel.setAttribute('aria-hidden', 'true');
+    toggle.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  }
+
   toggle.addEventListener('click', () => {
-    panel.classList.toggle('is-open');
+    if (panel.classList.contains('is-open')) closePanel();
+    else openPanel();
+  });
+
+  panelClose.addEventListener('click', closePanel);
+  scrim.addEventListener('click', closePanel);
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && panel.classList.contains('is-open')) closePanel();
   });
 
   panel.querySelectorAll('a').forEach((link) => {
-    link.addEventListener('click', () => panel.classList.remove('is-open'));
+    link.addEventListener('click', closePanel);
   });
 
   // O <html data-theme="light"> já foi aplicado (ou não) pelo script
   // síncrono no <head>, antes de qualquer render — aqui só sincroniza o
   // visual do switch com esse estado já decidido.
-  syncThemeToggleVisual(themeToggle, document.documentElement.getAttribute('data-theme') === 'light');
+  const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+  themeToggles.forEach((el) => syncThemeToggleVisual(el, isLight));
 
-  themeToggle.addEventListener('click', () => {
-    const nextIsLight = document.documentElement.getAttribute('data-theme') !== 'light';
-    if (nextIsLight) {
-      document.documentElement.setAttribute('data-theme', 'light');
-    } else {
-      document.documentElement.removeAttribute('data-theme');
-    }
-    setStoredTheme(nextIsLight ? 'light' : 'dark');
-    syncThemeToggleVisual(themeToggle, nextIsLight);
+  themeToggles.forEach((el) => {
+    el.addEventListener('click', () => {
+      const nextIsLight = document.documentElement.getAttribute('data-theme') !== 'light';
+      if (nextIsLight) {
+        document.documentElement.setAttribute('data-theme', 'light');
+      } else {
+        document.documentElement.removeAttribute('data-theme');
+      }
+      setStoredTheme(nextIsLight ? 'light' : 'dark');
+      themeToggles.forEach((toggleEl) => syncThemeToggleVisual(toggleEl, nextIsLight));
+    });
   });
 }
