@@ -51,15 +51,13 @@
    fura o AA (ver nota embaixo). Borda/sombra de vidro somam por cima
    mesmo com o fundo mais coberto. */
 body:not(:has(.hero)) .navbar:not(.is-scrolled) {
-  /* 0.96, não 0.75: o teste anterior só media a marca (--text-primary,
-     6.62:1 em 0.75 — passa fácil). Só que em largura de desktop as
-     páginas de case também mostram .navbar__links (--text-secondary) —
-     esse é o caso apertado (só 5.11:1 de margem contra o azul-marinho
-     puro) e em 0.75 caía pra 2.55:1. Mesmo valor do .is-scrolled acima
-     por consistência e porque a conta é a mesma cor de fundo/texto. */
-  background: rgba(13, 27, 42, 0.96);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  /* Volta pra faixa translúcida (0.55) + brightness() no backdrop-filter
+     escurecendo o conteúdo que passa pelo vidro, em vez de opacidade alta
+     resolvendo contraste sozinha — ver .navbar.is-scrolled abaixo pra
+     medição completa (mesma cor de fundo/texto, mesma conta). */
+  background: rgba(13, 27, 42, 0.55);
+  backdrop-filter: blur(12px) brightness(0.2);
+  -webkit-backdrop-filter: blur(12px) brightness(0.2);
   border-color: rgba(255, 255, 255, 0.1);
   border-top-color: rgba(255, 255, 255, 0.18);
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
@@ -80,21 +78,21 @@ body:not(:has(.hero)) .navbar:not(.is-scrolled) {
    em baixa opacidade (mais forte no topo) simula o contorno de vidro, e
    a sombra por baixo reforça a pill "flutuando" sobre o conteúdo. */
 .navbar.is-scrolled {
-  /* 0.96, não 0.65: medido de verdade (não só a marca — os links
-     .navbar__links, em --text-secondary, são o caso mais apertado) e o
-     0.65 falhava contraste (1.87:1) sempre que o conteúdo por trás é uma
-     seção clara e lisa do tema claro (ex.: Cases/Sobre). Isso já valia
-     mesmo pro 0.78 original (2.81:1) — --text-secondary só tem margem
-     suficiente (5.11:1) contra o azul-marinho puro, e qualquer diluição
-     real já derruba abaixo de 4.5:1. Testado ponto a ponto: 0.96 dá
-     ~4.6-4.7:1 nos 3 fundos claros do site (bg-base/bg-elevated/
-     bg-darker), com folga. Blur/saturação/borda/sombra mantidos
-     intensos — só a opacidade precisou subir. */
-  background: rgba(13, 27, 42, 0.96);
+  /* Contraste resolvido via brightness() no backdrop-filter (escurece o
+     que passa pelo vidro, não importa se o conteúdo atrás é claro ou
+     escuro) em vez de subir a opacidade do fundo — mantém a
+     translucidez visível de verdade (0.55, faixa original pedida).
+     brightness(0.2): --text-secondary (--navbar__links, o caso mais
+     apertado — só 5.11:1 de margem contra o azul-marinho puro) medido
+     de verdade contra os 2 cenários: ~4.6-4.7:1 sobre fundo claro liso
+     (Cases/Sobre no tema claro) e ~5.5-5.6:1 sobre o vídeo do Hero,
+     ambos acima do mínimo AA (4.5:1). Blur/saturação continuam fortes
+     (32px/200%) — só ganharam o brightness() extra. */
+  background: rgba(13, 27, 42, 0.55);
   border-color: rgba(255, 255, 255, 0.1);
   border-top-color: rgba(255, 255, 255, 0.22);
-  backdrop-filter: blur(32px) saturate(200%);
-  -webkit-backdrop-filter: blur(32px) saturate(200%);
+  backdrop-filter: blur(32px) saturate(200%) brightness(0.2);
+  -webkit-backdrop-filter: blur(32px) saturate(200%) brightness(0.2);
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
 }
 
