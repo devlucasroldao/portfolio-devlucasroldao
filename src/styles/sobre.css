@@ -292,6 +292,25 @@ img.sobre__grid-item {
 
   .sobre__grid {
     max-width: 480px;
+    /* Grid inteiro capado em 480px, mas o container real é bem mais
+       estreito que isso (~327px num iPhone comum) — com os mesmos 12px
+       de padding+gap do desktop, cada peça sobrava só ~93px de lado,
+       thumbnail pequena demais, e o vão de 12px entre peças tão
+       pequenas lia como "cards soltos", não quebra-cabeça encaixado.
+       Sem padding externo (as peças vão até a borda do quadro,
+       comum em grades de foto) + gap bem menor recupera o espaço pra
+       foto de verdade. */
+    padding: 0;
+    gap: var(--space-1);
+  }
+
+  /* Sem borda individual em cada peça no mobile — com o vão já fino
+     (--space-1), a borda de 1px em volta de cada foto competia
+     visualmente com o gap, reforçando a sensação de "peças separadas"
+     em vez de um bloco só. O quadro externo (.sobre__grid) já tem
+     sombra + fundo próprio marcando o conjunto inteiro. */
+  img.sobre__grid-item {
+    border: none;
   }
 }
 
