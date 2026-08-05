@@ -403,18 +403,29 @@ body:not(:has(.hero)) .navbar:not(.is-scrolled) {
 
   .navbar__panel-header {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: space-between;
+    gap: var(--space-4);
     margin-bottom: var(--space-8);
   }
 
-  .navbar__panel-title {
+  .navbar__panel-eyebrow {
+    display: block;
     font-family: var(--font-mono);
     font-weight: var(--fw-medium);
-    font-size: 0.85rem;
+    font-size: 0.75rem;
     color: var(--text-secondary);
     text-transform: uppercase;
     letter-spacing: 0.04em;
+    margin-bottom: var(--space-2);
+  }
+
+  .navbar__panel-heading {
+    font-family: var(--font-mono);
+    font-weight: var(--fw-medium);
+    font-size: 1.15rem;
+    color: var(--text-primary);
+    line-height: 1.25;
   }
 
   .navbar__panel-close {
@@ -456,6 +467,30 @@ body:not(:has(.hero)) .navbar:not(.is-scrolled) {
   }
 
   .navbar__panel-link:hover {
+    color: var(--accent);
+  }
+
+  /* Sublinks dos cases, recuados dentro do menu — mesmo espírito de uma
+     seção expandida, não uma seção nova: fonte menor, indentado, sem
+     competir com os links principais do menu. */
+  .navbar__panel-sublinks {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    padding-left: var(--space-4);
+    margin-top: var(--space-3);
+    border-left: 1px solid var(--border);
+  }
+
+  .navbar__panel-sublinks a {
+    font-family: var(--font-sans);
+    font-weight: var(--fw-regular);
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    transition: color var(--transition-ui);
+  }
+
+  .navbar__panel-sublinks a:hover {
     color: var(--accent);
   }
 

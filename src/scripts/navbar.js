@@ -79,14 +79,24 @@ export function renderNavbar({ base = '' } = {}) {
 
     <aside class="navbar__panel" id="navbar-panel" aria-hidden="true">
       <div class="navbar__panel-header">
-        <span class="navbar__panel-title">Menu</span>
+        <div>
+          <span class="navbar__panel-eyebrow">Menu</span>
+          <h2 class="navbar__panel-heading">Navegue pela página</h2>
+        </div>
         <button class="navbar__panel-close" type="button" aria-label="Fechar menu">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
         </button>
       </div>
 
       <nav class="navbar__panel-links">
-        ${links('navbar__panel-link')}
+        <a class="navbar__panel-link" href="${base}#inicio">Início</a>
+        <a class="navbar__panel-link" href="${base}#cases">Cases</a>
+        <div class="navbar__panel-sublinks">
+          <a href="case-conecte.html">Conecte Telecom</a>
+          <a href="case-lu-perfumes.html">Lu Perfumes &amp; Presentes</a>
+        </div>
+        <a class="navbar__panel-link" href="${base}#sobre">Sobre mim</a>
+        <a class="navbar__panel-link" href="${base}#depoimentos">Depoimentos</a>
       </nav>
 
       <div class="navbar__panel-footer">
