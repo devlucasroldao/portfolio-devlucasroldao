@@ -104,6 +104,20 @@ img.case-full__banner-image {
   color: var(--text-primary);
 }
 
+/* "Papel" tem texto bem mais longo que "Empresa"/"Período" (ex: 
+   "Desenvolvimento full-stack + Auditoria de segurança") — lado a lado
+   no flex-wrap padrão, ele quebra em 2 linhas espremido contra os
+   vizinhos enquanto os outros ficam em 1, o que lê como inconsistência.
+   Empilhando cada item em 100% da largura no mobile, cada um ganha o
+   container inteiro pra si — os curtos continuam em 1 linha, e se
+   "Papel" ainda quebrar, quebra como bloco próprio, não travado contra
+   o item do lado. */
+@media (max-width: 480px) {
+  .case-full__meta-item {
+    flex: 1 1 100%;
+  }
+}
+
 /* Site ao vivo + Instagram — perto da meta-informação, tratamento
    discreto (sem virar botão grande) e consistente entre os dois cases.
    "Ver site ao vivo" com um pouco mais de peso (é o link principal),

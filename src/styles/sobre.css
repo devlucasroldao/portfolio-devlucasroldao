@@ -35,15 +35,22 @@
   text-align: left;
 }
 
+/* Reduzido antes pra 1.25rem/1.1rem achando que a coluna de texto ainda
+   estava espremida (raciocínio herdado do layout 2 colunas). Mas
+   .sobre__inner já vira 1fr (coluna única, largura cheia) a partir de
+   900px — então nessas faixas o heading tem o container inteiro
+   disponível, não a coluna estreita. Sem motivo real pra ficar menor
+   que os outros heading de seção (Cases 28px mínimo, Depoimentos 24px
+   fixo) — alinhado a esse mesmo piso agora. */
 @media (max-width: 480px) {
   .sobre__heading {
-    font-size: 1.25rem;
+    font-size: 1.5rem;
   }
 }
 
 @media (max-width: 340px) {
   .sobre__heading {
-    font-size: 1.1rem;
+    font-size: 1.35rem;
   }
 }
 
@@ -154,7 +161,12 @@
 
 /* Hover sutil — sem scale aqui (o grid é quebra-cabeça, peças já ficam
    coladas nas outras, aumentar tamanho causaria sobreposição visual) —
-   só o destaque de borda, mesmo timing usado nas outras imagens do site. */
+   só o destaque de borda, mesmo timing usado nas outras imagens do site.
+   font-size aqui não aparece pra ninguém: os itens hoje são <img> reais
+   (não mais o placeholder <div> com texto visível de antes), então esse
+   valor só entraria em jogo como fallback se a imagem quebrasse. Mantido
+   baixo de propósito — texto de fallback não deve competir visualmente
+   com o quebra-cabeça de fotos. */
 .sobre__grid-item {
   min-height: 0;
   min-width: 0;

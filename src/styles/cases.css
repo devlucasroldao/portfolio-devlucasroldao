@@ -215,6 +215,24 @@ img.case-teaser__image {
   line-height: 1.65;
 }
 
+/* No mobile a linha fica bem mais curta (menos caracteres por linha),
+   então o mesmo parágrafo gera muito mais linhas empilhadas — sem
+   compensar o line-height isso lê como parede de texto, mesmo sem
+   nenhum parágrafo ter ficado mais longo. Mesmo valor já usado em
+   .sobre__text p (1.7) pra manter consistência entre as duas áreas de
+   texto corrido do site. Sub-blocos (Solução do Conecte) também ganham
+   um respiro extra entre si, já que no mobile eles empilham em coluna
+   única e ficam mais perto uns dos outros visualmente. */
+@media (max-width: 480px) {
+  .case__block p {
+    line-height: 1.7;
+  }
+
+  .case__sub-blocks {
+    gap: var(--space-8);
+  }
+}
+
 /* Destaque pontual em números/fatos específicos e decisões centrais dos
    textos de Problema/Decisão/Solução/Resultado — mesmo tratamento do
    .sobre__highlight--accent (peso + cor num só passo, sem duas
