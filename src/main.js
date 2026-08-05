@@ -106,7 +106,7 @@ const sobreTemplate = `
             <span class="sobre__info-label">Atuação</span>
             <span class="sobre__info-value">Dev &amp; Estrategista Digital</span>
           </div>
-          <div class="sobre__info-row">
+          <div class="sobre__info-row sobre__info-row--stack">
             <span class="sobre__info-label">Ferramentas</span>
             <span class="sobre__info-value">Claude · VS Code · Canva · Notion</span>
           </div>
