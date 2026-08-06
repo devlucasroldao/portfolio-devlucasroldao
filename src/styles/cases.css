@@ -65,23 +65,6 @@
   top: calc(var(--navbar-height) + var(--space-8));
 }
 
-.case__image-placeholder {
-  width: 100%;
-  min-height: 320px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: var(--space-6);
-  background: var(--bg-elevated);
-  border: 1px dashed var(--border);
-  border-radius: var(--radius-md);
-  color: var(--text-secondary);
-  font-family: var(--font-mono);
-  font-size: 0.85rem;
-  line-height: 1.6;
-}
-
 /* Só no teaser da home — corte geométrico de canto (puramente estrutural,
    a borda tracejada já existente acompanha o recorte automaticamente) +
    hover de destaque. Espelhado conforme o card é intercalado: o corte fica
@@ -322,27 +305,6 @@ img.case__inline-image {
    do flex já cuida do espaçamento, então não duplica aqui. */
 .case__block > .case__inline-image {
   margin: var(--space-6) 0;
-}
-
-.case__result-list {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-2);
-}
-
-.case__result-list li {
-  position: relative;
-  padding-left: var(--space-4);
-  font-family: var(--font-sans);
-  color: var(--text-primary);
-  line-height: 1.6;
-}
-
-.case__result-list li::before {
-  content: '—';
-  position: absolute;
-  left: 0;
-  color: var(--text-secondary);
 }
 
 .case__learning {
