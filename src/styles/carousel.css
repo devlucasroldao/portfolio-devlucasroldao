@@ -51,6 +51,16 @@
 .carousel__stage {
   position: relative;
   transition: height var(--transition-base);
+  /* Sem isso, os cards "de trás" (efeito de pilha — is-back-1/is-back-2,
+     deslocados 8-16px via transform) vazavam um pedaço de texto pra
+     fora do card da frente sempre que o depoimento de trás fosse mais
+     alto que o ativo (a altura do stage acompanha só o card ativo desde
+     a última mudança). Corta qualquer coisa que passe do limite exato
+     do card ativo — como efeito colateral, o pequeno "peek" visual da
+     pilha (cor/borda do card de trás espiando no canto) também some,
+     não só o texto. Trade-off aceito: preferir zero vazamento de texto
+     a manter aquele detalhe de profundidade. */
+  overflow: hidden;
 }
 
 .carousel__card-wrap {
