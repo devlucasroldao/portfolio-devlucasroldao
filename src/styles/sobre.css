@@ -359,26 +359,22 @@ img.sobre__grid-item {
     padding: var(--space-3) var(--space-4);
   }
 
-  /* Só a linha "Ferramentas" — é a única com valor longo o bastante pra
-     quebrar linha feio contra o layout label-esquerda/valor-direita.
-     Em vez de cortar ferramentas de verdade da lista (ela reflete o que
-     você realmente usa) ou forçar nowrap com fonte ilegível, empilha:
-     label em cima, valor embaixo, alinhados à esquerda os dois — e o
-     valor quebra linha normalmente se precisar, sem brigar por espaço
-     contra o label no mesmo eixo horizontal. */
-  .sobre__info-row--stack {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: var(--space-1);
-  }
-
-  .sobre__info-row--stack .sobre__info-value {
-    white-space: normal;
-  }
-
   .sobre__info-label,
   .sobre__info-value {
     font-size: 0.75rem;
+  }
+
+  /* Só o valor de "Ferramentas" — é o único texto longo o bastante pra
+     quebrar linha contra o layout label-esquerda/valor-direita (medido:
+     com 4 ferramentas listadas, ele precisa de ~231px, sobrando só
+     ~200px de verdade depois do label + gap). Testei tamanho por
+     tamanho até achar o menor que cabe numa linha só sem cortar —
+     classe própria, não reaproveita --nowrap (essa também é usada em
+     "Disponibilidade", que já cabia liso em 0.75rem — encolher ela
+     junto criaria uma inconsistência nova, só que ao contrário). */
+  .sobre__info-value--tools {
+    white-space: nowrap;
+    font-size: 0.65rem;
   }
 
   .sobre__grid-item {
