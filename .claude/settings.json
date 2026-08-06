@@ -258,7 +258,8 @@
       "Bash(grep -iE \"^\\(sharp|jimp|pngjs|canvas|get-pixels\\)$\")",
       "Bash(node test-real-pixel-contrast.mjs)",
       "Bash(cd \"c:\\\\Users\\\\lucas\\\\Documents\\\\MeusProjetos\\\\portfolio-devlucasroldao\" && rm portfolio-mobile-e-icone.patch && echo \"removido\")",
-      "Bash(cd \"c:\\\\Users\\\\lucas\\\\Documents\\\\MeusProjetos\\\\portfolio-devlucasroldao\" && rm portfolio-navbar-drawer-e-fixes.patch && echo removido)"
+      "Bash(cd \"c:\\\\Users\\\\lucas\\\\Documents\\\\MeusProjetos\\\\portfolio-devlucasroldao\" && rm portfolio-navbar-drawer-e-fixes.patch && echo removido)",
+      "Bash(cd \"c:\\\\Users\\\\lucas\\\\Documents\\\\MeusProjetos\\\\portfolio-devlucasroldao\" && rm portfolio-varredura-final.patch && echo \"removido\")"
     ],
     "additionalDirectories": [
       "c:\\Users\\lucas\\Documents\\MeusProjetos\\portfolio-devlucasroldao"
