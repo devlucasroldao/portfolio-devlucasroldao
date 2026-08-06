@@ -13,6 +13,7 @@ import { depoimentosTemplate, initCarousels } from './scripts/carousel.js';
 import { renderFooter, initFooterEmail } from './scripts/footer.js';
 import { whatsappHref } from './scripts/contact.js';
 import { initHeroRotator } from './scripts/hero-rotator.js';
+import { initHeroVideo } from './scripts/hero-video.js';
 import { initRotator } from './scripts/rotator.js';
 import { initScrollReveal, initTypewriter } from './scripts/scroll-animations.js';
 import { EXTERNAL_LINK_ICON } from './scripts/ui-icons.js';
@@ -22,7 +23,7 @@ const CTA_HEADING_PHRASES = ['Fala comigo!', 'Me chama!', 'Vem de zapzap', 'Bora
 const heroTemplate = `
   <section class="hero" id="inicio">
     <div class="hero__media">
-      <video class="hero__video" autoplay loop muted playsinline>
+      <video class="hero__video" autoplay loop muted playsinline poster="/hero-poster.jpg">
         <source src="/hero-video.mp4" type="video/mp4" />
       </video>
       <div class="hero__media-overlay"></div>
@@ -146,6 +147,7 @@ initNavbar();
 initCarousels();
 initFooterEmail();
 initHeroRotator();
+initHeroVideo();
 initRotator(document.querySelector('.cta-final__rotator'), CTA_HEADING_PHRASES, { wordSelector: '.cta-final__rotator-word' });
 
 initScrollReveal({
