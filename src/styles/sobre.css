@@ -324,6 +324,28 @@ img.sobre__grid-item {
        sensação de conjunto único. */
     border: none;
   }
+
+  /* v4 — quarta rodada nessa seção (histórico completo mantido acima):
+     v3 deixou as 5 fotos uniformes, mas o rabisco.jpg (laranja/terracota,
+     screenshot de site) chamava atenção desproporcional só pela cor
+     vibrante — mesmo do mesmo tamanho físico que as outras, "pesava"
+     mais visualmente. Pedido explícito: tirar ela do grid mobile (fica
+     só no desktop, onde o quebra-cabeça original é elemento de marca
+     documentado) e dar mais destaque pra foto casual (selfie, a mais
+     "pessoal" das 5) usando o espaço que sobrou.
+     Resultado: 3 fotos quadradas (trabalhando, setup-mesa, tela-codigo)
+     numa fileira compacta — "encaixadas" lado a lado, tipo peças de
+     quebra-cabeça pequeno — e a foto casual como uma faixa larga embaixo,
+     na proporção real dela (2:1, já nasceu larga) — maior em área
+     absoluta que qualquer uma das 3 de cima, sem cortar nada dela. */
+  img.sobre__grid-item--3 {
+    display: none;
+  }
+
+  img.sobre__grid-item--5 {
+    grid-column: 1 / -1;
+    aspect-ratio: 2 / 1;
+  }
 }
 
 @media (max-width: 480px) {
