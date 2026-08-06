@@ -64,8 +64,8 @@ export function renderNavbar({ base = '' } = {}) {
   `;
 
   return `
-    <nav class="navbar">
-      <a href="${base}#inicio" class="navbar__brand">
+    <nav class="navbar" aria-label="Navegação principal">
+      <a href="${base}#inicio" class="navbar__brand" aria-label="@devlucasroldao — início">
         <img
           src="/images/brand/mark-dark@2x.png"
           srcset="/images/brand/mark-dark@2x.png 2x, /images/brand/mark-dark@3x.png 3x"
@@ -97,7 +97,7 @@ export function renderNavbar({ base = '' } = {}) {
 
     <div class="navbar__scrim"></div>
 
-    <aside class="navbar__panel" id="navbar-panel" aria-hidden="true">
+    <aside class="navbar__panel" id="navbar-panel" aria-hidden="true" inert>
       <div class="navbar__panel-header">
         <div>
           <span class="navbar__panel-eyebrow">Menu</span>
@@ -108,7 +108,7 @@ export function renderNavbar({ base = '' } = {}) {
         </button>
       </div>
 
-      <nav class="navbar__panel-links">
+      <nav class="navbar__panel-links" aria-label="Menu">
         <div class="navbar__panel-group">
           <span class="navbar__panel-group-label">Seções</span>
           <a class="navbar__panel-link" href="${base}#inicio">Início</a>
@@ -192,6 +192,13 @@ export function initNavbar() {
     panel.classList.add('is-open');
     scrim.classList.add('is-open');
     panel.setAttribute('aria-hidden', 'false');
+    // inert (junto do aria-hidden) impede foco/tab dentro do conteúdo
+    // enquanto ele tá fechado — sem isso, dava pra tabular (teclado) pra
+    // dentro dos links do drawer mesmo ele estando visualmente escondido
+    // (fora da tela via transform), o que é uma cilada de navegação pra
+    // quem usa teclado ou leitor de tela. Suporte amplo em navegadores
+    // modernos (Chrome/Edge/Firefox/Safari recentes).
+    panel.inert = false;
     toggle.setAttribute('aria-expanded', 'true');
     // Trava o scroll da página por trás enquanto o drawer tá aberto —
     // senão dá pra rolar o conteúdo por baixo do overlay, o que quebra a
@@ -203,6 +210,7 @@ export function initNavbar() {
     panel.classList.remove('is-open');
     scrim.classList.remove('is-open');
     panel.setAttribute('aria-hidden', 'true');
+    panel.inert = true;
     toggle.setAttribute('aria-expanded', 'false');
     document.body.style.overflow = '';
     onScroll();

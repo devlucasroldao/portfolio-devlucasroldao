@@ -25,12 +25,12 @@ export function renderFooter({ base = '' } = {}) {
           </div>
         </div>
         <div class="footer__link-groups">
-          <nav class="footer__links">
+          <nav class="footer__links" aria-label="Redes e contato">
             <a href="https://linkedin.com/in/devlucasroldao" target="_blank" rel="noopener noreferrer">${LINKEDIN_ICON}<span>LinkedIn</span>${EXTERNAL_LINK_ICON}</a>
             <a href="https://github.com/devlucasroldao" target="_blank" rel="noopener noreferrer">${asFooterBrandIcon(getIconSvg('github'))}<span>GitHub</span>${EXTERNAL_LINK_ICON}</a>
             <a href="#" data-email-link>${ENVELOPE_ICON}<span>Email</span></a>
           </nav>
-          <nav class="footer__nav">
+          <nav class="footer__nav" aria-label="Seções da página">
             ${navLinks}
           </nav>
         </div>

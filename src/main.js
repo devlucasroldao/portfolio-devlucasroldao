@@ -136,12 +136,19 @@ const closingTemplate = `
         </div>
       </div>
     </div>
-    ${renderFooter()}
   </section>
 `;
 
 document.querySelector('#app').innerHTML =
-  renderNavbar() + heroTemplate + casesTeaserTemplate() + sobreTemplate + depoimentosTemplate() + closingTemplate;
+  renderNavbar() +
+  '<main>' +
+  heroTemplate +
+  casesTeaserTemplate() +
+  sobreTemplate +
+  depoimentosTemplate() +
+  closingTemplate +
+  '</main>' +
+  renderFooter();
 
 initNavbar();
 initCarousels();

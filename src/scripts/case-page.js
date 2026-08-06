@@ -12,10 +12,12 @@ import { initScrollReveal, initTypewriter } from './scroll-animations.js';
 export function mountCasePage(caseId) {
   document.querySelector('#app').innerHTML = `
     ${renderNavbar({ base: 'index.html' })}
-    <div class="case-page__top">
-      <a href="index.html#cases" class="case-page__back">&larr; voltar pros cases</a>
-    </div>
-    ${renderCaseFull(caseId)}
+    <main>
+      <div class="case-page__top">
+        <a href="index.html#cases" class="case-page__back">&larr; voltar pros cases</a>
+      </div>
+      ${renderCaseFull(caseId)}
+    </main>
     ${renderFooter({ base: 'index.html' })}
   `;
 
