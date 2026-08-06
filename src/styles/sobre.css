@@ -290,27 +290,60 @@ img.sobre__grid-item {
     grid-template-columns: 1fr;
   }
 
+  /* Abandona o quebra-cabeça assimétrico (1 peça grande 2x2 dominando +
+     4 pequenas) só no mobile — no desktop ele é elemento de marca
+     documentado, mantido como está. No mobile, mesmo sem corte técnico
+     de verdade (conferido: a proporção de cada foto já bate quase exata
+     com a célula que ocupava), uma foto ocupando 4x o espaço das outras
+     lia como "puzzle apertado", não como 5 fotos apresentadas com
+     clareza — a sensação de "não aparece a imagem inteira" vinha daí,
+     não de corte real. Grid uniforme 2 colunas resolve: as 4 fotos
+     quadradas (proporção 1:1 de origem) ganham peso visual igual, e a
+     quinta (proporção 2:1 de origem — já uma foto larga por natureza)
+     vira a linha de baixo, ocupando as 2 colunas. Sem aspect-ratio
+     forçado no container: cada foto define a própria altura pela
+     proporção real dela (abaixo), então built-in que bate exato com o
+     arquivo original — impossível cortar por engano. */
   .sobre__grid {
-    max-width: 480px;
-    /* Grid inteiro capado em 480px, mas o container real é bem mais
-       estreito que isso (~327px num iPhone comum) — com os mesmos 12px
-       de padding+gap do desktop, cada peça sobrava só ~93px de lado,
-       thumbnail pequena demais, e o vão de 12px entre peças tão
-       pequenas lia como "cards soltos", não quebra-cabeça encaixado.
-       Sem padding externo (as peças vão até a borda do quadro,
-       comum em grades de foto) + gap bem menor recupera o espaço pra
-       foto de verdade. */
-    padding: 0;
-    gap: var(--space-1);
+    aspect-ratio: auto;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: none;
+    grid-template-areas: none;
+    gap: var(--space-2);
+    padding: var(--space-2);
   }
 
-  /* Sem borda individual em cada peça no mobile — com o vão já fino
-     (--space-1), a borda de 1px em volta de cada foto competia
-     visualmente com o gap, reforçando a sensação de "peças separadas"
-     em vez de um bloco só. O quadro externo (.sobre__grid) já tem
-     sombra + fundo próprio marcando o conjunto inteiro. */
   img.sobre__grid-item {
+    aspect-ratio: 1 / 1;
+    /* Sem borda individual — mesmo raciocínio de antes: com o gap já
+       enxuto, borda em cada foto competia visualmente, quebrando a
+       sensação de conjunto único. */
     border: none;
+  }
+
+  /* grid-area:auto só nas 4 primeiras (mesma especificidade — uma classe
+     só — da regra da 5ª logo abaixo, então a ordem no arquivo decide;
+     por isso essa vem ANTES). Tentei fazer isso com um seletor genérico
+     "img.sobre__grid-item" antes, mas o qualificador de tag aumentava a
+     especificidade o suficiente pra vencer o grid-column da 5ª foto
+     mesmo vindo depois no arquivo — bug sutil, silencioso (sem erro,
+     só a foto 5 não esticava), só achei medindo o computed style de
+     verdade. */
+  .sobre__grid-item--1,
+  .sobre__grid-item--2,
+  .sobre__grid-item--3,
+  .sobre__grid-item--4 {
+    grid-area: auto;
+  }
+
+  /* A 5ª foto (proporção 2:1 na origem) ocupa as 2 colunas — mesma
+     lógica do desktop (ela é naturalmente mais larga que alta), só que
+     aqui vira a linha de baixo inteira em vez de um canto do quebra-
+     cabeça. */
+  .sobre__grid-item--5 {
+    grid-area: auto;
+    grid-column: 1 / -1;
+    aspect-ratio: 2 / 1;
   }
 }
 
