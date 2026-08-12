@@ -30,13 +30,14 @@ const heroTemplate = `
     </div>
 
     <div class="hero__content">
-      <h1 class="hero__headline">Bah, eu sou o <span class="hero__rotator"><span class="hero__rotator-word pos-current">Lucas Roldão</span><span class="hero__rotator-word"></span></span></h1>
+      <h1 class="hero__headline">Bah, eu sou o <span class="hero__rotator"><span class="hero__rotator-word pos-current">Desenvolvedor</span><span class="hero__rotator-word"></span></span></h1>
 
       <p class="hero__subtitle">
-        <span class="hero__subtitle-highlight">Dev</span>, <span class="hero__subtitle-highlight">designer</span>,
-        <span class="hero__subtitle-highlight">marketeiro</span> e
-        <span class="hero__subtitle-highlight">comunicador</span> — tudo ao mesmo tempo... e sim, dá pra fazer tudo
-        isso bem, com a ferramenta certa e um pouco de teimosia.
+        <span class="hero__subtitle-highlight">Dev</span> que também pensa como
+        <span class="hero__subtitle-highlight">estrategista</span>, escreve como
+        <span class="hero__subtitle-highlight">comunicador</span> e não foge de um
+        <span class="hero__subtitle-highlight">design</span> quando precisa. Tudo com a ferramenta certa e um
+        pouco de teimosia.
       </p>
 
       <div class="hero__ctas">
