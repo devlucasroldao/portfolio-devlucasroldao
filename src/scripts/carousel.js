@@ -10,7 +10,7 @@ const NEXT_ICON =
 function renderCard(item) {
   return `
     <blockquote class="testimonial-card testimonial-card--profile">
-      <img class="testimonial-card__photo" src="${item.photo}" alt="Foto de ${item.name}" loading="lazy" />
+      <img class="testimonial-card__photo" src="${item.photo}" alt="Foto de ${item.name}" width="700" height="933" loading="lazy" />
       <div class="testimonial-card__body">
         <p class="testimonial-card__quote">${item.quote}</p>
         <cite class="testimonial-card__author">${item.name} — ${item.role}</cite>
