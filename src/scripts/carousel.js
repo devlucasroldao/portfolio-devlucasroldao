@@ -1,7 +1,6 @@
 import { testimonials } from './testimonials.js';
 
 const ITEM_COUNT = testimonials.length;
-const AUTO_ADVANCE_MS = 8000;
 
 const PREV_ICON =
   '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>';
@@ -52,14 +51,13 @@ export function depoimentosTemplate() {
   `;
 }
 
-function initCarouselInstance(root, reducedMotion) {
+function initCarouselInstance(root) {
   const wraps = [...root.querySelectorAll('.carousel__card-wrap')];
   const stage = root.querySelector('.carousel__stage');
   const prevBtn = root.querySelector('.carousel__arrow--prev');
   const nextBtn = root.querySelector('.carousel__arrow--next');
 
   let current = Number(root.dataset.start || 0);
-  let timer = null;
 
   function applyClasses() {
     wraps.forEach((wrap, i) => {
@@ -115,28 +113,10 @@ function initCarouselInstance(root, reducedMotion) {
     applyClasses();
   }
 
-  function restartTimer() {
-    if (reducedMotion) return;
-    if (timer) clearInterval(timer);
-    timer = setInterval(next, AUTO_ADVANCE_MS);
-  }
-
-  prevBtn.addEventListener('click', () => {
-    prev();
-    restartTimer();
-  });
-  nextBtn.addEventListener('click', () => {
-    next();
-    restartTimer();
-  });
-
-  root.addEventListener('mouseenter', () => {
-    if (timer) clearInterval(timer);
-    timer = null;
-  });
-  root.addEventListener('mouseleave', () => {
-    restartTimer();
-  });
+  // Sem troca automática de propósito — só troca no clique da seta ou no
+  // swipe. Cada depoimento fica no ar até a pessoa decidir ver o próximo.
+  prevBtn.addEventListener('click', prev);
+  nextBtn.addEventListener('click', next);
 
   window.addEventListener('resize', measureHeight);
 
@@ -158,8 +138,6 @@ function initCarouselInstance(root, reducedMotion) {
       touchStartY = touch.clientY;
       touchDeltaX = 0;
       isHorizontalSwipe = null;
-      if (timer) clearInterval(timer);
-      timer = null;
     },
     { passive: true }
   );
@@ -189,14 +167,11 @@ function initCarouselInstance(root, reducedMotion) {
       else prev();
     }
     isHorizontalSwipe = null;
-    restartTimer();
   });
 
   applyClasses();
-  restartTimer();
 }
 
 export function initCarousels() {
-  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  document.querySelectorAll('.carousel').forEach((root) => initCarouselInstance(root, reducedMotion));
+  document.querySelectorAll('.carousel').forEach((root) => initCarouselInstance(root));
 }
