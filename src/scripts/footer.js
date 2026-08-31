@@ -32,6 +32,7 @@ export function renderFooter({ base = '' } = {}) {
           </nav>
           <nav class="footer__nav" aria-label="Seções da página">
             ${navLinks}
+            <a href="marketing.html">Marketing & Redes</a>
           </nav>
         </div>
       </div>

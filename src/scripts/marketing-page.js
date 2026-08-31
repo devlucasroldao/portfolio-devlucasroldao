@@ -5,7 +5,7 @@ import '../styles/footer.css';
 import '../styles/marketing.css';
 import { renderNavbar, initNavbar } from './navbar.js';
 import { renderFooter, initFooterEmail } from './footer.js';
-import { initScrollReveal } from './scroll-animations.js';
+import { initScrollReveal, initTypewriter } from './scroll-animations.js';
 import { marketingItems, CLIENT_LABELS, TYPE_LABELS } from './marketing-items.js';
 import { INSTAGRAM_ICON } from './ui-icons.js';
 
@@ -57,16 +57,30 @@ function marketingTemplate() {
     <section class="marketing-hero">
       <div class="marketing-hero__inner">
         <span class="marketing-hero__eyebrow">Fora do código</span>
-        <h1 class="marketing-hero__heading">Marketing & Redes Sociais</h1>
+        <h1 class="marketing-hero__heading">Marketing & <span class="marketing-hero__heading-accent">Redes Sociais</span></h1>
         <p class="marketing-hero__subtitle">
-          Além de desenvolver, cuido da presença digital da
-          <strong>Conecte Telecom</strong> e da <strong>Lu Perfumes & Presentes</strong> —
-          identidade de marca, posts e o antes x depois de cada perfil. Aqui embaixo, uma
-          amostra do que já produzi.
+          Além de desenvolver, também construo identidade de marca e presença digital — do post
+          ao resultado. Os exemplos abaixo são reais: <strong>Conecte Telecom</strong> e
+          <strong>Lu Perfumes & Presentes</strong>.
         </p>
-        <div class="marketing-hero__stat">
-          ${INSTAGRAM_ICON}
-          <span><strong>~5x</strong> de crescimento no engajamento dos posts da Conecte Telecom desde que assumi as redes.</span>
+        <div class="marketing-hero__stats">
+          <div class="marketing-hero__stat">
+            ${INSTAGRAM_ICON}
+            <div class="marketing-hero__stat-text">
+              <strong>~5x</strong>
+              <span>Engajamento — Conecte Telecom</span>
+            </div>
+          </div>
+          <div class="marketing-hero__stat">
+            ${INSTAGRAM_ICON}
+            <div class="marketing-hero__stat-text">
+              <!-- TODO: substituir "XX%" pelo número real de vendas/engajamento
+                   da Lu Perfumes assim que o Lucas confirmar — combinado em
+                   conversa, não inventar dado aqui. -->
+              <strong>XX%</strong>
+              <span>Vendas — Lu Perfumes & Presentes</span>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -179,5 +193,6 @@ export function mountMarketingPage() {
   initFooterEmail();
   initFilters(document);
   initLightbox(document);
-  initScrollReveal({ sections: ['.marketing-card'] });
+  initScrollReveal({ sections: ['.marketing-hero', '.marketing-card'] });
+  initTypewriter('.marketing-hero__eyebrow');
 }

@@ -77,7 +77,6 @@ const sobreTemplate = `
             Atuo com <span class="sobre__highlight">marketing digital</span> aqui na minha cidade, ajudando
             negócios a ter identidade que conversa com o público. Comecei ajudando o negócio da
             <span class="sobre__highlight">minha mãe</span> a crescer nas redes.
-            <a href="marketing.html" class="sobre__inline-link">Confira as artes que já fiz →</a>
           </p>
           <p>
             Gosto de fazer coisas — se for meio maluca, ainda melhor. Essa é a parte mais humana desse site. Um
@@ -88,6 +87,7 @@ const sobreTemplate = `
         <div class="sobre__ctas">
           <a href="https://linkedin.com/in/devlucasroldao" target="_blank" rel="noopener noreferrer" class="btn btn--secondary">Meu LinkedIn${EXTERNAL_LINK_ICON}</a>
           <a href="${whatsappHref}" target="_blank" rel="noopener noreferrer" class="btn">Fale comigo${EXTERNAL_LINK_ICON}</a>
+          <a href="marketing.html" class="btn btn--secondary">Marketing & Redes${EXTERNAL_LINK_ICON}</a>
         </div>
       </div>
 
