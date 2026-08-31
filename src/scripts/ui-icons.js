@@ -32,3 +32,13 @@ export function asFooterBrandIcon(svg) {
 // do site (nada de cor de marca solta) — usado no link discreto de
 // Instagram de cada case.
 export const INSTAGRAM_ICON = asFooterBrandIcon(instagramRaw.replace('<svg ', '<svg fill="currentColor" '));
+
+// Dois ícones hand-drawn novos, mesmo tratamento stroke-only dos outros —
+// usados nos cards de estatística da página de marketing pra diferenciar
+// visualmente "engajamento" (gráfico subindo) de "vendas" (sacola),
+// em vez dos dois reusarem o mesmo ícone do Instagram sem necessidade.
+export const TRENDING_UP_ICON =
+  '<svg class="icon-trending-up" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></svg>';
+
+export const SHOPPING_BAG_ICON =
+  '<svg class="icon-shopping-bag" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8h12l-1 12H7z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>';

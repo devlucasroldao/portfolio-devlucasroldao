@@ -7,7 +7,7 @@ import { renderNavbar, initNavbar } from './navbar.js';
 import { renderFooter, initFooterEmail } from './footer.js';
 import { initScrollReveal, initTypewriter } from './scroll-animations.js';
 import { marketingItems, CLIENT_LABELS, CLIENT_INSTAGRAM } from './marketing-items.js';
-import { INSTAGRAM_ICON, EXTERNAL_LINK_ICON } from './ui-icons.js';
+import { INSTAGRAM_ICON, EXTERNAL_LINK_ICON, TRENDING_UP_ICON, SHOPPING_BAG_ICON } from './ui-icons.js';
 import { whatsappHref } from './contact.js';
 
 function renderGalleryItem(item) {
@@ -59,28 +59,26 @@ function marketingTemplate() {
           </p>
           <div class="marketing-hero__stats">
             <div class="marketing-hero__stat">
-              ${INSTAGRAM_ICON}
+              ${TRENDING_UP_ICON}
               <div class="marketing-hero__stat-text">
-                <strong>~5x</strong>
-                <span>mais interações por post na Conecte Telecom desde que assumi as redes</span>
+                <strong>5x</strong>
+                <span>Mais interações por post — Conecte Telecom</span>
               </div>
             </div>
             <div class="marketing-hero__stat">
-              ${INSTAGRAM_ICON}
+              ${SHOPPING_BAG_ICON}
               <div class="marketing-hero__stat-text">
-                <!-- Sem número aqui de propósito — não é dado concreto ainda
+                <!-- "↑" no lugar de número — não é dado concreto ainda
                      (confirmado com o Lucas). Assim que tiver um valor real
-                     medido, troca por número + rótulo igual o card da
-                     Conecte, no mesmo formato. -->
-                <span class="marketing-hero__stat-qualitative">Vendas em alta desde a reformulação do perfil da Lu Perfumes & Presentes</span>
+                     medido, troca pelo número de verdade, mesma posição. -->
+                <strong>↑</strong>
+                <span>Vendas em alta — Lu Perfumes & Presentes</span>
               </div>
             </div>
           </div>
         </div>
         <div class="marketing-hero__photo">
-          <!-- TODO: trocar pela foto real do Lucas assim que ele enviar —
-               placeholder só marca o espaço/proporção (retrato, ~5:6). -->
-          <img src="/images/marketing/PLACEHOLDER-foto.jpg" alt="Foto de Lucas Roldão" width="900" height="1080" loading="eager" />
+          <img src="/images/marketing/lucas-hero.jpg" alt="Foto de Lucas Roldão" width="900" height="900" loading="eager" />
         </div>
       </div>
     </section>
