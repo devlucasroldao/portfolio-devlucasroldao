@@ -57,6 +57,7 @@ export const casesData = [
     bannerImageAlt: 'Home do site da Conecte Telecom com menu, hero de conexão de internet e mascote Gasturinha',
     liveUrl: 'https://seconecte.net/',
     instagramUrl: 'https://www.instagram.com/seconecte2021/',
+    marketingClient: 'conecte',
     teaserHeadline: 'De site solto a plataforma real',
     teaserProblem:
       'De landing page genérica a plataforma completa: admin sem depender de código, mobile redondo, analytics de verdade — e uma vulnerabilidade crítica corrigida no meio do caminho.',
@@ -153,6 +154,7 @@ export const casesData = [
     bannerImageAlt: 'Home do site da Lu Perfumes & Presentes, com foto da Lu e chamada para o catálogo',
     liveUrl: 'https://lu-perfumes-v2.vercel.app/',
     instagramUrl: 'https://www.instagram.com/lu_roldaoperfumes/',
+    marketingClient: 'lu-perfumes',
     teaserHeadline: 'Catálogo & atendimento sem perder o humano',
     teaserProblem:
       '"O que você tem de perfume feminino aí?" — a Lu respondia isso, um por um, pra centenas de clientes, sem catálogo, sem histórico, sem parar.',
@@ -267,13 +269,17 @@ function renderCaseMeta(meta) {
   `;
 }
 
-// Link pro site real + Instagram da empresa — perto da meta-informação,
-// tratamento discreto e igual nos dois cases (ver .case-full__links).
+// Link pro site real + Instagram da empresa + trabalho de marketing —
+// perto da meta-informação, tratamento discreto e igual nos dois cases
+// (ver .case-full__links). O link de marketing já chega filtrado nesse
+// cliente específico (?cliente=... lido por marketing-page.js) — quem
+// clicou a partir do case da Conecte não precisa filtrar de novo lá.
 function renderCaseLinks(data) {
   return `
     <div class="case-full__links">
       <a href="${data.liveUrl}" target="_blank" rel="noopener noreferrer" class="case-full__live-link">Ver site ao vivo${EXTERNAL_LINK_ICON}</a>
       <a href="${data.instagramUrl}" target="_blank" rel="noopener noreferrer" class="case-full__instagram-link">${INSTAGRAM_ICON}Instagram</a>
+      <a href="marketing.html?cliente=${data.marketingClient}" class="case-full__instagram-link">Trabalho de marketing →</a>
     </div>
   `;
 }

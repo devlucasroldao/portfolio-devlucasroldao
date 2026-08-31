@@ -6,33 +6,17 @@ import '../styles/marketing.css';
 import { renderNavbar, initNavbar } from './navbar.js';
 import { renderFooter, initFooterEmail } from './footer.js';
 import { initScrollReveal, initTypewriter } from './scroll-animations.js';
-import { marketingItems, CLIENT_LABELS } from './marketing-items.js';
+import { marketingItems, CLIENT_LABELS, CLIENT_INSTAGRAM } from './marketing-items.js';
 import { INSTAGRAM_ICON, EXTERNAL_LINK_ICON } from './ui-icons.js';
 import { whatsappHref } from './contact.js';
 
 function renderGalleryItem(item) {
   const clientLabel = CLIENT_LABELS[item.client];
 
-  const media =
-    item.type === 'antes-depois'
-      ? `
-        <div class="marketing-card__compare">
-          <div class="marketing-card__compare-half">
-            <img src="${item.beforeImage}" alt="Antes — ${item.caption}" loading="lazy" />
-            <span class="marketing-card__compare-tag">Antes</span>
-          </div>
-          <div class="marketing-card__compare-half">
-            <img src="${item.afterImage}" alt="Depois — ${item.caption}" loading="lazy" />
-            <span class="marketing-card__compare-tag">Depois</span>
-          </div>
-        </div>
-      `
-      : `<img src="${item.image}" alt="${item.caption}" loading="lazy" />`;
-
   return `
     <figure class="marketing-card" data-client="${item.client}">
       <div class="marketing-card__media">
-        ${media}
+        <img src="${item.image}" alt="${item.caption}" loading="lazy" />
       </div>
       <figcaption class="marketing-card__caption">
         <span class="marketing-card__client">${clientLabel}</span>
@@ -44,6 +28,20 @@ function renderGalleryItem(item) {
 function marketingTemplate() {
   const clientFilters = Object.entries(CLIENT_LABELS)
     .map(([value, label]) => `<button class="marketing-filter" data-filter-client="${value}">${label}</button>`)
+    .join('');
+
+  // Botão de seguir no Instagram por cliente — junto do filtro
+  // correspondente, não misturado no meio da galeria. Some quando
+  // "Todos" está selecionado (não faz sentido mostrar os dois de uma
+  // vez ali) e aparece só o do cliente ativo.
+  const instagramLinks = Object.entries(CLIENT_INSTAGRAM)
+    .map(
+      ([value, url]) => `
+        <a href="${url}" target="_blank" rel="noopener noreferrer" class="marketing-instagram-link" data-instagram-for="${value}">
+          ${INSTAGRAM_ICON}Seguir no Instagram${EXTERNAL_LINK_ICON}
+        </a>
+      `
+    )
     .join('');
 
   const cards = marketingItems.map(renderGalleryItem).join('');
@@ -64,7 +62,7 @@ function marketingTemplate() {
               ${INSTAGRAM_ICON}
               <div class="marketing-hero__stat-text">
                 <strong>~5x</strong>
-                <span>Engajamento — Conecte Telecom</span>
+                <span>mais interações por post na Conecte Telecom desde que assumi as redes</span>
               </div>
             </div>
             <div class="marketing-hero__stat">
@@ -74,7 +72,7 @@ function marketingTemplate() {
                      (confirmado com o Lucas). Assim que tiver um valor real
                      medido, troca por número + rótulo igual o card da
                      Conecte, no mesmo formato. -->
-                <span class="marketing-hero__stat-qualitative">Vendas em alta desde a reformulação do perfil — Lu Perfumes & Presentes</span>
+                <span class="marketing-hero__stat-qualitative">Vendas em alta desde a reformulação do perfil da Lu Perfumes & Presentes</span>
               </div>
             </div>
           </div>
@@ -95,6 +93,7 @@ function marketingTemplate() {
             <button class="marketing-filter is-active" data-filter-client="all">Todos</button>
             ${clientFilters}
           </div>
+          ${instagramLinks}
         </div>
 
         <div class="marketing-grid">
@@ -121,6 +120,7 @@ function initFilters(root) {
   const clientButtons = [...root.querySelectorAll('[data-filter-client]')];
   const cards = [...root.querySelectorAll('.marketing-card')];
   const grid = root.querySelector('.marketing-grid');
+  const instagramLinks = [...root.querySelectorAll('[data-instagram-for]')];
 
   function applyFilters(activeClient) {
     cards.forEach((card) => {
@@ -131,6 +131,11 @@ function initFilters(root) {
     // misturados ("Todos") — filtrando por um cliente só, toda legenda
     // repetiria o mesmo nome, informação redundante à toa.
     grid.classList.toggle('is-single-client', activeClient !== 'all');
+    // Botão de Instagram: só mostra o do cliente ativo (nenhum aparece
+    // em "Todos" — não faz sentido empurrar as duas contas ao mesmo tempo).
+    instagramLinks.forEach((link) => {
+      link.classList.toggle('is-visible', link.dataset.instagramFor === activeClient);
+    });
   }
 
   clientButtons.forEach((btn) => {
@@ -139,6 +144,19 @@ function initFilters(root) {
       applyFilters(btn.dataset.filterClient);
     });
   });
+
+  // Chegando de um link "Trabalho de marketing" numa página de case
+  // (?cliente=conecte, por exemplo) — já abre filtrado nesse cliente,
+  // sem a pessoa precisar clicar de novo no que ela já tinha escolhido.
+  const params = new URLSearchParams(window.location.search);
+  const initialClient = params.get('cliente');
+  const initialBtn = clientButtons.find((b) => b.dataset.filterClient === initialClient);
+  if (initialBtn) {
+    clientButtons.forEach((b) => b.classList.toggle('is-active', b === initialBtn));
+    applyFilters(initialClient);
+  } else {
+    applyFilters('all');
+  }
 }
 
 function initLightbox(root) {

@@ -13,16 +13,21 @@
   max-width: var(--content-max-width);
   margin: 0 auto;
   display: grid;
-  grid-template-columns: 1.2fr 1fr;
+  grid-template-columns: 1fr 200px;
   gap: var(--space-12);
-  align-items: center;
+  align-items: start;
 }
 
+/* Complemento, não destaque — pedido explícito depois da primeira versão
+   (era quase metade da largura, competindo com o texto). 200px fixos,
+   pequena o bastante pra ler como "assinatura pessoal" no canto, não
+   como elemento central da página. */
 .marketing-hero__photo {
   border-radius: var(--radius-md);
   overflow: hidden;
   border: 1px solid var(--border);
-  aspect-ratio: 5 / 6;
+  aspect-ratio: 4 / 5;
+  margin-top: var(--space-2);
 }
 
 .marketing-hero__photo img {
@@ -160,6 +165,34 @@
   gap: var(--space-3);
 }
 
+/* Empurra o link de Instagram pro final da barra (desktop) — sem, ele
+   ficaria colado nos botões de filtro, competindo por atenção com eles.
+   display:none por padrão: só o do cliente ativo aparece (.is-visible,
+   alternado via JS em initFilters — nenhum aparece com "Todos"). */
+.marketing-instagram-link {
+  display: none;
+  align-items: center;
+  gap: var(--space-2);
+  margin-left: auto;
+  color: var(--text-secondary);
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  transition: color var(--transition-ui);
+}
+
+.marketing-instagram-link.is-visible {
+  display: inline-flex;
+}
+
+.marketing-instagram-link:hover {
+  color: var(--accent-text);
+}
+
+.marketing-instagram-link svg {
+  width: 16px;
+  height: 16px;
+}
+
 /* Maior que o filtro antigo (era o único filtro compartilhando espaço
    com o de tipo — agora ele é o destaque principal da barra, pedido
    explícito: "filtragem de cliente com mais destaque"). */
@@ -225,33 +258,6 @@
   display: block;
 }
 
-.marketing-card__compare {
-  display: flex;
-  width: 100%;
-  height: 100%;
-}
-
-.marketing-card__compare-half {
-  position: relative;
-  width: 50%;
-  height: 100%;
-}
-
-.marketing-card__compare-tag {
-  position: absolute;
-  bottom: var(--space-2);
-  left: var(--space-2);
-  font-family: var(--font-mono);
-  font-size: 0.65rem;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-  color: var(--text-primary);
-  background: rgba(13, 27, 42, 0.75);
-  padding: 2px var(--space-2);
-  border-radius: var(--radius-full);
-  pointer-events: none;
-}
-
 .marketing-card__caption {
   display: flex;
   align-items: center;
@@ -286,10 +292,12 @@
     grid-template-columns: 1fr;
   }
 
+  /* Continua pequena/complemento no mobile — sem forçar ordem antes do
+     texto (fica depois, no fluxo natural do HTML: intro primeiro, foto
+     como assinatura ao final). */
   .marketing-hero__photo {
-    max-width: 340px;
-    aspect-ratio: 1 / 1;
-    order: -1;
+    width: 120px;
+    margin-top: var(--space-6);
   }
 }
 
