@@ -216,14 +216,23 @@
 
 /* ---------- Grid ---------- */
 
+/* Masonry via CSS columns — abandonado o grid quadrado uniforme de
+   propósito: a maioria do conteúdo real (posts de Instagram vs capas de
+   Reels/Stories) não é toda quadrada, é uma mistura de quadrado (1:1) e
+   vertical (9:16). Forçar tudo num quadrado só cortava o conteúdo
+   vertical de um jeito ruim. Aqui cada card mantém a proporção original
+   da imagem — break-inside:avoid impede um card cortado ao meio entre
+   duas colunas. */
 .marketing-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: var(--space-6);
+  columns: 3;
+  column-gap: var(--space-6);
 }
 
 .marketing-card {
-  margin: 0;
+  display: inline-block;
+  width: 100%;
+  margin: 0 0 var(--space-6);
+  break-inside: avoid;
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
   overflow: hidden;
@@ -239,15 +248,18 @@
   display: none;
 }
 
+/* Sem aspect-ratio forçado — a altura vem naturalmente da proporção real
+   do arquivo (width:100% + height:auto). Sem object-fit:cover também:
+   ele só faz sentido quando o container tem proporção própria pra
+   "encaixar" a imagem dentro; aqui é o oposto, o container que se ajusta
+   à imagem. */
 .marketing-card__media {
-  aspect-ratio: 1 / 1;
-  overflow: hidden;
+  line-height: 0;
 }
 
 .marketing-card__media img {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
+  height: auto;
   cursor: zoom-in;
   display: block;
 }
@@ -279,7 +291,7 @@
 
 @media (max-width: 900px) {
   .marketing-grid {
-    grid-template-columns: repeat(2, 1fr);
+    columns: 2;
   }
 
   .marketing-hero__inner {
@@ -297,7 +309,7 @@
 
 @media (max-width: 560px) {
   .marketing-grid {
-    grid-template-columns: 1fr;
+    columns: 1;
   }
 
   .marketing-hero__stats {

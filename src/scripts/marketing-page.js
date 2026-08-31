@@ -12,11 +12,16 @@ import { whatsappHref } from './contact.js';
 
 function renderGalleryItem(item) {
   const clientLabel = CLIENT_LABELS[item.client];
-
+  // width/height por item (vem de marketing-items.js) — cada peça real
+  // tem uma proporção diferente agora (post quadrado, capa de reels
+  // vertical...), então não dá mais pra assumir uma proporção fixa pra
+  // todas. Sem isso, o navegador não reserva o espaço certo antes da
+  // imagem carregar e o layout "pula" — mesmo cuidado já tomado no
+  // resto do site.
   return `
     <figure class="marketing-card" data-client="${item.client}">
       <div class="marketing-card__media">
-        <img src="${item.image}" alt="${item.caption}" loading="lazy" />
+        <img src="${item.image}" alt="${item.caption}" width="${item.width}" height="${item.height}" loading="lazy" />
       </div>
       <figcaption class="marketing-card__caption">
         <span class="marketing-card__client">${clientLabel}</span>
