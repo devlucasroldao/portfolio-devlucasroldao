@@ -6,12 +6,12 @@ import '../styles/marketing.css';
 import { renderNavbar, initNavbar } from './navbar.js';
 import { renderFooter, initFooterEmail } from './footer.js';
 import { initScrollReveal, initTypewriter } from './scroll-animations.js';
-import { marketingItems, CLIENT_LABELS, TYPE_LABELS } from './marketing-items.js';
-import { INSTAGRAM_ICON } from './ui-icons.js';
+import { marketingItems, CLIENT_LABELS } from './marketing-items.js';
+import { INSTAGRAM_ICON, EXTERNAL_LINK_ICON } from './ui-icons.js';
+import { whatsappHref } from './contact.js';
 
 function renderGalleryItem(item) {
   const clientLabel = CLIENT_LABELS[item.client];
-  const typeLabel = TYPE_LABELS[item.type];
 
   const media =
     item.type === 'antes-depois'
@@ -30,13 +30,12 @@ function renderGalleryItem(item) {
       : `<img src="${item.image}" alt="${item.caption}" loading="lazy" />`;
 
   return `
-    <figure class="marketing-card" data-client="${item.client}" data-type="${item.type}">
+    <figure class="marketing-card" data-client="${item.client}">
       <div class="marketing-card__media">
         ${media}
       </div>
       <figcaption class="marketing-card__caption">
         <span class="marketing-card__client">${clientLabel}</span>
-        <span class="marketing-card__type">${typeLabel}</span>
       </figcaption>
     </figure>
   `;
@@ -47,40 +46,43 @@ function marketingTemplate() {
     .map(([value, label]) => `<button class="marketing-filter" data-filter-client="${value}">${label}</button>`)
     .join('');
 
-  const typeFilters = Object.entries(TYPE_LABELS)
-    .map(([value, label]) => `<button class="marketing-filter" data-filter-type="${value}">${label}</button>`)
-    .join('');
-
   const cards = marketingItems.map(renderGalleryItem).join('');
 
   return `
     <section class="marketing-hero">
       <div class="marketing-hero__inner">
-        <span class="marketing-hero__eyebrow">Fora do código</span>
-        <h1 class="marketing-hero__heading">Marketing & <span class="marketing-hero__heading-accent">Redes Sociais</span></h1>
-        <p class="marketing-hero__subtitle">
-          Além de desenvolver, também construo identidade de marca e presença digital — do post
-          ao resultado. Os exemplos abaixo são reais: <strong>Conecte Telecom</strong> e
-          <strong>Lu Perfumes & Presentes</strong>.
-        </p>
-        <div class="marketing-hero__stats">
-          <div class="marketing-hero__stat">
-            ${INSTAGRAM_ICON}
-            <div class="marketing-hero__stat-text">
-              <strong>~5x</strong>
-              <span>Engajamento — Conecte Telecom</span>
+        <div class="marketing-hero__main">
+          <span class="marketing-hero__eyebrow">Fora do código</span>
+          <h1 class="marketing-hero__heading">Marketing & <span class="marketing-hero__heading-accent">Redes Sociais</span></h1>
+          <p class="marketing-hero__subtitle">
+            Além de desenvolver, também construo identidade de marca e presença digital — do post
+            ao resultado. Os exemplos abaixo são reais: <strong>Conecte Telecom</strong> e
+            <strong>Lu Perfumes & Presentes</strong>.
+          </p>
+          <div class="marketing-hero__stats">
+            <div class="marketing-hero__stat">
+              ${INSTAGRAM_ICON}
+              <div class="marketing-hero__stat-text">
+                <strong>~5x</strong>
+                <span>Engajamento — Conecte Telecom</span>
+              </div>
+            </div>
+            <div class="marketing-hero__stat">
+              ${INSTAGRAM_ICON}
+              <div class="marketing-hero__stat-text">
+                <!-- Sem número aqui de propósito — não é dado concreto ainda
+                     (confirmado com o Lucas). Assim que tiver um valor real
+                     medido, troca por número + rótulo igual o card da
+                     Conecte, no mesmo formato. -->
+                <span class="marketing-hero__stat-qualitative">Vendas em alta desde a reformulação do perfil — Lu Perfumes & Presentes</span>
+              </div>
             </div>
           </div>
-          <div class="marketing-hero__stat">
-            ${INSTAGRAM_ICON}
-            <div class="marketing-hero__stat-text">
-              <!-- TODO: substituir "XX%" pelo número real de vendas/engajamento
-                   da Lu Perfumes assim que o Lucas confirmar — combinado em
-                   conversa, não inventar dado aqui. -->
-              <strong>XX%</strong>
-              <span>Vendas — Lu Perfumes & Presentes</span>
-            </div>
-          </div>
+        </div>
+        <div class="marketing-hero__photo">
+          <!-- TODO: trocar pela foto real do Lucas assim que ele enviar —
+               placeholder só marca o espaço/proporção (retrato, ~5:6). -->
+          <img src="/images/marketing/PLACEHOLDER-foto.jpg" alt="Foto de Lucas Roldão" width="900" height="1080" loading="eager" />
         </div>
       </div>
     </section>
@@ -88,20 +90,20 @@ function marketingTemplate() {
     <section class="marketing-gallery">
       <div class="marketing-gallery__inner">
         <div class="marketing-filters">
+          <span class="marketing-filters__label">Filtrar por cliente</span>
           <div class="marketing-filters__group">
-            <span class="marketing-filters__label">Cliente</span>
             <button class="marketing-filter is-active" data-filter-client="all">Todos</button>
             ${clientFilters}
-          </div>
-          <div class="marketing-filters__group">
-            <span class="marketing-filters__label">Tipo</span>
-            <button class="marketing-filter is-active" data-filter-type="all">Todos</button>
-            ${typeFilters}
           </div>
         </div>
 
         <div class="marketing-grid">
           ${cards}
+        </div>
+
+        <div class="marketing-cta">
+          <p class="marketing-cta__text">Precisa de algo parecido pro seu negócio?</p>
+          <a href="${whatsappHref}" target="_blank" rel="noopener noreferrer" class="btn">Fale comigo${EXTERNAL_LINK_ICON}</a>
         </div>
       </div>
     </section>
@@ -117,33 +119,24 @@ function marketingTemplate() {
 
 function initFilters(root) {
   const clientButtons = [...root.querySelectorAll('[data-filter-client]')];
-  const typeButtons = [...root.querySelectorAll('[data-filter-type]')];
   const cards = [...root.querySelectorAll('.marketing-card')];
+  const grid = root.querySelector('.marketing-grid');
 
-  let activeClient = 'all';
-  let activeType = 'all';
-
-  function applyFilters() {
+  function applyFilters(activeClient) {
     cards.forEach((card) => {
-      const matchesClient = activeClient === 'all' || card.dataset.client === activeClient;
-      const matchesType = activeType === 'all' || card.dataset.type === activeType;
-      card.classList.toggle('is-hidden', !(matchesClient && matchesType));
+      const matches = activeClient === 'all' || card.dataset.client === activeClient;
+      card.classList.toggle('is-hidden', !matches);
     });
+    // Nome do cliente na legenda só faz sentido quando dá pra ver os dois
+    // misturados ("Todos") — filtrando por um cliente só, toda legenda
+    // repetiria o mesmo nome, informação redundante à toa.
+    grid.classList.toggle('is-single-client', activeClient !== 'all');
   }
 
   clientButtons.forEach((btn) => {
     btn.addEventListener('click', () => {
-      activeClient = btn.dataset.filterClient;
       clientButtons.forEach((b) => b.classList.toggle('is-active', b === btn));
-      applyFilters();
-    });
-  });
-
-  typeButtons.forEach((btn) => {
-    btn.addEventListener('click', () => {
-      activeType = btn.dataset.filterType;
-      typeButtons.forEach((b) => b.classList.toggle('is-active', b === btn));
-      applyFilters();
+      applyFilters(btn.dataset.filterClient);
     });
   });
 }
