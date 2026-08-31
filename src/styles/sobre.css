@@ -118,6 +118,25 @@
   color: var(--accent-text);
 }
 
+/* Link discreto pro lado de marketing/redes sociais — de propósito não é
+   um botão nem entra no menu principal (drawer/navbar). É só uma porta
+   pra quem quiser ver, sem competir visualmente com os Cases, que são a
+   prova principal de dev. */
+.sobre__inline-link {
+  display: inline-block;
+  margin-left: var(--space-2);
+  color: var(--accent-text);
+  font-weight: var(--fw-medium);
+  text-decoration: underline;
+  text-decoration-color: var(--border);
+  text-underline-offset: 3px;
+  transition: text-decoration-color var(--transition-ui);
+}
+
+.sobre__inline-link:hover {
+  text-decoration-color: var(--accent);
+}
+
 .sobre__ctas {
   display: flex;
   flex-wrap: wrap;

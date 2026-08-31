@@ -77,6 +77,7 @@ const sobreTemplate = `
             Atuo com <span class="sobre__highlight">marketing digital</span> aqui na minha cidade, ajudando
             negócios a ter identidade que conversa com o público. Comecei ajudando o negócio da
             <span class="sobre__highlight">minha mãe</span> a crescer nas redes.
+            <a href="marketing.html" class="sobre__inline-link">Confira as artes que já fiz →</a>
           </p>
           <p>
             Gosto de fazer coisas — se for meio maluca, ainda melhor. Essa é a parte mais humana desse site. Um

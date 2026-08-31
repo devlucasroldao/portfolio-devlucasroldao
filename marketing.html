@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <script>
+      (function () {
+        try {
+          if (localStorage.getItem('theme') === 'light') {
+            document.documentElement.setAttribute('data-theme', 'light');
+          }
+        } catch (e) {}
+      })();
+    </script>
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Artes, posts e identidade visual que Lucas Roldão cria pra Conecte Telecom e Lu Perfumes & Presentes — bastidores do trabalho de marketing digital." />
+    <title>Marketing & Redes Sociais — Lucas Roldão</title>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="module" src="/src/marketing.js"></script>
+  </body>
+</html>
