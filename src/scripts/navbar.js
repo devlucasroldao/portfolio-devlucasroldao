@@ -79,6 +79,7 @@ export function renderNavbar({ base = '' } = {}) {
 
       <div class="navbar__links">
         ${links('')}
+        <a href="marketing.html">Marketing & Redes</a>
       </div>
 
       <div class="navbar__actions">
@@ -114,6 +115,7 @@ export function renderNavbar({ base = '' } = {}) {
           <a class="navbar__panel-link" href="${base}#inicio">Início</a>
           <a class="navbar__panel-link" href="${base}#sobre">Sobre mim</a>
           <a class="navbar__panel-link" href="${base}#depoimentos">Depoimentos</a>
+          <a class="navbar__panel-link" href="marketing.html">Marketing & Redes</a>
         </div>
 
         <div class="navbar__panel-group">
