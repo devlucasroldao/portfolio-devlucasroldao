@@ -298,12 +298,12 @@
     grid-template-columns: 1fr;
   }
 
-  /* Continua pequena/complemento no mobile — sem forçar ordem antes do
-     texto (fica depois, no fluxo natural do HTML: intro primeiro, foto
-     como assinatura ao final). */
+  /* Foto removida no mobile de propósito (pedido explícito) — fica só
+     no desktop, onde tem espaço de sobra ao lado do texto. No mobile o
+     hero já é bem mais apertado verticalmente, então some sem deixar
+     buraco. */
   .marketing-hero__photo {
-    width: 120px;
-    margin-top: var(--space-6);
+    display: none;
   }
 }
 
