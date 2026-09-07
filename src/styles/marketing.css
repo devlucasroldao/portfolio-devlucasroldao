@@ -322,6 +322,55 @@
   }
 }
 
+/* "Ver mais no Instagram" — os cards de verdade do final da galeria
+   esmaecem até sumir no fundo da página (gradiente por cima, não cards
+   falsos: a ideia é "isso é só uma amostra, o resto tá continuando lá no
+   perfil de verdade"), com o botão flutuando por cima, meio sobreposto
+   ao esmaecimento. Só aparece com um cliente específico filtrado — em
+   "Todos" não tem UM perfil só pra levar a pessoa, então o efeito inteiro
+   fica desligado (.has-fade, alternado via JS em initFilters). */
+.marketing-grid-wrap {
+  position: relative;
+}
+
+.marketing-grid-wrap.has-fade {
+  padding-bottom: var(--space-16);
+}
+
+.marketing-grid__fade {
+  display: none;
+}
+
+.marketing-grid-wrap.has-fade .marketing-grid__fade {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: var(--space-16);
+  height: 260px;
+  /* Some no --bg-base, mesma cor do fundo da página logo abaixo — se a
+     página tivesse outro fundo aqui, o gradiente teria que mudar junto. */
+  background: linear-gradient(to bottom, transparent, var(--bg-base) 55%);
+  padding-bottom: var(--space-6);
+  /* Deixa cliques passarem pros cards de verdade por baixo do
+     esmaecimento — só o botão (que tem pointer-events:auto próprio,
+     por ser um link) precisa ser clicável. */
+  pointer-events: none;
+}
+
+.marketing-grid__more {
+  display: none;
+  pointer-events: auto;
+}
+
+.marketing-grid__more.is-visible {
+  display: inline-flex;
+}
+
+/* ---------- Fechamento (CTA de WhatsApp) ---------- */
+
 /* Sugestão própria (não foi pedido, mas faz sentido dado que essa
    página também pode atrair cliente de marketing, não só recrutador) —
    fechamento discreto, mesmo botão/estilo já usado no resto do site. */

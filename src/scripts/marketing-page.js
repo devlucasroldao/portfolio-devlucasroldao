@@ -99,8 +99,14 @@ function marketingTemplate() {
           ${instagramLinks}
         </div>
 
-        <div class="marketing-grid">
-          ${cards}
+        <div class="marketing-grid-wrap">
+          <div class="marketing-grid">
+            ${cards}
+          </div>
+          <div class="marketing-grid__fade">
+            <a href="${CLIENT_INSTAGRAM.conecte}" target="_blank" rel="noopener noreferrer" class="btn marketing-grid__more" data-more-for="conecte">Ver mais no Instagram${EXTERNAL_LINK_ICON}</a>
+            <a href="${CLIENT_INSTAGRAM['lu-perfumes']}" target="_blank" rel="noopener noreferrer" class="btn marketing-grid__more" data-more-for="lu-perfumes">Ver mais no Instagram${EXTERNAL_LINK_ICON}</a>
+          </div>
         </div>
 
         <div class="marketing-cta">
@@ -124,6 +130,8 @@ function initFilters(root) {
   const cards = [...root.querySelectorAll('.marketing-card')];
   const grid = root.querySelector('.marketing-grid');
   const instagramLinks = [...root.querySelectorAll('[data-instagram-for]')];
+  const moreLinks = [...root.querySelectorAll('[data-more-for]')];
+  const gridWrap = root.querySelector('.marketing-grid-wrap');
 
   function applyFilters(activeClient) {
     cards.forEach((card) => {
@@ -139,6 +147,13 @@ function initFilters(root) {
     instagramLinks.forEach((link) => {
       link.classList.toggle('is-visible', link.dataset.instagramFor === activeClient);
     });
+    // Mesma lógica pro "esmaecer + Ver mais no Instagram" do fim da
+    // galeria — só faz sentido convidar pra UM perfil específico, então
+    // o efeito inteiro (esmaecimento + botão) some em "Todos".
+    moreLinks.forEach((link) => {
+      link.classList.toggle('is-visible', link.dataset.moreFor === activeClient);
+    });
+    gridWrap.classList.toggle('has-fade', activeClient !== 'all');
   }
 
   clientButtons.forEach((btn) => {
