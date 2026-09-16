@@ -55,24 +55,3 @@ export const bioLinks = [
     external: true,
   },
 ];
-
-// 3 depoimentos reais (de testimonials.js), encurtados pra caber num
-// resumo rápido — texto vem direto da fonte original, só cortado, nunca
-// reescrito/inventado.
-export const bioTestimonials = [
-  {
-    quote: 'Esse garoto é fera... ficou excelente, ficou top mesmo.',
-    name: 'Anderson',
-    role: 'Dev do sistema, Conecte Telecom',
-  },
-  {
-    quote: 'Um excelente profissional: inteligente, prestativo, proativo, de aprendizado muito rápido.',
-    name: 'Bernard Becker',
-    role: 'Dono da Conecte Telecom',
-  },
-  {
-    quote: 'Nunca faz as coisas pela metade — sempre entrega mais do que o esperado.',
-    name: 'Giulia Teixeira',
-    role: 'Sócia na Rabisco',
-  },
-];

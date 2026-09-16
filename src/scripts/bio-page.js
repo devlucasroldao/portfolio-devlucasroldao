@@ -1,7 +1,7 @@
 import '../styles/main.css';
 import '../styles/buttons.css';
 import '../styles/bio.css';
-import { bioLinks, bioTestimonials } from './bio-links.js';
+import { bioLinks } from './bio-links.js';
 import { LINKEDIN_ICON, INSTAGRAM_ICON, TIKTOK_ICON, EXTERNAL_LINK_ICON, CHAT_ICON } from './ui-icons.js';
 import { getIconSvg } from './icons.js';
 
@@ -29,24 +29,10 @@ function renderLinkButton(link) {
   `;
 }
 
-function renderTestimonial(t) {
-  return `
-    <figure class="bio-testimonial">
-      <blockquote>&ldquo;${t.quote}&rdquo;</blockquote>
-      <figcaption><strong>${t.name}</strong> — ${t.role}</figcaption>
-    </figure>
-  `;
-}
-
 function bioTemplate() {
   const primaryLinks = bioLinks.filter((l) => l.variant === 'primary').map(renderLinkButton).join('');
-  // "Portfólio completo" é o próximo botão depois do CTA — é onde a tira
-  // de depoimentos entra (prova social logo após a prova de valor, mesma
-  // lógica do playbook de bio-link: CTA → prova de valor → prova social
-  // → canais secundários).
   const portfolioLink = bioLinks.find((l) => l.id === 'portfolio');
   const secondaryLinks = bioLinks.filter((l) => l.variant === 'secondary' && l.id !== 'portfolio').map(renderLinkButton).join('');
-  const testimonials = bioTestimonials.map(renderTestimonial).join('');
 
   return `
     <main class="bio-page">
@@ -61,10 +47,6 @@ function bioTemplate() {
         <div class="bio-links">
           ${primaryLinks}
           ${renderLinkButton(portfolioLink)}
-        </div>
-
-        <div class="bio-testimonials">
-          ${testimonials}
         </div>
 
         <div class="bio-links">
