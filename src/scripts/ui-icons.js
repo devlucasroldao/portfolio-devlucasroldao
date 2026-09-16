@@ -1,4 +1,5 @@
 import instagramRaw from 'simple-icons/icons/instagram.svg?raw';
+import tiktokRaw from 'simple-icons/icons/tiktok.svg?raw';
 
 // Ícones de interface hand-drawn (não são logo de marca) — mesmo tratamento
 // flat/stroke-only do hambúrguer e sol/lua da navbar e dos badges de case.
@@ -32,6 +33,9 @@ export function asFooterBrandIcon(svg) {
 // do site (nada de cor de marca solta) — usado no link discreto de
 // Instagram de cada case.
 export const INSTAGRAM_ICON = asFooterBrandIcon(instagramRaw.replace('<svg ', '<svg fill="currentColor" '));
+
+// Mesmo tratamento do Instagram — usado na página de bio.
+export const TIKTOK_ICON = asFooterBrandIcon(tiktokRaw.replace('<svg ', '<svg fill="currentColor" '));
 
 // Dois ícones hand-drawn novos, mesmo tratamento stroke-only dos outros —
 // usados nos cards de estatística da página de marketing pra diferenciar

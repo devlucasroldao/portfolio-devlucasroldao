@@ -1,0 +1,227 @@
+/* Página de bio (link-in-bio) — deliberadamente SEM navbar/footer do
+   resto do site: quem chega aqui vem do Instagram/TikTok, nunca viu o
+   site antes, e a página precisa ser auto-suficiente e rápida. Uma
+   coluna só, centralizada, mobile-first de verdade (a maioria do
+   tráfego real vem de toque em celular, não desktop). */
+
+.bio-page {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  padding: var(--space-16) var(--space-6) var(--space-12);
+  background: var(--bg-base);
+}
+
+.bio-page__inner {
+  width: 100%;
+  max-width: 440px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-8);
+}
+
+/* ---------- Header ---------- */
+
+.bio-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--space-2);
+}
+
+.bio-header__mark {
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--text-primary);
+  border-radius: var(--radius-md);
+  font-family: var(--font-mono);
+  font-weight: var(--fw-bold);
+  font-size: 1.5rem;
+  letter-spacing: -0.05em;
+  color: var(--text-primary);
+  margin-bottom: var(--space-2);
+}
+
+.bio-header__mark-dot {
+  color: var(--accent);
+}
+
+.bio-header__name {
+  font-family: var(--font-mono);
+  font-weight: var(--fw-semibold);
+  font-size: 1.5rem;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.bio-header__tagline {
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  color: var(--text-secondary);
+  max-width: 320px;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.bio-header__accent {
+  color: var(--accent-text);
+  font-weight: var(--fw-medium);
+}
+
+.bio-header__location {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+/* ---------- Botões de link ---------- */
+
+.bio-links {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.bio-link {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  width: 100%;
+  padding: var(--space-4) var(--space-5);
+  border-radius: var(--radius-md);
+  font-family: var(--font-sans);
+  font-weight: var(--fw-medium);
+  font-size: 0.95rem;
+  text-decoration: none;
+  transition: transform var(--transition-ui), border-color var(--transition-ui), background var(--transition-ui);
+}
+
+.bio-link:hover {
+  transform: translateY(-1px);
+}
+
+.bio-link__icon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  display: flex;
+}
+
+.bio-link__icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.bio-link__label {
+  flex: 1;
+}
+
+.bio-link__external {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+  opacity: 0.6;
+}
+
+.bio-link__external svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* CTA principal — o único preenchido, degradê sutil (equivalente ao
+   "ShinyButton" do playbook, só que sem biblioteca de animação: um
+   gradiente simples em CSS já resolve, sem peso nenhum de JS). */
+.bio-link--primary {
+  background: linear-gradient(135deg, var(--accent), #3d9970);
+  color: var(--on-accent);
+  border: none;
+  font-weight: var(--fw-semibold);
+}
+
+.bio-link--primary .bio-link__external {
+  opacity: 0.8;
+}
+
+/* Secundários — contorno, mesmo tratamento visual do resto do site
+   (.btn--secondary). */
+.bio-link--secondary {
+  background: var(--bg-elevated);
+  color: var(--text-primary);
+  border: 1px solid var(--border);
+}
+
+.bio-link--secondary:hover {
+  border-color: var(--accent);
+}
+
+/* ---------- Depoimentos ---------- */
+
+.bio-testimonials {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  padding: var(--space-5);
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+}
+
+.bio-testimonial {
+  margin: 0;
+  padding-bottom: var(--space-4);
+  border-bottom: 1px solid var(--border);
+}
+
+.bio-testimonial:last-child {
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.bio-testimonial blockquote {
+  margin: 0 0 var(--space-2);
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: var(--text-primary);
+  font-style: italic;
+}
+
+.bio-testimonial figcaption {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}
+
+.bio-testimonial figcaption strong {
+  color: var(--text-primary);
+  font-weight: var(--fw-medium);
+}
+
+/* ---------- Rodapé ---------- */
+
+.bio-footer {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  text-align: center;
+  margin: 0;
+}
+
+.bio-footer a {
+  color: var(--text-secondary);
+  text-decoration: underline;
+  text-decoration-color: var(--border);
+  text-underline-offset: 3px;
+}
+
+.bio-footer a:hover {
+  color: var(--accent-text);
+}

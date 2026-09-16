@@ -116,7 +116,7 @@ function marketingTemplate() {
       </div>
     </section>
 
-    <div class="marketing-lightbox" id="marketing-lightbox" aria-hidden="true">
+    <div class="marketing-lightbox" id="marketing-lightbox" aria-hidden="true" inert>
       <button class="marketing-lightbox__close" type="button" aria-label="Fechar">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
       </button>
@@ -187,12 +187,18 @@ function initLightbox(root) {
     lightboxImage.alt = alt;
     lightbox.classList.add('is-open');
     lightbox.setAttribute('aria-hidden', 'false');
+    // inert junto do aria-hidden — mesmo fix já usado no drawer do menu
+    // mobile: sem isso, o botão de fechar continua focável por teclado
+    // mesmo com o lightbox tecnicamente escondido (achado pelo axe-core:
+    // "aria-hidden-focus").
+    lightbox.inert = false;
     document.body.style.overflow = 'hidden';
   }
 
   function close() {
     lightbox.classList.remove('is-open');
     lightbox.setAttribute('aria-hidden', 'true');
+    lightbox.inert = true;
     document.body.style.overflow = '';
   }
 

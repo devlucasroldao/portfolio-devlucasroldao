@@ -9,6 +9,7 @@ export default defineConfig({
         caseConecte: resolve(__dirname, 'case-conecte.html'),
         caseLuPerfumes: resolve(__dirname, 'case-lu-perfumes.html'),
         marketing: resolve(__dirname, 'marketing.html'),
+        bio: resolve(__dirname, 'bio.html'),
       },
     },
   },
