@@ -16,6 +16,19 @@
      [data-theme="light"] abaixo). */
   --accent-text: var(--accent);
 
+  /* Cor de texto pra usar EM CIMA de um fundo --accent (botão preenchido,
+     filtro ativo, badge) — problema espelhado do --accent-text acima, só
+     que na direção oposta: --bg-base parecia a escolha óbvia (funciona
+     no escuro, onde bg-base é escuro sobre o verde), mas no claro
+     bg-base vira claro e o texto quase some sobre o mesmo verde (medido:
+     ~1.9:1, bem abaixo do mínimo de 4.5:1 — mesmo bug do accent-text,
+     só que não detectado antes porque só aparece com --accent como
+     fundo E o tema claro ativo ao mesmo tempo). Fixo (não sobrescrito
+     no [data-theme="light"] abaixo) de propósito: o verde tem
+     aproximadamente o mesmo brilho nos dois temas, então o texto escuro
+     que funciona hoje sobre ele no escuro funciona igual no claro. */
+  --on-accent: #0d1b2a;
+
   /* Tipografia — briefing seção 2 */
   --font-mono: 'JetBrains Mono', monospace;
   --font-sans: 'Geist Sans', sans-serif;

@@ -17,7 +17,7 @@
 
 .btn:hover {
   background: var(--accent);
-  color: var(--bg-base);
+  color: var(--on-accent);
 }
 
 /* Leve encolhimento ao clicar — feedback tátil consistente em todo botão do site */
@@ -33,5 +33,5 @@
 .btn--secondary:hover {
   background: var(--accent);
   border-color: var(--accent);
-  color: var(--bg-base);
+  color: var(--on-accent);
 }

@@ -145,7 +145,7 @@
 .cta-final__button--primary {
   background: var(--accent);
   border-color: var(--accent);
-  color: var(--bg-base);
+  color: var(--on-accent);
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
 }
 

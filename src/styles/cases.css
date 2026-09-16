@@ -456,7 +456,7 @@ img.case__inline-image {
 }
 
 .case-teaser__link:hover {
-  color: var(--bg-base);
+  color: var(--on-accent);
 }
 
 .case-teaser__link:active {
