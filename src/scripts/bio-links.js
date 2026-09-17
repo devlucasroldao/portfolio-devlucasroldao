@@ -4,10 +4,9 @@
 
 import { whatsappHref } from './contact.js';
 
-// Palavras que giram no título (mesmo efeito do Hero da home, via
-// rotator.js). "Desenvolvedor" primeiro de propósito — é a primeira
-// palavra visível antes do JS começar a rodar, mesma decisão já tomada
-// no Hero principal.
+// Palavras que giram na linha de cargo, abaixo do nome (mesmo efeito do
+// Hero da home, via rotator.js). "Desenvolvedor" primeiro de propósito —
+// é a primeira palavra visível antes do JS começar a rodar.
 export const BIO_ROTATOR_WORDS = [
   'Desenvolvedor',
   'Estrategista',
@@ -19,65 +18,43 @@ export const BIO_ROTATOR_WORDS = [
 export const bioIntro =
   'Estudante de ADS que aprende fazendo. Construo produto de verdade — com cliente real, problema real e resultado medido.';
 
-// Tags de habilidade (referência: pills do unaivan). Só o que realmente
-// uso nos projetos que estão no ar, nada de encher lista.
-export const bioSkills = [
-  'JavaScript',
-  'TypeScript',
-  'Next.js',
-  'React',
-  'Tailwind',
-  'Supabase',
-  'Git',
-  'Figma',
-];
+export const bioLocation = 'Arroio do Sal, RS';
 
-// CTAs principais — dois, mesmo peso visual, lado a lado (referência 2).
+// CTAs principais — lista vertical, cada um com título + subtítulo curto
+// (referência: cards da Pono/Hannah Lee, mais informativo que só rótulo).
 export const bioCtas = [
   {
     id: 'whatsapp',
     label: 'Falar comigo',
+    description: 'Resposta direta, sem robô',
     href: whatsappHref,
     variant: 'primary',
     external: true,
   },
   {
     id: 'portfolio',
-    label: 'Ver portfólio',
+    label: 'Ver meu portfólio',
+    description: 'Cases reais, do problema ao resultado',
     href: '/',
+    variant: 'secondary',
+    external: false,
+  },
+  {
+    id: 'marketing',
+    label: 'Marketing & Redes',
+    description: 'As artes que produzo pras marcas que cuido',
+    href: '/marketing',
     variant: 'secondary',
     external: false,
   },
 ];
 
-// Cards de destaque com título + descrição (referência 2) — leva pras
-// páginas internas que já existem, em vez de só listar link solto.
-export const bioCards = [
-  {
-    title: 'Cases',
-    description: 'Dois projetos reais, do problema bruto ao resultado — Conecte Telecom e Lu Perfumes.',
-    href: '/#cases',
-  },
-  {
-    title: 'Marketing & Redes',
-    description: 'Artes e posts que produzo pras marcas que cuido — a parte fora do código.',
-    href: '/marketing',
-  },
-];
-
-// Ícones sociais em dock (referência 3) — fileira única, não botão
-// empilhado. `icon` casa com a chave em BIO_SOCIAL_ICONS (bio-page.js).
+// Ícones sociais em dock — fileira única sobreposta entre a foto e o
+// corpo (referência: Hannah Lee). `id` casa com a chave em
+// BIO_SOCIAL_ICONS (bio-page.js).
 export const bioSocials = [
-  {
-    id: 'linkedin',
-    name: 'LinkedIn',
-    href: 'https://linkedin.com/in/devlucasroldao',
-  },
-  {
-    id: 'github',
-    name: 'GitHub',
-    href: 'https://github.com/devlucasroldao',
-  },
+  { id: 'linkedin', name: 'LinkedIn', href: 'https://linkedin.com/in/devlucasroldao' },
+  { id: 'github', name: 'GitHub', href: 'https://github.com/devlucasroldao' },
   {
     id: 'instagram',
     // TODO: trocar "#" pelo Instagram pessoal real assim que o Lucas
@@ -91,17 +68,12 @@ export const bioSocials = [
     name: 'TikTok',
     href: '#',
   },
-  {
-    id: 'email',
-    name: 'Email',
-    href: 'mailto:lucasroldao2802@gmail.com',
-  },
+  { id: 'email', name: 'Email', href: 'mailto:lucasroldao2802@gmail.com' },
 ];
 
-// Galeria de fotos do topo (referência 1 — leque de fotos horizontais,
-// pra humanizar a página). Cada item: caminho + alt.
+// Galeria de fotos do corpo (leque horizontal, pra humanizar a página).
 // TODO: trocar os placeholders pelas fotos reais assim que o Lucas
-// enviar. A quantidade não é fixa em 5 — o CSS/JS distribui o leque
+// enviar. A quantidade não é fixa em 5 — o JS distribui o leque
 // conforme o número de itens aqui.
 export const bioPhotos = [
   { src: '/images/bio/PLACEHOLDER-1.jpg', alt: 'Foto de Lucas Roldão' },

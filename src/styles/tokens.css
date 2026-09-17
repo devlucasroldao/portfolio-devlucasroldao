@@ -1,6 +1,11 @@
 :root {
   /* Cores — briefing seção 2 */
   --bg-base: #0d1b2a;
+  /* Mesma cor do --bg-base, só que como componentes RGB soltos — pra
+     usar em rgba() com opacidade variável (ex: degradê que morre na cor
+     do fundo). CSS não deixa extrair os canais de um hex, então os dois
+     precisam andar juntos: mudou um, muda o outro. */
+  --bg-base-rgb: 13, 27, 42;
   --bg-elevated: #141d2e;
   --bg-darker: #0f1622;
   --border: #415a77;
@@ -79,6 +84,7 @@
    explicitamente (toggle da navbar, ver theme.js). */
 :root[data-theme='light'] {
   --bg-base: #e0e1dd;
+  --bg-base-rgb: 224, 225, 221;
   --bg-elevated: #ffffff;
   --bg-darker: #cdcfc8;
   --border: #b4b7ae;

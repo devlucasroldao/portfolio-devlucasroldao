@@ -1,14 +1,11 @@
 import '../styles/main.css';
-import '../styles/buttons.css';
 import '../styles/bio.css';
 import { initRotator } from './rotator.js';
-import { initScrollReveal } from './scroll-animations.js';
 import {
   BIO_ROTATOR_WORDS,
   bioIntro,
-  bioSkills,
+  bioLocation,
   bioCtas,
-  bioCards,
   bioSocials,
   bioPhotos,
 } from './bio-links.js';
@@ -31,23 +28,20 @@ const BIO_SOCIAL_ICONS = {
 
 function renderCta(cta) {
   const externalAttrs = cta.external ? 'target="_blank" rel="noopener noreferrer"' : '';
-  const icon = cta.external ? EXTERNAL_LINK_ICON : '';
-  return `<a href="${cta.href}" ${externalAttrs} class="btn ${cta.variant === 'secondary' ? 'btn--secondary' : ''} bio-cta">${cta.label}${icon}</a>`;
-}
-
-function renderCard(card) {
   return `
-    <a href="${card.href}" class="bio-card">
-      <span class="bio-card__title">${card.title}${EXTERNAL_LINK_ICON}</span>
-      <span class="bio-card__description">${card.description}</span>
+    <a href="${cta.href}" ${externalAttrs} class="bio-cta bio-cta--${cta.variant}">
+      <span class="bio-cta__text">
+        <span class="bio-cta__label">${cta.label}</span>
+        <span class="bio-cta__description">${cta.description}</span>
+      </span>
+      <span class="bio-cta__arrow">${EXTERNAL_LINK_ICON}</span>
     </a>
   `;
 }
 
-// Dock de ícones (referência 3, adaptada): o original em React usa
-// seletores CSS `:has(+ .icon:hover)` pra fazer o vizinho crescer junto.
-// Isso funciona em CSS puro, sem JS nenhum — reproduzido aqui direto no
-// bio.css, sem framer-motion nem shadcn.
+// Dock de ícones: o item sob o cursor cresce e os vizinhos crescem em
+// degrau, criando a "onda". Feito em CSS puro (:hover + :has) — a
+// referência original em React usava framer-motion pra isso.
 function renderSocial(social) {
   const icon = BIO_SOCIAL_ICONS[social.id] || '';
   const isMail = social.href.startsWith('mailto:');
@@ -62,16 +56,13 @@ function renderSocial(social) {
   `;
 }
 
-// Leque de fotos (referência 1, adaptada): o original usa framer-motion
-// pra animar posição/rotação e permitir arrastar. Aqui é CSS pronto —
-// cada foto já nasce na posição/rotação final via `transform`, e o
-// "espalhar" acontece como transição de entrada quando a seção fica
-// visível (classe .is-spread, via IntersectionObserver). Sem biblioteca,
-// sem drag (que não faria sentido em toque de celular mesmo).
+// Leque de fotos: cada uma já nasce com posição/rotação final via
+// variável inline calculada aqui, e o "abrir" acontece como transição
+// quando a seção entra na tela (.is-spread). Sem biblioteca.
 function renderPhoto(photo, index, total) {
   const middle = (total - 1) / 2;
   const offset = index - middle;
-  const x = offset * 148;
+  const x = offset * 142;
   const y = Math.abs(offset) * 10;
   const rotate = offset * 4;
   const zIndex = total - Math.abs(offset);
@@ -88,57 +79,61 @@ function renderPhoto(photo, index, total) {
 
 function bioTemplate() {
   const ctas = bioCtas.map(renderCta).join('');
-  const cards = bioCards.map(renderCard).join('');
   const socials = bioSocials.map(renderSocial).join('');
-  const skills = bioSkills.map((s) => `<li class="bio-skill">${s}</li>`).join('');
   const photos = bioPhotos.map((p, i) => renderPhoto(p, i, bioPhotos.length)).join('');
 
   return `
-    <main class="bio-page">
-      <div class="bio-page__inner">
-        <header class="bio-hero">
-          <div class="bio-hero__avatar">
-            <!-- TODO: trocar pela foto real do Lucas quando ele enviar. -->
-            <img src="/images/bio/PLACEHOLDER-avatar.jpg" alt="Foto de Lucas Roldão" />
-          </div>
+    <div class="bio-page">
+      <!-- FAIXA 1 — header: foto grande ocupando o topo inteiro, com um
+           degradê por cima pra amarrar com a faixa de baixo. -->
+      <header class="bio-header">
+        <div class="bio-header__photo">
+          <!-- TODO: trocar pela foto real do Lucas quando ele enviar. -->
+          <img src="/images/bio/PLACEHOLDER-avatar.jpg" alt="Foto de Lucas Roldão" />
+        </div>
+        <div class="bio-header__scrim" aria-hidden="true"></div>
+      </header>
 
-          <h1 class="bio-hero__heading">
-            <span class="bio-hero__heading-line">Bah, eu sou o</span>
-            <span class="bio-hero__rotator">
-              <span class="bio-hero__rotator-word pos-current">${BIO_ROTATOR_WORDS[0]}</span>
-              <span class="bio-hero__rotator-word"></span>
-            </span>
-          </h1>
-
-          <p class="bio-hero__intro">${bioIntro}</p>
-
-          <ul class="bio-skills">${skills}</ul>
-
-          <div class="bio-ctas">${ctas}</div>
-        </header>
-
+      <!-- FAIXA 2 — corpo: fundo mais claro que o header, conteúdo
+           principal. O dock de ícones fica sobreposto na divisa entre as
+           duas faixas (margin-top negativo), igual à referência. -->
+      <main class="bio-main">
         <nav class="bio-dock" aria-label="Redes sociais e contato">
           <ul class="bio-dock__list">${socials}</ul>
         </nav>
 
-        <section class="bio-cards">${cards}</section>
+        <div class="bio-identity">
+          <h1 class="bio-identity__name">Lucas Roldão</h1>
+          <p class="bio-identity__role">
+            <span class="bio-identity__rotator">
+              <span class="bio-identity__rotator-word pos-current">${BIO_ROTATOR_WORDS[0]}</span>
+              <span class="bio-identity__rotator-word"></span>
+            </span>
+          </p>
+          <p class="bio-identity__location">${bioLocation}</p>
+          <p class="bio-identity__intro">${bioIntro}</p>
+        </div>
+
+        <div class="bio-ctas">${ctas}</div>
 
         <section class="bio-gallery" aria-label="Fotos">
           <div class="bio-gallery__stage">${photos}</div>
         </section>
+      </main>
 
-        <a href="/" class="bio-footer">
+      <!-- FAIXA 3 — footer: o tom mais escuro da paleta, fechando. -->
+      <footer class="bio-footer">
+        <a href="/" class="bio-footer__link">
           <span class="bio-footer__mark">L<span class="bio-footer__mark-dot">.</span>R</span>
-          <span>@devlucasroldao</span>
+          <span class="bio-footer__handle">@devlucasroldao</span>
         </a>
-      </div>
-    </main>
+      </footer>
+    </div>
   `;
 }
 
-// Dispara o "espalhar" do leque quando a galeria entra na tela — mesmo
-// mecanismo (IntersectionObserver) que o resto do site já usa pro
-// reveal, em vez de um setTimeout fixo como o componente original.
+// Dispara o "abrir" do leque quando a galeria entra na tela — mesmo
+// mecanismo (IntersectionObserver) que o resto do site já usa pro reveal.
 function initGallerySpread() {
   const stage = document.querySelector('.bio-gallery__stage');
   if (!stage) return;
@@ -165,9 +160,8 @@ function initGallerySpread() {
 export function mountBioPage() {
   document.querySelector('#app').innerHTML = bioTemplate();
 
-  initRotator(document.querySelector('.bio-hero__rotator'), BIO_ROTATOR_WORDS, {
-    wordSelector: '.bio-hero__rotator-word',
+  initRotator(document.querySelector('.bio-identity__rotator'), BIO_ROTATOR_WORDS, {
+    wordSelector: '.bio-identity__rotator-word',
   });
   initGallerySpread();
-  initScrollReveal({ sections: ['.bio-cards', '.bio-dock'] });
 }

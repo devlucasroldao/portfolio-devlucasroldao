@@ -1,174 +1,86 @@
 /* Página de bio (link-in-bio) — deliberadamente SEM navbar/footer do
    resto do site: quem chega aqui vem do Instagram/TikTok, nunca viu o
-   site antes, e a página precisa ser auto-suficiente e rápida. Uma
-   coluna só, centralizada, mobile-first (a maioria do tráfego real vem
-   de toque em celular). Mesmos tokens de cor/tipografia do resto do
-   site — zero cor ou fonte nova introduzida aqui. */
+   site antes, e a página precisa ser auto-suficiente e rápida.
+   Estrutura em 3 faixas de fundo distintas (header / main / footer),
+   usando os 3 tons que a paleta já tem — nenhuma cor nova inventada. */
 
 .bio-page {
   min-height: 100vh;
   display: flex;
-  justify-content: center;
-  padding: var(--space-16) var(--space-6) var(--space-12);
+  flex-direction: column;
   background: var(--bg-base);
 }
 
-.bio-page__inner {
+/* ---------- FAIXA 1: header com a foto ---------- */
+
+/* Foto grande dominando o topo — é a primeira coisa que a pessoa vê,
+   antes de qualquer texto. Altura em vh pra ocupar uma fatia real da
+   tela em qualquer aparelho, com teto pra não virar tela cheia em
+   monitor grande. */
+.bio-header {
+  position: relative;
   width: 100%;
-  max-width: 480px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: var(--space-8);
-}
-
-/* ---------- Hero ---------- */
-
-.bio-hero {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  gap: var(--space-4);
-  width: 100%;
-}
-
-.bio-hero__avatar {
-  width: 96px;
-  height: 96px;
-  border-radius: 50%;
+  height: min(46vh, 340px);
   overflow: hidden;
-  border: 2px solid var(--border);
-  flex-shrink: 0;
+  background: var(--bg-darker);
 }
 
-.bio-hero__avatar img {
+.bio-header__photo,
+.bio-header__photo img {
   width: 100%;
   height: 100%;
+}
+
+.bio-header__photo img {
   object-fit: cover;
+  object-position: center 30%;
   display: block;
 }
 
-.bio-hero__heading {
-  font-family: var(--font-mono);
-  font-weight: var(--fw-semibold);
-  font-size: clamp(1.5rem, 7vw, 2rem);
-  line-height: 1.2;
-  color: var(--text-primary);
-  margin: 0;
-  width: 100%;
-}
-
-.bio-hero__heading-line {
-  display: block;
-}
-
-/* Mesmo efeito de rolagem vertical do Hero da home (rotator.js) — duas
-   camadas empilhadas dentro de um container de altura fixa, animando em
-   direções opostas ao mesmo tempo. Altura 1.2em casa com o line-height
-   acima, senão o texto "pula" a cada troca de palavra. */
-.bio-hero__rotator {
-  position: relative;
-  display: block;
-  overflow: hidden;
-  height: 1.2em;
-}
-
-.bio-hero__rotator-word {
+/* Degradê por cima da foto, morrendo na cor da faixa de baixo — faz a
+   transição entre header e corpo sem uma linha dura no meio, e garante
+   contraste por trás do dock (sobreposto na divisa) independentemente
+   de como for a foto real.
+   Os stops usam --bg-base-rgb (não um rgba fixo) porque a cor da faixa
+   de baixo muda com o tema: hardcodar o azul-escuro criava uma faixa
+   escura sem sentido por cima da foto no modo claro. */
+.bio-header__scrim {
   position: absolute;
-  inset-inline: 0;
-  text-align: center;
-  font-style: italic;
-  /* --accent-text (não --accent puro) porque aqui o fundo muda com o
-     tema: o Hero da home pode usar --accent direto porque lá o fundo é
-     sempre escuro (vídeo por trás), mas nessa página o fundo claro
-     deixaria o verde original em ~2:1 de contraste. Bug real pego pelo
-     axe-core. */
-  color: var(--accent-text);
-  transition: opacity 480ms ease-in-out, transform 480ms ease-in-out;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(var(--bg-base-rgb), 0.15) 0%,
+    rgba(var(--bg-base-rgb), 0.05) 45%,
+    rgba(var(--bg-base-rgb), 1) 100%
+  );
+  pointer-events: none;
 }
 
-.bio-hero__rotator-word.pos-current {
-  opacity: 1;
-  transform: translateY(0);
-}
+/* ---------- FAIXA 2: corpo ---------- */
 
-.bio-hero__rotator-word.pos-next {
-  opacity: 0;
-  transform: translateY(100%);
-}
-
-.bio-hero__rotator-word.pos-prev {
-  opacity: 0;
-  transform: translateY(-100%);
-}
-
-.bio-hero__rotator-word.no-transition {
-  transition: none;
-}
-
-.bio-hero__intro {
-  font-family: var(--font-sans);
-  font-size: 0.95rem;
-  line-height: 1.6;
-  color: var(--text-secondary);
-  margin: 0;
-  max-width: 380px;
-}
-
-/* ---------- Tags de habilidade ---------- */
-
-.bio-skills {
+.bio-main {
+  flex: 1;
+  width: 100%;
+  max-width: 520px;
+  margin: 0 auto;
+  padding: 0 var(--space-6) var(--space-12);
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: var(--space-2);
-  list-style: none;
-  padding: 0;
-  margin: 0;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-6);
+  background: var(--bg-base);
 }
 
-.bio-skill {
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  color: var(--text-secondary);
-  background: var(--bg-elevated);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-full);
-  padding: var(--space-1) var(--space-3);
+/* ---------- Dock de ícones (sobreposto na divisa) ---------- */
+
+/* margin-top negativo puxa o dock pra cima da divisa entre as faixas —
+   é o que faz ele "flutuar" entre a foto e o conteúdo, em vez de
+   parecer só mais um elemento empilhado. */
+.bio-dock {
+  margin-top: -26px;
+  z-index: 2;
 }
 
-/* ---------- CTAs ---------- */
-
-.bio-ctas {
-  display: flex;
-  gap: var(--space-3);
-  flex-wrap: wrap;
-  justify-content: center;
-  margin-top: var(--space-2);
-}
-
-/* Preenchido em repouso (não só no hover como o .btn padrão) — essa
-   página tem um objetivo só, então o CTA principal precisa de peso
-   visual desde o primeiro olhar. */
-.bio-cta:not(.btn--secondary) {
-  background: var(--accent);
-  color: var(--on-accent);
-  font-weight: var(--fw-semibold);
-}
-
-.bio-cta:not(.btn--secondary):hover {
-  opacity: 0.88;
-}
-
-/* ---------- Dock de ícones ---------- */
-
-/* Efeito dock (referência: macOS) — o ícone sob o cursor cresce e os
-   vizinhos crescem um pouco menos, criando a "onda". O componente
-   original fazia isso em React com framer-motion; aqui é CSS puro,
-   com :hover + seletores de irmão adjacente e :has(). Zero JS, zero
-   biblioteca. Em toque (celular) nada disso dispara — e tudo bem, o
-   dock continua sendo uma fileira de links perfeitamente usável. */
 .bio-dock__list {
   display: flex;
   align-items: flex-end;
@@ -179,8 +91,13 @@
   background: var(--bg-elevated);
   border: 1px solid var(--border);
   border-radius: var(--radius-full);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
 }
 
+/* Efeito dock (referência: macOS) — o ícone sob o cursor cresce e os
+   vizinhos crescem um pouco menos, criando a "onda". CSS puro, com
+   :hover + irmão adjacente + :has(). Em toque (celular) nada disso
+   dispara — e tudo bem, continua sendo uma fileira de links usável. */
 .bio-dock__item {
   --size: 40px;
   width: var(--size);
@@ -212,24 +129,16 @@
   border-color: var(--accent);
 }
 
-/* Item sob o cursor cresce mais... */
 .bio-dock__item:hover {
-  --size: 56px;
+  --size: 54px;
 }
 
-/* ...e os dois vizinhos (de cada lado) crescem um pouco, em degrau. */
-.bio-dock__item:hover + .bio-dock__item {
-  --size: 50px;
-}
-
-.bio-dock__item:hover + .bio-dock__item + .bio-dock__item {
-  --size: 44px;
-}
-
+.bio-dock__item:hover + .bio-dock__item,
 .bio-dock__item:has(+ .bio-dock__item:hover) {
-  --size: 50px;
+  --size: 48px;
 }
 
+.bio-dock__item:hover + .bio-dock__item + .bio-dock__item,
 .bio-dock__item:has(+ .bio-dock__item + .bio-dock__item:hover) {
   --size: 44px;
 }
@@ -256,79 +165,212 @@
   opacity: 1;
 }
 
-/* ---------- Cards de destaque ---------- */
+/* ---------- Identidade (nome + cargo + intro) ---------- */
 
-.bio-cards {
+.bio-identity {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--space-2);
+}
+
+/* Nome grande é o protagonista agora (o "Bah, eu sou o..." saiu — a
+   frase continua sendo a assinatura do Hero da home, mas aqui o que
+   importa é bater o nome de cara). */
+.bio-identity__name {
+  font-family: var(--font-mono);
+  font-weight: var(--fw-bold);
+  font-size: clamp(1.75rem, 8vw, 2.5rem);
+  line-height: 1.1;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.bio-identity__role {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: clamp(1rem, 4.5vw, 1.25rem);
+  /* width:100% obrigatório aqui: o pai é flex com align-items:center, o
+     que encolhe os filhos ao conteúdo — e como as duas palavras do
+     rotator são position:absolute (não ocupam espaço no fluxo), o
+     container colapsava pra largura 0 e a palavra sumia da tela. */
+  width: 100%;
+}
+
+/* Mesmo efeito de rolagem vertical do Hero da home (rotator.js) — duas
+   camadas empilhadas animando em direções opostas. A altura precisa ser
+   >= a altura real de uma linha, senão a palavra que está saindo/entrando
+   fica visível pra fora da janela do overflow (dava pra ver duas palavras
+   ao mesmo tempo). line-height fixo aqui pra não depender do que o
+   elemento herdaria. */
+.bio-identity__rotator {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  height: 1.6em;
+  line-height: 1.6;
+}
+
+.bio-identity__rotator-word {
+  position: absolute;
+  inset-inline: 0;
+  text-align: center;
+  font-style: italic;
+  /* --accent-text (não --accent puro) porque aqui o fundo muda com o
+     tema: fundo claro deixaria o verde original em ~2:1 de contraste. */
+  color: var(--accent-text);
+  transition: opacity 480ms ease-in-out, transform 480ms ease-in-out;
+}
+
+.bio-identity__rotator-word.pos-current {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.bio-identity__rotator-word.pos-next {
+  opacity: 0;
+  transform: translateY(100%);
+}
+
+.bio-identity__rotator-word.pos-prev {
+  opacity: 0;
+  transform: translateY(-100%);
+}
+
+.bio-identity__rotator-word.no-transition {
+  transition: none;
+}
+
+.bio-identity__location {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+}
+
+.bio-identity__intro {
+  margin: var(--space-2) 0 0;
+  font-family: var(--font-sans);
+  font-size: 0.92rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  max-width: 380px;
+}
+
+/* ---------- CTAs ---------- */
+
+/* Lista vertical, cada item com título + subtítulo (referência: Pono) —
+   mais informativo que um botão com rótulo solto, e dá pra escanear
+   rápido o que cada link entrega. */
+.bio-ctas {
   width: 100%;
   display: flex;
   flex-direction: column;
   gap: var(--space-3);
 }
 
-.bio-card {
+.bio-cta {
   display: flex;
-  flex-direction: column;
-  gap: var(--space-1);
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
   padding: var(--space-4) var(--space-5);
-  background: var(--bg-elevated);
-  border: 1px solid var(--border);
   border-radius: var(--radius-md);
   text-decoration: none;
-  transition: border-color var(--transition-ui), transform var(--transition-ui);
+  border: 1px solid var(--border);
+  transition: transform var(--transition-ui), border-color var(--transition-ui), opacity var(--transition-ui);
 }
 
-.bio-card:hover {
-  border-color: var(--accent);
+.bio-cta:hover {
   transform: translateY(-2px);
 }
 
-.bio-card__title {
+.bio-cta__text {
   display: flex;
-  align-items: center;
-  gap: var(--space-2);
+  flex-direction: column;
+  gap: 2px;
+  text-align: left;
+}
+
+.bio-cta__label {
   font-family: var(--font-sans);
   font-weight: var(--fw-semibold);
-  font-size: 0.95rem;
+  font-size: 0.98rem;
+}
+
+.bio-cta__description {
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  line-height: 1.4;
+}
+
+.bio-cta__arrow {
+  display: flex;
+  flex-shrink: 0;
+}
+
+.bio-cta__arrow svg {
+  width: 15px;
+  height: 15px;
+}
+
+/* Primário preenchido em repouso (não só no hover) — essa página tem um
+   objetivo principal, então o CTA precisa de peso visual de cara. */
+.bio-cta--primary {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--on-accent);
+}
+
+/* O subtítulo precisa ficar visualmente mais leve que o título, mas
+   opacity:0.75 derrubava o contraste pra 4.43:1 — logo abaixo do mínimo
+   AA de 4.5:1 (medido pelo axe). 0.85 mantém a hierarquia e passa. */
+.bio-cta--primary .bio-cta__description {
+  opacity: 0.85;
+}
+
+.bio-cta--primary:hover {
+  opacity: 0.9;
+}
+
+.bio-cta--secondary {
+  background: var(--bg-elevated);
   color: var(--text-primary);
 }
 
-.bio-card__title svg {
-  width: 13px;
-  height: 13px;
-  opacity: 0.6;
+.bio-cta--secondary .bio-cta__description {
+  color: var(--text-secondary);
 }
 
-.bio-card__description {
-  font-family: var(--font-sans);
-  font-size: 0.82rem;
-  line-height: 1.5;
+.bio-cta--secondary .bio-cta__arrow {
   color: var(--text-secondary);
+}
+
+.bio-cta--secondary:hover {
+  border-color: var(--accent);
 }
 
 /* ---------- Galeria em leque ---------- */
 
 /* As fotos começam empilhadas no centro e "abrem" em leque quando a
-   seção entra na tela (.is-spread, via IntersectionObserver em
-   bio-page.js). Cada foto recebe sua posição/rotação final por variável
-   inline (--x, --y, --rotate) calculada no JS a partir da posição dela
-   na lista — então adicionar/remover foto no array redistribui o leque
-   sozinho, sem tocar em CSS. */
-/* O leque é mais largo que a coluna de conteúdo (480px) de propósito —
-   é o que dá a sensação de "continua além da tela". Pra isso funcionar
-   sem cortar as fotos das pontas pela metade, a seção fura a largura do
-   container pai e ocupa a viewport inteira (100vw centralizado), com o
-   overflow cortando só nas bordas reais da tela. */
+   seção entra na tela (.is-spread, via IntersectionObserver). A posição
+   de cada uma vem de variável inline (--x/--y/--rotate) calculada no JS
+   a partir do índice — adicionar/remover foto redistribui sozinho.
+   O leque é mais largo que a coluna de propósito (dá a sensação de
+   continuar além da tela), então fura o container e ocupa a viewport
+   inteira, cortando só nas bordas reais. */
 .bio-gallery {
   width: 100vw;
   margin-left: calc(50% - 50vw);
   margin-right: calc(50% - 50vw);
   overflow: hidden;
-  padding: var(--space-4) 0;
+  padding: var(--space-4) 0 0;
 }
 
 .bio-gallery__stage {
   position: relative;
-  height: 200px;
+  height: 190px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -336,14 +378,13 @@
 
 .bio-photo {
   position: absolute;
-  width: 132px;
-  height: 168px;
+  width: 126px;
+  height: 160px;
   border-radius: var(--radius-md);
   overflow: hidden;
   border: 1px solid var(--border);
   background: var(--bg-elevated);
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
-  /* Estado inicial: empilhado no centro, sem rotação. */
   transform: translate(0, 0) rotate(0deg);
   transition: transform 700ms cubic-bezier(0.22, 1, 0.36, 1);
   transition-delay: var(--delay, 0ms);
@@ -360,12 +401,18 @@
   display: block;
 }
 
-/* ---------- Rodapé ---------- */
+/* ---------- FAIXA 3: footer ---------- */
 
-/* Fechamento pequeno, de propósito — marca + @handle, mesmo espírito do
-   "L.R" que já assina o footer do resto do site, só que compacto aqui
-   (essa página não tem footer completo, é só o fechamento). */
 .bio-footer {
+  width: 100%;
+  padding: var(--space-8) var(--space-6);
+  background: var(--bg-darker);
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: center;
+}
+
+.bio-footer__link {
   display: flex;
   align-items: center;
   gap: var(--space-2);
@@ -374,13 +421,13 @@
   transition: color var(--transition-ui);
 }
 
-.bio-footer:hover {
+.bio-footer__link:hover {
   color: var(--accent-text);
 }
 
 .bio-footer__mark {
-  width: 22px;
-  height: 22px;
+  width: 24px;
+  height: 24px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -388,7 +435,7 @@
   border-radius: 5px;
   font-family: var(--font-mono);
   font-weight: var(--fw-bold);
-  font-size: 0.65rem;
+  font-size: 0.68rem;
   letter-spacing: -0.05em;
 }
 
@@ -396,27 +443,27 @@
   color: var(--accent);
 }
 
-.bio-footer span:last-child {
+.bio-footer__handle {
   font-family: var(--font-mono);
-  font-size: 0.8rem;
+  font-size: 0.82rem;
 }
 
 /* ---------- Responsivo ---------- */
 
-/* O leque em tamanho cheio não cabe em tela estreita — encolhe a foto e
-   o espaçamento entre elas via scale no palco inteiro (mais simples e
-   previsível que recalcular cada --x no JS por breakpoint). */
+/* O leque em tamanho cheio não cabe em tela estreita — encolhe o palco
+   inteiro via scale (mais previsível que recalcular cada --x por
+   breakpoint no JS). */
 @media (max-width: 520px) {
   .bio-gallery__stage {
     transform: scale(0.62);
-    height: 140px;
+    height: 135px;
   }
 }
 
 @media (max-width: 380px) {
   .bio-gallery__stage {
     transform: scale(0.5);
-    height: 120px;
+    height: 115px;
   }
 
   .bio-dock__item {
