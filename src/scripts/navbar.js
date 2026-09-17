@@ -14,7 +14,7 @@ const MOON_ICON =
   '<svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5Z"/></svg>';
 
 // base = '' quando renderizado na própria home (âncora rola na página atual)
-// base = 'index.html' quando renderizado numa página de case (navega de volta pra home e âncora)
+// base = '/' quando renderizado numa página de case (navega de volta pra home e âncora)
 export function renderNavbar({ base = '' } = {}) {
   const links = (className) =>
     NAV_ITEMS.map(([hash, label]) => `<a class="${className}" href="${base}${hash}">${label}</a>`).join('\n');
@@ -79,7 +79,7 @@ export function renderNavbar({ base = '' } = {}) {
 
       <div class="navbar__links">
         ${links('')}
-        <a href="marketing.html">Marketing & Redes</a>
+        <a href="/marketing">Marketing & Redes</a>
       </div>
 
       <div class="navbar__actions">
@@ -115,15 +115,15 @@ export function renderNavbar({ base = '' } = {}) {
           <a class="navbar__panel-link" href="${base}#inicio">Início</a>
           <a class="navbar__panel-link" href="${base}#sobre">Sobre mim</a>
           <a class="navbar__panel-link" href="${base}#depoimentos">Depoimentos</a>
-          <a class="navbar__panel-link" href="marketing.html">Marketing & Redes</a>
+          <a class="navbar__panel-link" href="/marketing">Marketing & Redes</a>
         </div>
 
         <div class="navbar__panel-group">
           <span class="navbar__panel-group-label">Cases</span>
           <a class="navbar__panel-link" href="${base}#cases">Ver todos</a>
           <div class="navbar__panel-sublinks">
-            <a href="case-conecte.html">Conecte Telecom</a>
-            <a href="case-lu-perfumes.html">Lu Perfumes &amp; Presentes</a>
+            <a href="/case-conecte">Conecte Telecom</a>
+            <a href="/case-lu-perfumes">Lu Perfumes &amp; Presentes</a>
           </div>
         </div>
       </nav>

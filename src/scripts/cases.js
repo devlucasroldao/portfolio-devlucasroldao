@@ -41,7 +41,7 @@ function renderSubBlock(label, html) {
 export const casesData = [
   {
     id: 'case-conecte',
-    href: 'case-conecte.html',
+    href: '/case-conecte',
     reverse: false,
     eyebrow: 'Case 01 — Segurança & Performance',
     badgeIcon: 'shield',
@@ -138,7 +138,7 @@ export const casesData = [
   },
   {
     id: 'case-lu-perfumes',
-    href: 'case-lu-perfumes.html',
+    href: '/case-lu-perfumes',
     reverse: true,
     eyebrow: 'Case 02 — Produto pré-lançamento',
     badgeIcon: 'tag',
@@ -279,7 +279,7 @@ function renderCaseLinks(data) {
     <div class="case-full__links">
       <a href="${data.liveUrl}" target="_blank" rel="noopener noreferrer" class="case-full__live-link">Ver site ao vivo${EXTERNAL_LINK_ICON}</a>
       <a href="${data.instagramUrl}" target="_blank" rel="noopener noreferrer" class="case-full__instagram-link">${INSTAGRAM_ICON}Instagram</a>
-      <a href="marketing.html?cliente=${data.marketingClient}" class="case-full__instagram-link">Trabalho de marketing →</a>
+      <a href="/marketing?cliente=${data.marketingClient}" class="case-full__instagram-link">Trabalho de marketing →</a>
     </div>
   `;
 }

@@ -54,7 +54,7 @@ function bioTemplate() {
         </div>
 
         <p class="bio-footer">
-          <a href="index.html">devlucasroldao.vercel.app</a> · © ${new Date().getFullYear()}
+          <a href="/">devlucasroldao.vercel.app</a> · © ${new Date().getFullYear()}
         </p>
       </div>
     </main>

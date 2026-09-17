@@ -217,11 +217,11 @@ function initLightbox(root) {
 
 export function mountMarketingPage() {
   document.querySelector('#app').innerHTML = `
-    ${renderNavbar({ base: 'index.html' })}
+    ${renderNavbar({ base: '/' })}
     <main>
       ${marketingTemplate()}
     </main>
-    ${renderFooter({ base: 'index.html' })}
+    ${renderFooter({ base: '/' })}
   `;
 
   initNavbar();

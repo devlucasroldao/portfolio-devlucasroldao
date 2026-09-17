@@ -3,7 +3,7 @@ import { EXTERNAL_LINK_ICON, ENVELOPE_ICON, LINKEDIN_ICON, asFooterBrandIcon } f
 import { getIconSvg } from './icons.js';
 
 // base = '' quando renderizado na própria home (âncora rola na página atual)
-// base = 'index.html' quando renderizado numa página de case (navega de volta pra home e âncora)
+// base = '/' quando renderizado numa página de case (navega de volta pra home e âncora)
 export function renderFooter({ base = '' } = {}) {
   const navLinks = NAV_ITEMS.map(([hash, label]) => `<a href="${base}${hash}">${label}</a>`).join('\n');
 
@@ -32,7 +32,7 @@ export function renderFooter({ base = '' } = {}) {
           </nav>
           <nav class="footer__nav" aria-label="Seções da página">
             ${navLinks}
-            <a href="marketing.html">Marketing & Redes</a>
+            <a href="/marketing">Marketing & Redes</a>
           </nav>
         </div>
       </div>

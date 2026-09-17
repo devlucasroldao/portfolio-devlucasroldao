@@ -87,7 +87,7 @@ const sobreTemplate = `
         <div class="sobre__ctas">
           <a href="https://linkedin.com/in/devlucasroldao" target="_blank" rel="noopener noreferrer" class="btn btn--secondary">Meu LinkedIn${EXTERNAL_LINK_ICON}</a>
           <a href="${whatsappHref}" target="_blank" rel="noopener noreferrer" class="btn">Fale comigo${EXTERNAL_LINK_ICON}</a>
-          <a href="marketing.html" class="btn btn--secondary">Marketing & Redes${EXTERNAL_LINK_ICON}</a>
+          <a href="/marketing" class="btn btn--secondary">Marketing & Redes${EXTERNAL_LINK_ICON}</a>
         </div>
       </div>
 

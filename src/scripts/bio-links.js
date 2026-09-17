@@ -18,7 +18,7 @@ export const bioLinks = [
   {
     id: 'portfolio',
     label: 'Ver portfólio completo',
-    href: 'index.html',
+    href: '/',
     variant: 'secondary',
     external: false,
   },
