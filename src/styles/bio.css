@@ -1,8 +1,9 @@
 /* Página de bio (link-in-bio) — deliberadamente SEM navbar/footer do
    resto do site: quem chega aqui vem do Instagram/TikTok, nunca viu o
    site antes, e a página precisa ser auto-suficiente e rápida. Uma
-   coluna só, centralizada, mobile-first de verdade (a maioria do
-   tráfego real vem de toque em celular, não desktop). */
+   coluna só, centralizada, mobile-first (a maioria do tráfego real vem
+   de toque em celular). Mesmos tokens de cor/tipografia do resto do
+   site — zero cor ou fonte nova introduzida aqui. */
 
 .bio-page {
   min-height: 100vh;
@@ -14,170 +15,411 @@
 
 .bio-page__inner {
   width: 100%;
-  max-width: 440px;
+  max-width: 480px;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: var(--space-8);
 }
 
-/* ---------- Header ---------- */
+/* ---------- Hero ---------- */
 
-.bio-header {
+.bio-hero {
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  gap: var(--space-2);
+  gap: var(--space-4);
+  width: 100%;
 }
 
-.bio-header__mark {
-  width: 56px;
-  height: 56px;
+.bio-hero__avatar {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid var(--border);
+  flex-shrink: 0;
+}
+
+.bio-hero__avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.bio-hero__heading {
+  font-family: var(--font-mono);
+  font-weight: var(--fw-semibold);
+  font-size: clamp(1.5rem, 7vw, 2rem);
+  line-height: 1.2;
+  color: var(--text-primary);
+  margin: 0;
+  width: 100%;
+}
+
+.bio-hero__heading-line {
+  display: block;
+}
+
+/* Mesmo efeito de rolagem vertical do Hero da home (rotator.js) — duas
+   camadas empilhadas dentro de um container de altura fixa, animando em
+   direções opostas ao mesmo tempo. Altura 1.2em casa com o line-height
+   acima, senão o texto "pula" a cada troca de palavra. */
+.bio-hero__rotator {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  height: 1.2em;
+}
+
+.bio-hero__rotator-word {
+  position: absolute;
+  inset-inline: 0;
+  text-align: center;
+  font-style: italic;
+  /* --accent-text (não --accent puro) porque aqui o fundo muda com o
+     tema: o Hero da home pode usar --accent direto porque lá o fundo é
+     sempre escuro (vídeo por trás), mas nessa página o fundo claro
+     deixaria o verde original em ~2:1 de contraste. Bug real pego pelo
+     axe-core. */
+  color: var(--accent-text);
+  transition: opacity 480ms ease-in-out, transform 480ms ease-in-out;
+}
+
+.bio-hero__rotator-word.pos-current {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.bio-hero__rotator-word.pos-next {
+  opacity: 0;
+  transform: translateY(100%);
+}
+
+.bio-hero__rotator-word.pos-prev {
+  opacity: 0;
+  transform: translateY(-100%);
+}
+
+.bio-hero__rotator-word.no-transition {
+  transition: none;
+}
+
+.bio-hero__intro {
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  margin: 0;
+  max-width: 380px;
+}
+
+/* ---------- Tags de habilidade ---------- */
+
+.bio-skills {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-2);
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.bio-skill {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--text-secondary);
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-full);
+  padding: var(--space-1) var(--space-3);
+}
+
+/* ---------- CTAs ---------- */
+
+.bio-ctas {
+  display: flex;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: var(--space-2);
+}
+
+/* Preenchido em repouso (não só no hover como o .btn padrão) — essa
+   página tem um objetivo só, então o CTA principal precisa de peso
+   visual desde o primeiro olhar. */
+.bio-cta:not(.btn--secondary) {
+  background: var(--accent);
+  color: var(--on-accent);
+  font-weight: var(--fw-semibold);
+}
+
+.bio-cta:not(.btn--secondary):hover {
+  opacity: 0.88;
+}
+
+/* ---------- Dock de ícones ---------- */
+
+/* Efeito dock (referência: macOS) — o ícone sob o cursor cresce e os
+   vizinhos crescem um pouco menos, criando a "onda". O componente
+   original fazia isso em React com framer-motion; aqui é CSS puro,
+   com :hover + seletores de irmão adjacente e :has(). Zero JS, zero
+   biblioteca. Em toque (celular) nada disso dispara — e tudo bem, o
+   dock continua sendo uma fileira de links perfeitamente usável. */
+.bio-dock__list {
+  display: flex;
+  align-items: flex-end;
+  gap: var(--space-2);
+  list-style: none;
+  padding: var(--space-2);
+  margin: 0;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-full);
+}
+
+.bio-dock__item {
+  --size: 40px;
+  width: var(--size);
+  height: var(--size);
+  transition: width var(--transition-ui), height var(--transition-ui);
+}
+
+.bio-dock__link {
+  position: relative;
+  width: 100%;
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 2px solid var(--text-primary);
-  border-radius: var(--radius-md);
-  font-family: var(--font-mono);
-  font-weight: var(--fw-bold);
-  font-size: 1.5rem;
-  letter-spacing: -0.05em;
-  color: var(--text-primary);
-  margin-bottom: var(--space-2);
-}
-
-.bio-header__mark-dot {
-  color: var(--accent);
-}
-
-.bio-header__name {
-  font-family: var(--font-mono);
-  font-weight: var(--fw-semibold);
-  font-size: 1.5rem;
-  color: var(--text-primary);
-  margin: 0;
-}
-
-.bio-header__tagline {
-  font-family: var(--font-sans);
-  font-size: 1rem;
+  border-radius: 50%;
+  background: var(--bg-base);
+  border: 1px solid var(--border);
   color: var(--text-secondary);
-  max-width: 320px;
-  margin: 0;
-  line-height: 1.5;
+  transition: color var(--transition-ui), border-color var(--transition-ui);
 }
 
-.bio-header__accent {
+.bio-dock__link svg {
+  width: 45%;
+  height: 45%;
+}
+
+.bio-dock__item:hover .bio-dock__link {
   color: var(--accent-text);
-  font-weight: var(--fw-medium);
+  border-color: var(--accent);
 }
 
-.bio-header__location {
+/* Item sob o cursor cresce mais... */
+.bio-dock__item:hover {
+  --size: 56px;
+}
+
+/* ...e os dois vizinhos (de cada lado) crescem um pouco, em degrau. */
+.bio-dock__item:hover + .bio-dock__item {
+  --size: 50px;
+}
+
+.bio-dock__item:hover + .bio-dock__item + .bio-dock__item {
+  --size: 44px;
+}
+
+.bio-dock__item:has(+ .bio-dock__item:hover) {
+  --size: 50px;
+}
+
+.bio-dock__item:has(+ .bio-dock__item + .bio-dock__item:hover) {
+  --size: 44px;
+}
+
+.bio-dock__tooltip {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 2px var(--space-2);
+  border-radius: var(--radius-sm);
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  color: var(--text-primary);
   font-family: var(--font-mono);
-  font-size: 0.8rem;
-  color: var(--text-secondary);
-  margin: 0;
+  font-size: 0.65rem;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--transition-ui);
 }
 
-/* ---------- Botões de link ---------- */
+.bio-dock__item:hover .bio-dock__tooltip {
+  opacity: 1;
+}
 
-.bio-links {
+/* ---------- Cards de destaque ---------- */
+
+.bio-cards {
   width: 100%;
   display: flex;
   flex-direction: column;
   gap: var(--space-3);
 }
 
-.bio-link {
+.bio-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  padding: var(--space-4) var(--space-5);
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  transition: border-color var(--transition-ui), transform var(--transition-ui);
+}
+
+.bio-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+}
+
+.bio-card__title {
   display: flex;
   align-items: center;
-  gap: var(--space-3);
-  width: 100%;
-  padding: var(--space-4) var(--space-5);
-  border-radius: var(--radius-md);
+  gap: var(--space-2);
   font-family: var(--font-sans);
-  font-weight: var(--fw-medium);
+  font-weight: var(--fw-semibold);
   font-size: 0.95rem;
-  text-decoration: none;
-  transition: transform var(--transition-ui), border-color var(--transition-ui), background var(--transition-ui);
+  color: var(--text-primary);
 }
 
-.bio-link:hover {
-  transform: translateY(-1px);
-}
-
-.bio-link__icon {
-  width: 20px;
-  height: 20px;
-  flex-shrink: 0;
-  display: flex;
-}
-
-.bio-link__icon svg {
-  width: 100%;
-  height: 100%;
-}
-
-.bio-link__label {
-  flex: 1;
-}
-
-.bio-link__external {
-  width: 14px;
-  height: 14px;
-  flex-shrink: 0;
+.bio-card__title svg {
+  width: 13px;
+  height: 13px;
   opacity: 0.6;
 }
 
-.bio-link__external svg {
+.bio-card__description {
+  font-family: var(--font-sans);
+  font-size: 0.82rem;
+  line-height: 1.5;
+  color: var(--text-secondary);
+}
+
+/* ---------- Galeria em leque ---------- */
+
+/* As fotos começam empilhadas no centro e "abrem" em leque quando a
+   seção entra na tela (.is-spread, via IntersectionObserver em
+   bio-page.js). Cada foto recebe sua posição/rotação final por variável
+   inline (--x, --y, --rotate) calculada no JS a partir da posição dela
+   na lista — então adicionar/remover foto no array redistribui o leque
+   sozinho, sem tocar em CSS. */
+/* O leque é mais largo que a coluna de conteúdo (480px) de propósito —
+   é o que dá a sensação de "continua além da tela". Pra isso funcionar
+   sem cortar as fotos das pontas pela metade, a seção fura a largura do
+   container pai e ocupa a viewport inteira (100vw centralizado), com o
+   overflow cortando só nas bordas reais da tela. */
+.bio-gallery {
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  overflow: hidden;
+  padding: var(--space-4) 0;
+}
+
+.bio-gallery__stage {
+  position: relative;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bio-photo {
+  position: absolute;
+  width: 132px;
+  height: 168px;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background: var(--bg-elevated);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+  /* Estado inicial: empilhado no centro, sem rotação. */
+  transform: translate(0, 0) rotate(0deg);
+  transition: transform 700ms cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: var(--delay, 0ms);
+}
+
+.bio-gallery__stage.is-spread .bio-photo {
+  transform: translate(var(--x), var(--y)) rotate(var(--rotate));
+}
+
+.bio-photo img {
   width: 100%;
   height: 100%;
-}
-
-/* CTA principal — o único preenchido, degradê sutil (equivalente ao
-   "ShinyButton" do playbook, só que sem biblioteca de animação: um
-   gradiente simples em CSS já resolve, sem peso nenhum de JS). */
-.bio-link--primary {
-  background: linear-gradient(135deg, var(--accent), #3d9970);
-  color: var(--on-accent);
-  border: none;
-  font-weight: var(--fw-semibold);
-}
-
-.bio-link--primary .bio-link__external {
-  opacity: 0.8;
-}
-
-/* Secundários — contorno, mesmo tratamento visual do resto do site
-   (.btn--secondary). */
-.bio-link--secondary {
-  background: var(--bg-elevated);
-  color: var(--text-primary);
-  border: 1px solid var(--border);
-}
-
-.bio-link--secondary:hover {
-  border-color: var(--accent);
+  object-fit: cover;
+  display: block;
 }
 
 /* ---------- Rodapé ---------- */
 
+/* Fechamento pequeno, de propósito — marca + @handle, mesmo espírito do
+   "L.R" que já assina o footer do resto do site, só que compacto aqui
+   (essa página não tem footer completo, é só o fechamento). */
 .bio-footer {
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  text-decoration: none;
   color: var(--text-secondary);
-  text-align: center;
-  margin: 0;
+  transition: color var(--transition-ui);
 }
 
-.bio-footer a {
-  color: var(--text-secondary);
-  text-decoration: underline;
-  text-decoration-color: var(--border);
-  text-underline-offset: 3px;
-}
-
-.bio-footer a:hover {
+.bio-footer:hover {
   color: var(--accent-text);
+}
+
+.bio-footer__mark {
+  width: 22px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid currentColor;
+  border-radius: 5px;
+  font-family: var(--font-mono);
+  font-weight: var(--fw-bold);
+  font-size: 0.65rem;
+  letter-spacing: -0.05em;
+}
+
+.bio-footer__mark-dot {
+  color: var(--accent);
+}
+
+.bio-footer span:last-child {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+}
+
+/* ---------- Responsivo ---------- */
+
+/* O leque em tamanho cheio não cabe em tela estreita — encolhe a foto e
+   o espaçamento entre elas via scale no palco inteiro (mais simples e
+   previsível que recalcular cada --x no JS por breakpoint). */
+@media (max-width: 520px) {
+  .bio-gallery__stage {
+    transform: scale(0.62);
+    height: 140px;
+  }
+}
+
+@media (max-width: 380px) {
+  .bio-gallery__stage {
+    transform: scale(0.5);
+    height: 120px;
+  }
+
+  .bio-dock__item {
+    --size: 36px;
+  }
 }
