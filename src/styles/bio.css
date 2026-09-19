@@ -398,7 +398,7 @@
    continuar além da tela), então fura o container e ocupa a viewport
    inteira, cortando só nas bordas reais. */
 .bio-gallery {
-  --bio-photo-gap: 142px;
+  --bio-photo-gap: 145px;
   width: 100vw;
   margin-left: calc(50% - 50vw);
   margin-right: calc(50% - 50vw);
@@ -488,7 +488,7 @@
    fotos, foto menor cabe na largura real. */
 @media (max-width: 520px) {
   .bio-gallery {
-    --bio-photo-gap: 78px;
+    --bio-photo-gap: 66px;
   }
 
   .bio-gallery__stage {
@@ -503,7 +503,7 @@
 
 @media (max-width: 380px) {
   .bio-gallery {
-    --bio-photo-gap: 64px;
+    --bio-photo-gap: 52px;
   }
 
   .bio-gallery__stage {

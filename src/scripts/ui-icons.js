@@ -1,5 +1,6 @@
 import instagramRaw from 'simple-icons/icons/instagram.svg?raw';
 import tiktokRaw from 'simple-icons/icons/tiktok.svg?raw';
+import whatsappRaw from 'simple-icons/icons/whatsapp.svg?raw';
 
 // Ícones de interface hand-drawn (não são logo de marca) — mesmo tratamento
 // flat/stroke-only do hambúrguer e sol/lua da navbar e dos badges de case.
@@ -37,6 +38,10 @@ export const INSTAGRAM_ICON = asFooterBrandIcon(instagramRaw.replace('<svg ', '<
 // Mesmo tratamento do Instagram — usado na página de bio.
 export const TIKTOK_ICON = asFooterBrandIcon(tiktokRaw.replace('<svg ', '<svg fill="currentColor" '));
 
+// WhatsApp brand icon — pra usar no CTA da bio (mais reconhecível que o
+// balão genérico de chat que estava antes).
+export const WHATSAPP_BRAND_ICON = asFooterBrandIcon(whatsappRaw.replace('<svg ', '<svg fill="currentColor" '));
+
 // Dois ícones hand-drawn novos, mesmo tratamento stroke-only dos outros —
 // usados nos cards de estatística da página de marketing pra diferenciar
 // visualmente "engajamento" (gráfico subindo) de "vendas" (sacola),
@@ -47,14 +52,11 @@ export const TRENDING_UP_ICON =
 export const SHOPPING_BAG_ICON =
   '<svg class="icon-shopping-bag" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8h12l-1 12H7z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>';
 
-// Ícones dos CTAs da página de bio — stroke-only, mesmo estilo dos de
-// cima. WhatsApp (balão), portfólio (grid de projetos), marketing
-// (megafone).
-export const WHATSAPP_ICON =
-  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>';
+// Ícones dos CTAs da página de bio — substituídos após feedback: o balão
+// de chat era genérico, o grid não dizia "portfólio", o megafone não
+// dizia "redes sociais". Novos: WhatsApp brand (reconhecível), código
+// (remete a dev/portfólio), Instagram brand (remete a social/marketing).
+// O WhatsApp brand icon fica em WHATSAPP_BRAND_ICON, definido acima.
 
-export const GRID_ICON =
-  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>';
-
-export const MEGAPHONE_ICON =
-  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11v2a1 1 0 0 0 1 1h2l4 4V7L6 11H4a1 1 0 0 0-1 0z"/><path d="M15 8a4 4 0 0 1 0 8"/><path d="M10 7l8-4v18l-8-4"/></svg>';
+export const CODE_ICON =
+  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>';

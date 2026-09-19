@@ -14,9 +14,8 @@ import {
   INSTAGRAM_ICON,
   TIKTOK_ICON,
   EXTERNAL_LINK_ICON,
-  WHATSAPP_ICON,
-  GRID_ICON,
-  MEGAPHONE_ICON,
+  WHATSAPP_BRAND_ICON,
+  CODE_ICON,
 } from './ui-icons.js';
 import { getIconSvg } from './icons.js';
 
@@ -28,9 +27,11 @@ const BIO_SOCIAL_ICONS = {
 };
 
 const BIO_CTA_ICONS = {
-  whatsapp: WHATSAPP_ICON,
-  grid: GRID_ICON,
-  megaphone: MEGAPHONE_ICON,
+  whatsapp: WHATSAPP_BRAND_ICON,
+  portfolio: CODE_ICON,
+  // Marketing usa Instagram icon — é onde o trabalho de redes fica de
+  // fato. Mais reconhecível que megafone genérico.
+  marketing: INSTAGRAM_ICON,
 };
 
 function renderCta(cta) {
@@ -102,8 +103,7 @@ function bioTemplate() {
            degradê por cima pra amarrar com a faixa de baixo. -->
       <header class="bio-header">
         <div class="bio-header__photo">
-          <!-- TODO: trocar pela foto real do Lucas quando ele enviar. -->
-          <img src="/images/bio/PLACEHOLDER-avatar.jpg" alt="Foto de Lucas Roldão" />
+          <img src="/images/bio/lucas-header.jpg" alt="Foto de Lucas Roldão" />
         </div>
         <div class="bio-header__scrim" aria-hidden="true"></div>
       </header>

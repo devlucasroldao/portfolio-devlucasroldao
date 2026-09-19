@@ -34,7 +34,7 @@ export const bioCtas = [
   },
   {
     id: 'portfolio',
-    icon: 'grid',
+    icon: 'portfolio',
     label: 'Ver meu portfólio',
     description: 'Cases reais, do problema ao resultado',
     href: '/',
@@ -43,7 +43,7 @@ export const bioCtas = [
   },
   {
     id: 'marketing',
-    icon: 'megaphone',
+    icon: 'marketing',
     label: 'Marketing & Redes',
     description: 'As artes que produzo pras marcas que cuido',
     href: '/marketing',
