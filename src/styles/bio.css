@@ -403,12 +403,14 @@
   margin-left: calc(50% - 50vw);
   margin-right: calc(50% - 50vw);
   overflow: hidden;
-  padding: var(--space-4) 0 0;
+  padding: var(--space-4) 0 var(--space-8);
 }
 
 .bio-gallery__stage {
   position: relative;
-  height: 190px;
+  /* Foto mais externa: rotate=8° + y=20px → projeta ~196px do centro.
+     190px cortava. 220px dá margem de 12px pra cima e pra baixo. */
+  height: 220px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -492,7 +494,7 @@
   }
 
   .bio-gallery__stage {
-    height: 150px;
+    height: 192px;
   }
 
   .bio-photo {
@@ -507,7 +509,7 @@
   }
 
   .bio-gallery__stage {
-    height: 132px;
+    height: 172px;
   }
 
   .bio-photo {
