@@ -273,70 +273,106 @@
 .bio-cta {
   display: flex;
   align-items: center;
-  justify-content: space-between;
   gap: var(--space-4);
-  padding: var(--space-4) var(--space-5);
+  padding: var(--space-4);
   border-radius: var(--radius-md);
   text-decoration: none;
   border: 1px solid var(--border);
-  transition: transform var(--transition-ui), border-color var(--transition-ui), opacity var(--transition-ui);
+  transition: transform var(--transition-ui), border-color var(--transition-ui), background var(--transition-ui), box-shadow var(--transition-ui);
 }
 
 .bio-cta:hover {
   transform: translateY(-2px);
 }
 
+/* Ícone num quadradinho arredondado à esquerda — dá "corpo" pro botão
+   (antes era só texto solto, achatado). O fundo do quadradinho muda
+   conforme a variante. */
+.bio-cta__icon {
+  flex-shrink: 0;
+  width: 42px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-sm);
+}
+
+.bio-cta__icon svg {
+  width: 20px;
+  height: 20px;
+}
+
 .bio-cta__text {
+  flex: 1;
   display: flex;
   flex-direction: column;
   gap: 2px;
   text-align: left;
+  min-width: 0;
 }
 
 .bio-cta__label {
   font-family: var(--font-sans);
   font-weight: var(--fw-semibold);
-  font-size: 0.98rem;
+  font-size: 1rem;
 }
 
 .bio-cta__description {
   font-family: var(--font-sans);
-  font-size: 0.78rem;
+  font-size: 0.8rem;
   line-height: 1.4;
 }
 
 .bio-cta__arrow {
   display: flex;
   flex-shrink: 0;
+  opacity: 0.7;
+  transition: transform var(--transition-ui);
+}
+
+.bio-cta:hover .bio-cta__arrow {
+  transform: translate(2px, -2px);
 }
 
 .bio-cta__arrow svg {
-  width: 15px;
-  height: 15px;
+  width: 16px;
+  height: 16px;
 }
 
-/* Primário preenchido em repouso (não só no hover) — essa página tem um
-   objetivo principal, então o CTA precisa de peso visual de cara. */
+/* Primário: verde preenchido, o CTA principal. Quadradinho do ícone num
+   tom escuro translúcido pra destacar do verde. */
 .bio-cta--primary {
   background: var(--accent);
   border-color: var(--accent);
   color: var(--on-accent);
+  box-shadow: 0 4px 20px rgba(82, 183, 136, 0.25);
 }
 
-/* O subtítulo precisa ficar visualmente mais leve que o título, mas
-   opacity:0.75 derrubava o contraste pra 4.43:1 — logo abaixo do mínimo
-   AA de 4.5:1 (medido pelo axe). 0.85 mantém a hierarquia e passa. */
+.bio-cta--primary .bio-cta__icon {
+  background: rgba(13, 27, 42, 0.15);
+}
+
+/* O subtítulo precisa ficar mais leve que o título, mas opacity:0.75
+   derrubava o contraste pra 4.43:1 — logo abaixo do mínimo AA de 4.5:1
+   (medido pelo axe). 0.85 mantém a hierarquia e passa. */
 .bio-cta--primary .bio-cta__description {
   opacity: 0.85;
 }
 
 .bio-cta--primary:hover {
-  opacity: 0.9;
+  box-shadow: 0 6px 26px rgba(82, 183, 136, 0.35);
 }
 
+/* Secundário: fundo elevado, ícone verde num quadradinho escuro. */
 .bio-cta--secondary {
   background: var(--bg-elevated);
   color: var(--text-primary);
+}
+
+.bio-cta--secondary .bio-cta__icon {
+  background: var(--bg-base);
+  color: var(--accent-text);
 }
 
 .bio-cta--secondary .bio-cta__description {
@@ -354,13 +390,15 @@
 /* ---------- Galeria em leque ---------- */
 
 /* As fotos começam empilhadas no centro e "abrem" em leque quando a
-   seção entra na tela (.is-spread, via IntersectionObserver). A posição
-   de cada uma vem de variável inline (--x/--y/--rotate) calculada no JS
-   a partir do índice — adicionar/remover foto redistribui sozinho.
+   seção entra na tela (.is-spread, via IntersectionObserver). --y e
+   --rotate vêm de variável inline calculada no JS a partir do índice;
+   --x vem do CSS (--offset inline x --bio-photo-gap, ver abaixo) —
+   adicionar/remover foto redistribui sozinho.
    O leque é mais largo que a coluna de propósito (dá a sensação de
    continuar além da tela), então fura o container e ocupa a viewport
    inteira, cortando só nas bordas reais. */
 .bio-gallery {
+  --bio-photo-gap: 142px;
   width: 100vw;
   margin-left: calc(50% - 50vw);
   margin-right: calc(50% - 50vw);
@@ -390,8 +428,11 @@
   transition-delay: var(--delay, 0ms);
 }
 
+/* --x é calculado aqui (não no JS) a partir do --offset da foto x o
+   --bio-photo-gap da galeria — assim dá pra encolher o leque no mobile
+   só mudando o gap, sem estourar a largura da tela. */
 .bio-gallery__stage.is-spread .bio-photo {
-  transform: translate(var(--x), var(--y)) rotate(var(--rotate));
+  transform: translate(calc(var(--offset) * var(--bio-photo-gap)), var(--y)) rotate(var(--rotate));
 }
 
 .bio-photo img {
@@ -425,22 +466,13 @@
   color: var(--accent-text);
 }
 
+/* PNG da marca (mesmo asset da navbar/footer do site) em vez do "L.R"
+   desenhado em CSS — pedido do Lucas, fecha mais bonito. */
 .bio-footer__mark {
-  width: 24px;
-  height: 24px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid currentColor;
-  border-radius: 5px;
-  font-family: var(--font-mono);
-  font-weight: var(--fw-bold);
-  font-size: 0.68rem;
-  letter-spacing: -0.05em;
-}
-
-.bio-footer__mark-dot {
-  color: var(--accent);
+  width: 26px;
+  height: 26px;
+  display: block;
+  flex-shrink: 0;
 }
 
 .bio-footer__handle {
@@ -450,20 +482,37 @@
 
 /* ---------- Responsivo ---------- */
 
-/* O leque em tamanho cheio não cabe em tela estreita — encolhe o palco
-   inteiro via scale (mais previsível que recalcular cada --x por
-   breakpoint no JS). */
+/* O leque em tamanho cheio não cabe em tela estreita — no mobile ele
+   encolhe pelo gap + tamanho da foto (não por scale, que estourava a
+   largura da tela e cortava as fotos das pontas). Gap menor junta as
+   fotos, foto menor cabe na largura real. */
 @media (max-width: 520px) {
+  .bio-gallery {
+    --bio-photo-gap: 78px;
+  }
+
   .bio-gallery__stage {
-    transform: scale(0.62);
-    height: 135px;
+    height: 150px;
+  }
+
+  .bio-photo {
+    width: 98px;
+    height: 124px;
   }
 }
 
 @media (max-width: 380px) {
+  .bio-gallery {
+    --bio-photo-gap: 64px;
+  }
+
   .bio-gallery__stage {
-    transform: scale(0.5);
-    height: 115px;
+    height: 132px;
+  }
+
+  .bio-photo {
+    width: 84px;
+    height: 106px;
   }
 
   .bio-dock__item {

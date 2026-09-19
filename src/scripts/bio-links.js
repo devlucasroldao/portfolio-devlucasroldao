@@ -25,6 +25,7 @@ export const bioLocation = 'Arroio do Sal, RS';
 export const bioCtas = [
   {
     id: 'whatsapp',
+    icon: 'whatsapp',
     label: 'Falar comigo',
     description: 'Resposta direta, sem robô',
     href: whatsappHref,
@@ -33,6 +34,7 @@ export const bioCtas = [
   },
   {
     id: 'portfolio',
+    icon: 'grid',
     label: 'Ver meu portfólio',
     description: 'Cases reais, do problema ao resultado',
     href: '/',
@@ -41,6 +43,7 @@ export const bioCtas = [
   },
   {
     id: 'marketing',
+    icon: 'megaphone',
     label: 'Marketing & Redes',
     description: 'As artes que produzo pras marcas que cuido',
     href: '/marketing',
@@ -51,7 +54,8 @@ export const bioCtas = [
 
 // Ícones sociais em dock — fileira única sobreposta entre a foto e o
 // corpo (referência: Hannah Lee). `id` casa com a chave em
-// BIO_SOCIAL_ICONS (bio-page.js).
+// BIO_SOCIAL_ICONS (bio-page.js). Sem email aqui — ele já aparece como
+// contato natural, não precisa competir com as redes no dock.
 export const bioSocials = [
   { id: 'linkedin', name: 'LinkedIn', href: 'https://linkedin.com/in/devlucasroldao' },
   { id: 'github', name: 'GitHub', href: 'https://github.com/devlucasroldao' },
@@ -68,7 +72,6 @@ export const bioSocials = [
     name: 'TikTok',
     href: '#',
   },
-  { id: 'email', name: 'Email', href: 'mailto:lucasroldao2802@gmail.com' },
 ];
 
 // Galeria de fotos do corpo (leque horizontal, pra humanizar a página).

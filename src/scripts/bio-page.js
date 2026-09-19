@@ -13,8 +13,10 @@ import {
   LINKEDIN_ICON,
   INSTAGRAM_ICON,
   TIKTOK_ICON,
-  ENVELOPE_ICON,
   EXTERNAL_LINK_ICON,
+  WHATSAPP_ICON,
+  GRID_ICON,
+  MEGAPHONE_ICON,
 } from './ui-icons.js';
 import { getIconSvg } from './icons.js';
 
@@ -23,13 +25,20 @@ const BIO_SOCIAL_ICONS = {
   github: getIconSvg('github'),
   instagram: INSTAGRAM_ICON,
   tiktok: TIKTOK_ICON,
-  email: ENVELOPE_ICON,
+};
+
+const BIO_CTA_ICONS = {
+  whatsapp: WHATSAPP_ICON,
+  grid: GRID_ICON,
+  megaphone: MEGAPHONE_ICON,
 };
 
 function renderCta(cta) {
   const externalAttrs = cta.external ? 'target="_blank" rel="noopener noreferrer"' : '';
+  const icon = BIO_CTA_ICONS[cta.icon] || '';
   return `
     <a href="${cta.href}" ${externalAttrs} class="bio-cta bio-cta--${cta.variant}">
+      <span class="bio-cta__icon">${icon}</span>
       <span class="bio-cta__text">
         <span class="bio-cta__label">${cta.label}</span>
         <span class="bio-cta__description">${cta.description}</span>
@@ -62,7 +71,12 @@ function renderSocial(social) {
 function renderPhoto(photo, index, total) {
   const middle = (total - 1) / 2;
   const offset = index - middle;
-  const x = offset * 142;
+  // O espaçamento horizontal vem de uma variável CSS (--bio-photo-gap),
+  // não de um px fixo aqui — assim o CSS pode encolher o leque no mobile
+  // por breakpoint sem depender só de scale (que estourava a largura da
+  // tela e dava a impressão de que fotos tinham sumido). O JS só define
+  // o MULTIPLICADOR (a posição de cada foto na ordem); o tamanho do passo
+  // é decisão de layout, fica no CSS.
   const y = Math.abs(offset) * 10;
   const rotate = offset * 4;
   const zIndex = total - Math.abs(offset);
@@ -70,7 +84,7 @@ function renderPhoto(photo, index, total) {
   return `
     <div
       class="bio-photo"
-      style="--x:${x}px; --y:${y}px; --rotate:${rotate}deg; z-index:${zIndex}; --delay:${Math.abs(offset) * 90}ms;"
+      style="--offset:${offset}; --y:${y}px; --rotate:${rotate}deg; z-index:${zIndex}; --delay:${Math.abs(offset) * 90}ms;"
     >
       <img src="${photo.src}" alt="${photo.alt}" loading="lazy" />
     </div>
@@ -124,7 +138,7 @@ function bioTemplate() {
       <!-- FAIXA 3 — footer: o tom mais escuro da paleta, fechando. -->
       <footer class="bio-footer">
         <a href="/" class="bio-footer__link">
-          <span class="bio-footer__mark">L<span class="bio-footer__mark-dot">.</span>R</span>
+          <img class="bio-footer__mark" src="/images/brand/mark-dark@2x.png" srcset="/images/brand/mark-dark@2x.png 2x, /images/brand/mark-dark@3x.png 3x" alt="" />
           <span class="bio-footer__handle">@devlucasroldao</span>
         </a>
       </footer>
