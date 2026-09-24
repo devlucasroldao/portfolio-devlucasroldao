@@ -222,6 +222,78 @@ export const casesData = [
       { label: 'Banco/Infra', icons: ['supabase', 'vercel'] },
     ],
   },
+  {
+    id: 'case-helena-lima',
+    href: '/case-helena-lima',
+    reverse: false,
+    eyebrow: 'Case 03 — Marca pessoal + Landing page',
+    badgeIcon: 'star',
+    title: 'Helena Lima',
+    meta: [
+      ['Cliente', 'Helena Lima — gestão administrativa para MEIs, autônomos e empresas'],
+      ['Período', 'Set 2026 (menos de 24 horas)'],
+      ['Papel', 'Estratégia, identidade visual, fotografia, templates, documentos e desenvolvimento'],
+    ],
+    teaserImage: '/images/cases/helena-teaser.jpg',
+    teaserImageAlt: 'Landing page da Helena Lima — Gestão pra Negócios, com foto e chamada para diagnóstico sem custo',
+    bannerImage: '/images/cases/helena-banner.jpg',
+    bannerImageAlt: 'Site da Helena Lima com hero, foto profissional e botões de CTA para WhatsApp',
+    liveUrl: 'https://helena-lima-landing.vercel.app/',
+    instagramUrl: 'https://www.instagram.com/helenagestao/',
+    teaserHeadline: 'Do zero ao ar em menos de 24 horas',
+    teaserProblem:
+      'Uma ideia que tinha esfriado: perfil criado, logo pronta, nenhum post. Posicionamento, identidade, fotos, documentos, templates e site — tudo do zero em um dia.',
+    teaserTags: ['Marca pessoal', 'Landing page', 'Entregue em 24h'],
+    blocks: [
+      [
+        'Problema',
+        `<p>A Helena é minha amiga e foi minha colega durante um ano na Conecte Telecom. Lá, ela estruturou do zero um setor financeiro que não tinha organização nenhuma. Depois de sair, foi trabalhar como PJ e surgiu a vontade de prestar serviço pra outras empresas — mas a ideia ficou parada: tinha um perfil no Instagram chamado <span class="case__highlight">Flow Gestão</span>, com logo criada, e zero posts. A identidade não era dela, era de uma empresa genérica. E serviço administrativo é difícil de vender pra uma marca sem rosto.</p>
+        <p>O maior ativo que ela tinha era ela mesma: a experiência, a história que começa aos 14 anos como secretária num salão, e um case real e forte — o financeiro da Conecte, estruturado por ela. O projeto precisava colocar isso na frente.</p>`,
+      ],
+      [
+        'Decisão',
+        `<p>A primeira decisão não foi visual, foi estratégica: <span class="case__highlight">sair da marca e colocar a Helena no centro</span>. O perfil deixaria de ser uma empresa genérica de gestão e passaria a ser a Helena Lima, com o rosto, a história e o jeito dela de falar. Daí saiu tudo o resto.</p>
+        <p>A frase que guiou o projeto veio da própria Helena quando descreveu o trabalho dela: <em>"Eu sei organizar o seu negócio, mas antes de organizar, eu quero entender você."</em> Isso se tornou o posicionamento, o tom de voz e a estrutura de toda a página.</p>`,
+      ],
+      [
+        'Solução',
+        `<div class="case__sub-blocks">
+          ${renderSubBlock(
+            'Estratégia & identidade visual',
+            '<p>Briefing estruturado no ChatGPT, diagnóstico e direções visuais desenvolvidas no Claude. Três direções de identidade, com a Helena escolhendo e refinando. Logo, monograma, paleta "papel" (off-white, bege, grafite e verde-musgo), tipografia e regras de uso — tudo documentado antes de qualquer tela ser gerada.</p>'
+          )}
+          ${renderSubBlock(
+            'Fotografia',
+            '<p>115 fotos produzidas na sessão, já com a paleta da marca em mente. A parede medida mostrou que a cor já estava muito perto do tom "papel" da identidade — isso eliminou o uso de IA pra trocar fundo, evitando o risco de distorção no rosto (crítico numa marca pessoal). As telas dos notebooks nas fotos de bastidor foram desfocadas antes de qualquer uso: a Helena promete confidencialidade em contrato, e publicar planilhas reais seria o pior tipo de exposição.</p>'
+          )}
+          ${renderImage(
+            '/images/cases/helena-site.jpg',
+            'Landing page da Helena Lima com hero, seções de dores, serviços, processo e CTA para WhatsApp',
+            'case__inline-image'
+          )}
+          ${renderSubBlock(
+            'Landing page',
+            `<p>Primeira versão gerada no <span class="case__highlight">Figma Make</span> com o prompt completo (copy, identidade e regra de não inventar nenhum dado). Migração pro VS Code com Claude Code: ícones, botões, animações, fotos reais, mobile e deploy na Vercel. Estrutura da página responde, em ordem, às perguntas que alguém faz antes de chamar um profissional — quem é ela, se isso tem a ver com o meu problema, como funciona, se ela já fez isso antes e como eu começo.</p>
+            <a href="https://helena-lima-landing.vercel.app/" target="_blank" rel="noopener noreferrer" class="case__inline-link">Ver o site no ar${EXTERNAL_LINK_ICON}</a>`
+          )}
+          ${renderSubBlock(
+            'Templates, documentos e IA',
+            '<p>Primeiros templates no Canva com a paleta, fontes e regras da identidade — pra ela criar posts sem depender de ninguém. Proposta comercial e contrato base com identidade visual completa, em Word e PDF. IA configurada com um projeto próprio do perfil (posicionamento, tom de voz, o que evitar) — qualquer legenda ou ideia que ela pedir já sai na voz da marca.</p>'
+          )}
+        </div>`,
+      ],
+      [
+        'Resultado',
+        `<p>Do briefing ao site no ar em <span class="case__highlight">menos de 24 horas</span>. Entregas: posicionamento, tom de voz, identidade visual completa, logo e monograma, 115 fotos, perfil no Instagram (<a href="https://www.instagram.com/helenagestao/" target="_blank" rel="noopener noreferrer" class="case__inline-link">@helenagestao</a>), templates no Canva, IA configurada com a documentação da marca, proposta comercial, contrato base e landing page no ar.</p>`,
+      ],
+    ],
+    learning:
+      '"Fazer rápido com IA não quer dizer que tudo funciona de primeira. O Figma Make disse que tinha corrigido as fontes — e não tinha. Escondeu um plugin que bloqueava toda a indexação no Google. A IA acelera, mas quem decide é quem conhece o projeto e sabe onde desconfiar."',
+    stack: [
+      { label: 'Frontend', icons: ['react', 'typescript', 'tailwindcss', 'vite'] },
+      { label: 'Infra', icons: ['vercel'] },
+    ],
+  },
 ];
 
 // Foto real — mesma vaga que o placeholder ocupava, sem a borda tracejada
@@ -274,20 +346,25 @@ function renderCaseMeta(meta) {
 // (ver .case-full__links). O link de marketing já chega filtrado nesse
 // cliente específico (?cliente=... lido por marketing-page.js) — quem
 // clicou a partir do case da Conecte não precisa filtrar de novo lá.
+// Case sem cliente no marketing (ex.: Helena Lima) não mostra esse link.
 function renderCaseLinks(data) {
+  const marketingLink = data.marketingClient
+    ? `<a href="/marketing?cliente=${data.marketingClient}" class="case-full__instagram-link">Trabalho de marketing →</a>`
+    : '';
   return `
     <div class="case-full__links">
       <a href="${data.liveUrl}" target="_blank" rel="noopener noreferrer" class="case-full__live-link">Ver site ao vivo${EXTERNAL_LINK_ICON}</a>
       <a href="${data.instagramUrl}" target="_blank" rel="noopener noreferrer" class="case-full__instagram-link">${INSTAGRAM_ICON}Instagram</a>
-      <a href="/marketing?cliente=${data.marketingClient}" class="case-full__instagram-link">Trabalho de marketing →</a>
+      ${marketingLink}
     </div>
   `;
 }
 
-// Só existem 2 cases — o "próximo" é sempre o outro, ciclicamente
-// (Conecte -> Lu Perfumes -> Conecte).
+// "Próximo" segue a ordem de casesData, ciclicamente
+// (Conecte -> Lu Perfumes -> Helena Lima -> Conecte).
 function renderNextCaseNav(currentId) {
-  const next = casesData.find((c) => c.id !== currentId) ?? casesData[0];
+  const idx = casesData.findIndex((c) => c.id === currentId);
+  const next = casesData[(idx + 1) % casesData.length];
   return `
     <a href="${next.href}" class="case-next">
       <span class="case-next__eyebrow">Próximo case</span>
