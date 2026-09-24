@@ -250,6 +250,20 @@ img.case-teaser__image {
   color: var(--text-primary);
 }
 
+/* Link dentro de texto corrido (diferente do case__inline-link que é
+   display:flex e fica em linha própria). Só cor + sublinhado, sem
+   quebrar o parágrafo. */
+.case__text-link {
+  color: var(--accent-text);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color var(--transition-ui);
+}
+
+.case__text-link:hover {
+  color: var(--text-primary);
+}
+
 /* Sub-divisões dentro de um bloco (só a Solução do Conecte usa, por ter
    muita coisa pra cobrir) — mesmo padrão tipográfico do label de bloco
    grande logo acima, só um nível menor, pra ficar claro que é filho

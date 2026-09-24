@@ -284,7 +284,7 @@ export const casesData = [
       ],
       [
         'Resultado',
-        `<p>Do briefing ao site no ar em <span class="case__highlight">menos de 24 horas</span>. Entregas: posicionamento, tom de voz, identidade visual completa, logo e monograma, 115 fotos, perfil no Instagram (<a href="https://www.instagram.com/helenagestao/" target="_blank" rel="noopener noreferrer" class="case__inline-link">@helenagestao</a>), templates no Canva, IA configurada com a documentação da marca, proposta comercial, contrato base e landing page no ar.</p>`,
+        `<p>Do briefing ao site no ar em <span class="case__highlight">menos de 24 horas</span>. Entregas: posicionamento, tom de voz, identidade visual completa, logo e monograma, 115 fotos, perfil no Instagram (<a href="https://www.instagram.com/helenagestao/" target="_blank" rel="noopener noreferrer" class="case__text-link">@helenagestao</a>), templates no Canva, IA configurada com a documentação da marca, proposta comercial, contrato base e landing page no ar.</p>`,
       ],
     ],
     learning:
