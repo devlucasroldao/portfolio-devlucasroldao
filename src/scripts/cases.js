@@ -235,9 +235,9 @@ export const casesData = [
       ['Papel', 'Estratégia, identidade visual, fotografia, templates, documentos e desenvolvimento'],
     ],
     teaserImage: '/images/cases/helena-teaser.jpg',
-    teaserImageAlt: 'Landing page da Helena Lima — Gestão pra Negócios, com foto e chamada para diagnóstico sem custo',
+    teaserImageAlt: 'Hero do site Helena Lima — Gestão pra Negócios, com foto dela e chamada para contato',
     bannerImage: '/images/cases/helena-banner.jpg',
-    bannerImageAlt: 'Site da Helena Lima com hero, foto profissional e botões de CTA para WhatsApp',
+    bannerImageAlt: 'Hero do site Helena Lima com foto profissional e botões de contato no WhatsApp',
     liveUrl: 'https://helena-lima-landing.vercel.app/',
     instagramUrl: 'https://www.instagram.com/helenagestao/',
     teaserHeadline: 'Do zero ao ar em menos de 24 horas',
@@ -268,7 +268,7 @@ export const casesData = [
           )}
           ${renderImage(
             '/images/cases/helena-site.jpg',
-            'Landing page da Helena Lima com hero, seções de dores, serviços, processo e CTA para WhatsApp',
+            'Seção "Prazer, Helena Lima" — história e apresentação da profissional no site',
             'case__inline-image'
           )}
           ${renderSubBlock(
