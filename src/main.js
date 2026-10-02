@@ -30,7 +30,7 @@ const heroTemplate = `
     </div>
 
     <div class="hero__content">
-      <h1 class="hero__headline">Bah, eu sou o <span class="hero__rotator"><span class="hero__rotator-word pos-current">Desenvolvedor</span><span class="hero__rotator-word"></span></span></h1>
+      <h1 class="hero__headline">Bah, eu sou o <span class="hero__rotator"><span class="hero__rotator-word pos-current">Dev front-end</span><span class="hero__rotator-word"></span></span></h1>
 
       <p class="hero__subtitle">
         <span class="hero__subtitle-highlight">Dev</span> que também pensa como
@@ -107,7 +107,7 @@ const sobreTemplate = `
           </div>
           <div class="sobre__info-row">
             <span class="sobre__info-label">Atuação</span>
-            <span class="sobre__info-value">Dev &amp; Estrategista Digital</span>
+            <span class="sobre__info-value">Desenvolvedor Front-end</span>
           </div>
           <div class="sobre__info-row">
             <span class="sobre__info-label">Ferramentas</span>
@@ -136,6 +136,7 @@ const closingTemplate = `
           <a href="${whatsappHref}" target="_blank" rel="noopener noreferrer" class="btn cta-final__button--primary">Chamar no WhatsApp${EXTERNAL_LINK_ICON}</a>
           <a href="https://linkedin.com/in/devlucasroldao" target="_blank" rel="noopener noreferrer" class="btn btn--secondary">Meu LinkedIn${EXTERNAL_LINK_ICON}</a>
         </div>
+        <p class="cta-final__email">Prefere e-mail? <a href="#" data-email-link><span>lucasroldao2802@gmail.com</span></a></p>
       </div>
     </div>
   </section>

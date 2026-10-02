@@ -158,7 +158,7 @@ export const casesData = [
     teaserHeadline: 'Catálogo & atendimento sem perder o humano',
     teaserProblem:
       '"O que você tem de perfume feminino aí?" — a Lu respondia isso, um por um, pra centenas de clientes, sem catálogo, sem histórico, sem parar.',
-    teaserTags: ['Catálogo online', 'Meta: 500+ produtos', 'Painel admin autônomo'],
+    teaserTags: ['Catálogo online', '35 de 500+ produtos no ar', 'Painel admin autônomo'],
     blocks: [
       [
         'Problema',
@@ -212,7 +212,7 @@ export const casesData = [
       ],
       [
         'Resultado',
-        '<p>Site funcional, catálogo ainda em construção: das <span class="case__highlight">mais de 500 peças planejadas</span>, <span class="case__highlight">~350 já foram fotografadas</span> e menos de 100 estão cadastradas até agora — processo manual e ainda em andamento. A base de reputação (<span class="case__highlight">100+ avaliações 5 estrelas</span>) já está pronta pro dia em que o domínio for ao ar.</p>',
+        '<p>Site funcional, catálogo em fase de cadastro: das <span class="case__highlight">mais de 500 peças planejadas</span>, <span class="case__highlight">~350 já foram fotografadas</span> e <span class="case__highlight">35 já estão cadastradas</span> — o cadastro é manual e segue em andamento, com meta de passar das 500. A base de reputação (<span class="case__highlight">100+ avaliações 5 estrelas</span>) já está pronta pro dia em que o domínio for ao ar.</p>',
       ],
     ],
     learning:

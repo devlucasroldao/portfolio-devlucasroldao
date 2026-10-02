@@ -21,7 +21,7 @@ export function renderFooter({ base = '' } = {}) {
           />
           <div class="footer__identity-text">
             <span class="footer__name">Lucas Roldão</span>
-            <span class="footer__meta">Dev &amp; Estrategista Digital · Arroio do Sal, RS</span>
+            <span class="footer__meta">Desenvolvedor Front-end · Arroio do Sal, RS</span>
           </div>
         </div>
         <div class="footer__link-groups">
@@ -57,9 +57,10 @@ export function renderFooter({ base = '' } = {}) {
 // feedback visual no próprio texto do link — clique sempre produz um
 // resultado útil, independente de o navegador abrir um cliente ou não.
 export function initFooterEmail() {
-  const link = document.querySelector('[data-email-link]');
-  if (!link) return;
+  document.querySelectorAll('[data-email-link]').forEach(initEmailLink);
+}
 
+function initEmailLink(link) {
   const user = 'lucasroldao2802';
   const domain = 'gmail.com';
   const email = `${user}@${domain}`;

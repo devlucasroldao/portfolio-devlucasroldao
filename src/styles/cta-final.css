@@ -168,3 +168,20 @@
   border-color: var(--bg-base);
   color: var(--text-primary);
 }
+
+/* E-mail visível abaixo dos botões — recrutador de empresa grande não chama no WhatsApp. */
+.cta-final__email {
+  margin-top: 1.25rem;
+  color: var(--border);
+  font-size: 0.85rem;
+}
+
+.cta-final__email a {
+  color: var(--bg-base);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.cta-final__email a:hover {
+  color: var(--accent);
+}

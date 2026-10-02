@@ -126,7 +126,7 @@ A IA acelerou a execução. As decisões — o que construir, o que cortar, o qu
 
 ## 👨‍💻 Sobre Mim
 
-**Lucas Roldão Cardoso** — Estudante de Análise e Desenvolvimento de Sistemas (ULBRA), hoje atuando com marketing digital na Conecte Telecom. Foi lá, por iniciativa própria, que encarei meu primeiro projeto de desenvolvimento de verdade: reconstruí o site da empresa como uma plataforma completa e, no processo, encontrei e corrigi uma vulnerabilidade crítica de segurança.
+**Lucas Roldão Cardoso** — Estudante de Análise e Desenvolvimento de Sistemas (ULBRA), hoje atuando com marketing digital na Conecte Telecom. Foi lá, por iniciativa própria, que encarei meu primeiro projeto de desenvolvimento de verdade: evoluí o site institucional que a empresa já tinha para uma plataforma completa e, no processo, encontrei e corrigi uma falha crítica de controle de acesso.
 
 Busco minha primeira oportunidade formal como desenvolvedor.
 
