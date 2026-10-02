@@ -41,26 +41,9 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* Fade-in sutil no carregamento — #app é o ponto de montagem em toda
-   página (home e cases), então isso cobre o site inteiro de uma vez. */
-#app {
-  animation: page-fade-in 420ms ease-out;
-}
-
-@keyframes page-fade-in {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  #app {
-    animation: none;
-  }
-}
+/* O fade-in de entrada do #app (opacity 0 → 1) foi removido: em celular
+   com CPU e rede lentas, o Lighthouse não registrava nenhuma pintura
+   (erro NO_FCP) e a nota mobile não saía. Sem ele, FCP ~3 s no teste. */
 
 /* Scroll-reveal genérico (scroll-animations.js adiciona .reveal via JS e
    .is-visible quando o IntersectionObserver dispara) — fade + leve subida,
