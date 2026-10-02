@@ -41,11 +41,10 @@ export function depoimentosTemplate() {
       <div class="depoimentos__header">
         <span class="depoimentos__eyebrow">Depoimentos</span>
         <h2 class="depoimentos__heading">O que dizem sobre mim</h2>
-        <p class="depoimentos__subtitle">Recados de gente que cruzou meu caminho — faculdade, trabalho, parceria, amizade. Não é sobre validar projeto, é sobre quem eu sou pros dois lados.</p>
+        <p class="depoimentos__subtitle">Recados de quem trabalhou comigo — na Conecte Telecom e na Agrocenter.</p>
       </div>
       <div class="depoimentos__grid">
         ${carousel(0)}
-        ${carousel(3, { secondary: true })}
       </div>
     </section>
   `;

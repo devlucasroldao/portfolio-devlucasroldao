@@ -31,16 +31,15 @@
   line-height: 1.6;
 }
 
+/* Uma coluna só: com 3 depoimentos, dois carrosséis lado a lado acabavam
+   mostrando o mesmo card nas duas colunas. Largura limitada pra o card não
+   esticar demais no desktop. */
 .depoimentos__grid {
-  max-width: var(--content-max-width);
+  max-width: 760px;
   margin: 0 auto;
   padding: 0 var(--space-6);
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  /* Gap largo de propósito: as setas centrais (next da esquerda + prev da
-     direita) ficam penduradas na borda de cada card, uma de frente pra
-     outra, dentro desse espaço — precisa sobrar respiro entre as duas. */
-  gap: var(--space-16);
+  grid-template-columns: 1fr;
 }
 
 .carousel {
@@ -300,10 +299,6 @@
 }
 
 @media (max-width: 900px) {
-  .depoimentos__grid {
-    grid-template-columns: 1fr;
-  }
-
   .carousel--secondary {
     display: none;
   }
