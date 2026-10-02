@@ -37,6 +37,15 @@ Aqui dá pra conhecer um pouco mais sobre mim, minha rotina, onde moro (Arroio d
 - 🔒 **Headers de segurança** configurados via `vercel.json` (`X-Frame-Options`, `Strict-Transport-Security`, `Permissions-Policy`)
 - ⚡ **Performance** — payload total reduzido de 17,6MB pra 6MB (vídeo recomprimido, imagens redimensionadas pro tamanho real de exibição, `width`/`height` explícitos pra evitar pulo de layout)
 
+### Lighthouse (PageSpeed Insights, 02/10/2026)
+
+| | Desempenho | Acessibilidade | Práticas recomendadas | SEO |
+|---|---|---|---|---|
+| 💻 Desktop | 99 | 100 | 100 | 100 |
+| 📱 Celular | 90 | 100 | 100 | 100 |
+
+> No celular, o teste não gerava nota (erro `NO_FCP`): um fade-in de entrada deixava a página inteira com opacidade 0, e o navegador não contava isso como conteúdo desenhado. Reproduzi o erro rodando o Lighthouse localmente, removi o efeito e a nota passou a sair.
+
 ---
 
 ## 🛠️ Stack Tecnológica
