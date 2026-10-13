@@ -30,7 +30,7 @@ Aqui dá pra conhecer um pouco mais sobre mim, minha rotina, onde moro (Arroio d
 - 🎬 **Hero com vídeo de fundo** — poster leve pro primeiro carregamento, e respeita `prefers-reduced-motion` (quem pede menos movimento no sistema nem baixa o vídeo)
 
 ### Conteúdo
-- 💼 **Cases reais** — Conecte Telecom (plataforma full-stack + correção de uma vulnerabilidade crítica de segurança) e Lu Perfumes & Presentes (e-commerce em desenvolvimento pra minha mãe), cada um com página própria, stack documentada e resultado real, não inventado
+- 💼 **Cases reais** — Conecte Telecom (plataforma full-stack + correção de uma vulnerabilidade crítica de segurança) e Lu Perfumes & Presentes (e-commerce de uma loja de perfumes de Arroio do Sal), cada um com página própria, stack documentada e resultado real, não inventado
 - 🗣️ **Depoimentos** — carrossel com gente de verdade que cruzou meu caminho (profissional e pessoal), sem troca automática — só avança quando a pessoa clica
 - 🎨 **Galeria de Marketing & Redes Sociais** — página própria, separada do fluxo principal, com artes reais que já produzi pra Conecte e Lu Perfumes: grid *masonry* (cada peça na proporção real dela, sem cortar nada), filtro por cliente, lightbox, e um esmaecimento no final convidando pra ver mais no Instagram de cada marca
 
