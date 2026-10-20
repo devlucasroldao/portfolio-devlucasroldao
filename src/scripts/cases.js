@@ -304,7 +304,7 @@ export const casesData = [
     badgeIcon: 'eye',
     title: 'Rabisco Prévia',
     meta: [
-      ['Produto', 'Ferramenta interna da Rabisco, agência que toco com a Júlia'],
+      ['Produto', 'Ferramenta interna da agência Rabisco'],
       ['Período', 'Out 2026 (2 dias até o painel no ar; hoje em uso real)'],
       ['Papel', 'Escopo de produto, desenvolvimento full-stack e testes'],
     ],
@@ -419,7 +419,7 @@ function renderImage(src, alt, extraClass = '', { eager = false } = {}) {
 // pede menos movimento sem precisar de checagem extra) e preload="none":
 // só baixa o arquivo quando a pessoa aperta o play; até lá, aparece o poster.
 function renderVideo(src, poster, label) {
-  return `<video class="case__inline-video" src="${src}" poster="${poster}" controls playsinline preload="none" aria-label="${label}"></video>`;
+  return `<video class="case__inline-video" src="${src}" poster="${poster}" controls muted playsinline preload="none" aria-label="${label}"></video>`;
 }
 
 // Selo circular reforçando a categoria do case — círculo é a exceção de

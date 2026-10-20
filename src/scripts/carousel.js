@@ -74,7 +74,7 @@ function initCarouselInstance(root) {
   // natural de TODOS os cards e travava o stage na maior — pensado pra
   // não "pular" o layout ao trocar de card, mas o efeito colateral era
   // pior: com 7 depoimentos de tamanhos bem diferentes, a caixa toda
-  // ficava travada no tamanho do MAIOR (Giulia, o mais longo) o tempo
+  // ficava travada no tamanho do MAIOR (o mais longo) o tempo
   // todo — inclusive quando o depoimento ativo era um curto (tipo o da
   // Lu Roldão), sobrando uma área vazia enorme abaixo do texto/foto.
   // Agora mede só o card ATIVO a cada troca — o stage já tinha
