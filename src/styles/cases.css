@@ -314,6 +314,17 @@ img.case__inline-image {
   }
 }
 
+/* Vídeo curto dentro do case (hoje só a Rabisco Prévia) — mesma moldura
+   das imagens, na proporção 16:9 do próprio vídeo, então nunca corta. */
+video.case__inline-video {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: var(--bg-darker);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+}
+
 /* Só quando a imagem é filha direta do bloco (Lu Perfumes, meio de um
    texto corrido) — dentro de .case__sub-blocks (Conecte) o próprio gap
    do flex já cuida do espaçamento, então não duplica aqui. */

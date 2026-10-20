@@ -17,7 +17,7 @@ Esse é o meu portfólio pessoal — e por muito pouco não virou mais um clich�
 
 A ideia nasceu depois de ver o portfólio que minha professora Andrezza Andrade criou pra ela. Peguei a referência, pesquisei bastante coisa no Dribbble e fui construindo o meu, do jeito que quis: sem "Olá, sou desenvolvedor tal", sem lista de tecnologia solta, com a minha cara.
 
-Aqui dá pra conhecer um pouco mais sobre mim, minha rotina, onde moro (Arroio do Sal, litoral gaúcho), e — o mais importante — dois projetos reais que construí, com cliente de verdade, problema de verdade e resultado medido, não case fictício de portfólio.
+Aqui dá pra conhecer um pouco mais sobre mim, minha rotina, onde moro (Arroio do Sal, litoral gaúcho), e — o mais importante — os projetos reais que construí, com cliente de verdade, problema de verdade e resultado medido, não case fictício de portfólio.
 
 ---
 
@@ -30,7 +30,7 @@ Aqui dá pra conhecer um pouco mais sobre mim, minha rotina, onde moro (Arroio d
 - 🎬 **Hero com vídeo de fundo** — poster leve pro primeiro carregamento, e respeita `prefers-reduced-motion` (quem pede menos movimento no sistema nem baixa o vídeo)
 
 ### Conteúdo
-- 💼 **Cases reais** — Conecte Telecom (plataforma full-stack + correção de uma vulnerabilidade crítica de segurança) e Lu Perfumes & Presentes (e-commerce de uma loja de perfumes de Arroio do Sal), cada um com página própria, stack documentada e resultado real, não inventado
+- 💼 **Cases reais** — Conecte Telecom (plataforma full-stack + correção de uma vulnerabilidade crítica de segurança), Lu Perfumes & Presentes (e-commerce de uma loja de perfumes de Arroio do Sal), Helena Lima (marca pessoal + landing page em menos de 24h) e Rabisco Prévia (ferramenta de código aberto que mostra ao cliente, num link, como o feed vai ficar antes de publicar), cada um com página própria, stack documentada e resultado real, não inventado
 - 🗣️ **Depoimentos** — carrossel com gente de verdade que cruzou meu caminho (profissional e pessoal), sem troca automática — só avança quando a pessoa clica
 - 🎨 **Galeria de Marketing & Redes Sociais** — página própria, separada do fluxo principal, com artes reais que já produzi pra Conecte e Lu Perfumes: grid *masonry* (cada peça na proporção real dela, sem cortar nada), filtro por cliente, lightbox, e um esmaecimento no final convidando pra ver mais no Instagram de cada marca
 
@@ -69,9 +69,11 @@ portfolio-devlucasroldao/
 ├── index.html              # Home
 ├── case-conecte.html       # Case completo: Conecte Telecom
 ├── case-lu-perfumes.html   # Case completo: Lu Perfumes & Presentes
+├── case-helena-lima.html   # Case completo: Helena Lima
+├── case-rabisco-previa.html # Case completo: Rabisco Prévia
 ├── marketing.html          # Galeria de Marketing & Redes Sociais
 ├── src/
-│   ├── main.js, case-conecte.js, case-lu-perfumes.js, marketing.js   # pontos de entrada
+│   ├── main.js, case-*.js, marketing.js, bio.js   # pontos de entrada
 │   ├── scripts/
 │   │   ├── navbar.js, footer.js          # layout compartilhado
 │   │   ├── hero-rotator.js, hero-video.js
@@ -85,6 +87,7 @@ portfolio-devlucasroldao/
 ├── public/
 │   ├── images/             # organizadas por seção (cases, depoimentos, marketing, sobre)
 │   ├── hero-video.mp4 + hero-poster.jpg
+│   ├── videos/             # vídeos curtos dos cases (carregam só no play)
 │   └── og-image.jpg        # imagem de preview pra compartilhamento
 └── vercel.json             # headers de segurança
 ```

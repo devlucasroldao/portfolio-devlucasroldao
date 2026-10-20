@@ -1,6 +1,8 @@
 import { getIconSvg, iconTitles } from './icons.js';
 import { BADGE_ICONS } from './badge-icons.js';
-import { EXTERNAL_LINK_ICON, INSTAGRAM_ICON } from './ui-icons.js';
+import { EXTERNAL_LINK_ICON, INSTAGRAM_ICON, asFooterBrandIcon } from './ui-icons.js';
+
+const GITHUB_ICON = asFooterBrandIcon(getIconSvg('github'));
 
 function renderStack(groups) {
   const icons = groups.flatMap((group) => group.icons);
@@ -294,6 +296,114 @@ export const casesData = [
       { label: 'Infra', icons: ['vercel'] },
     ],
   },
+  {
+    id: 'case-rabisco-previa',
+    href: '/case-rabisco-previa',
+    reverse: true,
+    eyebrow: 'Case 04 — Produto próprio + Código aberto',
+    badgeIcon: 'eye',
+    title: 'Rabisco Prévia',
+    meta: [
+      ['Produto', 'Ferramenta interna da Rabisco, agência que toco com a Júlia'],
+      ['Período', 'Out 2026 (2 dias até o painel no ar; hoje em uso real)'],
+      ['Papel', 'Escopo de produto, desenvolvimento full-stack e testes'],
+    ],
+    teaserImage: '/images/cases/previa-teaser.jpg',
+    teaserImageAlt: 'Três celulares mostrando a Rabisco Prévia: um carrossel aberto, o grid numerado dos próximos posts e um Reels com legenda',
+    bannerImage: '/images/cases/previa-banner.jpg',
+    bannerImageAlt: 'Painel da equipe montando a semana de um cliente ao lado do celular com o grid numerado que o cliente recebe',
+    liveUrl: 'https://rabisco-previa.vercel.app/p/demo',
+    liveLabel: 'Ver demo ao vivo',
+    repoUrl: 'https://github.com/devlucasroldao/rabisco-previa',
+    instagramUrl: 'https://www.instagram.com/rabisco.agencia/',
+    teaserHeadline: 'Do .zip no WhatsApp a um link por semana',
+    teaserProblem:
+      'O conteúdo da semana ia pro cliente num .zip pelo WhatsApp, e ele aprovava sem ver como o feed ia ficar. Construí um link que abre no celular com cara de perfil do Instagram, com os posts numerados.',
+    teaserTags: ['Produto em uso real', 'Código aberto', 'R$ 0 de infraestrutura'],
+    blocks: [
+      [
+        'Problema',
+        `<p>Na Rabisco, o conteúdo da semana ia pro cliente numa <span class="case__highlight">pasta zipada pelo WhatsApp</span>. Esse fluxo falhava em três pontos. Arte solta não mostra como o post fica no feed, ao lado dos outros. A legenda chegava separada da arte, e quem aprovava tinha que juntar as peças sozinho. E o retorno vinha vago: "muda aquele azul" não diz de qual post o cliente está falando.</p>
+        <p>No fim, o cliente aprovava sem ver o feed, e a equipe perdia tempo interpretando mensagem solta.</p>
+        <a href="https://www.linkedin.com/feed/update/urn:li:activity:7518291210910982144/" target="_blank" rel="noopener noreferrer" class="case__inline-link">Contei sobre a Prévia neste post${EXTERNAL_LINK_ICON}</a>`,
+      ],
+      [
+        'Decisão',
+        `<p>A decisão que definiu o projeto foi o que ele não faz: <span class="case__highlight">só visualização, de propósito</span>. Sem login pro cliente, sem comentários, sem aprovação dentro do app. O feedback continua no WhatsApp, por print, citando o número do post ("Post 3: trocar a foto"). O número resolve o "de qual post você está falando" sem criar sistema novo pra manter nem nada novo pro cliente aprender.</p>
+        <p>O mesmo critério cortou upload em massa e duplicar apresentação: o volume semanal é baixo, e duplicar dobraria o armazenamento. Antes da primeira linha de código, o escopo foi fechado numa <span class="case__highlight">especificação escrita</span> (problema, usuários, o que entra, o que fica de fora, dados, stack e riscos), pra ferramenta interna não cair no erro clássico de crescer sem parar.</p>`,
+      ],
+      [
+        'Solução',
+        `<div class="case__sub-blocks">
+          ${renderSubBlock(
+            'O fluxo em 25 segundos',
+            '<p>Um link por semana. A equipe monta a apresentação no painel, copia o link e manda no WhatsApp. O cliente abre no celular e vê um perfil com cara de Instagram, com os próximos posts numerados.</p>'
+          )}
+          ${renderVideo(
+            '/videos/previa-demo.mp4',
+            '/images/cases/previa-video-poster.jpg',
+            'Vídeo de 25 segundos: antes, o conteúdo ia num .zip pelo WhatsApp; agora, um link mostra o grid numerado e o ajuste cita o número do post'
+          )}
+          ${renderSubBlock(
+            'Tela do cliente',
+            '<p>Sem login, sem menu, nada pra aprender: quem lê o feed todo dia já sabe usar. Grid numerado, visualizador em tela cheia pra post, carrossel (com swipe e contador) e Reels, sempre com legenda e hashtags. Stories da semana com o anel que fica cinza depois de visto. Segue o tema claro ou escuro do aparelho.</p>'
+          )}
+          ${renderImage(
+            '/images/cases/previa-cliente.jpg',
+            'Visualizador da Rabisco Prévia no celular: carrossel com contador, Reels com controles e story da semana',
+            'case__inline-image'
+          )}
+          ${renderSubBlock(
+            'Painel da equipe',
+            '<p>Cadastro de clientes e apresentações por semana. Novo post com arrastar e soltar e barra de progresso real; reordenar posts arrastando, <span class="case__highlight">inclusive pelo teclado</span>. Medidor de armazenamento e limpeza em lote, porque o limite que aperta é 1 GB de arquivos. Redesenhado no estilo Notion com a identidade da Rabisco, com tema claro e escuro e gaveta no celular.</p>'
+          )}
+          ${renderImage(
+            '/images/cases/previa-painel.jpg',
+            'Painel da Rabisco Prévia nos temas escuro e claro, com a lista de posts e stories da semana de um cliente',
+            'case__inline-image'
+          )}
+          ${renderSubBlock(
+            'Vídeo comprimido no navegador',
+            '<p>Vídeo de iPhone (HEVC) quase sempre passa de 50 MB, o limite por arquivo do plano gratuito do Supabase. Em vez de pagar servidor de vídeo, a compressão roda no navegador de quem monta a semana, com ffmpeg.wasm, e já gera a capa. Como o Turbopack não empacota o worker do ffmpeg, ele vem de um CDN com versão fixa e hash SHA-384 conferido antes do uso. Um vídeo real de 43 s caiu de <span class="case__highlight">57,4 MB para 6,7 MB</span>.</p>'
+          )}
+          ${renderSubBlock(
+            'Segurança',
+            '<p>O link do cliente dá acesso a conteúdo ainda não publicado, então segurança entrou como parte do produto, não como acabamento. A tela do cliente nunca fala com o banco: o servidor recebe o token, busca só aquela apresentação e devolve URLs assinadas, válidas por 6 horas, de um bucket privado. O painel usa a chave pública com a sessão de quem entrou, sob RLS, e cada ação confere o login no servidor. Acesso público direto ao banco: <span class="case__highlight">nenhum, conferido por script</span>. O link pode ser desativado, reativado ou regenerado a qualquer momento.</p>'
+          )}
+          ${renderSubBlock(
+            'Prova, não "parece certo"',
+            '<p><span class="case__highlight">41 testes de unidade</span> e teste de ponta a ponta com Playwright contra o Supabase real. O painel foi redesenhado inteiro e a tela do cliente passou intacta, provado por comparação de capturas em 7 telas, no claro e no escuro: só o rodapé da assinatura mudou. Contraste validado por script no padrão WCAG AA. Os dois bugs mais caros foram resolvidos na causa. A "senha incorreta" no login era, na verdade, uma chave pública errada (erro 401 do Supabase). E os modais abrindo no canto vinham do reset do Tailwind zerando a margem que o diálogo nativo usa pra se centralizar; a correção veio junto com um teste que mede o centro do modal em 1280 px e em 375 px.</p>'
+          )}
+          ${renderSubBlock(
+            'Identidade & página pública',
+            `<p>Página inicial e páginas de erro na identidade da Rabisco (terracota, mostarda e creme), com o mockup de celular feito em HTML e CSS. Uma demo pública mostra o resultado sem login, e a assinatura "Plataforma criada por Lucas Roldão" no rodapé leva pra este portfólio.</p>
+            <a href="https://rabisco-previa.vercel.app/p/demo" target="_blank" rel="noopener noreferrer" class="case__inline-link">Abrir a demo no celular${EXTERNAL_LINK_ICON}</a>`
+          )}
+          ${renderImage(
+            '/images/cases/previa-pagina-inicial.jpg',
+            'Página inicial da Rabisco Prévia no desktop e no celular, em terracota, com mockup do grid de posts',
+            'case__inline-image'
+          )}
+          ${renderSubBlock(
+            'IA como ferramenta, não como piloto',
+            '<p>Claude como par de trabalho (escopo, revisão dos relatórios, prompt de cada etapa) e Claude Code como executor no repositório. As decisões, os testes no Preview (inclusive em iPhone e Android) e os merges ficaram comigo. E teve proposta vetada: uma cor própria pro anel dos stories (ficou a convenção visual do Instagram) e o upload em massa.</p>'
+          )}
+        </div>`,
+      ],
+      [
+        'Resultado',
+        `<p>Da especificação ao painel com identidade no ar em <span class="case__highlight">dois dias</span> (13 e 14/10/2026), a <span class="case__highlight">custo de infraestrutura zero</span> (planos gratuitos do Supabase e da Vercel). Vídeos de <span class="case__highlight">88% a 93% menores</span>, zero acesso público ao banco e a tela do cliente intacta depois de um redesenho completo do painel. O código é aberto, então cada número aqui pode ser conferido no <a href="https://github.com/devlucasroldao/rabisco-previa" target="_blank" rel="noopener noreferrer" class="case__text-link">repositório</a>.</p>
+        <p>Fase atual: uso real com clientes por 2 a 3 semanas, anotando cada atrito, sem construir módulo novo. Os números de uso entram aqui depois disso. Limites conhecidos e aceitos: 1 GB de arquivos (por isso só as três últimas semanas de cada cliente ficam guardadas, com os originais no Drive), compressão testada no navegador de computador e ainda não no celular, e hospedagem no plano Hobby da Vercel, que pede o Pro pra uso comercial pleno. Essa decisão ainda está em aberto.</p>`,
+      ],
+    ],
+    learning:
+      '"Prova vale mais que \'parece certo\'. Os dois bugs mais caros tinham causa em outra camada: a \'senha incorreta\' era uma chave errada, e o modal torto era o reset do CSS. Remendar o sintoma teria parecido resolvido. E o escopo que escolheu não crescer foi o que deixou o produto de pé: cada coisa que eu não construí é uma coisa que eu não preciso manter."',
+    stack: [
+      { label: 'Frontend', icons: ['nextdotjs', 'typescript', 'zod', 'tailwindcss'] },
+      { label: 'Banco/Infra', icons: ['supabase', 'vercel'] },
+      { label: 'Vídeo', icons: ['ffmpeg'] },
+    ],
+  },
 ];
 
 // Foto real — mesma vaga que o placeholder ocupava, sem a borda tracejada
@@ -303,6 +413,13 @@ export const casesData = [
 function renderImage(src, alt, extraClass = '', { eager = false } = {}) {
   const loadingAttrs = eager ? 'loading="eager" fetchpriority="high"' : 'loading="lazy"';
   return `<img src="${src}" alt="${alt}" class="${extraClass}" ${loadingAttrs} />`;
+}
+
+// Vídeo curto dentro do case — com controles, sem autoplay (respeita quem
+// pede menos movimento sem precisar de checagem extra) e preload="none":
+// só baixa o arquivo quando a pessoa aperta o play; até lá, aparece o poster.
+function renderVideo(src, poster, label) {
+  return `<video class="case__inline-video" src="${src}" poster="${poster}" controls playsinline preload="none" aria-label="${label}"></video>`;
 }
 
 // Selo circular reforçando a categoria do case — círculo é a exceção de
@@ -342,26 +459,35 @@ function renderCaseMeta(meta) {
 }
 
 // Link pro site real + Instagram da empresa + trabalho de marketing —
-// perto da meta-informação, tratamento discreto e igual nos dois cases
+// perto da meta-informação, tratamento discreto e igual em todos os cases
 // (ver .case-full__links). O link de marketing já chega filtrado nesse
 // cliente específico (?cliente=... lido por marketing-page.js) — quem
 // clicou a partir do case da Conecte não precisa filtrar de novo lá.
-// Case sem cliente no marketing (ex.: Helena Lima) não mostra esse link.
+// Campos opcionais: `marketingClient` (só quem tem artes na página de
+// marketing), `repoUrl` (só projeto com código público, ex.: Rabisco
+// Prévia) e `liveLabel` (quando o link ao vivo é uma demo, não um site).
 function renderCaseLinks(data) {
+  const repoLink = data.repoUrl
+    ? `<a href="${data.repoUrl}" target="_blank" rel="noopener noreferrer" class="case-full__live-link">${GITHUB_ICON}Ver código no GitHub</a>`
+    : '';
+  const instagramLink = data.instagramUrl
+    ? `<a href="${data.instagramUrl}" target="_blank" rel="noopener noreferrer" class="case-full__instagram-link">${INSTAGRAM_ICON}Instagram</a>`
+    : '';
   const marketingLink = data.marketingClient
     ? `<a href="/marketing?cliente=${data.marketingClient}" class="case-full__instagram-link">Trabalho de marketing →</a>`
     : '';
   return `
     <div class="case-full__links">
-      <a href="${data.liveUrl}" target="_blank" rel="noopener noreferrer" class="case-full__live-link">Ver site ao vivo${EXTERNAL_LINK_ICON}</a>
-      <a href="${data.instagramUrl}" target="_blank" rel="noopener noreferrer" class="case-full__instagram-link">${INSTAGRAM_ICON}Instagram</a>
+      <a href="${data.liveUrl}" target="_blank" rel="noopener noreferrer" class="case-full__live-link">${data.liveLabel ?? 'Ver site ao vivo'}${EXTERNAL_LINK_ICON}</a>
+      ${repoLink}
+      ${instagramLink}
       ${marketingLink}
     </div>
   `;
 }
 
 // "Próximo" segue a ordem de casesData, ciclicamente
-// (Conecte -> Lu Perfumes -> Helena Lima -> Conecte).
+// (Conecte -> Lu Perfumes -> Helena Lima -> Rabisco Prévia -> Conecte).
 function renderNextCaseNav(currentId) {
   const idx = casesData.findIndex((c) => c.id === currentId);
   const next = casesData[(idx + 1) % casesData.length];
@@ -399,7 +525,7 @@ export function casesTeaserTemplate() {
       <div class="cases__header">
         <span class="cases__eyebrow">Cases selecionados</span>
         <h2 class="cases__heading">Onde estratégia encontra <span class="cases__heading-accent">forma</span>.</h2>
-        <p class="cases__subtitle">Dois trabalhos reais, contados do jeito que aconteceram — inclusive o que não deu certo de primeira.</p>
+        <p class="cases__subtitle">Trabalhos reais, contados do jeito que aconteceram — inclusive o que não deu certo de primeira.</p>
       </div>
       <div class="case-list">
         ${casesData.map(renderCaseTeaser).join('')}
