@@ -305,7 +305,7 @@ export const casesData = [
     title: 'Rabisco Prévia',
     meta: [
       ['Produto', 'Ferramenta interna da agência Rabisco'],
-      ['Período', 'Out 2026 (2 dias até o painel no ar; hoje em uso real)'],
+      ['Período', 'Out 2026 (painel no ar em 2 dias; calendário mensal em 23/10; em uso real)'],
       ['Papel', 'Escopo de produto, desenvolvimento full-stack e testes'],
     ],
     teaserImage: '/images/cases/previa-teaser.jpg',
@@ -393,7 +393,33 @@ export const casesData = [
       [
         'Resultado',
         `<p>Da especificação ao painel com identidade no ar em <span class="case__highlight">dois dias</span> (13 e 14/10/2026), a <span class="case__highlight">custo de infraestrutura zero</span> (planos gratuitos do Supabase e da Vercel). Vídeos de <span class="case__highlight">88% a 93% menores</span>, zero acesso público ao banco e a tela do cliente intacta depois de um redesenho completo do painel. O código é aberto, então cada número aqui pode ser conferido no <a href="https://github.com/devlucasroldao/rabisco-previa" target="_blank" rel="noopener noreferrer" class="case__text-link">repositório</a>.</p>
-        <p>Fase atual: uso real com clientes por 2 a 3 semanas, anotando cada atrito, sem construir módulo novo. Os números de uso entram aqui depois disso. Limites conhecidos e aceitos: 1 GB de arquivos (por isso só as três últimas semanas de cada cliente ficam guardadas, com os originais no Drive), compressão testada no navegador de computador e ainda não no celular, e hospedagem no plano Hobby da Vercel, que pede o Pro pra uso comercial pleno. Essa decisão ainda está em aberto.</p>`,
+        <p>O plano que escrevi em 14/10 era: uso real com clientes por 2 a 3 semanas, anotando cada atrito, sem construir módulo novo. Esse plano mudou em 23/10, e a <span class="case__highlight">etapa 2</span>, logo abaixo, conta como e por quê. Os números de uso continuam pendentes e entram aqui quando existirem. Limites conhecidos e aceitos: 1 GB de arquivos (por isso só as três últimas semanas de cada cliente ficam guardadas, com os originais no Drive), compressão testada no navegador de computador e ainda não no celular, e hospedagem no plano Hobby da Vercel, que pede o Pro pra uso comercial pleno. Essa decisão ainda está em aberto.</p>`,
+      ],
+      [
+        'Etapa 2: o calendário mensal',
+        `<p>Em 14/10 eu tinha escrito que não ia construir módulo novo por 2 a 3 semanas. Em 23/10, <span class="case__highlight">nove dias depois</span>, construí um. Em vez de apagar a frase e fingir que o plano se cumpriu, registro aqui o que mudou.</p>
+        <div class="case__sub-blocks">
+          ${renderSubBlock(
+            'O pedido',
+            '<p>Um cliente real pediu uma visão geral do mês, não só a semana da apresentação. É o mesmo tipo de atrito que originou a Prévia, um nível acima: o cliente via a semana, mas não conseguia ver pra onde o mês estava indo.</p>'
+          )}
+          ${renderSubBlock(
+            'A decisão de furar o próprio plano',
+            '<p>Construí fora do escopo planejado por dois motivos: o pedido era <span class="case__highlight">recorrente</span> e era pequeno perto do painel inteiro. O critério da especificação não mudou, que era cortar o que cria sistema novo pra manter. O calendário respeita isso: <span class="case__highlight">sem login</span>, no mesmo padrão de link por token da apresentação (/c/&lt;token&gt;) e sem infraestrutura nova. E a regra foi lançar uma v1 rápida pro cliente real usar, em vez de polir sem feedback.</p>'
+          )}
+          ${renderSubBlock(
+            'v1 e v2 em menos de 24 horas',
+            `<p>A v1 saiu com descrição obrigatória, emoji por tipo de conteúdo e <span class="case__highlight">sem visão geral do mês</span>. No mesmo dia, o cliente mandou 6 prints com feedback em áudio, bem detalhado. Em menos de 24 horas saiu a v2: título sempre visível e descrição opcional que expande; a grade do mês virou índice de navegação (clica no dia e pula pro item); ícone no lugar do emoji; e uma estrutura inspirada no padrão do Notion, com propriedade e corpo.</p>
+            <p>O uso também mostrou uma lacuna no painel. As listas de "recentes" da tela inicial não tinham menu de ações, que só existia dentro do perfil do cliente. Agora têm.</p>
+            <!-- IMAGEM 1 (renderImage): v1 do calendário, antes do feedback -->
+            <!-- IMAGEM 2 (renderImage): v2 do calendário, com a grade do mês como índice -->
+            <!-- IMAGEM 3 (opcional): v1 e v2 lado a lado, ou o menu de ações nas listas de recentes -->`
+          )}
+          ${renderSubBlock(
+            'Resultado e limites',
+            '<p>Módulo novo em produção, no mesmo padrão de token da apresentação e com <span class="case__highlight">custo adicional de infraestrutura zero</span>. Dois limites em aberto, que valem tanto quanto o resultado: o calendário <span class="case__highlight">ainda não tem teste automatizado</span> (os 41 testes cobrem apresentação, stories e painel), e não existe modo demo público pra ele. A /p/demo mostra a apresentação, mas a /c/demo não existe.</p>'
+          )}
+        </div>`,
       ],
     ],
     learning:
