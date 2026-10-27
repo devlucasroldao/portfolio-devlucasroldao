@@ -124,6 +124,8 @@ export function renderNavbar({ base = '' } = {}) {
           <div class="navbar__panel-sublinks">
             <a href="/case-conecte">Conecte Telecom</a>
             <a href="/case-lu-perfumes">Lu Perfumes &amp; Presentes</a>
+            <a href="/case-helena-lima">Helena Lima</a>
+            <a href="/case-rabisco-previa">Rabisco Prévia</a>
           </div>
         </div>
       </nav>
