@@ -305,7 +305,7 @@ export const casesData = [
     title: 'Rabisco Prévia',
     meta: [
       ['Produto', 'Ferramenta interna da agência Rabisco'],
-      ['Período', 'Out 2026 (painel no ar em 2 dias; calendário mensal em 23/10; em uso real)'],
+      ['Período', 'Out 2026 (painel no ar em 2 dias; calendário mensal em 23/10; campanhas e Dividir Imagem no fim do mês; em uso real)'],
       ['Papel', 'Escopo de produto, desenvolvimento full-stack e testes'],
     ],
     teaserImage: '/images/cases/previa-teaser.jpg',
@@ -418,6 +418,32 @@ export const casesData = [
           ${renderSubBlock(
             'Resultado e limites',
             '<p>Módulo novo em produção, no mesmo padrão de token da apresentação e com <span class="case__highlight">custo adicional de infraestrutura zero</span>. Dois limites em aberto, que valem tanto quanto o resultado: o calendário <span class="case__highlight">ainda não tem teste automatizado</span> (os 41 testes cobrem apresentação, stories e painel), e não existe modo demo público pra ele. A /p/demo mostra a apresentação, mas a /c/demo não existe.</p>'
+          )}
+        </div>`,
+      ],
+      [
+        'Etapa 3: campanhas e Dividir Imagem',
+        `<p>Com o calendário em uso, apareceram duas necessidades: um jeito de marcar conteúdo que dura mais de um dia e uma forma de tirar do fluxo um site externo que a equipe usava toda semana.</p>
+        <div class="case__sub-blocks">
+          ${renderSubBlock(
+            'Campanha com intervalo de dias',
+            '<p>Post é de um dia, mas campanha costuma durar uma semana. Ao escolher o tipo "Campanha", o formulário abre um campo de dia final, e o item aparece em cada dia do intervalo, no painel e na tela do cliente. Por trás continua sendo <span class="case__highlight">um registro só</span>: editar ou excluir vale pra campanha inteira, não só pro dia em que se clicou.</p>'
+          )}
+          ${renderSubBlock(
+            'Ajustes que vieram do uso',
+            '<p>Mês cheio deixa a lista longa. No painel, entraram filtro por tipo de conteúdo, ordem invertível (do início pro fim ou do fim pro início) e o ícone de cada tipo já no formulário, igual ao que o cliente vai ver. Na tela do cliente, um botão "Ver calendário completo", no topo e no fim da lista, volta direto pra grade do mês.</p>'
+          )}
+          ${renderSubBlock(
+            'Dividir Imagem: tirar um site de terceiro do fluxo',
+            '<p>Carrossel nasce como uma arte única no Canva, com todas as colunas lado a lado, e precisa ser cortado em um arquivo por slide. Isso era feito num site externo, ou seja, um passo fora do fluxo e <span class="case__highlight">a arte do cliente indo pro servidor de outra empresa</span>. Agora o painel tem uma seção de Ferramentas com "Dividir imagem": corte vertical (colunas) ou horizontal (faixas), de 2 a 20 partes, com as linhas de corte desenhadas no preview antes de processar. A saída pode ser PNG, JPEG, WEBP ou o formato original, e os arquivos baixam um por um ou num .zip já numerado.</p>'
+          )}
+          ${renderSubBlock(
+            'Sem servidor e sem perda de qualidade',
+            '<p>O corte roda <span class="case__highlight">inteiro no navegador</span>, num canvas da própria página: a imagem não sobe pra servidor nenhum, nem o da Prévia. O recorte sempre usa a resolução nativa do arquivo, nunca a do preview, e em PNG o resultado é idêntico ao original, pixel a pixel. Também ficou de fora de propósito o que o site antigo fazia e o fluxo de carrossel não usa: corte em grade, tamanho fixo por pedaço e sobreposição entre blocos. Se fizer falta no dia a dia, entra depois.</p>'
+          )}
+          ${renderSubBlock(
+            'Limites em aberto',
+            '<p>A campanha com intervalo depende de uma coluna nova no banco, e essa migração <span class="case__highlight">ainda precisa ser conferida em produção</span>. O Dividir Imagem foi testado localmente e ainda falta um teste com arte real de cliente. E o calendário segue sem teste automatizado e sem demo pública.</p>'
           )}
         </div>`,
       ],
