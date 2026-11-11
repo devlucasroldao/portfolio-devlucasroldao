@@ -1,0 +1,245 @@
+{
+  "lucas-retrato": {
+    "w": 540,
+    "h": 672,
+    "widths": [
+      360,
+      540
+    ]
+  },
+  "sobre-lucas": {
+    "w": 900,
+    "h": 900,
+    "widths": [
+      480,
+      900
+    ]
+  },
+  "mkt-conecte-dinossauro": {
+    "w": 1080,
+    "h": 1350,
+    "widths": [
+      360,
+      720
+    ]
+  },
+  "mkt-conecte-tabela-planos": {
+    "w": 1080,
+    "h": 1350,
+    "widths": [
+      360,
+      720
+    ]
+  },
+  "mkt-lu-kit-personalizado": {
+    "w": 759,
+    "h": 1350,
+    "widths": [
+      360,
+      720
+    ]
+  },
+  "mkt-lu-pronta-entrega": {
+    "w": 759,
+    "h": 1350,
+    "widths": [
+      360,
+      720
+    ]
+  },
+  "aval-painel": {
+    "w": 2880,
+    "h": 1800,
+    "widths": [
+      480,
+      960,
+      1600
+    ]
+  },
+  "conecte-admin": {
+    "w": 2000,
+    "h": 1125,
+    "widths": [
+      480,
+      960,
+      1600
+    ]
+  },
+  "conecte-analytics": {
+    "w": 2000,
+    "h": 1125,
+    "widths": [
+      480,
+      960,
+      1600
+    ]
+  },
+  "conecte-banner": {
+    "w": 2000,
+    "h": 854,
+    "widths": [
+      480,
+      960,
+      1600
+    ]
+  },
+  "conecte-central-ajuda": {
+    "w": 2000,
+    "h": 1125,
+    "widths": [
+      480,
+      960,
+      1600
+    ]
+  },
+  "conecte-teaser": {
+    "w": 2000,
+    "h": 1250,
+    "widths": [
+      480,
+      960,
+      1600
+    ]
+  },
+  "helena-banner": {
+    "w": 2000,
+    "h": 1132,
+    "widths": [
+      480,
+      960,
+      1600
+    ]
+  },
+  "helena-site": {
+    "w": 2000,
+    "h": 956,
+    "widths": [
+      480,
+      960,
+      1600
+    ]
+  },
+  "helena-teaser": {
+    "w": 2000,
+    "h": 1132,
+    "widths": [
+      480,
+      960,
+      1600
+    ]
+  },
+  "lu-admin-produto": {
+    "w": 2000,
+    "h": 1125,
+    "widths": [
+      480,
+      960,
+      1600
+    ]
+  },
+  "lu-banner": {
+    "w": 2000,
+    "h": 854,
+    "widths": [
+      480,
+      960,
+      1600
+    ]
+  },
+  "lu-catalogo": {
+    "w": 2000,
+    "h": 1125,
+    "widths": [
+      480,
+      960,
+      1600
+    ]
+  },
+  "lu-teaser": {
+    "w": 2000,
+    "h": 1250,
+    "widths": [
+      480,
+      960,
+      1600
+    ]
+  },
+  "previa-banner": {
+    "w": 2000,
+    "h": 800,
+    "widths": [
+      480,
+      960,
+      1600
+    ]
+  },
+  "previa-cliente": {
+    "w": 2000,
+    "h": 896,
+    "widths": [
+      480,
+      960,
+      1600
+    ]
+  },
+  "previa-pagina-inicial": {
+    "w": 2000,
+    "h": 896,
+    "widths": [
+      480,
+      960,
+      1600
+    ]
+  },
+  "previa-painel": {
+    "w": 2000,
+    "h": 896,
+    "widths": [
+      480,
+      960,
+      1600
+    ]
+  },
+  "previa-teaser": {
+    "w": 2000,
+    "h": 1250,
+    "widths": [
+      480,
+      960,
+      1600
+    ]
+  },
+  "previa-video-poster": {
+    "w": 1600,
+    "h": 900,
+    "widths": [
+      480,
+      960,
+      1600
+    ]
+  },
+  "depoimento4": {
+    "w": 700,
+    "h": 933,
+    "widths": [
+      160,
+      320
+    ]
+  },
+  "depoimento5": {
+    "w": 700,
+    "h": 933,
+    "widths": [
+      160,
+      320
+    ]
+  },
+  "depoimento7": {
+    "w": 700,
+    "h": 933,
+    "widths": [
+      160,
+      320
+    ]
+  }
+}

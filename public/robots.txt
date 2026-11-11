@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://devlucasroldao.vercel.app/sitemap.xml
