@@ -1,5 +1,5 @@
 import { site } from '../data/site.js';
-import { esc } from './parts.js';
+import { esc, ic } from './parts.js';
 
 // <head> de cada página: título, descrição, canonical e Open Graph próprios.
 export function head({ title, description, path, image = '/og-image.jpg', type = 'website', noindex = false, jsonLd = null }) {
@@ -18,6 +18,7 @@ export function head({ title, description, path, image = '/og-image.jpg', type =
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta name="twitter:card" content="summary_large_image" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
@@ -42,7 +43,7 @@ export function nav(base = '') {
         <li><a href="${base}#marketing">Marketing</a></li>
         <li><a href="${base}#contato">Contato</a></li>
       </ul>
-      <button type="button" class="theme-toggle label" data-theme-toggle hidden aria-label="Trocar entre tema claro e escuro">tema</button>
+      <button type="button" class="theme-toggle label" data-theme-toggle hidden aria-label="Trocar entre tema claro e escuro">${ic('moon')}${ic('sun')}</button>
     </nav>
   `;
 }
@@ -53,10 +54,10 @@ export function footer(base = '') {
       <div class="wrap footer-inner">
         <p class="footer-id"><strong>${site.name}</strong><br />${site.role}, ${site.base}</p>
         <ul class="footer-links">
-          <li><a href="${site.linkedin}" rel="noopener">LinkedIn</a></li>
-          <li><a href="${site.github}" rel="noopener">GitHub</a></li>
-          <li><a href="mailto:${site.email}">E-mail</a></li>
-          <li><a href="${site.cv}">Currículo (PDF)</a></li>
+          <li><a href="${site.linkedin}" rel="noopener">${ic('linkedin')}LinkedIn</a></li>
+          <li><a href="${site.github}" rel="noopener">${ic('github')}GitHub</a></li>
+          <li><a href="mailto:${site.email}">${ic('mail')}E-mail</a></li>
+          <li><a href="${site.cv}">${ic('cv')}Currículo (PDF)</a></li>
           <li><a href="${base}#cases">Cases</a></li>
         </ul>
         <p class="footer-sign">"Esse site quase virou mais um clichê de dev com cara de IA. Não virou porque cada decisão aqui foi questionada antes de entrar no ar — inclusive essa frase, revisada por um assistente de IA. Sim, eu percebi a ironia."</p>

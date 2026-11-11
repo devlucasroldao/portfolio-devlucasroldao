@@ -1,26 +1,26 @@
 import { site, testimonials, marketingPieces } from '../data/site.js';
 import { casesData } from '../data/cases.js';
-import { img, win, esc, pixelIcon } from './parts.js';
+import { img, win, esc, pixelIcon, ic } from './parts.js';
 import { nav, footer } from './layout.js';
 
 function hero() {
   return `
     <header class="hero" id="topo">
-      <span class="cloud c1" aria-hidden="true"></span><span class="cloud c2" aria-hidden="true"></span>
+      <div class="sky" aria-hidden="true"><span class="cloud c1"></span><span class="cloud c2"></span><span class="cloud c3"></span><span class="star s1"></span><span class="star s2"></span><span class="star s3"></span><span class="star s4"></span><span class="star s5"></span></div>
       ${nav('')}
       <div class="wrap hero-grid">
         <div>
           <p class="avail label">${site.availability}</p>
-          <h1>Bah, eu sou o ${site.name}.</h1>
+          <h1>Bah, eu sou o ${site.name}.<span class="caret" aria-hidden="true"></span></h1>
           <p class="role">${site.role}</p>
           <p class="stack">${site.stack}, com produtos em produção</p>
           <p class="pitch">Dev que também pensa como estrategista, escreve como comunicador e não foge de um design quando precisa. Tudo com a ferramenta certa e um pouco de teimosia.</p>
           <div class="actions">
-            <a class="btn btn-primary" href="#cases">Ver cases</a>
-            <a class="btn" href="${site.cv}">Currículo (PDF)</a>
-            <a class="btn" href="${site.github}" rel="noopener">GitHub</a>
-            <a class="btn" href="${site.linkedin}" rel="noopener">LinkedIn</a>
-            <a class="btn" href="mailto:${site.email}">E-mail</a>
+            <a class="btn btn-primary" href="#cases">${ic('down')}Ver cases</a>
+            <a class="btn" href="${site.cv}">${ic('cv')}Currículo (PDF)</a>
+            <a class="btn" href="${site.github}" rel="noopener">${ic('github')}GitHub</a>
+            <a class="btn" href="${site.linkedin}" rel="noopener">${ic('linkedin')}LinkedIn</a>
+            <a class="btn" href="mailto:${site.email}">${ic('mail')}E-mail</a>
           </div>
         </div>
         ${win(
@@ -35,6 +35,11 @@ function hero() {
         <path class="hill-near" d="M0 150 C 300 70, 620 150, 900 120 S 1300 60, 1440 120 V170 H0 Z"/>
       </svg>
     </header>
+      <div class="ticker" aria-hidden="true">
+        <div class="ticker-track">
+          ${[0, 1].map(() => ['React', 'Next.js', 'TypeScript', 'Supabase', 'PostgreSQL', 'Tailwind CSS', 'Acessibilidade', 'Produtos em produção', 'Arroio do Sal, RS'].map((t) => `<span>${t}</span>`).join('')).join('')}
+        </div>
+      </div>
   `;
 }
 
@@ -56,8 +61,8 @@ function caseCard(c) {
           <p>${c.teaserProblem}</p>
           ${tags(c.tags)}
           <div class="case-links">
-            <a class="btn btn-primary btn-small" href="${c.href}">Ver case<span class="sr"> ${c.title}</span></a>
-            <a class="btn btn-small" href="${c.demoUrl}" rel="noopener">Abrir demo</a>
+            <a class="btn btn-primary btn-small" href="${c.href}">Ver case<span class="sr"> ${c.title}</span>${ic('arrow')}</a>
+            <a class="btn btn-small" href="${c.demoUrl}" rel="noopener">${ic('play')}Abrir demo</a>
           </div>
         </div>
       </div>`,
@@ -70,7 +75,7 @@ function caseCard(c) {
     <div class="case-text">
       <h3><a href="${c.href}">${c.teaserHeadline}</a></h3>
       ${tags(c.tags)}
-      <a class="more" href="${c.href}">Ver case<span class="sr"> ${c.title}</span></a>
+      <a class="more" href="${c.href}">Ver case<span class="sr"> ${c.title}</span>${ic('arrow')}</a>
     </div>`,
     { cls: 'case-card', tag: 'article', status }
   );
@@ -137,8 +142,8 @@ function marketing() {
           <h2>Também faço marketing</h2>
           <p>Sou cofundador da <strong>Rabisco</strong>, agência que atende 4 empresas locais com identidade de marca, redes sociais e vídeo. Na Conecte Telecom, os vídeos que produzi levaram o engajamento de cerca de 20 para quase 100 interações por publicação.</p>
           <p class="mkt-links">
-            <a href="${site.rabiscoInstagram}" rel="noopener">Instagram da Rabisco</a>
-            <a href="${site.cvGrowth}">Currículo Web/Growth (PDF)</a>
+            <a href="${site.rabiscoInstagram}" rel="noopener">${ic('instagram')}Instagram da Rabisco</a>
+            <a href="${site.cvGrowth}">${ic('cv')}Currículo Web/Growth (PDF)</a>
           </p>
         </div>
         <ul class="mkt-pieces">
@@ -180,10 +185,10 @@ function contato() {
         <h2>Tem um problema real? Me chama.</h2>
         <p class="sub">Manda uma mensagem que eu respondo de verdade (sem meme).</p>
         <div class="actions">
-          <a class="btn btn-primary" href="mailto:${site.email}">${site.email}</a>
-          <a class="btn" href="${site.linkedin}" rel="noopener">LinkedIn</a>
-          <a class="btn" href="${site.github}" rel="noopener">GitHub</a>
-          <a class="btn" href="${site.cv}">Currículo (PDF)</a>
+          <a class="btn btn-primary" href="mailto:${site.email}">${ic('mail')}${site.email}</a>
+          <a class="btn" href="${site.linkedin}" rel="noopener">${ic('linkedin')}LinkedIn</a>
+          <a class="btn" href="${site.github}" rel="noopener">${ic('github')}GitHub</a>
+          <a class="btn" href="${site.cv}">${ic('cv')}Currículo (PDF)</a>
         </div>
       </div>
     </section>

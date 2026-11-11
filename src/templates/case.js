@@ -1,5 +1,5 @@
 import { casesData } from '../data/cases.js';
-import { img, win, EXTERNAL_LINK_ICON } from './parts.js';
+import { img, win, ic, EXTERNAL_LINK_ICON } from './parts.js';
 import { nav, footer } from './layout.js';
 
 const imgKey = (path) => path.split('/').pop().replace(/\.\w+$/, '');
@@ -30,7 +30,7 @@ function resumo(c) {
         <ul>
           ${c.proof.map((p) => `<li><a href="${p.href}" target="_blank" rel="noopener noreferrer">${p.label}${EXTERNAL_LINK_ICON}</a>${p.note ? `<span>${p.note}</span>` : ''}</li>`).join('')}
         </ul>
-        ${c.featured ? `<a class="btn btn-primary btn-small" href="${c.liveUrl}" target="_blank" rel="noopener noreferrer">Abrir meuaval.com.br</a>` : ''}
+        ${c.featured ? `<a class="btn btn-primary btn-small" href="${c.liveUrl}" target="_blank" rel="noopener noreferrer">${ic('play')}Abrir meuaval.com.br</a>` : ''}
         ${c.proofFooter ? `<p class="proof-foot">${c.proofFooter}</p>` : ''}
       </div>
     </div>`,
@@ -40,7 +40,7 @@ function resumo(c) {
 
 function nextCase(c) {
   const next = casesData[(casesData.indexOf(c) + 1) % casesData.length];
-  return `<a class="case-next" href="${next.href}"><span class="label">Próximo case</span><strong>${next.title}</strong><span>${next.teaserHeadline}</span></a>`;
+  return `<a class="case-next" href="${next.href}"><span class="label">Próximo case</span><strong>${next.title}${ic('arrow')}</strong><span>${next.teaserHeadline}</span></a>`;
 }
 
 export function casePage(id) {
@@ -51,13 +51,14 @@ export function casePage(id) {
     <div class="case-head">
       ${nav('/')}
       <div class="wrap">
-        <a class="crumb label" href="/#cases">&lt; voltar pros cases</a>
+        <a class="crumb label" href="/#cases">${ic('back')}voltar pros cases</a>
         <h1>${c.title}</h1>
         <p class="lead">${c.teaserProblem}</p>
         ${resumo(c)}
         ${win(imgKey(c.bannerImage) + '.webp', img(imgKey(c.bannerImage), c.bannerImageAlt, { sizes: '(min-width: 1168px) 1116px, 100vw', eager: true }), { cls: 'banner', tag: 'figure' })}
       </div>
     </div>
+    <div class="progress" aria-hidden="true"></div>
     <main id="conteudo" class="case-body">
       <nav class="indice" aria-label="Nesta página">
         <ul>${c.blocks.map(([label]) => `<li><a href="#${slug(label)}">${label}</a></li>`).join('')}</ul>
