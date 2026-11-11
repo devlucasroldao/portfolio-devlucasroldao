@@ -23,30 +23,31 @@ Aqui dá pra conhecer um pouco mais sobre mim, minha rotina, onde moro (Arroio d
 
 ## ✨ Funcionalidades
 
-### Navegação e experiência
-- 🌗 **Modo claro/escuro** completo, com preferência salva e contraste ajustado nos dois temas
-- 📱 **Mobile-first de verdade** — menu em drawer lateral, navbar que some perto do fim da página pra não cobrir o CTA
-- ⌨️ **Acessibilidade** — landmarks semânticos, `aria-label` em elementos interativos, drawer com `inert` quando fechado, navegação por teclado testada
-- 🎬 **Hero com vídeo de fundo** — poster leve pro primeiro carregamento, e respeita `prefers-reduced-motion` (quem pede menos movimento no sistema nem baixa o vídeo)
+### Pra quem visita
+- 🪟 **Visual "retrô limpo"** — layout moderno e legível, com janelas nos cards, fonte pixel só nos rótulos e uma colina com céu desenhados em CSS e SVG. Sem imagem de marca de terceiros e sem sistema operacional de mentira pra navegar
+- 🧭 **Primeira tela direta** — nome, função, stack, disponibilidade e os botões de cases, currículo, GitHub, LinkedIn e e-mail, sem rolar
+- 🌗 **Tema claro e escuro** — segue o sistema e guarda a escolha de quem troca
+- 📄 **Funciona sem JavaScript** — o conteúdo inteiro é gerado no build e já vem no HTML. O JS do site tem 1 KB e só liga o botão de tema
+- 🎈 **Um movimento só** — uma nuvem que desliza devagar, desligada pra quem pede menos movimento no sistema
 
 ### Conteúdo
-- 💼 **Cases reais** — Conecte Telecom (plataforma full-stack + correção de uma vulnerabilidade crítica de segurança), Lu Perfumes & Presentes (e-commerce de uma loja de perfumes de Arroio do Sal), Helena Lima (marca pessoal + landing page em menos de 24h) e Rabisco Prévia (ferramenta de código aberto que mostra ao cliente, num link, como o feed vai ficar antes de publicar), cada um com página própria, stack documentada e resultado real, não inventado
-- 🗣️ **Depoimentos** — carrossel com gente de verdade que cruzou meu caminho (profissional e pessoal), sem troca automática — só avança quando a pessoa clica
-- 🎨 **Galeria de Marketing & Redes Sociais** — página própria, separada do fluxo principal, com artes reais que já produzi pra Conecte e Lu Perfumes: grid *masonry* (cada peça na proporção real dela, sem cortar nada), filtro por cliente, lightbox, e um esmaecimento no final convidando pra ver mais no Instagram de cada marca
+- 💼 **Cases reais** — Aval (SaaS de aprovação de conteúdo para agências, com 4 demos públicas), Conecte Telecom (plataforma com contratação digital e auditoria de segurança), Lu Perfumes & Presentes (catálogo com painel próprio) e Helena Lima (marca pessoal e landing page em menos de 24h). Cada página abre com um resumo: papel, período, stack, resultado e o que dá pra clicar e conferir
+- 🗣️ **Depoimentos** — três, fixos, de gente que trabalhou comigo
+- 🎨 **Marketing** — um bloco curto na home com quatro peças publicadas e o currículo Web/Growth
 
 ### Por trás dos panos
-- 🔍 **SEO e compartilhamento** — Open Graph e Twitter Card com imagem própria, então o link do site aparece bonito em qualquer lugar que for compartilhado
-- 🔒 **Headers de segurança** configurados via `vercel.json` (`X-Frame-Options`, `Strict-Transport-Security`, `Permissions-Policy`)
-- ⚡ **Performance** — payload total reduzido de 17,6MB pra 6MB (vídeo recomprimido, imagens redimensionadas pro tamanho real de exibição, `width`/`height` explícitos pra evitar pulo de layout)
+- 🔍 **SEO e compartilhamento** — título, descrição, canonical e Open Graph por página, `og-image.jpg` própria, `robots.txt`, `sitemap.xml` e página 404
+- 🖼️ **Imagens** — WebP com `srcset`, geradas por `scripts/images.mjs`, todas com `width` e `height` (sem pulo de layout)
+- 🔒 **Headers de segurança** via `vercel.json`, que também redireciona (301) os endereços antigos `/bio`, `/marketing` e `/case-rabisco-previa`
 
-### Lighthouse (PageSpeed Insights, 02/10/2026)
+### Lighthouse (celular, build local, 11/11/2026)
 
-| | Desempenho | Acessibilidade | Práticas recomendadas | SEO |
-|---|---|---|---|---|
-| 💻 Desktop | 99 | 100 | 100 | 100 |
-| 📱 Celular | 90 | 100 | 100 | 100 |
+| | Desempenho | Acessibilidade | Práticas recomendadas | SEO | Peso |
+|---|---|---|---|---|---|
+| Home, antes do redesign | 82 | 100 | 100 | 100 | 3.637 KB |
+| Home, depois | 100 | 100 | 100 | 100 | 239 KB |
 
-> No celular, o teste não gerava nota (erro `NO_FCP`): um fade-in de entrada deixava a página inteira com opacidade 0, e o navegador não contava isso como conteúdo desenhado. Reproduzi o erro rodando o Lighthouse localmente, removi o efeito e a nota passou a sair.
+> Medido com Lighthouse 12 no build local, mesmo método nas duas linhas. O maior ganho veio de tirar o vídeo de fundo do topo (2,5 MB) e de servir as imagens em WebP no tamanho certo.
 
 ---
 
@@ -54,11 +55,11 @@ Aqui dá pra conhecer um pouco mais sobre mim, minha rotina, onde moro (Arroio d
 
 | Camada | Tecnologia | Decisão |
 |---|---|---|
-| **Build** | Vite | Múltiplos pontos de entrada (uma página por HTML), dev server rápido, zero configuração desnecessária |
+| **Build** | Vite | Uma página por HTML, com um plugin pequeno que pré-renderiza o conteúdo no build |
 | **Frontend** | HTML + CSS + JavaScript puro | Sem framework — pro tamanho e propósito desse site, React/Vue seriam peso sem benefício real |
-| **Fontes** | JetBrains Mono + Geist Sans, via Fontsource | Self-hosted, sem depender de CDN externo nem esperar Google Fonts carregar |
-| **Ícones** | simple-icons | Ícones de marca (GitHub, LinkedIn, Instagram) sempre atualizados e consistentes |
-| **Deploy** | Vercel | CI/CD automático a cada push, headers de segurança configuráveis via `vercel.json` |
+| **Fontes** | Geist + Pixelify Sans | Self-hosted em `public/fonts/`, 37 KB no total |
+| **Imagens** | sharp | Converte as origens de `assets/images/` em WebP com `srcset` |
+| **Deploy** | Vercel | CI/CD a cada push, headers e redirects em `vercel.json` |
 
 ---
 
@@ -66,31 +67,34 @@ Aqui dá pra conhecer um pouco mais sobre mim, minha rotina, onde moro (Arroio d
 
 ```
 portfolio-devlucasroldao/
-├── index.html              # Home
-├── case-conecte.html       # Case completo: Conecte Telecom
-├── case-lu-perfumes.html   # Case completo: Lu Perfumes & Presentes
-├── case-helena-lima.html   # Case completo: Helena Lima
-├── case-rabisco-previa.html # Case completo: Rabisco Prévia
-├── marketing.html          # Galeria de Marketing & Redes Sociais
+├── index.html, case-*.html, 404.html   # cascas: o conteúdo entra no build
+├── vite.config.js                      # plugin que preenche <!--head--> e <!--app-->
 ├── src/
-│   ├── main.js, case-*.js, marketing.js, bio.js   # pontos de entrada
-│   ├── scripts/
-│   │   ├── navbar.js, footer.js          # layout compartilhado
-│   │   ├── hero-rotator.js, hero-video.js
-│   │   ├── cases.js, case-page.js
-│   │   ├── carousel.js, testimonials.js
-│   │   ├── marketing-page.js, marketing-items.js
-│   │   └── scroll-animations.js          # reveal ao rolar, digitação nos eyebrows
-│   └── styles/
-│       ├── tokens.css                    # cores, tipografia, espaçamento — fonte única da verdade
-│       └── um arquivo por seção (hero.css, cases.css, marketing.css...)
-├── public/
-│   ├── images/             # organizadas por seção (cases, depoimentos, marketing, sobre)
-│   ├── hero-video.mp4 + hero-poster.jpg
-│   ├── videos/             # vídeos curtos dos cases (carregam só no play)
-│   └── og-image.jpg        # imagem de preview pra compartilhamento
-└── vercel.json             # headers de segurança
+│   ├── render.js                       # qual página recebe qual conteúdo e <head>
+│   ├── data/
+│   │   ├── cases.js                    # texto dos cases (fonte única)
+│   │   ├── site.js                     # links, depoimentos, peças de marketing
+│   │   └── images.json                 # manifesto gerado por scripts/images.mjs
+│   ├── templates/                      # layout, home, case, parts
+│   ├── styles/site.css                 # um arquivo, tokens no topo
+│   └── main.js                         # botão de tema
+├── scripts/
+│   ├── images.mjs                      # npm run images
+│   └── og-image.html                   # fonte da imagem de compartilhamento
+├── assets/images/                      # origens das imagens (não vão pro deploy)
+└── public/                             # img/ (WebP), fonts/, vídeos, currículos, og-image, robots, sitemap
 ```
+
+### Rodar
+
+```
+npm install
+npm run dev      # desenvolvimento
+npm run build    # gera dist/
+npm run images   # só quando uma imagem de origem mudar
+```
+
+Pra trocar a foto do topo: substitua `assets/images/bio/lucas-header.jpg`, ajuste o recorte em `scripts/images.mjs` se precisar e rode `npm run images`.
 
 ---
 
@@ -98,10 +102,10 @@ portfolio-devlucasroldao/
 
 | | |
 |---|---|
-| Fundo | `#0D1B2A` |
-| Acento | `#52B788` (verde — usado com moderação, nunca em blocos grandes) |
-| Texto | `#E0E1DD` |
-| Fontes | JetBrains Mono (estrutura/títulos) · Geist Sans (corpo) |
+| Navy | `#0D1B2A` (texto no claro, fundo no escuro) |
+| Verde | `#52B788` (acento, o mesmo dos posts do LinkedIn) |
+| Céu e colina | `#A9D4F2` e `#3F9A63` |
+| Fontes | Geist (texto e títulos) · Pixelify Sans (rótulos) |
 
 ---
 
@@ -129,20 +133,18 @@ A IA acelerou a execução. As decisões — o que construir, o que cortar, o qu
 | Etapa | O que mudou |
 |---|---|
 | **Estrutura inicial** | Hero, Cases, Sobre mim, Depoimentos, CTA final — primeira versão completa |
-| **Refinamento mobile** | Menu virou drawer lateral, correções de toque e acessibilidade crítica |
-| **Cases reais** | Conecte Telecom e Lu Perfumes ganharam páginas completas, com stack documentada e imagens reais |
+| **Cases reais** | Conecte Telecom, Lu Perfumes e Helena Lima ganharam páginas completas, com imagens reais |
 | **Modo claro/escuro** | Sistema de tema completo, com contraste ajustado nos dois modos |
-| **Performance e acessibilidade** | Payload de 17,6MB → 6MB, `width`/`height` explícitos, `aria-label`, `inert` no drawer, landmark `<main>` |
-| **SEO e segurança** | Open Graph com imagem própria, headers de segurança via `vercel.json` |
-| **Galeria de Marketing** | Nova página, separada do fluxo principal — grid masonry com artes reais da Conecte e da Lu Perfumes |
+| **Rabisco Prévia** | Case da ferramenta interna da Rabisco, com código aberto |
+| **Redesign (nov/2026)** | Visual "retrô limpo", Aval como case principal (a Prévia virou o capítulo de origem dele), conteúdo no HTML sem depender de JS, imagens em WebP, home de 3.637 KB pra 239 KB. Saíram o vídeo do topo, a página de links e a galeria de marketing |
 
 ---
 
 ## 👨‍💻 Sobre Mim
 
-**Lucas Roldão Cardoso** — Estudante de Análise e Desenvolvimento de Sistemas (ULBRA), hoje atuando com marketing digital na Conecte Telecom. Foi lá, por iniciativa própria, que encarei meu primeiro projeto de desenvolvimento de verdade: evoluí o site institucional que a empresa já tinha para uma plataforma completa e, no processo, encontrei e corrigi uma falha crítica de controle de acesso.
+**Lucas Roldão Cardoso** — Estudante de Análise e Desenvolvimento de Sistemas (ULBRA), hoje Desenvolvedor Web e Responsável pelos Canais Digitais na Conecte Telecom. Foi lá, por iniciativa própria, que encarei meu primeiro projeto de desenvolvimento de verdade: evoluí o site institucional que a empresa já tinha para uma plataforma completa e, no processo, encontrei e corrigi uma falha crítica de controle de acesso.
 
-Busco minha primeira oportunidade formal como desenvolvedor.
+Busco minha primeira oportunidade formal como desenvolvedor: estágio ou júnior em front-end, remoto ou presencial no Litoral Norte e em Porto Alegre.
 
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/in/devlucasroldao)
 [![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/devlucasroldao)

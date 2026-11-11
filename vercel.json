@@ -1,5 +1,22 @@
 {
   "cleanUrls": true,
+  "redirects": [
+    {
+      "source": "/bio",
+      "destination": "/",
+      "statusCode": 301
+    },
+    {
+      "source": "/marketing",
+      "destination": "/#marketing",
+      "statusCode": 301
+    },
+    {
+      "source": "/case-rabisco-previa",
+      "destination": "/case-aval#como-comecou",
+      "statusCode": 301
+    }
+  ],
   "headers": [
     {
       "source": "/(.*)",

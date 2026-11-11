@@ -2,36 +2,12 @@
 <html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
-    <!-- Aplica o tema salvo (se houver) antes da primeira renderização —
-         script síncrono de propósito (não type="module", que é adiado),
-         evita o "flash" do tema errado no carregamento. Padrão é escuro:
-         só mexe no atributo se existir uma preferência clara salva. -->
-    <script>
-      (function () {
-        try {
-          if (localStorage.getItem('theme') === 'light') {
-            document.documentElement.setAttribute('data-theme', 'light');
-          }
-        } catch (e) {}
-      })();
-    </script>
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Portfólio de Lucas Roldão, desenvolvedor front-end (React, Next.js, TypeScript): cases reais em produção, sem enrolação." />
-    <title>Lucas Roldão — Desenvolvedor Front-end</title>
-    <link rel="preload" as="image" href="/hero-poster.jpg" fetchpriority="high" />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://devlucasroldao.vercel.app/" />
-    <meta property="og:title" content="Lucas Roldão — Desenvolvedor Front-end" />
-    <meta property="og:description" content="React, Next.js e TypeScript em projetos reais: plataforma em produção para um provedor com mais de 1.000 clientes, e-commerce e landing pages." />
-    <meta property="og:image" content="https://devlucasroldao.vercel.app/og-image.jpg" />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
+    <!-- <head> e conteúdo entram no build: ver src/render.js e o plugin em vite.config.js -->
+    <!--head-->
   </head>
   <body>
-    <div id="app"></div>
+    <!--app-->
     <script type="module" src="/src/main.js"></script>
   </body>
 </html>
